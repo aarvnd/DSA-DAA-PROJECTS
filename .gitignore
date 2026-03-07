@@ -1,0 +1,17 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+.env
+.env.local
+
+.vscode
+.idea
+.DS_Store
+*.sw?

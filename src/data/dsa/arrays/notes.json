@@ -1,0 +1,98 @@
+{
+  "topicId": "arrays",
+  "title": { "en": "Arrays - Complete Guide", "hi": "Arrays - Poori Jaankari" },
+  "introduction": {
+    "en": "An array is a collection of items stored at contiguous memory locations. It's the most basic and widely used data structure in programming.",
+    "hi": "Array ek aisi data structure hai jisme saare items ek saath memory mein store hote hain. Ye programming ki sabse basic aur zyada use hone wali data structure hai. Jaise ek train ke dabbon mein passengers baithe hain - har dabbe ka ek number hai!"
+  },
+  "realLifeAnalogy": {
+    "en": "Think of a bookshelf where books are arranged in order. Each position has a number (0, 1, 2...) and you can directly pick any book if you know its position number.",
+    "hi": "Ek bookshelf socho jisme books order mein rakhi hain. Har position ka ek number hai (0, 1, 2...) aur tum koi bhi book seedha utha sakte ho agar position pata ho. Ye index kehlaata hai!"
+  },
+  "sections": [
+    {
+      "id": "what-is-array",
+      "title": { "en": "What is an Array?", "hi": "Array kya hota hai?" },
+      "content": {
+        "en": "An array is a linear data structure that stores elements of the same type in contiguous memory locations. Each element can be accessed using its index (position number), starting from 0.\n\n**Key Properties:**\n- Fixed size (in most languages)\n- Stores elements of same data type\n- Random access - any element in O(1) time\n- Contiguous memory allocation",
+        "hi": "Array ek linear data structure hai jo same type ke elements ko ek saath (contiguous) memory mein store karta hai. Har element ko uske index (position number) se access kar sakte ho, jo 0 se start hota hai.\n\n**Important Baatein:**\n- Size fixed hota hai (zyaadatar languages mein)\n- Same data type ke elements store hote hain\n- Random access - koi bhi element O(1) time mein mil jaata hai\n- Memory mein ek saath store hote hain (contiguous)"
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // Array declare karna\n    int arr[5] = {10, 20, 30, 40, 50};\n    \n    // Element access karna (index se)\n    cout << \"First element: \" << arr[0] << endl;  // 10\n    cout << \"Third element: \" << arr[2] << endl;  // 30\n    \n    // Array traverse karna\n    cout << \"All elements: \";\n    for(int i = 0; i < 5; i++) {\n        cout << arr[i] << \" \";\n    }\n    return 0;\n}",
+        "java": "public class Main {\n    public static void main(String[] args) {\n        // Array declare karna\n        int[] arr = {10, 20, 30, 40, 50};\n        \n        // Element access karna\n        System.out.println(\"First element: \" + arr[0]);  // 10\n        System.out.println(\"Third element: \" + arr[2]);  // 30\n        \n        // Array traverse karna\n        System.out.print(\"All elements: \");\n        for(int x : arr) {\n            System.out.print(x + \" \");\n        }\n    }\n}",
+        "python": "# Array (List) declare karna\narr = [10, 20, 30, 40, 50]\n\n# Element access karna\nprint(\"First element:\", arr[0])   # 10\nprint(\"Third element:\", arr[2])   # 30\n\n# Array traverse karna\nprint(\"All elements:\", *arr)",
+        "javascript": "// Array declare karna\nlet arr = [10, 20, 30, 40, 50];\n\n// Element access karna\nconsole.log(\"First element:\", arr[0]);  // 10\nconsole.log(\"Third element:\", arr[2]);  // 30\n\n// Array traverse karna\nconsole.log(\"All elements:\", arr.join(\" \"));",
+        "c": "#include <stdio.h>\n\nint main() {\n    // Array declare karna\n    int arr[5] = {10, 20, 30, 40, 50};\n    \n    // Element access karna\n    printf(\"First element: %d\\n\", arr[0]);  // 10\n    printf(\"Third element: %d\\n\", arr[2]);  // 30\n    \n    // Array traverse karna\n    printf(\"All elements: \");\n    for(int i = 0; i < 5; i++) {\n        printf(\"%d \", arr[i]);\n    }\n    return 0;\n}"
+      },
+      "keyPoints": [
+        { "en": "Array index starts from 0, not 1", "hi": "Array ka index 0 se start hota hai, 1 se nahi" },
+        { "en": "Access any element in O(1) time using index", "hi": "Index use karke koi bhi element O(1) time mein access kar sakte ho" },
+        { "en": "Array size is fixed once declared (in C/C++/Java)", "hi": "Array ka size ek baar declare karne ke baad fix ho jaata hai (C/C++/Java mein)" }
+      ],
+      "timeComplexity": { "access": "O(1)", "search": "O(n)", "insert": "O(n)", "delete": "O(n)" }
+    },
+    {
+      "id": "array-operations",
+      "title": { "en": "Array Operations", "hi": "Array Operations" },
+      "content": {
+        "en": "Common operations on arrays include:\n1. **Traversal** - Visit each element one by one\n2. **Insertion** - Add element at a position\n3. **Deletion** - Remove element from a position\n4. **Search** - Find an element\n5. **Update** - Change value at a position",
+        "hi": "Array pe common operations:\n1. **Traversal** - Ek ek element visit karna\n2. **Insertion** - Kisi position pe element add karna\n3. **Deletion** - Kisi position se element hatana\n4. **Search** - Element dhundhna\n5. **Update** - Kisi position ki value change karna"
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int arr[10] = {10, 20, 30, 40, 50};\n    int n = 5;\n    \n    // Insert 25 at index 2\n    for(int i = n; i > 2; i--) {\n        arr[i] = arr[i-1];\n    }\n    arr[2] = 25;\n    n++;\n    \n    // Print: 10 20 25 30 40 50\n    for(int i = 0; i < n; i++) {\n        cout << arr[i] << \" \";\n    }\n    \n    // Delete element at index 3\n    for(int i = 3; i < n-1; i++) {\n        arr[i] = arr[i+1];\n    }\n    n--;\n    \n    cout << endl;\n    // Print: 10 20 25 40 50\n    for(int i = 0; i < n; i++) {\n        cout << arr[i] << \" \";\n    }\n    return 0;\n}",
+        "python": "arr = [10, 20, 30, 40, 50]\n\n# Insert 25 at index 2\narr.insert(2, 25)\nprint(arr)  # [10, 20, 25, 30, 40, 50]\n\n# Delete element at index 3\narr.pop(3)\nprint(arr)  # [10, 20, 25, 40, 50]\n\n# Search for 25\nif 25 in arr:\n    print(f\"Found at index: {arr.index(25)}\")\n\n# Update index 1\narr[1] = 99\nprint(arr)  # [10, 99, 25, 40, 50]",
+        "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        ArrayList<Integer> arr = new ArrayList<>(Arrays.asList(10, 20, 30, 40, 50));\n        \n        // Insert 25 at index 2\n        arr.add(2, 25);\n        System.out.println(arr);  // [10, 20, 25, 30, 40, 50]\n        \n        // Delete at index 3\n        arr.remove(3);\n        System.out.println(arr);  // [10, 20, 25, 40, 50]\n        \n        // Search\n        System.out.println(\"Index of 25: \" + arr.indexOf(25));\n    }\n}",
+        "javascript": "let arr = [10, 20, 30, 40, 50];\n\n// Insert 25 at index 2\narr.splice(2, 0, 25);\nconsole.log(arr);  // [10, 20, 25, 30, 40, 50]\n\n// Delete at index 3\narr.splice(3, 1);\nconsole.log(arr);  // [10, 20, 25, 40, 50]\n\n// Search\nconsole.log(\"Index of 25:\", arr.indexOf(25));\n\n// Update\narr[1] = 99;\nconsole.log(arr);  // [10, 99, 25, 40, 50]",
+        "c": "#include <stdio.h>\n\nint main() {\n    int arr[10] = {10, 20, 30, 40, 50};\n    int n = 5;\n    \n    // Insert 25 at index 2\n    for(int i = n; i > 2; i--) arr[i] = arr[i-1];\n    arr[2] = 25;\n    n++;\n    \n    for(int i = 0; i < n; i++) printf(\"%d \", arr[i]);\n    printf(\"\\n\");\n    \n    // Delete at index 3\n    for(int i = 3; i < n-1; i++) arr[i] = arr[i+1];\n    n--;\n    \n    for(int i = 0; i < n; i++) printf(\"%d \", arr[i]);\n    return 0;\n}"
+      },
+      "keyPoints": [
+        { "en": "Insertion and deletion require shifting elements - O(n)", "hi": "Insert aur delete mein elements shift karne padte hain - O(n)" },
+        { "en": "Python lists and JS arrays are dynamic (auto-resize)", "hi": "Python lists aur JS arrays dynamic hain (automatic resize ho jaate hain)" },
+        { "en": "In C/C++, you must manage array size manually", "hi": "C/C++ mein array ka size khud manage karna padta hai" }
+      ],
+      "timeComplexity": { "access": "O(1)", "search": "O(n)", "insert": "O(n)", "delete": "O(n)" }
+    },
+    {
+      "id": "two-pointer",
+      "title": { "en": "Two Pointer Technique", "hi": "Two Pointer Technique" },
+      "content": {
+        "en": "The two-pointer technique uses two pointers (indices) that move towards each other or in the same direction to solve problems efficiently.\n\n**When to use:**\n- Sorted arrays\n- Finding pairs with a given sum\n- Removing duplicates\n- Reversing an array",
+        "hi": "Two pointer technique mein do pointers (indices) use hote hain jo ek dusre ki taraf ya ek hi direction mein move karte hain aur efficiently problems solve karte hain.\n\n**Kab use karein:**\n- Sorted arrays mein\n- Kisi given sum ke pairs dhundhne mein\n- Duplicates remove karne mein\n- Array reverse karne mein"
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\n// Two Sum in sorted array\npair<int,int> twoSum(vector<int>& arr, int target) {\n    int left = 0, right = arr.size() - 1;\n    \n    while(left < right) {\n        int sum = arr[left] + arr[right];\n        if(sum == target) return {left, right};\n        else if(sum < target) left++;\n        else right--;\n    }\n    return {-1, -1};\n}\n\nint main() {\n    vector<int> arr = {1, 3, 5, 7, 9, 11};\n    auto [i, j] = twoSum(arr, 12);\n    cout << \"Indices: \" << i << \", \" << j << endl;\n    // Output: 1, 4 (3 + 9 = 12)\n    return 0;\n}",
+        "python": "def two_sum(arr, target):\n    left, right = 0, len(arr) - 1\n    \n    while left < right:\n        current_sum = arr[left] + arr[right]\n        if current_sum == target:\n            return (left, right)\n        elif current_sum < target:\n            left += 1\n        else:\n            right -= 1\n    \n    return (-1, -1)\n\narr = [1, 3, 5, 7, 9, 11]\nprint(two_sum(arr, 12))  # (1, 4) -> 3 + 9 = 12",
+        "java": "public class Main {\n    public static int[] twoSum(int[] arr, int target) {\n        int left = 0, right = arr.length - 1;\n        while (left < right) {\n            int sum = arr[left] + arr[right];\n            if (sum == target) return new int[]{left, right};\n            else if (sum < target) left++;\n            else right--;\n        }\n        return new int[]{-1, -1};\n    }\n    \n    public static void main(String[] args) {\n        int[] arr = {1, 3, 5, 7, 9, 11};\n        int[] result = twoSum(arr, 12);\n        System.out.println(result[0] + \", \" + result[1]);\n    }\n}",
+        "javascript": "function twoSum(arr, target) {\n    let left = 0, right = arr.length - 1;\n    \n    while (left < right) {\n        const sum = arr[left] + arr[right];\n        if (sum === target) return [left, right];\n        else if (sum < target) left++;\n        else right--;\n    }\n    return [-1, -1];\n}\n\nconst arr = [1, 3, 5, 7, 9, 11];\nconsole.log(twoSum(arr, 12)); // [1, 4]",
+        "c": "#include <stdio.h>\n\nvoid twoSum(int arr[], int n, int target) {\n    int left = 0, right = n - 1;\n    while (left < right) {\n        int sum = arr[left] + arr[right];\n        if (sum == target) {\n            printf(\"Indices: %d, %d\\n\", left, right);\n            return;\n        }\n        else if (sum < target) left++;\n        else right--;\n    }\n    printf(\"Not found\\n\");\n}\n\nint main() {\n    int arr[] = {1, 3, 5, 7, 9, 11};\n    twoSum(arr, 6, 12);\n    return 0;\n}"
+      },
+      "keyPoints": [
+        { "en": "Reduces O(n^2) brute force to O(n) for sorted arrays", "hi": "Sorted arrays ke liye O(n^2) brute force ko O(n) mein convert kar deta hai" },
+        { "en": "Works best with sorted arrays", "hi": "Sorted arrays ke saath best kaam karta hai" },
+        { "en": "Two variants: opposite direction (left/right) and same direction (slow/fast)", "hi": "Do tarike: opposite direction (left/right) aur same direction (slow/fast)" }
+      ],
+      "timeComplexity": { "access": "O(1)", "search": "O(n)", "insert": "N/A", "delete": "N/A" }
+    },
+    {
+      "id": "sliding-window",
+      "title": { "en": "Sliding Window Technique", "hi": "Sliding Window Technique" },
+      "content": {
+        "en": "Sliding window is a technique where we maintain a window (subarray) that slides through the array. It's used to find optimal subarrays that satisfy certain conditions.\n\n**When to use:**\n- Maximum/minimum sum subarray of size K\n- Longest substring problems\n- Subarray with given sum",
+        "hi": "Sliding window ek technique hai jisme hum ek window (subarray) maintain karte hain jo array mein slide hoti hai. Ye un subarrays ko dhundhne mein use hoti hai jo kuch conditions satisfy karti hain.\n\n**Kab use karein:**\n- Size K ke maximum/minimum sum subarray\n- Longest substring problems\n- Given sum wala subarray"
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\n#include <vector>\n#include <climits>\nusing namespace std;\n\n// Maximum sum subarray of size k\nint maxSumSubarray(vector<int>& arr, int k) {\n    int n = arr.size();\n    int windowSum = 0, maxSum = INT_MIN;\n    \n    for(int i = 0; i < n; i++) {\n        windowSum += arr[i];\n        \n        if(i >= k - 1) {\n            maxSum = max(maxSum, windowSum);\n            windowSum -= arr[i - k + 1];\n        }\n    }\n    return maxSum;\n}\n\nint main() {\n    vector<int> arr = {2, 1, 5, 1, 3, 2};\n    int k = 3;\n    cout << \"Max sum of subarray size \" << k << \": \";\n    cout << maxSumSubarray(arr, k) << endl;  // 9 (5+1+3)\n    return 0;\n}",
+        "python": "def max_sum_subarray(arr, k):\n    n = len(arr)\n    window_sum = sum(arr[:k])\n    max_sum = window_sum\n    \n    for i in range(k, n):\n        window_sum += arr[i] - arr[i - k]\n        max_sum = max(max_sum, window_sum)\n    \n    return max_sum\n\narr = [2, 1, 5, 1, 3, 2]\nk = 3\nprint(f\"Max sum of subarray size {k}: {max_sum_subarray(arr, k)}\")  # 9",
+        "java": "public class Main {\n    public static int maxSumSubarray(int[] arr, int k) {\n        int windowSum = 0, maxSum = Integer.MIN_VALUE;\n        for (int i = 0; i < arr.length; i++) {\n            windowSum += arr[i];\n            if (i >= k - 1) {\n                maxSum = Math.max(maxSum, windowSum);\n                windowSum -= arr[i - k + 1];\n            }\n        }\n        return maxSum;\n    }\n    \n    public static void main(String[] args) {\n        int[] arr = {2, 1, 5, 1, 3, 2};\n        System.out.println(\"Max sum: \" + maxSumSubarray(arr, 3));\n    }\n}",
+        "javascript": "function maxSumSubarray(arr, k) {\n    let windowSum = 0, maxSum = -Infinity;\n    \n    for (let i = 0; i < arr.length; i++) {\n        windowSum += arr[i];\n        if (i >= k - 1) {\n            maxSum = Math.max(maxSum, windowSum);\n            windowSum -= arr[i - k + 1];\n        }\n    }\n    return maxSum;\n}\n\nconst arr = [2, 1, 5, 1, 3, 2];\nconsole.log(\"Max sum:\", maxSumSubarray(arr, 3)); // 9",
+        "c": "#include <stdio.h>\n#include <limits.h>\n\nint maxSumSubarray(int arr[], int n, int k) {\n    int windowSum = 0, maxSum = INT_MIN;\n    for (int i = 0; i < n; i++) {\n        windowSum += arr[i];\n        if (i >= k - 1) {\n            if (windowSum > maxSum) maxSum = windowSum;\n            windowSum -= arr[i - k + 1];\n        }\n    }\n    return maxSum;\n}\n\nint main() {\n    int arr[] = {2, 1, 5, 1, 3, 2};\n    printf(\"Max sum: %d\\n\", maxSumSubarray(arr, 6, 3));\n    return 0;\n}"
+      },
+      "keyPoints": [
+        { "en": "Converts O(n*k) brute force to O(n)", "hi": "O(n*k) brute force ko O(n) mein convert kar deta hai" },
+        { "en": "Fixed window: size remains constant. Variable window: size changes based on conditions", "hi": "Fixed window: size same rehta hai. Variable window: condition ke basis pe size badalta hai" },
+        { "en": "Very common in interview questions!", "hi": "Interview questions mein bahut common hai!" }
+      ],
+      "timeComplexity": { "access": "N/A", "search": "O(n)", "insert": "N/A", "delete": "N/A" }
+    }
+  ]
+}

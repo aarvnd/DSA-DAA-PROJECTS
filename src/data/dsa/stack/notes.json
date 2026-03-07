@@ -1,0 +1,55 @@
+{
+  "topicId": "stack",
+  "title": { "en": "Stack - Complete Guide", "hi": "Stack - Poori Jaankari" },
+  "introduction": {
+    "en": "A Stack is a linear data structure that follows the Last In First Out (LIFO) principle. The last element added is the first one to be removed.",
+    "hi": "Stack ek linear data structure hai jo Last In First Out (LIFO) principle follow karta hai. Jo element sabse last mein add hua, wo sabse pehle remove hoga. Socho plates ka stack - upar wali plate pehle uthate ho!"
+  },
+  "realLifeAnalogy": {
+    "en": "Think of a stack of plates in a cafeteria. You always take the top plate first. When a new plate is washed, it goes on top. This is LIFO - Last In, First Out!",
+    "hi": "Canteen mein plates ka stack socho. Hamesha upar wali plate pehle uthate ho. Jab nayi plate dhul ke aati hai, wo upar rakh di jaati hai. Yehi hai LIFO - Last In, First Out!"
+  },
+  "sections": [
+    {
+      "id": "what-is-stack",
+      "title": { "en": "What is a Stack?", "hi": "Stack kya hota hai?" },
+      "content": {
+        "en": "A stack is a container where you can only add or remove elements from the top.\n\n**Operations:**\n- **Push** - Add element to top\n- **Pop** - Remove element from top\n- **Peek/Top** - See the top element without removing\n- **isEmpty** - Check if stack is empty\n- **Size** - Number of elements",
+        "hi": "Stack ek aisa container hai jisme elements sirf upar se add ya remove kar sakte ho.\n\n**Operations:**\n- **Push** - Element ko upar add karo\n- **Pop** - Upar se element hatao\n- **Peek/Top** - Upar wala element dekho bina hataye\n- **isEmpty** - Check karo stack khali hai ya nahi\n- **Size** - Kitne elements hain"
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\n#include <stack>\nusing namespace std;\n\nint main() {\n    stack<int> s;\n    \n    // Push elements\n    s.push(10);\n    s.push(20);\n    s.push(30);\n    \n    cout << \"Top: \" << s.top() << endl;  // 30\n    cout << \"Size: \" << s.size() << endl; // 3\n    \n    s.pop();  // 30 removed\n    cout << \"Top after pop: \" << s.top() << endl;  // 20\n    \n    // Print all elements\n    while(!s.empty()) {\n        cout << s.top() << \" \";\n        s.pop();\n    }\n    // Output: 20 10\n    return 0;\n}",
+        "python": "# Python mein list ko stack ki tarah use kar sakte ho\nstack = []\n\n# Push\nstack.append(10)\nstack.append(20)\nstack.append(30)\n\nprint(\"Top:\", stack[-1])   # 30\nprint(\"Size:\", len(stack))  # 3\n\n# Pop\nstack.pop()  # 30 removed\nprint(\"Top after pop:\", stack[-1])  # 20\n\n# Print all\nwhile stack:\n    print(stack.pop(), end=\" \")\n# Output: 20 10",
+        "java": "import java.util.Stack;\n\npublic class Main {\n    public static void main(String[] args) {\n        Stack<Integer> stack = new Stack<>();\n        \n        // Push\n        stack.push(10);\n        stack.push(20);\n        stack.push(30);\n        \n        System.out.println(\"Top: \" + stack.peek());  // 30\n        System.out.println(\"Size: \" + stack.size());  // 3\n        \n        stack.pop();  // 30 removed\n        System.out.println(\"Top after pop: \" + stack.peek());  // 20\n    }\n}",
+        "javascript": "// Stack using array\nlet stack = [];\n\n// Push\nstack.push(10);\nstack.push(20);\nstack.push(30);\n\nconsole.log(\"Top:\", stack[stack.length - 1]);  // 30\nconsole.log(\"Size:\", stack.length);  // 3\n\n// Pop\nstack.pop();  // 30 removed\nconsole.log(\"Top after pop:\", stack[stack.length - 1]);  // 20",
+        "c": "#include <stdio.h>\n#define MAX 100\n\nint stack[MAX];\nint top = -1;\n\nvoid push(int val) {\n    if (top >= MAX - 1) { printf(\"Overflow\\n\"); return; }\n    stack[++top] = val;\n}\n\nint pop() {\n    if (top < 0) { printf(\"Underflow\\n\"); return -1; }\n    return stack[top--];\n}\n\nint peek() { return stack[top]; }\nint isEmpty() { return top < 0; }\n\nint main() {\n    push(10); push(20); push(30);\n    printf(\"Top: %d\\n\", peek());  // 30\n    pop();\n    printf(\"Top after pop: %d\\n\", peek());  // 20\n    return 0;\n}"
+      },
+      "keyPoints": [
+        { "en": "Stack follows LIFO - Last In, First Out", "hi": "Stack LIFO follow karta hai - Last In, First Out" },
+        { "en": "Push and Pop are both O(1) operations", "hi": "Push aur Pop dono O(1) operations hain" },
+        { "en": "Used in function calls, undo operations, browser back button", "hi": "Function calls, undo operations, browser back button mein use hota hai" }
+      ],
+      "timeComplexity": { "push": "O(1)", "pop": "O(1)", "peek": "O(1)", "search": "O(n)" }
+    },
+    {
+      "id": "stack-applications",
+      "title": { "en": "Stack Applications", "hi": "Stack ke Uses" },
+      "content": {
+        "en": "Stacks are used everywhere in programming:\n\n1. **Function Call Stack** - Every function call is pushed onto the call stack\n2. **Undo/Redo** - Each action is pushed, undo pops the last action\n3. **Browser Back Button** - Each visited page is pushed onto a stack\n4. **Balanced Parentheses** - Check if brackets are properly matched\n5. **Expression Evaluation** - Convert and evaluate mathematical expressions",
+        "hi": "Stack programming mein har jagah use hota hai:\n\n1. **Function Call Stack** - Har function call stack pe push hota hai\n2. **Undo/Redo** - Har action push hota hai, undo last action pop karta hai\n3. **Browser Back Button** - Har visited page stack pe push hota hai\n4. **Balanced Parentheses** - Check karo brackets sahi se match ho rahe hain ya nahi\n5. **Expression Evaluation** - Math expressions convert aur evaluate karo"
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\n#include <stack>\n#include <string>\nusing namespace std;\n\n// Balanced Parentheses Check\nbool isBalanced(string s) {\n    stack<char> st;\n    \n    for(char c : s) {\n        if(c == '(' || c == '{' || c == '[') {\n            st.push(c);\n        } else {\n            if(st.empty()) return false;\n            char top = st.top();\n            if((c == ')' && top == '(') ||\n               (c == '}' && top == '{') ||\n               (c == ']' && top == '[')) {\n                st.pop();\n            } else {\n                return false;\n            }\n        }\n    }\n    return st.empty();\n}\n\nint main() {\n    cout << isBalanced(\"{[()]}\") << endl;  // 1 (true)\n    cout << isBalanced(\"{[(])}\") << endl;  // 0 (false)\n    cout << isBalanced(\"((()))\") << endl;  // 1 (true)\n    return 0;\n}",
+        "python": "def is_balanced(s):\n    stack = []\n    bracket_map = {')': '(', '}': '{', ']': '['}\n    \n    for char in s:\n        if char in '({[':\n            stack.append(char)\n        elif char in ')}]':\n            if not stack or stack[-1] != bracket_map[char]:\n                return False\n            stack.pop()\n    \n    return len(stack) == 0\n\nprint(is_balanced(\"{[()]}\"))  # True\nprint(is_balanced(\"{[(])}\"))  # False\nprint(is_balanced(\"((()))\"))  # True",
+        "java": "import java.util.Stack;\n\npublic class Main {\n    public static boolean isBalanced(String s) {\n        Stack<Character> stack = new Stack<>();\n        for (char c : s.toCharArray()) {\n            if (c == '(' || c == '{' || c == '[') {\n                stack.push(c);\n            } else {\n                if (stack.isEmpty()) return false;\n                char top = stack.pop();\n                if ((c == ')' && top != '(') ||\n                    (c == '}' && top != '{') ||\n                    (c == ']' && top != '['))\n                    return false;\n            }\n        }\n        return stack.isEmpty();\n    }\n    \n    public static void main(String[] args) {\n        System.out.println(isBalanced(\"{[()]}\")); // true\n        System.out.println(isBalanced(\"{[(])}\")); // false\n    }\n}",
+        "javascript": "function isBalanced(s) {\n    const stack = [];\n    const map = { ')': '(', '}': '{', ']': '[' };\n    \n    for (const char of s) {\n        if ('({['.includes(char)) {\n            stack.push(char);\n        } else if (')}]'.includes(char)) {\n            if (!stack.length || stack[stack.length-1] !== map[char])\n                return false;\n            stack.pop();\n        }\n    }\n    return stack.length === 0;\n}\n\nconsole.log(isBalanced(\"{[()]}\")); // true\nconsole.log(isBalanced(\"{[(])}\")); // false",
+        "c": "#include <stdio.h>\n#include <string.h>\n\nchar stack[100];\nint top = -1;\n\nvoid push(char c) { stack[++top] = c; }\nchar pop() { return stack[top--]; }\nint isEmpty() { return top < 0; }\n\nint isBalanced(char* s) {\n    top = -1;\n    for (int i = 0; s[i]; i++) {\n        if (s[i]=='(' || s[i]=='{' || s[i]=='[') push(s[i]);\n        else {\n            if (isEmpty()) return 0;\n            char t = pop();\n            if ((s[i]==')' && t!='(') || (s[i]=='}' && t!='{') || (s[i]==']' && t!='['))\n                return 0;\n        }\n    }\n    return isEmpty();\n}\n\nint main() {\n    printf(\"%d\\n\", isBalanced(\"{[()]}\")); // 1\n    printf(\"%d\\n\", isBalanced(\"{[(])}\")); // 0\n    return 0;\n}"
+      },
+      "keyPoints": [
+        { "en": "Balanced parentheses is the most classic stack problem", "hi": "Balanced parentheses stack ka sabse classic problem hai" },
+        { "en": "Stack is used internally by programming languages for function calls", "hi": "Programming languages internally function calls ke liye stack use karti hain" }
+      ],
+      "timeComplexity": { "push": "O(1)", "pop": "O(1)", "peek": "O(1)", "search": "O(n)" }
+    }
+  ]
+}

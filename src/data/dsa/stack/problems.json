@@ -1,0 +1,415 @@
+{
+  "topicId": "stack",
+  "problems": [
+    {
+      "id": "stk-001",
+      "title": "Valid Parentheses",
+      "titleHi": "Valid Parentheses Check Karo",
+      "difficulty": "easy",
+      "description": { "en": "Check if the given string of brackets is valid. A string is valid if every open bracket has a corresponding close bracket in correct order.", "hi": "Check karo diya gaya brackets ka string valid hai ya nahi. String valid hai agar har open bracket ka corresponding close bracket sahi order mein ho." },
+      "examples": [
+        { "input": "{[()]}", "output": "true", "explanation": { "en": "All brackets properly matched", "hi": "Saare brackets sahi se match hain" } },
+        { "input": "{[(])}", "output": "false", "explanation": { "en": "Square bracket closes before round", "hi": "Square bracket round se pehle close ho raha" } }
+      ],
+      "constraints": ["1 <= s.length <= 10^4", "s consists of (){}[] only"],
+      "hints": [{ "en": "Push open brackets, pop and match for close brackets", "hi": "Open brackets push karo, close brackets ke liye pop karke match karo" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<stack>\n#include<string>\nusing namespace std;\nint main() {\n    string s; cin>>s;\n    // Print true or false\n}",
+        "python": "s = input()\n# Print true or false",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        String s = new Scanner(System.in).next();\n    }\n}",
+        "javascript": "const s = require('fs').readFileSync('/dev/stdin','utf8').trim();\n// Print true or false",
+        "c": "#include<stdio.h>\n#include<string.h>\nint main() {\n    char s[10001]; scanf(\"%s\",s);\n}"
+      },
+      "testCases": [
+        { "input": "{[()]}", "expectedOutput": "true" },
+        { "input": "{[(])}", "expectedOutput": "false" },
+        { "input": "()", "expectedOutput": "true" },
+        { "input": "((", "expectedOutput": "false" }
+      ],
+      "solution": {
+        "approach": { "en": "Use stack: push open, pop and match for close.", "hi": "Stack use karo: open push karo, close ke liye pop karke match karo." },
+        "code": { "cpp": "stack<char> st;\nbool valid=true;\nfor(char c:s){\n  if(c=='('||c=='{'||c=='[') st.push(c);\n  else {\n    if(st.empty()){valid=false;break;}\n    char t=st.top(); st.pop();\n    if((c==')'&&t!='(')||(c=='}'&&t!='{')||(c==']'&&t!='[')){valid=false;break;}\n  }\n}\nif(!st.empty()) valid=false;\ncout<<(valid?\"true\":\"false\");", "python": "stack=[]\nmp={')':'(','}':'{',']':'['}\nvalid=True\nfor c in s:\n  if c in '({[': stack.append(c)\n  else:\n    if not stack or stack[-1]!=mp[c]: valid=False; break\n    stack.pop()\nif stack: valid=False\nprint('true' if valid else 'false')" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(n)"
+      },
+      "tags": ["stack", "string"]
+    },
+    {
+      "id": "stk-002",
+      "title": "Min Stack",
+      "titleHi": "Min Stack Design Karo",
+      "difficulty": "easy",
+      "description": { "en": "Design a stack that supports push, pop, top, and getMin in O(1) time. Process Q queries.", "hi": "Ek stack design karo jo push, pop, top, aur getMin O(1) time mein support kare. Q queries process karo." },
+      "examples": [
+        { "input": "push 5, push 3, getMin, pop, getMin", "output": "3\n5", "explanation": { "en": "After push 5,3: min=3. After pop: min=5", "hi": "Push 5,3 ke baad: min=3. Pop ke baad: min=5" } }
+      ],
+      "constraints": ["1 <= Q <= 10^5"],
+      "hints": [{ "en": "Use two stacks - one for elements, one for minimums", "hi": "Do stacks use karo - ek elements ke liye, ek minimums ke liye" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<stack>\nusing namespace std;\nint main() {\n    int q; cin>>q;\n    // Process queries: push x, pop, top, getMin\n}",
+        "python": "q = int(input())\n# Process queries",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int q = sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\n// Process queries",
+        "c": "#include<stdio.h>\nint main() {\n    int q; scanf(\"%d\",&q);\n}"
+      },
+      "testCases": [
+        { "input": "5\npush 5\npush 3\ngetMin\npop\ngetMin", "expectedOutput": "3\n5" }
+      ],
+      "solution": {
+        "approach": { "en": "Maintain a min stack alongside main stack.", "hi": "Main stack ke saath ek min stack maintain karo." },
+        "code": { "cpp": "stack<int> s, mn;\n// push: s.push(x); if(mn.empty()||x<=mn.top()) mn.push(x);\n// pop: if(s.top()==mn.top()) mn.pop(); s.pop();\n// getMin: cout<<mn.top();", "python": "# Use two lists as stacks\ns, mn = [], []\n# push x: s.append(x); if not mn or x<=mn[-1]: mn.append(x)\n# pop: if s[-1]==mn[-1]: mn.pop(); s.pop()\n# getMin: print(mn[-1])" },
+        "timeComplexity": "O(1) per operation", "spaceComplexity": "O(n)"
+      },
+      "tags": ["stack", "design"]
+    },
+    {
+      "id": "stk-003",
+      "title": "Reverse String Using Stack",
+      "titleHi": "Stack se String Ulta Karo",
+      "difficulty": "easy",
+      "description": { "en": "Reverse a string using a stack.", "hi": "Stack use karke string ko ulta karo." },
+      "examples": [{ "input": "hello", "output": "olleh", "explanation": { "en": "Push all chars, then pop all", "hi": "Saare characters push karo, phir sab pop karo" } }],
+      "constraints": ["1 <= s.length <= 10^4"],
+      "hints": [{ "en": "Push all characters, pop them to get reverse", "hi": "Saare characters push karo, pop karte jao to ulta milega" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<stack>\n#include<string>\nusing namespace std;\nint main() {\n    string s; cin>>s;\n    // Reverse using stack\n}",
+        "python": "s = input()\n# Reverse using stack",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        String s = new Scanner(System.in).next();\n    }\n}",
+        "javascript": "const s = require('fs').readFileSync('/dev/stdin','utf8').trim();\n// Reverse using stack",
+        "c": "#include<stdio.h>\n#include<string.h>\nint main() {\n    char s[10001]; scanf(\"%s\",s);\n}"
+      },
+      "testCases": [
+        { "input": "hello", "expectedOutput": "olleh" },
+        { "input": "abcdef", "expectedOutput": "fedcba" }
+      ],
+      "solution": {
+        "approach": { "en": "Push all, pop all.", "hi": "Sab push karo, sab pop karo." },
+        "code": { "cpp": "stack<char> st;\nfor(char c:s) st.push(c);\nwhile(!st.empty()){cout<<st.top();st.pop();}", "python": "stack=list(s)\nprint(''.join(reversed(stack)))" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(n)"
+      },
+      "tags": ["stack", "string"]
+    },
+    {
+      "id": "stk-004",
+      "title": "Sort a Stack",
+      "titleHi": "Stack ko Sort Karo",
+      "difficulty": "easy",
+      "description": { "en": "Sort a stack using only stack operations (push, pop, top, isEmpty). Smallest on top.", "hi": "Stack ko sirf stack operations se sort karo. Sabse chhota upar." },
+      "examples": [{ "input": "[5, 1, 3, 2, 4]", "output": "1 2 3 4 5", "explanation": { "en": "Stack sorted with 1 on top", "hi": "Stack sorted, 1 upar" } }],
+      "constraints": ["1 <= n <= 100"],
+      "hints": [{ "en": "Use a temporary stack", "hi": "Ek temporary stack use karo" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<stack>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    stack<int> s;\n    for(int i=0;i<n;i++){int x;cin>>x;s.push(x);}\n    // Sort and print top to bottom\n}",
+        "python": "n = int(input())\narr = list(map(int, input().split()))\n# Sort using stack operations",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        Stack<Integer> s = new Stack<>();\n        for(int i=0;i<n;i++) s.push(sc.nextInt());\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst arr = lines[1].split(' ').map(Number);",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n}"
+      },
+      "testCases": [
+        { "input": "5\n5 1 3 2 4", "expectedOutput": "1 2 3 4 5" },
+        { "input": "3\n3 1 2", "expectedOutput": "1 2 3" }
+      ],
+      "solution": {
+        "approach": { "en": "Use temp stack: pop from input, insert in sorted order into temp.", "hi": "Temp stack use karo: input se pop karo, temp mein sorted order mein insert karo." },
+        "code": { "cpp": "stack<int> tmp;\nwhile(!s.empty()){\n  int t=s.top();s.pop();\n  while(!tmp.empty()&&tmp.top()>t){s.push(tmp.top());tmp.pop();}\n  tmp.push(t);\n}\nwhile(!tmp.empty()){cout<<tmp.top()<<\" \";tmp.pop();}", "python": "stack=arr[:]\ntmp=[]\nwhile stack:\n  t=stack.pop()\n  while tmp and tmp[-1]>t: stack.append(tmp.pop())\n  tmp.append(t)\nprint(*tmp)" },
+        "timeComplexity": "O(n^2)", "spaceComplexity": "O(n)"
+      },
+      "tags": ["stack", "sorting"]
+    },
+    {
+      "id": "stk-005",
+      "title": "Implement Queue using Stacks",
+      "titleHi": "Stacks se Queue Banao",
+      "difficulty": "easy",
+      "description": { "en": "Implement a queue using two stacks. Support enqueue and dequeue operations.", "hi": "Do stacks se queue banao. Enqueue aur dequeue operations support karo." },
+      "examples": [{ "input": "enqueue 1, enqueue 2, dequeue, enqueue 3, dequeue", "output": "1\n2", "explanation": { "en": "FIFO order maintained", "hi": "FIFO order maintain hai" } }],
+      "constraints": ["1 <= Q <= 10^5"],
+      "hints": [{ "en": "Use two stacks: one for enqueue, transfer to other for dequeue", "hi": "Do stacks: ek enqueue ke liye, dusre mein transfer karke dequeue" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<stack>\nusing namespace std;\nint main() {\n    int q; cin>>q;\n    stack<int> s1, s2;\n    // Process enqueue and dequeue\n}",
+        "python": "q = int(input())\n# Process enqueue and dequeue using two lists as stacks",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int q = sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');",
+        "c": "#include<stdio.h>\nint main() {\n    int q; scanf(\"%d\",&q);\n}"
+      },
+      "testCases": [
+        { "input": "5\nenqueue 1\nenqueue 2\ndequeue\nenqueue 3\ndequeue", "expectedOutput": "1\n2" }
+      ],
+      "solution": {
+        "approach": { "en": "Two stacks: push to s1, for pop transfer s1 to s2 if s2 empty.", "hi": "Do stacks: s1 mein push karo, pop ke liye s1 se s2 mein transfer karo agar s2 empty hai." },
+        "code": { "cpp": "// enqueue: s1.push(x)\n// dequeue: if s2 empty, move all from s1 to s2. Then s2.pop()", "python": "# enqueue: s1.append(x)\n# dequeue: if not s2, while s1: s2.append(s1.pop()); s2.pop()" },
+        "timeComplexity": "O(1) amortized", "spaceComplexity": "O(n)"
+      },
+      "tags": ["stack", "queue", "design"]
+    },
+    {
+      "id": "stk-006",
+      "title": "Next Greater Element",
+      "titleHi": "Next Greater Element Dhundho",
+      "difficulty": "medium",
+      "description": { "en": "For each element, find the next greater element to its right. If none, use -1.", "hi": "Har element ke liye, uske right mein next greater element dhundho. Agar nahi hai to -1." },
+      "examples": [{ "input": "[4, 5, 2, 25]", "output": "5 25 25 -1", "explanation": { "en": "Next greater for 4=5, 5=25, 2=25, 25=none", "hi": "4 ka next greater=5, 5 ka=25, 2 ka=25, 25 ka=none" } }],
+      "constraints": ["1 <= n <= 10^5"],
+      "hints": [{ "en": "Use monotonic stack (decreasing)", "hi": "Monotonic stack (decreasing) use karo" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<stack>\n#include<vector>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin>>arr[i];\n    // Find NGE for each\n}",
+        "python": "n = int(input())\narr = list(map(int, input().split()))\n# Find NGE for each",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst arr = lines[1].split(' ').map(Number);",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n}"
+      },
+      "testCases": [
+        { "input": "4\n4 5 2 25", "expectedOutput": "5 25 25 -1" },
+        { "input": "4\n13 7 6 12", "expectedOutput": "-1 12 12 -1" }
+      ],
+      "solution": {
+        "approach": { "en": "Traverse right to left, use stack to find next greater.", "hi": "Right se left traverse karo, stack se next greater dhundho." },
+        "code": { "cpp": "stack<int> st;\nvector<int> res(n);\nfor(int i=n-1;i>=0;i--){\n  while(!st.empty()&&st.top()<=arr[i]) st.pop();\n  res[i]=st.empty()?-1:st.top();\n  st.push(arr[i]);\n}\nfor(int i=0;i<n;i++) cout<<res[i]<<(i<n-1?\" \":\"\");", "python": "stack=[]\nres=[0]*n\nfor i in range(n-1,-1,-1):\n  while stack and stack[-1]<=arr[i]: stack.pop()\n  res[i]=stack[-1] if stack else -1\n  stack.append(arr[i])\nprint(*res)" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(n)"
+      },
+      "tags": ["stack", "monotonic-stack"]
+    },
+    {
+      "id": "stk-007",
+      "title": "Stock Span Problem",
+      "titleHi": "Stock Span Problem",
+      "difficulty": "medium",
+      "description": { "en": "Find the span of stock's price for each day. Span = number of consecutive days before (including today) where price was <= today's price.", "hi": "Har din ke liye stock ki price ka span dhundho. Span = aaj se pehle (aaj include) kitne consecutive din price <= today's price thi." },
+      "examples": [{ "input": "[100, 80, 60, 70, 60, 75, 85]", "output": "1 1 1 2 1 4 6", "explanation": { "en": "Day 6 (85): prices 80,60,70,60,75 all <= 85, span=6", "hi": "Day 6 (85): 80,60,70,60,75 sab <= 85, span=6" } }],
+      "constraints": ["1 <= n <= 10^5"],
+      "hints": [{ "en": "Use stack to store indices of previous greater elements", "hi": "Stack mein previous greater elements ke indices store karo" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<stack>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin>>arr[i];\n    // Find span for each day\n}",
+        "python": "n = int(input())\narr = list(map(int, input().split()))\n# Find span for each day",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst arr = lines[1].split(' ').map(Number);",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n}"
+      },
+      "testCases": [
+        { "input": "7\n100 80 60 70 60 75 85", "expectedOutput": "1 1 1 2 1 4 6" },
+        { "input": "5\n10 20 30 40 50", "expectedOutput": "1 2 3 4 5" }
+      ],
+      "solution": {
+        "approach": { "en": "Stack of indices: pop while top <= current.", "hi": "Indices ka stack: pop karo jab tak top <= current." },
+        "code": { "cpp": "stack<int> st;\nfor(int i=0;i<n;i++){\n  while(!st.empty()&&arr[st.top()]<=arr[i]) st.pop();\n  int span=st.empty()?i+1:i-st.top();\n  cout<<span<<(i<n-1?\" \":\"\");\n  st.push(i);\n}", "python": "stack=[]\nfor i in range(n):\n  while stack and arr[stack[-1]]<=arr[i]: stack.pop()\n  span=i+1 if not stack else i-stack[-1]\n  print(span,end=' ' if i<n-1 else '\\n')\n  stack.append(i)" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(n)"
+      },
+      "tags": ["stack", "monotonic-stack"]
+    },
+    {
+      "id": "stk-008",
+      "title": "Evaluate Postfix Expression",
+      "titleHi": "Postfix Expression Evaluate Karo",
+      "difficulty": "medium",
+      "description": { "en": "Evaluate a postfix (Reverse Polish Notation) expression.", "hi": "Postfix (Reverse Polish Notation) expression evaluate karo." },
+      "examples": [{ "input": "2 3 + 4 *", "output": "20", "explanation": { "en": "(2+3)*4 = 20", "hi": "(2+3)*4 = 20" } }],
+      "constraints": ["Expression is valid", "Operators: + - * /"],
+      "hints": [{ "en": "Push numbers, pop two when operator found, apply and push result", "hi": "Numbers push karo, operator mile to do pop karo, apply karo aur result push karo" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<stack>\n#include<string>\n#include<sstream>\nusing namespace std;\nint main() {\n    string line;\n    getline(cin, line);\n    // Evaluate postfix\n}",
+        "python": "tokens = input().split()\n# Evaluate postfix",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        String[] tokens = new Scanner(System.in).nextLine().split(\" \");\n    }\n}",
+        "javascript": "const tokens = require('fs').readFileSync('/dev/stdin','utf8').trim().split(' ');",
+        "c": "#include<stdio.h>\n#include<stdlib.h>\n#include<string.h>\nint main() {\n    char line[1000];\n    fgets(line, 1000, stdin);\n}"
+      },
+      "testCases": [
+        { "input": "2 3 + 4 *", "expectedOutput": "20" },
+        { "input": "5 1 2 + 4 * + 3 -", "expectedOutput": "14" }
+      ],
+      "solution": {
+        "approach": { "en": "Stack-based evaluation.", "hi": "Stack-based evaluation." },
+        "code": { "cpp": "stack<int> st;\nstringstream ss(line);\nstring token;\nwhile(ss>>token){\n  if(token==\"+\"||token==\"-\"||token==\"*\"||token==\"/\"){\n    int b=st.top();st.pop();\n    int a=st.top();st.pop();\n    if(token==\"+\") st.push(a+b);\n    else if(token==\"-\") st.push(a-b);\n    else if(token==\"*\") st.push(a*b);\n    else st.push(a/b);\n  } else st.push(stoi(token));\n}\ncout<<st.top();", "python": "stack=[]\nfor t in tokens:\n  if t in '+-*/':\n    b,a=stack.pop(),stack.pop()\n    if t=='+': stack.append(a+b)\n    elif t=='-': stack.append(a-b)\n    elif t=='*': stack.append(a*b)\n    else: stack.append(int(a/b))\n  else: stack.append(int(t))\nprint(stack[0])" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(n)"
+      },
+      "tags": ["stack", "expression"]
+    },
+    {
+      "id": "stk-009",
+      "title": "Daily Temperatures",
+      "titleHi": "Daily Temperatures",
+      "difficulty": "medium",
+      "description": { "en": "Given daily temperatures, find for each day how many days you have to wait for a warmer temperature. If no warmer day, output 0.", "hi": "Daily temperatures diye hain, har din ke liye dhundho kitne din wait karna padega warmer temperature ke liye. Agar nahi milega to 0." },
+      "examples": [{ "input": "[73, 74, 75, 71, 69, 72, 76, 73]", "output": "1 1 4 2 1 1 0 0", "explanation": { "en": "Day 0(73): next warmer is day 1(74), wait 1 day", "hi": "Day 0(73): next warmer day 1(74) hai, 1 din wait" } }],
+      "constraints": ["1 <= n <= 10^5", "30 <= temp <= 100"],
+      "hints": [{ "en": "Use monotonic decreasing stack of indices", "hi": "Monotonic decreasing stack of indices use karo" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<stack>\n#include<vector>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    int t[n];\n    for(int i=0;i<n;i++) cin>>t[i];\n    // Find wait days\n}",
+        "python": "n = int(input())\nt = list(map(int, input().split()))\n# Find wait days",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] t = new int[n];\n        for(int i=0;i<n;i++) t[i]=sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst t = lines[1].split(' ').map(Number);",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int t[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&t[i]);\n}"
+      },
+      "testCases": [
+        { "input": "8\n73 74 75 71 69 72 76 73", "expectedOutput": "1 1 4 2 1 1 0 0" },
+        { "input": "3\n30 40 50", "expectedOutput": "1 1 0" }
+      ],
+      "solution": {
+        "approach": { "en": "Monotonic stack: process from left, pop indices when current > stack top temp.", "hi": "Monotonic stack: left se process karo, current > stack top temp ho to pop karo." },
+        "code": { "cpp": "stack<int> st;\nvector<int> res(n,0);\nfor(int i=0;i<n;i++){\n  while(!st.empty()&&t[i]>t[st.top()]){\n    res[st.top()]=i-st.top();\n    st.pop();\n  }\n  st.push(i);\n}\nfor(int i=0;i<n;i++) cout<<res[i]<<(i<n-1?\" \":\"\");", "python": "stack=[]\nres=[0]*n\nfor i in range(n):\n  while stack and t[i]>t[stack[-1]]:\n    idx=stack.pop()\n    res[idx]=i-idx\n  stack.append(i)\nprint(*res)" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(n)"
+      },
+      "tags": ["stack", "monotonic-stack"]
+    },
+    {
+      "id": "stk-010",
+      "title": "Remove Adjacent Duplicates",
+      "titleHi": "Adjacent Duplicates Hatao",
+      "difficulty": "medium",
+      "description": { "en": "Remove all adjacent duplicates from a string. Repeat until no more adjacent duplicates remain.", "hi": "String se saare adjacent duplicates hatao. Tab tak repeat karo jab tak koi adjacent duplicate na bache." },
+      "examples": [{ "input": "abbaca", "output": "ca", "explanation": { "en": "bb removed -> aaca, aa removed -> ca", "hi": "bb hata -> aaca, aa hata -> ca" } }],
+      "constraints": ["1 <= s.length <= 10^5"],
+      "hints": [{ "en": "Use stack: if top == current char, pop; else push", "hi": "Stack use karo: agar top == current char, pop karo; nahi to push karo" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<stack>\n#include<string>\nusing namespace std;\nint main() {\n    string s; cin>>s;\n    // Remove adjacent duplicates\n}",
+        "python": "s = input()\n# Remove adjacent duplicates",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        String s = new Scanner(System.in).next();\n    }\n}",
+        "javascript": "const s = require('fs').readFileSync('/dev/stdin','utf8').trim();",
+        "c": "#include<stdio.h>\n#include<string.h>\nint main() {\n    char s[100001]; scanf(\"%s\",s);\n}"
+      },
+      "testCases": [
+        { "input": "abbaca", "expectedOutput": "ca" },
+        { "input": "azxxzy", "expectedOutput": "ay" }
+      ],
+      "solution": {
+        "approach": { "en": "Stack: push chars, pop if top matches current.", "hi": "Stack: chars push karo, top match kare to pop karo." },
+        "code": { "cpp": "string res;\nfor(char c:s){\n  if(!res.empty()&&res.back()==c) res.pop_back();\n  else res.push_back(c);\n}\ncout<<res;", "python": "stack=[]\nfor c in s:\n  if stack and stack[-1]==c: stack.pop()\n  else: stack.append(c)\nprint(''.join(stack))" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(n)"
+      },
+      "tags": ["stack", "string"]
+    },
+    {
+      "id": "stk-011",
+      "title": "Asteroid Collision",
+      "titleHi": "Asteroid Collision",
+      "difficulty": "medium",
+      "description": { "en": "Asteroids move in a row. Positive = right, negative = left. When two collide, smaller one explodes. Equal = both explode. Find remaining asteroids.", "hi": "Asteroids ek row mein move kar rahe hain. Positive = right, Negative = left. Collision mein chhota explode hota hai. Equal = dono explode. Bache hue asteroids dhundho." },
+      "examples": [{ "input": "[5, 10, -5]", "output": "5 10", "explanation": { "en": "10 and -5 collide, 10 survives", "hi": "10 aur -5 collide, 10 bacha" } }],
+      "constraints": ["1 <= n <= 10^4"],
+      "hints": [{ "en": "Use stack: collision only when top is positive and current is negative", "hi": "Stack use karo: collision tab hoti hai jab top positive aur current negative ho" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<stack>\n#include<vector>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin>>arr[i];\n    // Find remaining\n}",
+        "python": "n = int(input())\narr = list(map(int, input().split()))\n# Find remaining",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst arr = lines[1].split(' ').map(Number);",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n}"
+      },
+      "testCases": [
+        { "input": "3\n5 10 -5", "expectedOutput": "5 10" },
+        { "input": "2\n8 -8", "expectedOutput": "" },
+        { "input": "4\n10 2 -5 8", "expectedOutput": "10 8" }
+      ],
+      "solution": {
+        "approach": { "en": "Stack simulation of collisions.", "hi": "Stack se collision simulate karo." },
+        "code": { "cpp": "vector<int> st;\nfor(int i=0;i<n;i++){\n  bool alive=true;\n  while(alive&&!st.empty()&&st.back()>0&&arr[i]<0){\n    if(st.back()<-arr[i]) st.pop_back();\n    else if(st.back()==-arr[i]){st.pop_back();alive=false;}\n    else alive=false;\n  }\n  if(alive) st.push_back(arr[i]);\n}\nfor(int i=0;i<st.size();i++) cout<<st[i]<<(i<st.size()-1?\" \":\"\");", "python": "st=[]\nfor a in arr:\n  alive=True\n  while alive and st and st[-1]>0 and a<0:\n    if st[-1]<-a: st.pop()\n    elif st[-1]==-a: st.pop(); alive=False\n    else: alive=False\n  if alive: st.append(a)\nprint(*st)" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(n)"
+      },
+      "tags": ["stack", "simulation"]
+    },
+    {
+      "id": "stk-012",
+      "title": "Largest Rectangle in Histogram",
+      "titleHi": "Histogram Mein Sabse Bada Rectangle",
+      "difficulty": "hard",
+      "description": { "en": "Given histogram bar heights, find the area of the largest rectangle that can be formed.", "hi": "Histogram ke bar heights diye hain, sabse bade rectangle ka area dhundho." },
+      "examples": [{ "input": "[2, 1, 5, 6, 2, 3]", "output": "10", "explanation": { "en": "Rectangle of height 5, width 2 (bars at index 2,3)", "hi": "Height 5, width 2 ka rectangle (index 2,3 pe)" } }],
+      "constraints": ["1 <= n <= 10^5"],
+      "hints": [{ "en": "Use stack to find previous and next smaller elements", "hi": "Stack se previous aur next smaller elements dhundho" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<stack>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    int h[n];\n    for(int i=0;i<n;i++) cin>>h[i];\n    // Find largest rectangle\n}",
+        "python": "n = int(input())\nh = list(map(int, input().split()))\n# Find largest rectangle",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] h = new int[n];\n        for(int i=0;i<n;i++) h[i]=sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst h = lines[1].split(' ').map(Number);",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int h[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&h[i]);\n}"
+      },
+      "testCases": [
+        { "input": "6\n2 1 5 6 2 3", "expectedOutput": "10" },
+        { "input": "2\n2 4", "expectedOutput": "4" }
+      ],
+      "solution": {
+        "approach": { "en": "Stack-based: for each bar, find width it can extend.", "hi": "Stack-based: har bar ke liye dhundho wo kitna extend ho sakta hai." },
+        "code": { "cpp": "stack<int> st;\nint maxArea=0;\nfor(int i=0;i<=n;i++){\n  int curr=i==n?0:h[i];\n  while(!st.empty()&&h[st.top()]>curr){\n    int height=h[st.top()]; st.pop();\n    int width=st.empty()?i:i-st.top()-1;\n    maxArea=max(maxArea,height*width);\n  }\n  st.push(i);\n}\ncout<<maxArea;", "python": "stack=[]\nmx=0\nfor i in range(n+1):\n  curr=0 if i==n else h[i]\n  while stack and h[stack[-1]]>curr:\n    height=h[stack.pop()]\n    width=i if not stack else i-stack[-1]-1\n    mx=max(mx,height*width)\n  stack.append(i)\nprint(mx)" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(n)"
+      },
+      "tags": ["stack", "monotonic-stack", "hard"]
+    },
+    {
+      "id": "stk-013",
+      "title": "Celebrity Problem",
+      "titleHi": "Celebrity Problem",
+      "difficulty": "hard",
+      "description": { "en": "In a party of n people, find the celebrity. A celebrity is known by everyone but knows no one. Given a matrix M where M[i][j]=1 means i knows j.", "hi": "N logon ki party mein celebrity dhundho. Celebrity ko sab jaante hain par wo kisi ko nahi jaanta. Matrix M diya hai jahan M[i][j]=1 matlab i, j ko jaanta hai." },
+      "examples": [{ "input": "[[0,1,0],[0,0,0],[0,1,0]]", "output": "1", "explanation": { "en": "Person 1 is known by 0 and 2, knows nobody", "hi": "Person 1 ko 0 aur 2 jaante hain, wo kisi ko nahi jaanta" } }],
+      "constraints": ["1 <= n <= 1000"],
+      "hints": [{ "en": "Use stack: compare top two, eliminate one who knows the other", "hi": "Stack use karo: top two compare karo, jo dusre ko jaanta hai use eliminate karo" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<stack>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    int M[n][n];\n    for(int i=0;i<n;i++) for(int j=0;j<n;j++) cin>>M[i][j];\n    // Find celebrity\n}",
+        "python": "n = int(input())\nM = []\nfor _ in range(n):\n    M.append(list(map(int, input().split())))\n# Find celebrity",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[][] M = new int[n][n];\n        for(int i=0;i<n;i++) for(int j=0;j<n;j++) M[i][j]=sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int M[n][n];\n    for(int i=0;i<n;i++) for(int j=0;j<n;j++) scanf(\"%d\",&M[i][j]);\n}"
+      },
+      "testCases": [
+        { "input": "3\n0 1 0\n0 0 0\n0 1 0", "expectedOutput": "1" },
+        { "input": "3\n0 1 0\n0 0 1\n0 0 0", "expectedOutput": "-1" }
+      ],
+      "solution": {
+        "approach": { "en": "Stack elimination: push all, pop two at a time, eliminate non-celebrity.", "hi": "Stack elimination: sab push karo, do do pop karke non-celebrity eliminate karo." },
+        "code": { "cpp": "stack<int> st;\nfor(int i=0;i<n;i++) st.push(i);\nwhile(st.size()>1){\n  int a=st.top();st.pop();\n  int b=st.top();st.pop();\n  if(M[a][b]) st.push(b); else st.push(a);\n}\nint c=st.top();\nbool isCeleb=true;\nfor(int i=0;i<n;i++){\n  if(i!=c&&(M[c][i]||!M[i][c])){isCeleb=false;break;}\n}\ncout<<(isCeleb?c:-1);", "python": "stack=list(range(n))\nwhile len(stack)>1:\n  a,b=stack.pop(),stack.pop()\n  if M[a][b]: stack.append(b)\n  else: stack.append(a)\nc=stack[0]\nok=all(M[i][c] and not M[c][i] for i in range(n) if i!=c)\nprint(c if ok else -1)" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(n)"
+      },
+      "tags": ["stack", "matrix", "hard"]
+    },
+    {
+      "id": "stk-014",
+      "title": "Maximal Rectangle",
+      "titleHi": "Maximal Rectangle",
+      "difficulty": "hard",
+      "description": { "en": "Given a binary matrix, find the area of the largest rectangle containing only 1s.", "hi": "Binary matrix diya hai, sabse bade rectangle ka area dhundho jisme sirf 1 ho." },
+      "examples": [{ "input": "[[1,0,1,0,0],[1,0,1,1,1],[1,1,1,1,1],[1,0,0,1,0]]", "output": "6", "explanation": { "en": "3x2 rectangle of 1s in rows 1-2, cols 2-4", "hi": "Rows 1-2, cols 2-4 mein 3x2 ka rectangle" } }],
+      "constraints": ["1 <= rows, cols <= 200"],
+      "hints": [{ "en": "Build histogram for each row, apply largest rectangle in histogram", "hi": "Har row ke liye histogram banao, largest rectangle in histogram apply karo" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<stack>\n#include<vector>\nusing namespace std;\nint main() {\n    int r,c; cin>>r>>c;\n    vector<vector<int>> mat(r,vector<int>(c));\n    for(int i=0;i<r;i++) for(int j=0;j<c;j++) cin>>mat[i][j];\n    // Find maximal rectangle\n}",
+        "python": "r, c = map(int, input().split())\nmat = []\nfor _ in range(r):\n    mat.append(list(map(int, input().split())))\n# Find maximal rectangle",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int r=sc.nextInt(), c=sc.nextInt();\n        int[][] mat = new int[r][c];\n        for(int i=0;i<r;i++) for(int j=0;j<c;j++) mat[i][j]=sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');",
+        "c": "#include<stdio.h>\nint main() {\n    int r,c; scanf(\"%d%d\",&r,&c);\n}"
+      },
+      "testCases": [
+        { "input": "4 5\n1 0 1 0 0\n1 0 1 1 1\n1 1 1 1 1\n1 0 0 1 0", "expectedOutput": "6" }
+      ],
+      "solution": {
+        "approach": { "en": "Row-wise histogram + largest rectangle in histogram.", "hi": "Row-wise histogram + largest rectangle in histogram." },
+        "code": { "cpp": "// Build heights row by row, apply histogram solution\nvector<int> heights(c,0);\nint maxArea=0;\nfor(int i=0;i<r;i++){\n  for(int j=0;j<c;j++) heights[j]=mat[i][j]?heights[j]+1:0;\n  // Apply largest rect in histogram on heights\n  stack<int> st;\n  for(int j=0;j<=c;j++){\n    int h=j==c?0:heights[j];\n    while(!st.empty()&&heights[st.top()]>h){\n      int ht=heights[st.top()];st.pop();\n      int w=st.empty()?j:j-st.top()-1;\n      maxArea=max(maxArea,ht*w);\n    }\n    st.push(j);\n  }\n}\ncout<<maxArea;", "python": "def maxRect(h):\n  stack,mx=[],0\n  for i in range(len(h)+1):\n    curr=0 if i==len(h) else h[i]\n    while stack and h[stack[-1]]>curr:\n      ht=h[stack.pop()]\n      w=i if not stack else i-stack[-1]-1\n      mx=max(mx,ht*w)\n    stack.append(i)\n  return mx\nheights=[0]*c\nmx=0\nfor i in range(r):\n  for j in range(c): heights[j]=heights[j]+1 if mat[i][j] else 0\n  mx=max(mx,maxRect(heights))\nprint(mx)" },
+        "timeComplexity": "O(rows * cols)", "spaceComplexity": "O(cols)"
+      },
+      "tags": ["stack", "matrix", "histogram", "hard"]
+    },
+    {
+      "id": "stk-015",
+      "title": "Trapping Rain Water (Stack)",
+      "titleHi": "Baarish Ka Paani (Stack Method)",
+      "difficulty": "hard",
+      "description": { "en": "Compute trapped rain water using a stack-based approach.", "hi": "Stack-based approach se trapped rain water compute karo." },
+      "examples": [{ "input": "[0,1,0,2,1,0,1,3,2,1,2,1]", "output": "6", "explanation": { "en": "6 units trapped", "hi": "6 units paani bhara" } }],
+      "constraints": ["1 <= n <= 10^5"],
+      "hints": [{ "en": "Stack stores indices. When current > stack top, calculate water in the valley.", "hi": "Stack mein indices store karo. Jab current > stack top, valley mein paani calculate karo." }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<stack>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    int h[n];\n    for(int i=0;i<n;i++) cin>>h[i];\n    // Compute trapped water\n}",
+        "python": "n = int(input())\nh = list(map(int, input().split()))\n# Compute trapped water",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] h = new int[n];\n        for(int i=0;i<n;i++) h[i]=sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst h = lines[1].split(' ').map(Number);",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int h[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&h[i]);\n}"
+      },
+      "testCases": [
+        { "input": "12\n0 1 0 2 1 0 1 3 2 1 2 1", "expectedOutput": "6" },
+        { "input": "6\n4 2 0 3 2 5", "expectedOutput": "9" }
+      ],
+      "solution": {
+        "approach": { "en": "Stack stores decreasing heights. Pop when current > top, compute water in valley.", "hi": "Stack mein decreasing heights store hain. Current > top ho to pop karo, valley mein paani compute karo." },
+        "code": { "cpp": "stack<int> st;\nint water=0;\nfor(int i=0;i<n;i++){\n  while(!st.empty()&&h[i]>h[st.top()]){\n    int bot=h[st.top()]; st.pop();\n    if(st.empty()) break;\n    int w=i-st.top()-1;\n    int bounded=min(h[i],h[st.top()])-bot;\n    water+=w*bounded;\n  }\n  st.push(i);\n}\ncout<<water;", "python": "stack=[]\nwater=0\nfor i in range(n):\n  while stack and h[i]>h[stack[-1]]:\n    bot=h[stack.pop()]\n    if not stack: break\n    w=i-stack[-1]-1\n    bounded=min(h[i],h[stack[-1]])-bot\n    water+=w*bounded\n  stack.append(i)\nprint(water)" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(n)"
+      },
+      "tags": ["stack", "monotonic-stack", "hard"]
+    }
+  ]
+}

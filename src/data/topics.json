@@ -1,0 +1,386 @@
+{
+  "categories": [
+    {
+      "id": "dsa",
+      "title": "Data Structures & Algorithms",
+      "titleHi": "Data Structures & Algorithms",
+      "topics": [
+        {
+          "id": "arrays",
+          "title": "Arrays",
+          "titleHi": "Arrays",
+          "icon": "📦",
+          "description": "Learn about the most fundamental data structure - storing elements in contiguous memory",
+          "descriptionHi": "Sabse basic data structure seekho - elements ko ek saath memory mein store karna",
+          "realLifeExample": {
+            "en": "Think of a row of lockers in school - each has a number (index) and holds something inside",
+            "hi": "School mein lockers ki ek row socho - har ek ka number (index) hai aur andar kuch rakha hai"
+          },
+          "difficulty": "beginner",
+          "totalProblems": 55,
+          "subtopics": ["1D Arrays", "2D Arrays", "Sliding Window", "Two Pointer", "Prefix Sum", "Kadane's Algorithm"],
+          "path": "dsa/arrays"
+        },
+        {
+          "id": "strings",
+          "title": "Strings",
+          "titleHi": "Strings",
+          "icon": "🔤",
+          "description": "Master string manipulation, pattern matching, and text processing",
+          "descriptionHi": "String manipulation, pattern matching, aur text processing seekho",
+          "realLifeExample": {
+            "en": "Like a necklace of beads - each bead is a character, and the order matters",
+            "hi": "Moti ki mala socho - har moti ek character hai, aur order matter karta hai"
+          },
+          "difficulty": "beginner",
+          "totalProblems": 50,
+          "subtopics": ["String Basics", "Pattern Matching", "Anagrams", "Palindromes", "String Hashing"],
+          "path": "dsa/strings"
+        },
+        {
+          "id": "linked-list",
+          "title": "Linked List",
+          "titleHi": "Linked List",
+          "icon": "🔗",
+          "description": "Dynamic data structure where elements are connected through pointers",
+          "descriptionHi": "Dynamic data structure jisme elements pointers se connected hote hain",
+          "realLifeExample": {
+            "en": "Like a train - each coach (node) is connected to the next one. You can add/remove coaches easily!",
+            "hi": "Train socho - har dabba (node) agle se connected hai. Aasani se dabbe jod ya hata sakte ho!"
+          },
+          "difficulty": "beginner",
+          "totalProblems": 50,
+          "subtopics": ["Singly Linked List", "Doubly Linked List", "Circular Linked List", "Fast & Slow Pointer"],
+          "path": "dsa/linked-list"
+        },
+        {
+          "id": "stack",
+          "title": "Stack",
+          "titleHi": "Stack",
+          "icon": "📚",
+          "description": "Last In First Out (LIFO) - like a stack of plates",
+          "descriptionHi": "Last In First Out (LIFO) - plates ke stack jaisa",
+          "realLifeExample": {
+            "en": "Stack of plates in a cafeteria - you always take the top plate first (Last In, First Out)",
+            "hi": "Canteen mein plates ka stack - hamesha upar wali plate pehle uthate ho (Last In, First Out)"
+          },
+          "difficulty": "beginner",
+          "totalProblems": 50,
+          "subtopics": ["Stack Basics", "Monotonic Stack", "Expression Evaluation", "Next Greater Element"],
+          "path": "dsa/stack"
+        },
+        {
+          "id": "queue",
+          "title": "Queue",
+          "titleHi": "Queue",
+          "icon": "🚶",
+          "description": "First In First Out (FIFO) - like a queue at a ticket counter",
+          "descriptionHi": "First In First Out (FIFO) - ticket counter pe line jaisi",
+          "realLifeExample": {
+            "en": "Queue at a movie ticket counter - first person in line gets served first",
+            "hi": "Movie ticket counter pe line - jo pehle aaya wo pehle ticket lega"
+          },
+          "difficulty": "beginner",
+          "totalProblems": 45,
+          "subtopics": ["Simple Queue", "Circular Queue", "Priority Queue", "Deque"],
+          "path": "dsa/queue"
+        },
+        {
+          "id": "recursion",
+          "title": "Recursion & Backtracking",
+          "titleHi": "Recursion & Backtracking",
+          "icon": "🔄",
+          "description": "Solve problems by breaking them into smaller sub-problems",
+          "descriptionHi": "Problems ko chhote sub-problems mein tod ke solve karo",
+          "realLifeExample": {
+            "en": "Like Russian nesting dolls - open one doll, find a smaller one inside, keep going until the smallest",
+            "hi": "Russian dolls socho - ek doll kholo, andar chhoti doll milegi, jab tak sabse chhoti na mile"
+          },
+          "difficulty": "intermediate",
+          "totalProblems": 55,
+          "subtopics": ["Basic Recursion", "Backtracking", "Subset Generation", "Permutations", "N-Queens"],
+          "path": "dsa/recursion"
+        },
+        {
+          "id": "trees",
+          "title": "Trees",
+          "titleHi": "Trees",
+          "icon": "🌳",
+          "description": "Hierarchical data structure - Binary Trees, BST, AVL Trees",
+          "descriptionHi": "Hierarchical data structure - Binary Trees, BST, AVL Trees",
+          "realLifeExample": {
+            "en": "Like a family tree - one ancestor at top, children branch out below",
+            "hi": "Family tree socho - ek ancestor upar, uske children neeche branch out hote hain"
+          },
+          "difficulty": "intermediate",
+          "totalProblems": 60,
+          "subtopics": ["Binary Tree", "BST", "Tree Traversals", "AVL Tree", "Segment Tree"],
+          "path": "dsa/trees"
+        },
+        {
+          "id": "graphs",
+          "title": "Graphs",
+          "titleHi": "Graphs",
+          "icon": "🕸️",
+          "description": "Network of nodes and edges - BFS, DFS, Shortest Path",
+          "descriptionHi": "Nodes aur edges ka network - BFS, DFS, Shortest Path",
+          "realLifeExample": {
+            "en": "Like a city map - locations are nodes, roads are edges connecting them",
+            "hi": "City ka map socho - locations nodes hain, roads edges hain jo unhe connect karti hain"
+          },
+          "difficulty": "advanced",
+          "totalProblems": 60,
+          "subtopics": ["BFS", "DFS", "Dijkstra", "Bellman-Ford", "Topological Sort", "MST"],
+          "path": "dsa/graphs"
+        },
+        {
+          "id": "hashing",
+          "title": "Hashing",
+          "titleHi": "Hashing",
+          "icon": "#️⃣",
+          "description": "Fast lookup using hash functions - HashMap, HashSet",
+          "descriptionHi": "Hash functions se fast lookup - HashMap, HashSet",
+          "realLifeExample": {
+            "en": "Like a dictionary - you know the word, you directly go to that page. No need to search page by page!",
+            "hi": "Dictionary socho - word pata hai, seedha us page pe chale jao. Page by page dhundhne ki zaroorat nahi!"
+          },
+          "difficulty": "beginner",
+          "totalProblems": 45,
+          "subtopics": ["Hash Map", "Hash Set", "Collision Handling", "Frequency Count"],
+          "path": "dsa/hashing"
+        },
+        {
+          "id": "heap",
+          "title": "Heap",
+          "titleHi": "Heap",
+          "icon": "⛰️",
+          "description": "Priority-based data structure - Min Heap, Max Heap",
+          "descriptionHi": "Priority-based data structure - Min Heap, Max Heap",
+          "realLifeExample": {
+            "en": "Like a hospital emergency room - most critical patient gets treated first, regardless of arrival order",
+            "hi": "Hospital emergency socho - sabse critical patient pehle treat hoga, chahe wo baad mein aaya ho"
+          },
+          "difficulty": "intermediate",
+          "totalProblems": 45,
+          "subtopics": ["Min Heap", "Max Heap", "Heap Sort", "Top K Elements", "Median Finding"],
+          "path": "dsa/heap"
+        },
+        {
+          "id": "sorting",
+          "title": "Sorting Algorithms",
+          "titleHi": "Sorting Algorithms",
+          "icon": "📊",
+          "description": "Arrange elements in order - Bubble, Merge, Quick Sort and more",
+          "descriptionHi": "Elements ko order mein arrange karo - Bubble, Merge, Quick Sort aur bahut kuch",
+          "realLifeExample": {
+            "en": "Like arranging books on a shelf by height - you compare and swap until everything is in order",
+            "hi": "Books ko height se arrange karna socho - compare karo aur swap karo jab tak sab order mein na ho"
+          },
+          "difficulty": "beginner",
+          "totalProblems": 50,
+          "subtopics": ["Bubble Sort", "Selection Sort", "Insertion Sort", "Merge Sort", "Quick Sort", "Counting Sort"],
+          "path": "dsa/sorting"
+        },
+        {
+          "id": "searching",
+          "title": "Searching Algorithms",
+          "titleHi": "Searching Algorithms",
+          "icon": "🔍",
+          "description": "Find elements efficiently - Linear Search, Binary Search",
+          "descriptionHi": "Elements ko efficiently dhundho - Linear Search, Binary Search",
+          "realLifeExample": {
+            "en": "Binary Search is like finding a word in a dictionary - you open the middle, then decide left or right half",
+            "hi": "Binary Search dictionary mein word dhundhne jaisa hai - beech mein kholo, phir left ya right half decide karo"
+          },
+          "difficulty": "beginner",
+          "totalProblems": 50,
+          "subtopics": ["Linear Search", "Binary Search", "Search in Rotated Array", "Search in Matrix"],
+          "path": "dsa/searching"
+        },
+        {
+          "id": "dynamic-programming",
+          "title": "Dynamic Programming",
+          "titleHi": "Dynamic Programming (DP)",
+          "icon": "🧩",
+          "description": "Optimize solutions by storing sub-problem results",
+          "descriptionHi": "Sub-problem results store karke solutions optimize karo",
+          "realLifeExample": {
+            "en": "Like climbing stairs - instead of recalculating ways for each step, remember what you already calculated",
+            "hi": "Stairs chadna socho - har step ke liye dubara calculate karne ki jagah, jo pehle calculate kiya wo yaad rakho"
+          },
+          "difficulty": "advanced",
+          "totalProblems": 60,
+          "subtopics": ["1D DP", "2D DP", "Knapsack", "LCS", "LIS", "Matrix Chain", "DP on Trees"],
+          "path": "dsa/dynamic-programming"
+        },
+        {
+          "id": "greedy",
+          "title": "Greedy Algorithms",
+          "titleHi": "Greedy Algorithms",
+          "icon": "🎯",
+          "description": "Make locally optimal choices to find global optimum",
+          "descriptionHi": "Locally optimal choices karke global optimum dhundho",
+          "realLifeExample": {
+            "en": "Like making change with coins - always pick the largest coin first to minimize total coins",
+            "hi": "Coins se change dena socho - hamesha sabse bada coin pehle do, total coins kam honge"
+          },
+          "difficulty": "intermediate",
+          "totalProblems": 50,
+          "subtopics": ["Activity Selection", "Fractional Knapsack", "Huffman Coding", "Job Sequencing"],
+          "path": "dsa/greedy"
+        },
+        {
+          "id": "trie",
+          "title": "Trie",
+          "titleHi": "Trie",
+          "icon": "🌲",
+          "description": "Tree-like structure for storing strings efficiently",
+          "descriptionHi": "Strings efficiently store karne ke liye tree-like structure",
+          "realLifeExample": {
+            "en": "Like phone's autocomplete - as you type each letter, it narrows down suggestions",
+            "hi": "Phone ka autocomplete socho - jaise jaise letter type karo, suggestions narrow hoti jaati hain"
+          },
+          "difficulty": "advanced",
+          "totalProblems": 35,
+          "subtopics": ["Trie Insert/Search", "Auto-complete", "Word Search", "Longest Prefix"],
+          "path": "dsa/trie"
+        }
+      ]
+    },
+    {
+      "id": "daa",
+      "title": "Design & Analysis of Algorithms",
+      "titleHi": "Algorithm Ka Design & Analysis",
+      "topics": [
+        {
+          "id": "algorithm-analysis",
+          "title": "Algorithm Analysis",
+          "titleHi": "Algorithm Analysis",
+          "icon": "📈",
+          "description": "Learn Big-O, Time & Space Complexity",
+          "descriptionHi": "Big-O, Time & Space Complexity seekho",
+          "realLifeExample": {
+            "en": "Like comparing two routes to office - which one is faster? That's what algorithm analysis does for code",
+            "hi": "Office ke do raaste compare karna socho - konsa fast hai? Yehi algorithm analysis code ke liye karta hai"
+          },
+          "difficulty": "beginner",
+          "totalProblems": 40,
+          "subtopics": ["Big-O Notation", "Best/Worst/Average Case", "Recurrence Relations", "Master Theorem"],
+          "path": "daa/algorithm-analysis"
+        },
+        {
+          "id": "divide-and-conquer",
+          "title": "Divide and Conquer",
+          "titleHi": "Divide and Conquer",
+          "icon": "✂️",
+          "description": "Break problem into smaller parts, solve, then combine",
+          "descriptionHi": "Problem ko chhote parts mein todo, solve karo, phir combine karo",
+          "realLifeExample": {
+            "en": "Like sorting a deck of cards - split into two halves, sort each half, then merge them",
+            "hi": "Cards ki deck sort karna socho - do halves mein todo, dono sort karo, phir merge karo"
+          },
+          "difficulty": "intermediate",
+          "totalProblems": 45,
+          "subtopics": ["Merge Sort", "Quick Sort", "Binary Search", "Strassen's Matrix", "Closest Pair"],
+          "path": "daa/divide-and-conquer"
+        },
+        {
+          "id": "daa-dp",
+          "title": "Dynamic Programming (DAA)",
+          "titleHi": "Dynamic Programming (DAA)",
+          "icon": "📋",
+          "description": "Optimal substructure and overlapping subproblems",
+          "descriptionHi": "Optimal substructure aur overlapping subproblems",
+          "realLifeExample": {
+            "en": "Planning a road trip - calculate shortest path to each city once, reuse for the final route",
+            "hi": "Road trip plan karna socho - har city ka shortest path ek baar calculate karo, final route mein reuse karo"
+          },
+          "difficulty": "advanced",
+          "totalProblems": 50,
+          "subtopics": ["0/1 Knapsack", "Matrix Chain", "LCS", "Optimal BST", "Floyd-Warshall"],
+          "path": "daa/dynamic-programming"
+        },
+        {
+          "id": "greedy-method",
+          "title": "Greedy Method",
+          "titleHi": "Greedy Method",
+          "icon": "💰",
+          "description": "Always make the locally optimal choice",
+          "descriptionHi": "Hamesha locally optimal choice karo",
+          "realLifeExample": {
+            "en": "Like eating at a buffet - always pick the dish that looks most appealing right now",
+            "hi": "Buffet mein khana socho - hamesha wo dish lo jo abhi sabse achhi lag rahi hai"
+          },
+          "difficulty": "intermediate",
+          "totalProblems": 45,
+          "subtopics": ["Activity Selection", "Fractional Knapsack", "Huffman Coding", "Kruskal's", "Prim's"],
+          "path": "daa/greedy-method"
+        },
+        {
+          "id": "branch-and-bound",
+          "title": "Branch and Bound",
+          "titleHi": "Branch and Bound",
+          "icon": "🌿",
+          "description": "Systematic enumeration with pruning",
+          "descriptionHi": "Systematic enumeration with pruning",
+          "realLifeExample": {
+            "en": "Like solving a maze - explore paths but turn back immediately when you hit a dead end",
+            "hi": "Maze solve karna socho - raaste explore karo par dead end mile to turant wapas aa jao"
+          },
+          "difficulty": "advanced",
+          "totalProblems": 35,
+          "subtopics": ["TSP", "0/1 Knapsack", "Job Assignment", "15-Puzzle"],
+          "path": "daa/branch-and-bound"
+        },
+        {
+          "id": "daa-backtracking",
+          "title": "Backtracking",
+          "titleHi": "Backtracking",
+          "icon": "↩️",
+          "description": "Try all possibilities, backtrack when stuck",
+          "descriptionHi": "Sab possibilities try karo, stuck hone pe wapas jao",
+          "realLifeExample": {
+            "en": "Like solving a Sudoku puzzle - fill a number, if it doesn't work, erase and try next",
+            "hi": "Sudoku solve karna socho - number bharo, agar kaam na kare to mita do aur agla try karo"
+          },
+          "difficulty": "intermediate",
+          "totalProblems": 40,
+          "subtopics": ["N-Queens", "Sudoku Solver", "Rat in Maze", "Graph Coloring", "Hamiltonian Cycle"],
+          "path": "daa/backtracking"
+        },
+        {
+          "id": "string-matching",
+          "title": "String Matching",
+          "titleHi": "String Matching",
+          "icon": "🔎",
+          "description": "Efficient pattern searching in text",
+          "descriptionHi": "Text mein efficiently pattern search karo",
+          "realLifeExample": {
+            "en": "Like using Ctrl+F to find a word in a document - but how does the computer actually do it?",
+            "hi": "Ctrl+F se document mein word dhundhna socho - par computer actually ye kaise karta hai?"
+          },
+          "difficulty": "advanced",
+          "totalProblems": 35,
+          "subtopics": ["Naive Pattern Search", "KMP Algorithm", "Rabin-Karp", "Z Algorithm"],
+          "path": "daa/string-matching"
+        },
+        {
+          "id": "np-completeness",
+          "title": "NP-Completeness",
+          "titleHi": "NP-Completeness",
+          "icon": "🧠",
+          "description": "Understanding computational limits",
+          "descriptionHi": "Computational limits ko samjho",
+          "realLifeExample": {
+            "en": "Some puzzles are easy to verify but incredibly hard to solve - that's NP!",
+            "hi": "Kuch puzzles verify karna easy hai par solve karna bahut hard - yehi NP hai!"
+          },
+          "difficulty": "advanced",
+          "totalProblems": 30,
+          "subtopics": ["P vs NP", "NP-Hard", "Reductions", "Approximation Algorithms"],
+          "path": "daa/np-completeness"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,558 @@
+{
+  "topicId": "arrays",
+  "problems": [
+    {
+      "id": "arr-001",
+      "title": "Find the Largest Element",
+      "titleHi": "Sabse Bada Element Dhundho",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given an array of integers, find the largest element in the array.",
+        "hi": "Ek array diya hai integers ka, usme se sabse bada element dhundho."
+      },
+      "examples": [
+        { "input": "[3, 7, 2, 9, 1]", "output": "9", "explanation": { "en": "9 is the largest element", "hi": "9 sabse bada element hai" } }
+      ],
+      "constraints": ["1 <= arr.length <= 10^5", "-10^9 <= arr[i] <= 10^9"],
+      "hints": [{ "en": "Keep track of maximum as you iterate", "hi": "Iterate karte hue maximum track karo" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\n\nint findLargest(int arr[], int n) {\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    int n; cin >> n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin >> arr[i];\n    cout << findLargest(arr, n);\n}",
+        "python": "def find_largest(arr):\n    # Write your code here\n    pass\n\nn = int(input())\narr = list(map(int, input().split()))\nprint(find_largest(arr))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int findLargest(int[] arr) {\n        // Write your code here\n        return 0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i] = sc.nextInt();\n        System.out.println(findLargest(arr));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);\nfunction findLargest(arr) {\n    // Write your code here\n}\nconsole.log(findLargest(arr));",
+        "c": "#include<stdio.h>\nint findLargest(int arr[], int n) {\n    // Write your code here\n    return 0;\n}\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    printf(\"%d\",findLargest(arr,n));\n}"
+      },
+      "testCases": [
+        { "input": "5\n3 7 2 9 1", "expectedOutput": "9" },
+        { "input": "3\n-1 -5 -3", "expectedOutput": "-1" },
+        { "input": "1\n42", "expectedOutput": "42" }
+      ],
+      "solution": {
+        "approach": { "en": "Iterate keeping track of max value.", "hi": "Iterate karo aur max value track karo." },
+        "code": { "cpp": "int findLargest(int arr[], int n) {\n    int mx = arr[0];\n    for(int i=1;i<n;i++) if(arr[i]>mx) mx=arr[i];\n    return mx;\n}", "python": "def find_largest(arr):\n    return max(arr)" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(1)"
+      },
+      "tags": ["array", "basic"]
+    },
+    {
+      "id": "arr-002",
+      "title": "Find the Smallest Element",
+      "titleHi": "Sabse Chhota Element Dhundho",
+      "difficulty": "easy",
+      "description": { "en": "Find the smallest element in an array.", "hi": "Array mein sabse chhota element dhundho." },
+      "examples": [{ "input": "[5, 3, 8, 1, 9]", "output": "1", "explanation": { "en": "1 is the smallest", "hi": "1 sabse chhota hai" } }],
+      "constraints": ["1 <= n <= 10^5"],
+      "hints": [{ "en": "Similar to finding max, but track minimum", "hi": "Max dhundhne jaisa, par minimum track karo" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin>>arr[i];\n    // Find and print smallest\n}",
+        "python": "n = int(input())\narr = list(map(int, input().split()))\n# Find and print smallest",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n        // Find and print smallest\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst arr = lines[1].split(' ').map(Number);\n// Find and print smallest",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    // Find and print smallest\n}"
+      },
+      "testCases": [
+        { "input": "5\n5 3 8 1 9", "expectedOutput": "1" },
+        { "input": "3\n-2 -5 -1", "expectedOutput": "-5" }
+      ],
+      "solution": {
+        "approach": { "en": "Track minimum while iterating.", "hi": "Iterate karte hue minimum track karo." },
+        "code": { "cpp": "int mn=arr[0];\nfor(int i=1;i<n;i++) if(arr[i]<mn) mn=arr[i];\ncout<<mn;", "python": "print(min(arr))" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(1)"
+      },
+      "tags": ["array", "basic"]
+    },
+    {
+      "id": "arr-003",
+      "title": "Reverse an Array",
+      "titleHi": "Array ko Ulta Karo",
+      "difficulty": "easy",
+      "description": { "en": "Reverse the given array and print it.", "hi": "Diye gaye array ko ulta karo aur print karo." },
+      "examples": [{ "input": "[1, 2, 3, 4, 5]", "output": "5 4 3 2 1", "explanation": { "en": "Array reversed", "hi": "Array ulta ho gaya" } }],
+      "constraints": ["1 <= n <= 10^5"],
+      "hints": [{ "en": "Use two pointers from start and end", "hi": "Start aur end se two pointers use karo" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin>>arr[i];\n    // Reverse and print\n}",
+        "python": "n = int(input())\narr = list(map(int, input().split()))\n# Reverse and print",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n        // Reverse and print\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst arr = lines[1].split(' ').map(Number);\n// Reverse and print",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    // Reverse and print\n}"
+      },
+      "testCases": [
+        { "input": "5\n1 2 3 4 5", "expectedOutput": "5 4 3 2 1" },
+        { "input": "3\n10 20 30", "expectedOutput": "30 20 10" }
+      ],
+      "solution": {
+        "approach": { "en": "Swap elements from both ends moving inward.", "hi": "Dono ends se elements swap karo andar ki taraf." },
+        "code": { "cpp": "for(int i=0,j=n-1;i<j;i++,j--) swap(arr[i],arr[j]);\nfor(int i=0;i<n;i++) cout<<arr[i]<<(i<n-1?\" \":\"\");", "python": "print(*arr[::-1])" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(1)"
+      },
+      "tags": ["array", "two-pointer"]
+    },
+    {
+      "id": "arr-004",
+      "title": "Check if Array is Sorted",
+      "titleHi": "Check Karo Array Sorted Hai Ya Nahi",
+      "difficulty": "easy",
+      "description": { "en": "Check if the given array is sorted in non-decreasing order.", "hi": "Check karo diya gaya array sorted hai ya nahi (non-decreasing order mein)." },
+      "examples": [
+        { "input": "[1, 2, 3, 4, 5]", "output": "true", "explanation": { "en": "Array is sorted", "hi": "Array sorted hai" } },
+        { "input": "[1, 3, 2, 5]", "output": "false", "explanation": { "en": "3 > 2, not sorted", "hi": "3 > 2, sorted nahi hai" } }
+      ],
+      "constraints": ["1 <= n <= 10^5"],
+      "hints": [{ "en": "Compare each element with the next one", "hi": "Har element ko next wale se compare karo" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin>>arr[i];\n    // Print true or false\n}",
+        "python": "n = int(input())\narr = list(map(int, input().split()))\n# Print true or false",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n        // Print true or false\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst arr = lines[1].split(' ').map(Number);\n// Print true or false",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    // Print true or false\n}"
+      },
+      "testCases": [
+        { "input": "5\n1 2 3 4 5", "expectedOutput": "true" },
+        { "input": "4\n1 3 2 5", "expectedOutput": "false" },
+        { "input": "1\n7", "expectedOutput": "true" }
+      ],
+      "solution": {
+        "approach": { "en": "Check if arr[i] <= arr[i+1] for all i.", "hi": "Check karo arr[i] <= arr[i+1] har i ke liye." },
+        "code": { "cpp": "bool sorted=true;\nfor(int i=0;i<n-1;i++) if(arr[i]>arr[i+1]){sorted=false;break;}\ncout<<(sorted?\"true\":\"false\");", "python": "print('true' if all(arr[i]<=arr[i+1] for i in range(len(arr)-1)) else 'false')" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(1)"
+      },
+      "tags": ["array", "basic"]
+    },
+    {
+      "id": "arr-005",
+      "title": "Second Largest Element",
+      "titleHi": "Doosra Sabse Bada Element",
+      "difficulty": "easy",
+      "description": { "en": "Find the second largest element in the array. If no second largest exists, print -1.", "hi": "Array mein doosra sabse bada element dhundho. Agar nahi hai to -1 print karo." },
+      "examples": [{ "input": "[12, 35, 1, 10, 34, 1]", "output": "34", "explanation": { "en": "35 is largest, 34 is second largest", "hi": "35 sabse bada, 34 doosra sabse bada" } }],
+      "constraints": ["2 <= n <= 10^5"],
+      "hints": [{ "en": "Track both largest and second largest in one pass", "hi": "Ek pass mein largest aur second largest dono track karo" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<climits>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin>>arr[i];\n    // Find second largest\n}",
+        "python": "n = int(input())\narr = list(map(int, input().split()))\n# Find second largest",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n        // Find second largest\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst arr = lines[1].split(' ').map(Number);\n// Find second largest",
+        "c": "#include<stdio.h>\n#include<limits.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    // Find second largest\n}"
+      },
+      "testCases": [
+        { "input": "6\n12 35 1 10 34 1", "expectedOutput": "34" },
+        { "input": "3\n5 5 5", "expectedOutput": "-1" }
+      ],
+      "solution": {
+        "approach": { "en": "Single pass tracking first and second largest.", "hi": "Ek pass mein first aur second largest track karo." },
+        "code": { "cpp": "int first=INT_MIN,second=INT_MIN;\nfor(int i=0;i<n;i++){\n  if(arr[i]>first){second=first;first=arr[i];}\n  else if(arr[i]>second && arr[i]!=first) second=arr[i];\n}\ncout<<(second==INT_MIN?-1:second);", "python": "first=second=float('-inf')\nfor x in arr:\n  if x>first: second,first=first,x\n  elif x>second and x!=first: second=x\nprint(-1 if second==float('-inf') else second)" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(1)"
+      },
+      "tags": ["array", "basic"]
+    },
+    {
+      "id": "arr-006",
+      "title": "Move Zeros to End",
+      "titleHi": "Zeros ko End Mein Bhejo",
+      "difficulty": "easy",
+      "description": { "en": "Move all zeros to the end of the array while maintaining the relative order of non-zero elements.", "hi": "Saare zeros ko array ke end mein bhejo, non-zero elements ka order same rakho." },
+      "examples": [{ "input": "[0, 1, 0, 3, 12]", "output": "1 3 12 0 0", "explanation": { "en": "Non-zero elements maintain order", "hi": "Non-zero elements ka order same hai" } }],
+      "constraints": ["1 <= n <= 10^5"],
+      "hints": [{ "en": "Use a pointer for next non-zero position", "hi": "Next non-zero position ke liye ek pointer use karo" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin>>arr[i];\n    // Move zeros and print\n}",
+        "python": "n = int(input())\narr = list(map(int, input().split()))\n# Move zeros and print",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n        // Move zeros and print\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst arr = lines[1].split(' ').map(Number);\n// Move zeros and print",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    // Move zeros and print\n}"
+      },
+      "testCases": [
+        { "input": "5\n0 1 0 3 12", "expectedOutput": "1 3 12 0 0" },
+        { "input": "4\n0 0 0 1", "expectedOutput": "1 0 0 0" }
+      ],
+      "solution": {
+        "approach": { "en": "Two-pointer: place non-zero at front.", "hi": "Two-pointer: non-zero ko front pe rakho." },
+        "code": { "cpp": "int j=0;\nfor(int i=0;i<n;i++) if(arr[i]!=0) swap(arr[i],arr[j++]);\nfor(int i=0;i<n;i++) cout<<arr[i]<<(i<n-1?\" \":\"\");", "python": "j=0\nfor i in range(len(arr)):\n  if arr[i]!=0: arr[i],arr[j]=arr[j],arr[i]; j+=1\nprint(*arr)" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(1)"
+      },
+      "tags": ["array", "two-pointer"]
+    },
+    {
+      "id": "arr-007",
+      "title": "Remove Duplicates from Sorted Array",
+      "titleHi": "Sorted Array se Duplicates Hatao",
+      "difficulty": "easy",
+      "description": { "en": "Remove duplicates from a sorted array in-place and print unique elements.", "hi": "Sorted array se duplicates hata ke unique elements print karo." },
+      "examples": [{ "input": "[1, 1, 2, 2, 3, 4, 4]", "output": "1 2 3 4", "explanation": { "en": "Duplicates removed", "hi": "Duplicates hat gaye" } }],
+      "constraints": ["1 <= n <= 10^5", "Array is sorted"],
+      "hints": [{ "en": "Use two pointers - one for reading, one for writing", "hi": "Two pointers use karo - ek padhne ke liye, ek likhne ke liye" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin>>arr[i];\n    // Remove duplicates and print\n}",
+        "python": "n = int(input())\narr = list(map(int, input().split()))\n# Remove duplicates and print",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst arr = lines[1].split(' ').map(Number);\n// Remove duplicates and print",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n}"
+      },
+      "testCases": [
+        { "input": "7\n1 1 2 2 3 4 4", "expectedOutput": "1 2 3 4" },
+        { "input": "5\n1 1 1 1 1", "expectedOutput": "1" }
+      ],
+      "solution": {
+        "approach": { "en": "Two pointer to track unique position.", "hi": "Unique position track karne ke liye two pointer." },
+        "code": { "cpp": "int j=0;\nfor(int i=1;i<n;i++) if(arr[i]!=arr[j]) arr[++j]=arr[i];\nfor(int i=0;i<=j;i++) cout<<arr[i]<<(i<j?\" \":\"\");", "python": "print(*sorted(set(arr)))" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(1)"
+      },
+      "tags": ["array", "two-pointer"]
+    },
+    {
+      "id": "arr-008",
+      "title": "Count Element Frequency",
+      "titleHi": "Element Ki Frequency Count Karo",
+      "difficulty": "easy",
+      "description": { "en": "Count the frequency of each element in the array and print element-frequency pairs sorted by element.", "hi": "Array mein har element ki frequency count karo aur element-frequency pairs print karo." },
+      "examples": [{ "input": "[1, 2, 2, 3, 3, 3]", "output": "1 1\n2 2\n3 3", "explanation": { "en": "1 appears 1 time, 2 appears 2 times, 3 appears 3 times", "hi": "1 ek baar, 2 do baar, 3 teen baar aaya" } }],
+      "constraints": ["1 <= n <= 10^5"],
+      "hints": [{ "en": "Use a hash map to count frequencies", "hi": "Hash map use karo frequencies count karne ke liye" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<map>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin>>arr[i];\n    // Count and print frequencies\n}",
+        "python": "n = int(input())\narr = list(map(int, input().split()))\n# Count and print frequencies",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst arr = lines[1].split(' ').map(Number);\n// Count and print frequencies",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n}"
+      },
+      "testCases": [
+        { "input": "6\n1 2 2 3 3 3", "expectedOutput": "1 1\n2 2\n3 3" },
+        { "input": "4\n5 5 5 5", "expectedOutput": "5 4" }
+      ],
+      "solution": {
+        "approach": { "en": "Use a map to count then iterate sorted keys.", "hi": "Map se count karo phir sorted keys iterate karo." },
+        "code": { "cpp": "map<int,int> freq;\nfor(int i=0;i<n;i++) freq[arr[i]]++;\nfor(auto& [k,v]:freq) cout<<k<<\" \"<<v<<\"\\n\";", "python": "from collections import Counter\nfor k,v in sorted(Counter(arr).items()): print(k,v)" },
+        "timeComplexity": "O(n log n)", "spaceComplexity": "O(n)"
+      },
+      "tags": ["array", "hashing"]
+    },
+    {
+      "id": "arr-009",
+      "title": "Two Sum",
+      "titleHi": "Do Numbers Ka Sum",
+      "difficulty": "medium",
+      "description": { "en": "Given an array and a target sum, find two numbers that add up to the target. Print their indices (0-based).", "hi": "Array aur target sum diya hai, do numbers dhundho jinke sum target ke barabar ho. Unke indices print karo (0-based)." },
+      "examples": [{ "input": "[2, 7, 11, 15], target = 9", "output": "0 1", "explanation": { "en": "arr[0] + arr[1] = 2 + 7 = 9", "hi": "arr[0] + arr[1] = 2 + 7 = 9" } }],
+      "constraints": ["2 <= n <= 10^4", "Exactly one solution exists"],
+      "hints": [{ "en": "Use a hash map to store complement", "hi": "Hash map mein complement store karo" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<unordered_map>\nusing namespace std;\nint main() {\n    int n,target; cin>>n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin>>arr[i];\n    cin>>target;\n    // Find two indices\n}",
+        "python": "n = int(input())\narr = list(map(int, input().split()))\ntarget = int(input())\n# Find two indices",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n        int target = sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst arr = lines[1].split(' ').map(Number);\nconst target = parseInt(lines[2]);\n// Find two indices",
+        "c": "#include<stdio.h>\nint main() {\n    int n,target; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    scanf(\"%d\",&target);\n}"
+      },
+      "testCases": [
+        { "input": "4\n2 7 11 15\n9", "expectedOutput": "0 1" },
+        { "input": "3\n3 2 4\n6", "expectedOutput": "1 2" }
+      ],
+      "solution": {
+        "approach": { "en": "Use hash map: for each element, check if target-element exists.", "hi": "Hash map: har element ke liye check karo target-element exist karta hai ya nahi." },
+        "code": { "cpp": "unordered_map<int,int> mp;\nfor(int i=0;i<n;i++){\n  if(mp.count(target-arr[i])){cout<<mp[target-arr[i]]<<\" \"<<i;return 0;}\n  mp[arr[i]]=i;\n}", "python": "mp={}\nfor i,x in enumerate(arr):\n  if target-x in mp: print(mp[target-x],i); break\n  mp[x]=i" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(n)"
+      },
+      "tags": ["array", "hashing", "two-pointer"]
+    },
+    {
+      "id": "arr-010",
+      "title": "Maximum Subarray Sum (Kadane's Algorithm)",
+      "titleHi": "Maximum Subarray Sum (Kadane's Algorithm)",
+      "difficulty": "medium",
+      "description": { "en": "Find the contiguous subarray with the largest sum.", "hi": "Wo contiguous subarray dhundho jiski sum sabse badi ho." },
+      "examples": [{ "input": "[-2, 1, -3, 4, -1, 2, 1, -5, 4]", "output": "6", "explanation": { "en": "Subarray [4,-1,2,1] has sum 6", "hi": "Subarray [4,-1,2,1] ki sum 6 hai" } }],
+      "constraints": ["1 <= n <= 10^5"],
+      "hints": [{ "en": "Track current sum and max sum. Reset current sum if it becomes negative.", "hi": "Current sum aur max sum track karo. Current sum negative ho to reset karo." }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<climits>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin>>arr[i];\n    // Print max subarray sum\n}",
+        "python": "n = int(input())\narr = list(map(int, input().split()))\n# Print max subarray sum",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst arr = lines[1].split(' ').map(Number);\n// Print max subarray sum",
+        "c": "#include<stdio.h>\n#include<limits.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n}"
+      },
+      "testCases": [
+        { "input": "9\n-2 1 -3 4 -1 2 1 -5 4", "expectedOutput": "6" },
+        { "input": "5\n1 2 3 4 5", "expectedOutput": "15" },
+        { "input": "3\n-1 -2 -3", "expectedOutput": "-1" }
+      ],
+      "solution": {
+        "approach": { "en": "Kadane's Algorithm: track running sum, reset when negative.", "hi": "Kadane's Algorithm: running sum track karo, negative ho to reset karo." },
+        "code": { "cpp": "int curr=arr[0],mx=arr[0];\nfor(int i=1;i<n;i++){\n  curr=max(arr[i],curr+arr[i]);\n  mx=max(mx,curr);\n}\ncout<<mx;", "python": "curr=mx=arr[0]\nfor x in arr[1:]:\n  curr=max(x,curr+x)\n  mx=max(mx,curr)\nprint(mx)" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(1)"
+      },
+      "tags": ["array", "dynamic-programming", "kadane"]
+    },
+    {
+      "id": "arr-011",
+      "title": "Sort 0s, 1s and 2s",
+      "titleHi": "0, 1 aur 2 Sort Karo",
+      "difficulty": "medium",
+      "description": { "en": "Sort an array containing only 0s, 1s, and 2s without using any sorting algorithm.", "hi": "Ek array jisme sirf 0, 1 aur 2 hain, bina sorting algorithm ke sort karo." },
+      "examples": [{ "input": "[0, 2, 1, 2, 0, 1]", "output": "0 0 1 1 2 2", "explanation": { "en": "Dutch National Flag algorithm", "hi": "Dutch National Flag algorithm" } }],
+      "constraints": ["1 <= n <= 10^5"],
+      "hints": [{ "en": "Use Dutch National Flag (3 pointers: low, mid, high)", "hi": "Dutch National Flag use karo (3 pointers: low, mid, high)" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin>>arr[i];\n    // Sort and print\n}",
+        "python": "n = int(input())\narr = list(map(int, input().split()))\n# Sort and print",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst arr = lines[1].split(' ').map(Number);\n// Sort and print",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n}"
+      },
+      "testCases": [
+        { "input": "6\n0 2 1 2 0 1", "expectedOutput": "0 0 1 1 2 2" },
+        { "input": "5\n2 0 2 1 1", "expectedOutput": "0 1 1 2 2" }
+      ],
+      "solution": {
+        "approach": { "en": "Dutch National Flag: 3 pointers partition into 0s, 1s, 2s.", "hi": "Dutch National Flag: 3 pointers se 0s, 1s, 2s partition karo." },
+        "code": { "cpp": "int lo=0,mid=0,hi=n-1;\nwhile(mid<=hi){\n  if(arr[mid]==0) swap(arr[lo++],arr[mid++]);\n  else if(arr[mid]==1) mid++;\n  else swap(arr[mid],arr[hi--]);\n}\nfor(int i=0;i<n;i++) cout<<arr[i]<<(i<n-1?\" \":\"\");", "python": "lo,mid,hi=0,0,len(arr)-1\nwhile mid<=hi:\n  if arr[mid]==0: arr[lo],arr[mid]=arr[mid],arr[lo]; lo+=1; mid+=1\n  elif arr[mid]==1: mid+=1\n  else: arr[mid],arr[hi]=arr[hi],arr[mid]; hi-=1\nprint(*arr)" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(1)"
+      },
+      "tags": ["array", "two-pointer", "dutch-flag"]
+    },
+    {
+      "id": "arr-012",
+      "title": "Rotate Array by K Places",
+      "titleHi": "Array ko K Jagah Rotate Karo",
+      "difficulty": "medium",
+      "description": { "en": "Rotate array to the right by K places.", "hi": "Array ko right mein K jagah rotate karo." },
+      "examples": [{ "input": "[1,2,3,4,5,6,7], k=3", "output": "5 6 7 1 2 3 4", "explanation": { "en": "Last 3 elements come to front", "hi": "Last 3 elements front pe aa gaye" } }],
+      "constraints": ["1 <= n <= 10^5", "0 <= k <= 10^5"],
+      "hints": [{ "en": "Reverse entire array, then reverse first k and last n-k", "hi": "Pura array reverse karo, phir first k aur last n-k reverse karo" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<algorithm>\nusing namespace std;\nint main() {\n    int n,k; cin>>n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin>>arr[i];\n    cin>>k;\n    // Rotate and print\n}",
+        "python": "n = int(input())\narr = list(map(int, input().split()))\nk = int(input())\n# Rotate and print",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n        int k = sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst arr = lines[1].split(' ').map(Number);\nconst k = parseInt(lines[2]);",
+        "c": "#include<stdio.h>\nint main() {\n    int n,k; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    scanf(\"%d\",&k);\n}"
+      },
+      "testCases": [
+        { "input": "7\n1 2 3 4 5 6 7\n3", "expectedOutput": "5 6 7 1 2 3 4" },
+        { "input": "5\n1 2 3 4 5\n2", "expectedOutput": "4 5 1 2 3" }
+      ],
+      "solution": {
+        "approach": { "en": "Three reverses: full, first k, last n-k.", "hi": "Teen reverses: pura, first k, last n-k." },
+        "code": { "cpp": "k%=n;\nreverse(arr,arr+n);\nreverse(arr,arr+k);\nreverse(arr+k,arr+n);\nfor(int i=0;i<n;i++) cout<<arr[i]<<(i<n-1?\" \":\"\");", "python": "k%=len(arr)\narr=arr[-k:]+arr[:-k]\nprint(*arr)" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(1)"
+      },
+      "tags": ["array", "rotation"]
+    },
+    {
+      "id": "arr-013",
+      "title": "Find Missing Number",
+      "titleHi": "Missing Number Dhundho",
+      "difficulty": "medium",
+      "description": { "en": "Given array of n-1 integers from 1 to n, find the missing number.", "hi": "1 se n tak ke n-1 integers diye hain, missing number dhundho." },
+      "examples": [{ "input": "n=5, [1, 2, 4, 5]", "output": "3", "explanation": { "en": "3 is missing from 1-5", "hi": "1-5 mein se 3 missing hai" } }],
+      "constraints": ["1 <= n <= 10^5"],
+      "hints": [{ "en": "Sum formula: n*(n+1)/2 minus array sum", "hi": "Sum formula: n*(n+1)/2 minus array sum" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    int arr[n-1];\n    for(int i=0;i<n-1;i++) cin>>arr[i];\n    // Find missing\n}",
+        "python": "n = int(input())\narr = list(map(int, input().split()))\n# Find missing",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n-1];\n        for(int i=0;i<n-1;i++) arr[i]=sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n-1];\n    for(int i=0;i<n-1;i++) scanf(\"%d\",&arr[i]);\n}"
+      },
+      "testCases": [
+        { "input": "5\n1 2 4 5", "expectedOutput": "3" },
+        { "input": "4\n1 3 4", "expectedOutput": "2" }
+      ],
+      "solution": {
+        "approach": { "en": "Use sum formula or XOR.", "hi": "Sum formula ya XOR use karo." },
+        "code": { "cpp": "long long total=((long long)n*(n+1))/2;\nfor(int i=0;i<n-1;i++) total-=arr[i];\ncout<<total;", "python": "print(n*(n+1)//2-sum(arr))" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(1)"
+      },
+      "tags": ["array", "math"]
+    },
+    {
+      "id": "arr-014",
+      "title": "Best Time to Buy and Sell Stock",
+      "titleHi": "Stock Buy-Sell ka Best Time",
+      "difficulty": "medium",
+      "description": { "en": "Find maximum profit from buying and selling stock once. Print 0 if no profit possible.", "hi": "Stock ek baar buy aur sell karke maximum profit dhundho. Agar profit possible nahi to 0 print karo." },
+      "examples": [{ "input": "[7, 1, 5, 3, 6, 4]", "output": "5", "explanation": { "en": "Buy at 1, sell at 6, profit = 5", "hi": "1 pe buy, 6 pe sell, profit = 5" } }],
+      "constraints": ["1 <= n <= 10^5"],
+      "hints": [{ "en": "Track minimum price so far and max profit", "hi": "Ab tak ki minimum price aur max profit track karo" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<climits>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin>>arr[i];\n    // Find max profit\n}",
+        "python": "n = int(input())\narr = list(map(int, input().split()))\n# Find max profit",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst arr = lines[1].split(' ').map(Number);",
+        "c": "#include<stdio.h>\n#include<limits.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n}"
+      },
+      "testCases": [
+        { "input": "6\n7 1 5 3 6 4", "expectedOutput": "5" },
+        { "input": "5\n7 6 4 3 1", "expectedOutput": "0" }
+      ],
+      "solution": {
+        "approach": { "en": "One pass: track min price, compute max profit at each step.", "hi": "Ek pass: min price track karo, har step pe max profit compute karo." },
+        "code": { "cpp": "int minP=arr[0],maxProfit=0;\nfor(int i=1;i<n;i++){\n  minP=min(minP,arr[i]);\n  maxProfit=max(maxProfit,arr[i]-minP);\n}\ncout<<maxProfit;", "python": "mn=arr[0]; mx=0\nfor x in arr[1:]:\n  mn=min(mn,x); mx=max(mx,x-mn)\nprint(mx)" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(1)"
+      },
+      "tags": ["array", "greedy"]
+    },
+    {
+      "id": "arr-015",
+      "title": "Subarray with Given Sum",
+      "titleHi": "Diye Gaye Sum Wala Subarray",
+      "difficulty": "medium",
+      "description": { "en": "Find a contiguous subarray with the given sum. Print start and end indices (1-based).", "hi": "Diye gaye sum wala contiguous subarray dhundho. Start aur end indices print karo (1-based)." },
+      "examples": [{ "input": "[1, 2, 3, 7, 5], sum=12", "output": "2 4", "explanation": { "en": "Elements from index 2 to 4: 2+3+7=12", "hi": "Index 2 se 4: 2+3+7=12" } }],
+      "constraints": ["1 <= n <= 10^5", "All elements are positive"],
+      "hints": [{ "en": "Sliding window with variable size", "hi": "Variable size sliding window" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\nint main() {\n    int n,s; cin>>n>>s;\n    int arr[n];\n    for(int i=0;i<n;i++) cin>>arr[i];\n    // Find subarray\n}",
+        "python": "n, s = map(int, input().split())\narr = list(map(int, input().split()))\n# Find subarray",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n=sc.nextInt(), s=sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [n,s] = lines[0].split(' ').map(Number);\nconst arr = lines[1].split(' ').map(Number);",
+        "c": "#include<stdio.h>\nint main() {\n    int n,s; scanf(\"%d%d\",&n,&s);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n}"
+      },
+      "testCases": [
+        { "input": "5 12\n1 2 3 7 5", "expectedOutput": "2 4" },
+        { "input": "10 15\n1 2 3 4 5 6 7 8 9 10", "expectedOutput": "1 5" }
+      ],
+      "solution": {
+        "approach": { "en": "Sliding window: expand right, shrink left when sum exceeds target.", "hi": "Sliding window: right expand karo, sum zyada ho to left shrink karo." },
+        "code": { "cpp": "int curr=0,start=0;\nfor(int i=0;i<n;i++){\n  curr+=arr[i];\n  while(curr>s && start<=i) curr-=arr[start++];\n  if(curr==s){cout<<start+1<<\" \"<<i+1;return 0;}\n}\ncout<<-1;", "python": "curr=start=0\nfor i in range(n):\n  curr+=arr[i]\n  while curr>s: curr-=arr[start]; start+=1\n  if curr==s: print(start+1,i+1); break" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(1)"
+      },
+      "tags": ["array", "sliding-window"]
+    },
+    {
+      "id": "arr-016",
+      "title": "Merge Two Sorted Arrays",
+      "titleHi": "Do Sorted Arrays Merge Karo",
+      "difficulty": "medium",
+      "description": { "en": "Merge two sorted arrays into one sorted array.", "hi": "Do sorted arrays ko ek sorted array mein merge karo." },
+      "examples": [{ "input": "[1,3,5] and [2,4,6]", "output": "1 2 3 4 5 6", "explanation": { "en": "Merged in sorted order", "hi": "Sorted order mein merge ho gaya" } }],
+      "constraints": ["1 <= n, m <= 10^5"],
+      "hints": [{ "en": "Two pointer technique", "hi": "Two pointer technique" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\nint main() {\n    int n,m; cin>>n>>m;\n    int a[n],b[m];\n    for(int i=0;i<n;i++) cin>>a[i];\n    for(int i=0;i<m;i++) cin>>b[i];\n    // Merge and print\n}",
+        "python": "n, m = map(int, input().split())\na = list(map(int, input().split()))\nb = list(map(int, input().split()))\n# Merge and print",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n=sc.nextInt(), m=sc.nextInt();\n        int[] a=new int[n], b=new int[m];\n        for(int i=0;i<n;i++) a[i]=sc.nextInt();\n        for(int i=0;i<m;i++) b[i]=sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst a = lines[1].split(' ').map(Number);\nconst b = lines[2].split(' ').map(Number);",
+        "c": "#include<stdio.h>\nint main() {\n    int n,m; scanf(\"%d%d\",&n,&m);\n    int a[n],b[m];\n    for(int i=0;i<n;i++) scanf(\"%d\",&a[i]);\n    for(int i=0;i<m;i++) scanf(\"%d\",&b[i]);\n}"
+      },
+      "testCases": [
+        { "input": "3 3\n1 3 5\n2 4 6", "expectedOutput": "1 2 3 4 5 6" },
+        { "input": "2 3\n1 10\n2 5 8", "expectedOutput": "1 2 5 8 10" }
+      ],
+      "solution": {
+        "approach": { "en": "Two pointers merging.", "hi": "Two pointers se merge karo." },
+        "code": { "cpp": "int i=0,j=0;\nwhile(i<n&&j<m){\n  if(a[i]<=b[j]) cout<<a[i++];\n  else cout<<b[j++];\n  cout<<\" \";\n}\nwhile(i<n) cout<<a[i++]<<(i<n?\" \":\"\");\nwhile(j<m) cout<<b[j++]<<(j<m?\" \":\"\");", "python": "print(*sorted(a+b))" },
+        "timeComplexity": "O(n+m)", "spaceComplexity": "O(n+m)"
+      },
+      "tags": ["array", "two-pointer", "merge"]
+    },
+    {
+      "id": "arr-017",
+      "title": "Trapping Rain Water",
+      "titleHi": "Baarish Ka Paani Kitna Bhara",
+      "difficulty": "hard",
+      "description": { "en": "Given elevation map, compute how much water it can trap after raining.", "hi": "Elevation map diya hai, baarish ke baad kitna paani bhar sakta hai compute karo." },
+      "examples": [{ "input": "[0,1,0,2,1,0,1,3,2,1,2,1]", "output": "6", "explanation": { "en": "6 units of water trapped", "hi": "6 units paani bhara" } }],
+      "constraints": ["1 <= n <= 10^5", "0 <= elevation[i] <= 10^4"],
+      "hints": [{ "en": "For each bar, water = min(maxLeft, maxRight) - height", "hi": "Har bar ke liye, paani = min(maxLeft, maxRight) - height" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin>>arr[i];\n    // Compute trapped water\n}",
+        "python": "n = int(input())\narr = list(map(int, input().split()))\n# Compute trapped water",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst arr = lines[1].split(' ').map(Number);",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n}"
+      },
+      "testCases": [
+        { "input": "12\n0 1 0 2 1 0 1 3 2 1 2 1", "expectedOutput": "6" },
+        { "input": "6\n4 2 0 3 2 5", "expectedOutput": "9" }
+      ],
+      "solution": {
+        "approach": { "en": "Two pointer approach from both ends.", "hi": "Dono ends se two pointer approach." },
+        "code": { "cpp": "int l=0,r=n-1,lMax=0,rMax=0,water=0;\nwhile(l<r){\n  if(arr[l]<arr[r]){\n    if(arr[l]>=lMax) lMax=arr[l]; else water+=lMax-arr[l];\n    l++;\n  } else {\n    if(arr[r]>=rMax) rMax=arr[r]; else water+=rMax-arr[r];\n    r--;\n  }\n}\ncout<<water;", "python": "l,r=0,n-1\nlm=rm=water=0\nwhile l<r:\n  if arr[l]<arr[r]:\n    if arr[l]>=lm: lm=arr[l]\n    else: water+=lm-arr[l]\n    l+=1\n  else:\n    if arr[r]>=rm: rm=arr[r]\n    else: water+=rm-arr[r]\n    r-=1\nprint(water)" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(1)"
+      },
+      "tags": ["array", "two-pointer", "hard"]
+    },
+    {
+      "id": "arr-018",
+      "title": "Next Permutation",
+      "titleHi": "Next Permutation",
+      "difficulty": "hard",
+      "description": { "en": "Find the next lexicographically greater permutation of the array.", "hi": "Array ki next lexicographically greater permutation dhundho." },
+      "examples": [{ "input": "[1, 2, 3]", "output": "1 3 2", "explanation": { "en": "Next permutation of [1,2,3]", "hi": "[1,2,3] ka next permutation" } }],
+      "constraints": ["1 <= n <= 100"],
+      "hints": [{ "en": "Find rightmost pair where arr[i] < arr[i+1]", "hi": "Rightmost pair dhundho jahan arr[i] < arr[i+1]" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<algorithm>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin>>arr[i];\n    // Find next permutation\n}",
+        "python": "n = int(input())\narr = list(map(int, input().split()))\n# Find next permutation",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst arr = lines[1].split(' ').map(Number);",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n}"
+      },
+      "testCases": [
+        { "input": "3\n1 2 3", "expectedOutput": "1 3 2" },
+        { "input": "3\n3 2 1", "expectedOutput": "1 2 3" },
+        { "input": "4\n1 3 5 4", "expectedOutput": "1 4 3 5" }
+      ],
+      "solution": {
+        "approach": { "en": "1) Find breakpoint i where arr[i]<arr[i+1] from right. 2) Swap with next larger. 3) Reverse suffix.", "hi": "1) Right se breakpoint dhundho jahan arr[i]<arr[i+1]. 2) Next larger se swap karo. 3) Suffix reverse karo." },
+        "code": { "cpp": "int i=n-2;\nwhile(i>=0 && arr[i]>=arr[i+1]) i--;\nif(i>=0){\n  int j=n-1;\n  while(arr[j]<=arr[i]) j--;\n  swap(arr[i],arr[j]);\n}\nreverse(arr+i+1,arr+n);\nfor(int k=0;k<n;k++) cout<<arr[k]<<(k<n-1?\" \":\"\");", "python": "i=len(arr)-2\nwhile i>=0 and arr[i]>=arr[i+1]: i-=1\nif i>=0:\n  j=len(arr)-1\n  while arr[j]<=arr[i]: j-=1\n  arr[i],arr[j]=arr[j],arr[i]\narr[i+1:]=arr[i+1:][::-1]\nprint(*arr)" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(1)"
+      },
+      "tags": ["array", "permutation"]
+    },
+    {
+      "id": "arr-019",
+      "title": "Merge Intervals",
+      "titleHi": "Intervals Merge Karo",
+      "difficulty": "hard",
+      "description": { "en": "Given a set of intervals, merge all overlapping intervals.", "hi": "Intervals ka set diya hai, saare overlapping intervals merge karo." },
+      "examples": [{ "input": "[[1,3],[2,6],[8,10],[15,18]]", "output": "1 6\n8 10\n15 18", "explanation": { "en": "[1,3] and [2,6] merge to [1,6]", "hi": "[1,3] aur [2,6] merge hoke [1,6] bane" } }],
+      "constraints": ["1 <= n <= 10^4"],
+      "hints": [{ "en": "Sort by start time, then merge greedily", "hi": "Start time se sort karo, phir greedy merge karo" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\n#include<algorithm>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    vector<pair<int,int>> intervals(n);\n    for(int i=0;i<n;i++) cin>>intervals[i].first>>intervals[i].second;\n    // Merge and print\n}",
+        "python": "n = int(input())\nintervals = []\nfor _ in range(n):\n    a, b = map(int, input().split())\n    intervals.append([a, b])\n# Merge and print",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[][] intervals = new int[n][2];\n        for(int i=0;i<n;i++){intervals[i][0]=sc.nextInt();intervals[i][1]=sc.nextInt();}\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst intervals = [];\nfor(let i=1;i<=n;i++) intervals.push(lines[i].split(' ').map(Number));",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int s[n],e[n];\n    for(int i=0;i<n;i++) scanf(\"%d%d\",&s[i],&e[i]);\n}"
+      },
+      "testCases": [
+        { "input": "4\n1 3\n2 6\n8 10\n15 18", "expectedOutput": "1 6\n8 10\n15 18" },
+        { "input": "2\n1 4\n4 5", "expectedOutput": "1 5" }
+      ],
+      "solution": {
+        "approach": { "en": "Sort by start, merge overlapping.", "hi": "Start se sort karo, overlapping merge karo." },
+        "code": { "cpp": "sort(intervals.begin(),intervals.end());\nvector<pair<int,int>> res;\nfor(auto& iv:intervals){\n  if(!res.empty()&&res.back().second>=iv.first)\n    res.back().second=max(res.back().second,iv.second);\n  else res.push_back(iv);\n}\nfor(auto& [a,b]:res) cout<<a<<\" \"<<b<<\"\\n\";", "python": "intervals.sort()\nres=[intervals[0]]\nfor s,e in intervals[1:]:\n  if res[-1][1]>=s: res[-1][1]=max(res[-1][1],e)\n  else: res.append([s,e])\nfor a,b in res: print(a,b)" },
+        "timeComplexity": "O(n log n)", "spaceComplexity": "O(n)"
+      },
+      "tags": ["array", "sorting", "intervals"]
+    },
+    {
+      "id": "arr-020",
+      "title": "Maximum Product Subarray",
+      "titleHi": "Maximum Product Subarray",
+      "difficulty": "hard",
+      "description": { "en": "Find the contiguous subarray with the largest product.", "hi": "Wo contiguous subarray dhundho jiska product sabse bada ho." },
+      "examples": [{ "input": "[2, 3, -2, 4]", "output": "6", "explanation": { "en": "Subarray [2,3] has product 6", "hi": "Subarray [2,3] ka product 6 hai" } }],
+      "constraints": ["1 <= n <= 10^5"],
+      "hints": [{ "en": "Track both max and min product (negative * negative = positive)", "hi": "Max aur min product dono track karo (negative * negative = positive)" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<climits>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin>>arr[i];\n    // Find max product\n}",
+        "python": "n = int(input())\narr = list(map(int, input().split()))\n# Find max product",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst arr = lines[1].split(' ').map(Number);",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n}"
+      },
+      "testCases": [
+        { "input": "4\n2 3 -2 4", "expectedOutput": "6" },
+        { "input": "3\n-2 0 -1", "expectedOutput": "0" },
+        { "input": "4\n-2 3 -4 5", "expectedOutput": "60" }
+      ],
+      "solution": {
+        "approach": { "en": "Track max and min product at each position.", "hi": "Har position pe max aur min product track karo." },
+        "code": { "cpp": "int mx=arr[0],mn=arr[0],ans=arr[0];\nfor(int i=1;i<n;i++){\n  if(arr[i]<0) swap(mx,mn);\n  mx=max(arr[i],mx*arr[i]);\n  mn=min(arr[i],mn*arr[i]);\n  ans=max(ans,mx);\n}\ncout<<ans;", "python": "mx=mn=ans=arr[0]\nfor x in arr[1:]:\n  if x<0: mx,mn=mn,mx\n  mx=max(x,mx*x)\n  mn=min(x,mn*x)\n  ans=max(ans,mx)\nprint(ans)" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(1)"
+      },
+      "tags": ["array", "dynamic-programming"]
+    }
+  ]
+}
