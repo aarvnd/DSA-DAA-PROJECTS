@@ -1,0 +1,98 @@
+{
+  "topicId": "queue",
+  "title": { "en": "Queue - Complete Guide", "hi": "Queue - Poori Jaankari" },
+  "introduction": {
+    "en": "A Queue is a linear data structure that follows the FIFO (First In, First Out) principle. The element inserted first is removed first. It has two ends: rear (for insertion) and front (for deletion).",
+    "hi": "Queue ek linear data structure hai jo FIFO (First In, First Out) principle follow karta hai. Jo element pehle daala gaya wo pehle nikalta hai. Iske do ends hote hain: rear (daalne ke liye) aur front (nikalne ke liye)."
+  },
+  "realLifeAnalogy": {
+    "en": "Think of a queue at a movie ticket counter — the person who arrives first gets the ticket first. No jumping ahead!",
+    "hi": "Movie ticket counter pe line socho — jo pehle aaya wo pehle ticket lega. Aage jump nahi kar sakte!"
+  },
+  "sections": [
+    {
+      "id": "what-is-queue",
+      "title": { "en": "What is a Queue?", "hi": "Queue kya hota hai?" },
+      "content": {
+        "en": "A Queue is a FIFO data structure with two operations:\n- **Enqueue**: Add element at the rear\n- **Dequeue**: Remove element from the front\n\n**Other operations:**\n- **Peek/Front**: View the front element without removing\n- **isEmpty**: Check if queue is empty\n- **Size**: Get number of elements",
+        "hi": "Queue ek FIFO data structure hai jisme do operations hote hain:\n- **Enqueue**: Rear mein element add karna\n- **Dequeue**: Front se element remove karna\n\n**Aur operations:**\n- **Peek/Front**: Front element dekhna bina remove kiye\n- **isEmpty**: Check karna ki queue khali hai ya nahi\n- **Size**: Elements ki sankhya pata karna"
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\n#include <queue>\nusing namespace std;\n\nint main() {\n    queue<int> q;\n    q.push(10); q.push(20); q.push(30);\n    cout << \"Front: \" << q.front() << endl;\n    cout << \"Back: \" << q.back() << endl;\n    q.pop();\n    cout << \"After dequeue, front: \" << q.front() << endl;\n    cout << \"Size: \" << q.size() << endl;\n    return 0;\n}",
+        "c": "#include <stdio.h>\n#define MAX 100\nint queue[MAX], front=-1, rear=-1;\nvoid enqueue(int val){\n    if(rear==MAX-1){printf(\"Overflow\\n\");return;}\n    if(front==-1)front=0;\n    queue[++rear]=val;\n}\nint dequeue(){\n    if(front==-1||front>rear){printf(\"Underflow\\n\");return -1;}\n    return queue[front++];\n}\nint main(){\n    enqueue(10);enqueue(20);enqueue(30);\n    printf(\"%d\\n\",dequeue());\n    printf(\"Front: %d\\n\",queue[front]);\n    return 0;\n}",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Queue<Integer> q = new LinkedList<>();\n        q.add(10); q.add(20); q.add(30);\n        System.out.println(\"Front: \" + q.peek());\n        q.poll();\n        System.out.println(\"After dequeue: \" + q.peek());\n        System.out.println(\"Size: \" + q.size());\n    }\n}",
+        "python": "from collections import deque\nq = deque()\nq.append(10); q.append(20); q.append(30)\nprint('Front:', q[0])\nq.popleft()\nprint('After dequeue:', q[0])\nprint('Size:', len(q))",
+        "javascript": "class Queue {\n    constructor() { this.items = []; }\n    enqueue(val) { this.items.push(val); }\n    dequeue() { return this.items.shift(); }\n    peek() { return this.items[0]; }\n    isEmpty() { return this.items.length === 0; }\n    size() { return this.items.length; }\n}\nconst q = new Queue();\nq.enqueue(10); q.enqueue(20); q.enqueue(30);\nconsole.log('Front:', q.peek());\nq.dequeue();\nconsole.log('After dequeue:', q.peek());"
+      },
+      "keyPoints": [
+        { "en": "FIFO: First element added is first to be removed", "hi": "FIFO: Pehla element add hone wala pehle remove hoga" },
+        { "en": "Enqueue adds to rear, dequeue removes from front", "hi": "Enqueue rear mein add karta hai, dequeue front se remove karta hai" },
+        { "en": "Use STL queue in C++, deque in Python, LinkedList in Java", "hi": "C++ mein STL queue, Python mein deque, Java mein LinkedList use karo" }
+      ],
+      "timeComplexity": { "access": "O(n)", "search": "O(n)", "insert": "O(1)", "delete": "O(1)" }
+    },
+    {
+      "id": "circular-queue",
+      "title": { "en": "Circular Queue", "hi": "Circular Queue" },
+      "content": {
+        "en": "In a simple queue implemented with an array, once the rear reaches the end, no more elements can be added even if there's space at the front. A **Circular Queue** solves this by connecting the end back to the beginning using modulo arithmetic.\n\n**Formula:** `rear = (rear + 1) % capacity`",
+        "hi": "Simple array queue mein jab rear end pe pahunch jaata hai to aur elements nahi add ho sakte, chahe front pe jagah ho. **Circular Queue** isse solve karta hai — end ko beginning se connect karta hai modulo arithmetic se.\n\n**Formula:** `rear = (rear + 1) % capacity`"
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\nusing namespace std;\n\nclass CircularQueue {\n    int *arr, front, rear, cap, sz;\npublic:\n    CircularQueue(int c): cap(c), front(0), rear(0), sz(0) { arr = new int[c]; }\n    bool enqueue(int val) {\n        if(sz==cap) return false;\n        arr[rear]=val; rear=(rear+1)%cap; sz++; return true;\n    }\n    int dequeue() {\n        if(sz==0) return -1;\n        int val=arr[front]; front=(front+1)%cap; sz--; return val;\n    }\n    int peek() { return sz>0?arr[front]:-1; }\n};\n\nint main() {\n    CircularQueue cq(3);\n    cq.enqueue(1); cq.enqueue(2); cq.enqueue(3);\n    cout<<cq.dequeue()<<endl;\n    cq.enqueue(4);\n    cout<<cq.peek()<<endl;\n    return 0;\n}",
+        "c": "#include <stdio.h>\n#define CAP 5\nint arr[CAP]; int front=0,rear=0,sz=0;\nvoid enq(int v){if(sz==CAP)return; arr[rear]=v; rear=(rear+1)%CAP; sz++;}\nint deq(){if(sz==0)return -1; int v=arr[front]; front=(front+1)%CAP; sz--; return v;}\nint main(){enq(1);enq(2);enq(3);printf(\"%d\\n\",deq());enq(4);printf(\"%d\\n\",arr[front]);return 0;}",
+        "java": "public class Main {\n    static int[] arr = new int[5];\n    static int front=0,rear=0,sz=0,cap=5;\n    static void enq(int v){if(sz==cap)return;arr[rear]=v;rear=(rear+1)%cap;sz++;}\n    static int deq(){if(sz==0)return -1;int v=arr[front];front=(front+1)%cap;sz--;return v;}\n    public static void main(String[] args){\n        enq(1);enq(2);enq(3);\n        System.out.println(deq());\n        enq(4);\n        System.out.println(arr[front]);\n    }\n}",
+        "python": "class CircularQueue:\n    def __init__(self, cap):\n        self.arr = [0]*cap; self.front=self.rear=self.sz=0; self.cap=cap\n    def enqueue(self,v):\n        if self.sz==self.cap: return False\n        self.arr[self.rear]=v; self.rear=(self.rear+1)%self.cap; self.sz+=1; return True\n    def dequeue(self):\n        if self.sz==0: return -1\n        v=self.arr[self.front]; self.front=(self.front+1)%self.cap; self.sz-=1; return v\n\ncq=CircularQueue(3)\ncq.enqueue(1);cq.enqueue(2);cq.enqueue(3)\nprint(cq.dequeue())\ncq.enqueue(4)\nprint(cq.arr[cq.front])",
+        "javascript": "class CircularQueue{\n    constructor(cap){this.arr=new Array(cap);this.front=this.rear=this.sz=0;this.cap=cap;}\n    enqueue(v){if(this.sz===this.cap)return false;this.arr[this.rear]=v;this.rear=(this.rear+1)%this.cap;this.sz++;return true;}\n    dequeue(){if(this.sz===0)return -1;const v=this.arr[this.front];this.front=(this.front+1)%this.cap;this.sz--;return v;}\n}\nconst cq=new CircularQueue(3);\ncq.enqueue(1);cq.enqueue(2);cq.enqueue(3);\nconsole.log(cq.dequeue());\ncq.enqueue(4);\nconsole.log(cq.arr[cq.front]);"
+      },
+      "keyPoints": [
+        { "en": "Circular queue reuses empty spaces using modulo", "hi": "Circular queue modulo se khali jagah reuse karta hai" },
+        { "en": "Avoids false overflow of linear queue", "hi": "Linear queue ke false overflow se bachata hai" },
+        { "en": "Full condition: sz == capacity", "hi": "Full condition: sz == capacity" }
+      ],
+      "timeComplexity": { "access": "O(1)", "search": "O(n)", "insert": "O(1)", "delete": "O(1)" }
+    },
+    {
+      "id": "priority-queue",
+      "title": { "en": "Priority Queue & Deque", "hi": "Priority Queue & Deque" },
+      "content": {
+        "en": "**Priority Queue**: Elements are dequeued based on priority, not insertion order. Implemented using a Heap internally.\n\n**Deque (Double-Ended Queue)**: Elements can be added/removed from both front and rear.\n\n**Applications of Priority Queue:**\n- Dijkstra's shortest path\n- CPU scheduling\n- Huffman coding",
+        "hi": "**Priority Queue**: Elements insertion order se nahi, priority ke basis pe dequeue hote hain. Internally Heap se implement hota hai.\n\n**Deque (Double-Ended Queue)**: Elements dono ends (front aur rear) se add/remove ho sakte hain.\n\n**Priority Queue ke Applications:**\n- Dijkstra's shortest path\n- CPU scheduling\n- Huffman coding"
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\n#include <queue>\nusing namespace std;\n\nint main() {\n    // Max Priority Queue\n    priority_queue<int> pq;\n    pq.push(30); pq.push(10); pq.push(50); pq.push(20);\n    cout << \"Max: \" << pq.top() << endl;  // 50\n    pq.pop();\n    cout << \"Next: \" << pq.top() << endl; // 30\n    \n    // Deque\n    deque<int> dq;\n    dq.push_front(10); dq.push_back(20); dq.push_front(5);\n    cout << \"Front: \" << dq.front() << \", Back: \" << dq.back() << endl;\n    return 0;\n}",
+        "c": "#include <stdio.h>\n// Min-heap based priority queue (simplified)\nint heap[100],hsz=0;\nvoid push(int v){heap[hsz++]=v;for(int i=hsz-1;i>0&&heap[i]<heap[(i-1)/2];i=(i-1)/2){int t=heap[i];heap[i]=heap[(i-1)/2];heap[(i-1)/2]=t;}}\nint top(){return heap[0];}\nint main(){push(30);push(10);push(50);printf(\"Min: %d\\n\",top());return 0;}",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());\n        pq.add(30); pq.add(10); pq.add(50);\n        System.out.println(\"Max: \" + pq.peek());\n        pq.poll();\n        ArrayDeque<Integer> dq = new ArrayDeque<>();\n        dq.addFirst(10); dq.addLast(20);\n        System.out.println(\"Front: \" + dq.peekFirst());\n    }\n}",
+        "python": "import heapq\nfrom collections import deque\n\n# Min heap (negate for max heap)\npq = []\nheapq.heappush(pq, -30); heapq.heappush(pq, -10); heapq.heappush(pq, -50)\nprint('Max:', -heapq.heappop(pq))\n\n# Deque\ndq = deque()\ndq.appendleft(10); dq.append(20)\nprint('Front:', dq[0], 'Back:', dq[-1])",
+        "javascript": "// Min-heap priority queue\nclass MinHeap{\n    constructor(){this.h=[];}\n    push(v){this.h.push(v);this.h.sort((a,b)=>a-b);}\n    pop(){return this.h.shift();}\n    top(){return this.h[0];}\n}\nconst pq=new MinHeap();\npq.push(30);pq.push(10);pq.push(50);\nconsole.log('Min:',pq.top());"
+      },
+      "keyPoints": [
+        { "en": "Priority queue dequeues element with highest priority first", "hi": "Priority queue mein sabse high priority wala element pehle dequeue hota hai" },
+        { "en": "Internally implemented using heap for O(log n) operations", "hi": "Internally heap use karke O(log n) operations milte hain" },
+        { "en": "Deque is more flexible than regular queue — both ends accessible", "hi": "Deque regular queue se zyada flexible hai — dono ends accessible hain" }
+      ],
+      "timeComplexity": { "access": "O(1) top", "search": "O(n)", "insert": "O(log n)", "delete": "O(log n)" }
+    },
+    {
+      "id": "queue-applications",
+      "title": { "en": "Queue Applications", "hi": "Queue ke Applications" },
+      "content": {
+        "en": "Queues are used in many real-world and algorithmic applications:\n\n1. **BFS (Breadth First Search)**: Traverse graph/tree level by level\n2. **CPU Scheduling**: Manage process execution order\n3. **Print Spooler**: Print jobs are queued\n4. **Sliding Window**: Use deque to find max/min in window\n5. **Cache (LRU)**: Evict least recently used items",
+        "hi": "Queues bahut saare real-world aur algorithmic applications mein use hote hain:\n\n1. **BFS (Breadth First Search)**: Graph/tree ko level by level traverse karna\n2. **CPU Scheduling**: Process execution order manage karna\n3. **Print Spooler**: Print jobs queue mein jaate hain\n4. **Sliding Window**: Deque use karke window mein max/min dhundhna\n5. **Cache (LRU)**: Least recently used items ko evict karna"
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\n#include <queue>\n#include <vector>\nusing namespace std;\n\n// BFS on a graph\nvoid bfs(vector<vector<int>>& adj, int start, int n) {\n    vector<bool> visited(n, false);\n    queue<int> q;\n    q.push(start); visited[start]=true;\n    while(!q.empty()) {\n        int node = q.front(); q.pop();\n        cout << node << \" \";\n        for(int nb : adj[node]) {\n            if(!visited[nb]) { visited[nb]=true; q.push(nb); }\n        }\n    }\n}\n\nint main() {\n    int n=5;\n    vector<vector<int>> adj(n);\n    adj[0]={1,2}; adj[1]={3}; adj[2]={4};\n    bfs(adj, 0, n);\n    return 0;\n}",
+        "c": "#include <stdio.h>\n#define N 5\nint adj[N][N]={{0,1,1,0,0},{0,0,0,1,0},{0,0,0,0,1},{0,0,0,0,0},{0,0,0,0,0}};\nint visited[N]={0};\nint q[100],front=0,rear=0;\nvoid enq(int v){q[rear++]=v;}\nint deq(){return q[front++];}\nint main(){\n    enq(0);visited[0]=1;\n    while(front<rear){\n        int node=deq(); printf(\"%d \",node);\n        for(int i=0;i<N;i++) if(adj[node][i]&&!visited[i]){visited[i]=1;enq(i);}\n    }\n    return 0;\n}",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        int n=5;\n        List<List<Integer>> adj=new ArrayList<>();\n        for(int i=0;i<n;i++) adj.add(new ArrayList<>());\n        adj.get(0).addAll(Arrays.asList(1,2));\n        adj.get(1).add(3); adj.get(2).add(4);\n        boolean[]visited=new boolean[n];\n        Queue<Integer> q=new LinkedList<>();\n        q.add(0);visited[0]=true;\n        while(!q.isEmpty()){\n            int node=q.poll(); System.out.print(node+\" \");\n            for(int nb:adj.get(node)) if(!visited[nb]){visited[nb]=true;q.add(nb);}\n        }\n    }\n}",
+        "python": "from collections import deque\n\ndef bfs(adj, start):\n    visited = set()\n    q = deque([start])\n    visited.add(start)\n    while q:\n        node = q.popleft()\n        print(node, end=' ')\n        for nb in adj.get(node, []):\n            if nb not in visited:\n                visited.add(nb); q.append(nb)\n\nadj = {0:[1,2], 1:[3], 2:[4]}\nbfs(adj, 0)",
+        "javascript": "function bfs(adj, start, n) {\n    const visited = new Array(n).fill(false);\n    const q = [start]; visited[start] = true;\n    while (q.length) {\n        const node = q.shift();\n        process.stdout.write(node + ' ');\n        for (const nb of (adj[node] || [])) {\n            if (!visited[nb]) { visited[nb] = true; q.push(nb); }\n        }\n    }\n}\nbfs({0:[1,2],1:[3],2:[4]}, 0, 5);"
+      },
+      "keyPoints": [
+        { "en": "BFS uses a queue to explore nodes level by level", "hi": "BFS queue use karke nodes ko level by level explore karta hai" },
+        { "en": "Deque is used in sliding window maximum/minimum problems", "hi": "Sliding window max/min problems mein deque use hota hai" },
+        { "en": "Priority queue is used in Dijkstra's and Prim's algorithms", "hi": "Dijkstra aur Prim's algorithms mein priority queue use hota hai" }
+      ],
+      "timeComplexity": { "access": "O(1)", "search": "O(V+E) BFS", "insert": "O(1)", "delete": "O(1)" }
+    }
+  ]
+}
