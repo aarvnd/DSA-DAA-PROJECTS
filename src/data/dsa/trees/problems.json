@@ -1,0 +1,787 @@
+{
+  "topicId": "trees",
+  "problems": [
+    {
+      "id": "tree-001",
+      "title": {
+        "en": "Tree Height",
+        "hi": "Tree Height"
+      },
+      "difficulty": "easy",
+      "description": {
+        "en": "Given the root of a binary tree, return its height (number of edges on the longest path from root to leaf). An empty tree has height -1 (or 0 if counting nodes).",
+        "hi": "Binary tree ka root diya gaya hai, uski height return karo (root se leaf tak sabse lamba path mein edges ki sankhya). Empty tree ki height -1 hai (ya 0 agar nodes count kar rahe ho)."
+      },
+      "examples": [
+        {
+          "input": "root = [3,9,20,null,null,15,7]",
+          "output": "2",
+          "explanation": {
+            "en": "The longest path is 3->20->15 or 3->20->7 with 2 edges",
+            "hi": "Sabse lamba path 3->20->15 ya 3->20->7 hai jisme 2 edges hain"
+          }
+        },
+        {
+          "input": "root = [1]",
+          "output": "0",
+          "explanation": {
+            "en": "Single node has height 0",
+            "hi": "Single node ki height 0 hai"
+          }
+        }
+      ],
+      "constraints": [
+        "0 <= number of nodes <= 10^4",
+        "-100 <= Node.val <= 100"
+      ],
+      "hints": [
+        {
+          "en": "Height = 1 + max(height(left), height(right)). Base case: null node returns -1.",
+          "hi": "Height = 1 + max(height(left), height(right)). Base case: null node -1 return karta hai."
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\nusing namespace std;\n\nstruct TreeNode {\n    int val;\n    TreeNode* left;\n    TreeNode* right;\n    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}\n};\n\nint height(TreeNode* root) {\n    // TODO: Return height of tree\n    // Base case: null node returns -1\n    // Recursive: 1 + max(height(left), height(right))\n}\n\nint main() {\n    TreeNode* root = new TreeNode(3);\n    root->left = new TreeNode(9);\n    root->right = new TreeNode(20);\n    root->right->left = new TreeNode(15);\n    root->right->right = new TreeNode(7);\n    cout << height(root) << endl;  // expected: 2\n    return 0;\n}",
+        "c": "#include <stdio.h>\n#include <stdlib.h>\n\ntypedef struct TreeNode { int val; struct TreeNode* left; struct TreeNode* right; } TreeNode;\nTreeNode* newNode(int v) { TreeNode* n=(TreeNode*)malloc(sizeof(TreeNode)); n->val=v; n->left=n->right=NULL; return n; }\n\nint height(TreeNode* root) {\n    // TODO: Return height\n}\n\nint main() {\n    TreeNode* root = newNode(3);\n    root->left = newNode(9); root->right = newNode(20);\n    root->right->left = newNode(15); root->right->right = newNode(7);\n    printf(\"%d\\n\", height(root));\n    return 0;\n}",
+        "java": "public class Solution {\n    static class TreeNode { int val; TreeNode left, right; TreeNode(int x){val=x;} }\n\n    static int height(TreeNode root) {\n        // TODO: Return height\n    }\n\n    public static void main(String[] args) {\n        TreeNode root = new TreeNode(3);\n        root.left = new TreeNode(9); root.right = new TreeNode(20);\n        root.right.left = new TreeNode(15); root.right.right = new TreeNode(7);\n        System.out.println(height(root));\n    }\n}",
+        "python": "class TreeNode:\n    def __init__(self, val=0, left=None, right=None):\n        self.val = val; self.left = left; self.right = right\n\ndef height(root):\n    # TODO: Return height\n    pass\n\nroot = TreeNode(3, TreeNode(9), TreeNode(20, TreeNode(15), TreeNode(7)))\nprint(height(root))  # expected: 2",
+        "javascript": "class TreeNode { constructor(val){this.val=val;this.left=this.right=null;} }\n\nfunction height(root) {\n    // TODO: Return height\n}\n\nconst root = new TreeNode(3);\nroot.left=new TreeNode(9); root.right=new TreeNode(20);\nroot.right.left=new TreeNode(15); root.right.right=new TreeNode(7);\nconsole.log(height(root));"
+      },
+      "solution": {
+        "approach": {
+          "en": "Recursively compute: if root is null, return -1. Otherwise return 1 + max(height(left), height(right)).",
+          "hi": "Recursively compute karo: agar root null hai, -1 return karo. Warna 1 + max(height(left), height(right)) return karo."
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(h)",
+        "code": {
+          "cpp": "#include <iostream>\n#include <algorithm>\nusing namespace std;\n\nstruct TreeNode {\n    int val; TreeNode* left; TreeNode* right;\n    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}\n};\n\nint height(TreeNode* root) {\n    if (!root) return -1;\n    return 1 + max(height(root->left), height(root->right));\n}\n\nint main() {\n    TreeNode* root = new TreeNode(3);\n    root->left = new TreeNode(9);\n    root->right = new TreeNode(20);\n    root->right->left = new TreeNode(15);\n    root->right->right = new TreeNode(7);\n    cout << height(root) << endl;  // 2\n    return 0;\n}",
+          "c": "#include <stdio.h>\n#include <stdlib.h>\n\ntypedef struct TreeNode { int val; struct TreeNode* left; struct TreeNode* right; } TreeNode;\nTreeNode* newNode(int v) { TreeNode* n=(TreeNode*)malloc(sizeof(TreeNode)); n->val=v; n->left=n->right=NULL; return n; }\n\nint height(TreeNode* root) {\n    if (!root) return -1;\n    int lh = height(root->left), rh = height(root->right);\n    return 1 + (lh > rh ? lh : rh);\n}\n\nint main() {\n    TreeNode* root = newNode(3);\n    root->left = newNode(9); root->right = newNode(20);\n    root->right->left = newNode(15); root->right->right = newNode(7);\n    printf(\"%d\\n\", height(root));\n    return 0;\n}",
+          "java": "public class Solution {\n    static class TreeNode { int val; TreeNode left, right; TreeNode(int x){val=x;} }\n\n    static int height(TreeNode root) {\n        if (root == null) return -1;\n        return 1 + Math.max(height(root.left), height(root.right));\n    }\n\n    public static void main(String[] args) {\n        TreeNode root = new TreeNode(3);\n        root.left = new TreeNode(9); root.right = new TreeNode(20);\n        root.right.left = new TreeNode(15); root.right.right = new TreeNode(7);\n        System.out.println(height(root));\n    }\n}",
+          "python": "class TreeNode:\n    def __init__(self, val=0, left=None, right=None):\n        self.val = val; self.left = left; self.right = right\n\ndef height(root):\n    if not root:\n        return -1\n    return 1 + max(height(root.left), height(root.right))\n\nroot = TreeNode(3, TreeNode(9), TreeNode(20, TreeNode(15), TreeNode(7)))\nprint(height(root))  # 2",
+          "javascript": "class TreeNode { constructor(val){this.val=val;this.left=this.right=null;} }\n\nfunction height(root) {\n    if (!root) return -1;\n    return 1 + Math.max(height(root.left), height(root.right));\n}\n\nconst root = new TreeNode(3);\nroot.left=new TreeNode(9); root.right=new TreeNode(20);\nroot.right.left=new TreeNode(15); root.right.right=new TreeNode(7);\nconsole.log(height(root));  // 2"
+        }
+      }
+    },
+    {
+      "id": "tree-002",
+      "title": {
+        "en": "Count Nodes",
+        "hi": "Nodes Count Karo"
+      },
+      "difficulty": "easy",
+      "description": {
+        "en": "Given the root of a binary tree, return the total number of nodes in the tree.",
+        "hi": "Binary tree ka root diya gaya hai, tree mein total nodes ki sankhya return karo."
+      },
+      "examples": [
+        {
+          "input": "root = [1,2,3,4,5]",
+          "output": "5",
+          "explanation": {
+            "en": "5 nodes in the tree",
+            "hi": "Tree mein 5 nodes hain"
+          }
+        },
+        {
+          "input": "root = []",
+          "output": "0",
+          "explanation": {
+            "en": "Empty tree has 0 nodes",
+            "hi": "Empty tree mein 0 nodes hain"
+          }
+        }
+      ],
+      "constraints": [
+        "0 <= number of nodes <= 10^5"
+      ],
+      "hints": [
+        {
+          "en": "countNodes(root) = 1 + countNodes(left) + countNodes(right). Base: null returns 0.",
+          "hi": "countNodes(root) = 1 + countNodes(left) + countNodes(right). Base: null 0 return karta hai."
+        }
+      ],
+      "starterCode": {
+        "cpp": "struct TreeNode { int val; TreeNode* left; TreeNode* right; TreeNode(int x):val(x),left(nullptr),right(nullptr){} };\n\nint countNodes(TreeNode* root) {\n    // TODO: Count all nodes recursively\n}",
+        "c": "typedef struct TreeNode { int val; struct TreeNode* left; struct TreeNode* right; } TreeNode;\n\nint countNodes(TreeNode* root) {\n    // TODO: Count all nodes recursively\n}",
+        "java": "static class TreeNode { int val; TreeNode left, right; TreeNode(int x){val=x;} }\n\nstatic int countNodes(TreeNode root) {\n    // TODO: Count all nodes recursively\n}",
+        "python": "def count_nodes(root):\n    # TODO: Count all nodes recursively\n    pass",
+        "javascript": "function countNodes(root) {\n    // TODO: Count all nodes recursively\n}"
+      },
+      "solution": {
+        "approach": {
+          "en": "Base case: null returns 0. Recursive case: 1 + countNodes(left) + countNodes(right).",
+          "hi": "Base case: null 0 return karta hai. Recursive case: 1 + countNodes(left) + countNodes(right)."
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(h)",
+        "code": {
+          "cpp": "struct TreeNode { int val; TreeNode* left; TreeNode* right; TreeNode(int x):val(x),left(nullptr),right(nullptr){} };\n\nint countNodes(TreeNode* root) {\n    if (!root) return 0;\n    return 1 + countNodes(root->left) + countNodes(root->right);\n}",
+          "c": "typedef struct TreeNode { int val; struct TreeNode* left; struct TreeNode* right; } TreeNode;\n\nint countNodes(TreeNode* root) {\n    if (!root) return 0;\n    return 1 + countNodes(root->left) + countNodes(root->right);\n}",
+          "java": "static int countNodes(TreeNode root) {\n    if (root == null) return 0;\n    return 1 + countNodes(root.left) + countNodes(root.right);\n}",
+          "python": "def count_nodes(root):\n    if not root:\n        return 0\n    return 1 + count_nodes(root.left) + count_nodes(root.right)",
+          "javascript": "function countNodes(root) {\n    if (!root) return 0;\n    return 1 + countNodes(root.left) + countNodes(root.right);\n}"
+        }
+      }
+    },
+    {
+      "id": "tree-003",
+      "title": {
+        "en": "Inorder Traversal",
+        "hi": "Inorder Traversal"
+      },
+      "difficulty": "easy",
+      "description": {
+        "en": "Given the root of a binary tree, return the inorder traversal of its nodes' values (left, root, right).",
+        "hi": "Binary tree ka root diya gaya hai, nodes ke values ka inorder traversal return karo (left, root, right)."
+      },
+      "examples": [
+        {
+          "input": "root = [1,null,2,3]",
+          "output": "[1,3,2]",
+          "explanation": {
+            "en": "Inorder: left->root->right gives 1,3,2",
+            "hi": "Inorder: left->root->right se 1,3,2 milta hai"
+          }
+        },
+        {
+          "input": "root = [1,2,3]",
+          "output": "[2,1,3]",
+          "explanation": {
+            "en": "Left subtree first, then root, then right",
+            "hi": "Pehle left subtree, phir root, phir right"
+          }
+        }
+      ],
+      "constraints": [
+        "0 <= nodes <= 100"
+      ],
+      "hints": [
+        {
+          "en": "Recurse left, add root to result, recurse right.",
+          "hi": "Left recurse karo, root result mein add karo, right recurse karo."
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include <vector>\nstruct TreeNode { int val; TreeNode* left; TreeNode* right; TreeNode(int x):val(x),left(nullptr),right(nullptr){} };\n\nvoid inorderHelper(TreeNode* root, std::vector<int>& result) {\n    // TODO: Add nodes in inorder\n}\n\nstd::vector<int> inorderTraversal(TreeNode* root) {\n    std::vector<int> result;\n    inorderHelper(root, result);\n    return result;\n}",
+        "c": "#include <stdio.h>\nint result[200]; int rCount = 0;\ntypedef struct TreeNode { int val; struct TreeNode* left; struct TreeNode* right; } TreeNode;\n\nvoid inorder(TreeNode* root) {\n    // TODO: Fill result array in inorder\n}",
+        "java": "import java.util.*;\nstatic class TreeNode { int val; TreeNode left, right; TreeNode(int x){val=x;} }\n\nstatic List<Integer> inorderTraversal(TreeNode root) {\n    List<Integer> result = new ArrayList<>();\n    // TODO: Fill result in inorder\n    return result;\n}",
+        "python": "def inorder_traversal(root):\n    result = []\n    # TODO: Fill result in inorder\n    return result",
+        "javascript": "function inorderTraversal(root) {\n    const result = [];\n    // TODO: Fill result in inorder\n    return result;\n}"
+      },
+      "solution": {
+        "approach": {
+          "en": "Recursively traverse left subtree, add root value, traverse right subtree.",
+          "hi": "Recursively left subtree traverse karo, root value add karo, right subtree traverse karo."
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(n)",
+        "code": {
+          "cpp": "#include <vector>\nstruct TreeNode { int val; TreeNode* left; TreeNode* right; TreeNode(int x):val(x),left(nullptr),right(nullptr){} };\n\nvoid inorderHelper(TreeNode* root, std::vector<int>& result) {\n    if (!root) return;\n    inorderHelper(root->left, result);\n    result.push_back(root->val);\n    inorderHelper(root->right, result);\n}\n\nstd::vector<int> inorderTraversal(TreeNode* root) {\n    std::vector<int> result;\n    inorderHelper(root, result);\n    return result;\n}",
+          "c": "#include <stdio.h>\nint result[200]; int rCount = 0;\ntypedef struct TreeNode { int val; struct TreeNode* left; struct TreeNode* right; } TreeNode;\n\nvoid inorder(TreeNode* root) {\n    if (!root) return;\n    inorder(root->left);\n    result[rCount++] = root->val;\n    inorder(root->right);\n}",
+          "java": "import java.util.*;\n\nstatic List<Integer> inorderTraversal(TreeNode root) {\n    List<Integer> result = new ArrayList<>();\n    inorderHelper(root, result);\n    return result;\n}\n\nstatic void inorderHelper(TreeNode root, List<Integer> result) {\n    if (root == null) return;\n    inorderHelper(root.left, result);\n    result.add(root.val);\n    inorderHelper(root.right, result);\n}",
+          "python": "def inorder_traversal(root):\n    result = []\n    def helper(node):\n        if not node: return\n        helper(node.left)\n        result.append(node.val)\n        helper(node.right)\n    helper(root)\n    return result",
+          "javascript": "function inorderTraversal(root) {\n    const result = [];\n    function helper(node) {\n        if (!node) return;\n        helper(node.left);\n        result.push(node.val);\n        helper(node.right);\n    }\n    helper(root);\n    return result;\n}"
+        }
+      }
+    },
+    {
+      "id": "tree-004",
+      "title": {
+        "en": "Level Order Traversal",
+        "hi": "Level Order Traversal"
+      },
+      "difficulty": "easy",
+      "description": {
+        "en": "Given the root of a binary tree, return the level order traversal of its nodes' values as a list of lists (each inner list contains values at one level).",
+        "hi": "Binary tree ka root diya gaya hai, nodes ke values ka level order traversal lists ki list ke roop mein return karo (har inner list mein ek level ke values hote hain)."
+      },
+      "examples": [
+        {
+          "input": "root = [3,9,20,null,null,15,7]",
+          "output": "[[3],[9,20],[15,7]]",
+          "explanation": {
+            "en": "Level 0: [3], Level 1: [9,20], Level 2: [15,7]",
+            "hi": "Level 0: [3], Level 1: [9,20], Level 2: [15,7]"
+          }
+        },
+        {
+          "input": "root = [1]",
+          "output": "[[1]]",
+          "explanation": {
+            "en": "Single level with one node",
+            "hi": "Ek level mein ek node"
+          }
+        }
+      ],
+      "constraints": [
+        "0 <= nodes <= 2000"
+      ],
+      "hints": [
+        {
+          "en": "Use a queue (BFS). For each level, process all nodes in the queue, add their children for next level.",
+          "hi": "Queue (BFS) use karo. Har level ke liye, queue mein saare nodes process karo, unke children next level ke liye add karo."
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include <vector>\n#include <queue>\nstruct TreeNode { int val; TreeNode* left; TreeNode* right; TreeNode(int x):val(x),left(nullptr),right(nullptr){} };\n\nstd::vector<std::vector<int>> levelOrder(TreeNode* root) {\n    std::vector<std::vector<int>> result;\n    // TODO: BFS with queue, group nodes by level\n    return result;\n}",
+        "c": "#include <stdio.h>\ntypedef struct TreeNode { int val; struct TreeNode* left; struct TreeNode* right; } TreeNode;\n\nvoid levelOrder(TreeNode* root) {\n    // TODO: BFS with array as queue\n}",
+        "java": "import java.util.*;\n\nstatic List<List<Integer>> levelOrder(TreeNode root) {\n    List<List<Integer>> result = new ArrayList<>();\n    // TODO: BFS with queue\n    return result;\n}",
+        "python": "from collections import deque\n\ndef level_order(root):\n    result = []\n    # TODO: BFS with deque\n    return result",
+        "javascript": "function levelOrder(root) {\n    const result = [];\n    // TODO: BFS with array as queue\n    return result;\n}"
+      },
+      "solution": {
+        "approach": {
+          "en": "Use BFS with a queue. Process level by level: record the size of the queue at start of each level iteration, process exactly that many nodes (adding their children), collect into a list per level.",
+          "hi": "Queue ke saath BFS use karo. Level by level process karo: har level iteration ke start par queue ka size record karo, exactly utne nodes process karo (unke children add karte hue), har level ke liye list mein collect karo."
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(n)",
+        "code": {
+          "cpp": "#include <vector>\n#include <queue>\nstruct TreeNode { int val; TreeNode* left; TreeNode* right; TreeNode(int x):val(x),left(nullptr),right(nullptr){} };\n\nstd::vector<std::vector<int>> levelOrder(TreeNode* root) {\n    std::vector<std::vector<int>> result;\n    if (!root) return result;\n    std::queue<TreeNode*> q;\n    q.push(root);\n    while (!q.empty()) {\n        int size = q.size();\n        std::vector<int> level;\n        for (int i = 0; i < size; i++) {\n            TreeNode* node = q.front(); q.pop();\n            level.push_back(node->val);\n            if (node->left) q.push(node->left);\n            if (node->right) q.push(node->right);\n        }\n        result.push_back(level);\n    }\n    return result;\n}",
+          "c": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct TreeNode { int val; struct TreeNode* left; struct TreeNode* right; } TreeNode;\nTreeNode* newNode(int v) { TreeNode* n=(TreeNode*)malloc(sizeof(TreeNode)); n->val=v; n->left=n->right=NULL; return n; }\n\nvoid levelOrder(TreeNode* root) {\n    if (!root) return;\n    TreeNode* q[10000]; int front=0, back=0;\n    q[back++] = root;\n    while (front < back) {\n        int size = back - front;\n        for (int i = 0; i < size; i++) {\n            TreeNode* node = q[front++];\n            printf(\"%d \", node->val);\n            if (node->left) q[back++] = node->left;\n            if (node->right) q[back++] = node->right;\n        }\n        printf(\"\\n\");\n    }\n}",
+          "java": "import java.util.*;\n\nstatic List<List<Integer>> levelOrder(TreeNode root) {\n    List<List<Integer>> result = new ArrayList<>();\n    if (root == null) return result;\n    Queue<TreeNode> q = new LinkedList<>();\n    q.add(root);\n    while (!q.isEmpty()) {\n        int size = q.size();\n        List<Integer> level = new ArrayList<>();\n        for (int i = 0; i < size; i++) {\n            TreeNode node = q.poll();\n            level.add(node.val);\n            if (node.left != null) q.add(node.left);\n            if (node.right != null) q.add(node.right);\n        }\n        result.add(level);\n    }\n    return result;\n}",
+          "python": "from collections import deque\n\ndef level_order(root):\n    if not root:\n        return []\n    result = []\n    q = deque([root])\n    while q:\n        size = len(q)\n        level = []\n        for _ in range(size):\n            node = q.popleft()\n            level.append(node.val)\n            if node.left: q.append(node.left)\n            if node.right: q.append(node.right)\n        result.append(level)\n    return result",
+          "javascript": "function levelOrder(root) {\n    if (!root) return [];\n    const result = [];\n    const q = [root];\n    while (q.length) {\n        const size = q.length;\n        const level = [];\n        for (let i = 0; i < size; i++) {\n            const node = q.shift();\n            level.push(node.val);\n            if (node.left) q.push(node.left);\n            if (node.right) q.push(node.right);\n        }\n        result.push(level);\n    }\n    return result;\n}"
+        }
+      }
+    },
+    {
+      "id": "tree-005",
+      "title": {
+        "en": "Mirror/Invert Binary Tree",
+        "hi": "Binary Tree Ko Mirror/Invert Karo"
+      },
+      "difficulty": "easy",
+      "description": {
+        "en": "Given the root of a binary tree, invert/mirror the tree and return its root.",
+        "hi": "Binary tree ka root diya gaya hai, tree ko invert/mirror karo aur uska root return karo."
+      },
+      "examples": [
+        {
+          "input": "root = [4,2,7,1,3,6,9]",
+          "output": "[4,7,2,9,6,3,1]",
+          "explanation": {
+            "en": "Swap left and right children at every node",
+            "hi": "Har node par left aur right children swap karo"
+          }
+        },
+        {
+          "input": "root = [2,1,3]",
+          "output": "[2,3,1]",
+          "explanation": {
+            "en": "Left becomes right and vice versa",
+            "hi": "Left right ban jaata hai aur vice versa"
+          }
+        }
+      ],
+      "constraints": [
+        "0 <= nodes <= 100"
+      ],
+      "hints": [
+        {
+          "en": "At each node, swap left and right children, then recursively invert both subtrees.",
+          "hi": "Har node par left aur right children swap karo, phir dono subtrees recursively invert karo."
+        }
+      ],
+      "starterCode": {
+        "cpp": "struct TreeNode { int val; TreeNode* left; TreeNode* right; TreeNode(int x):val(x),left(nullptr),right(nullptr){} };\n\nTreeNode* invertTree(TreeNode* root) {\n    // TODO: Swap left and right children recursively\n}",
+        "c": "typedef struct TreeNode { int val; struct TreeNode* left; struct TreeNode* right; } TreeNode;\n\nTreeNode* invertTree(TreeNode* root) {\n    // TODO: Invert tree recursively\n}",
+        "java": "static TreeNode invertTree(TreeNode root) {\n    // TODO: Swap left and right children recursively\n}",
+        "python": "def invert_tree(root):\n    # TODO: Swap left and right children recursively\n    pass",
+        "javascript": "function invertTree(root) {\n    // TODO: Swap left and right children recursively\n}"
+      },
+      "solution": {
+        "approach": {
+          "en": "Base case: null returns null. Swap left and right children, then recursively invert each subtree.",
+          "hi": "Base case: null null return karta hai. Left aur right children swap karo, phir har subtree ko recursively invert karo."
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(h)",
+        "code": {
+          "cpp": "struct TreeNode { int val; TreeNode* left; TreeNode* right; TreeNode(int x):val(x),left(nullptr),right(nullptr){} };\n\nTreeNode* invertTree(TreeNode* root) {\n    if (!root) return nullptr;\n    TreeNode* tmp = root->left;\n    root->left = root->right;\n    root->right = tmp;\n    invertTree(root->left);\n    invertTree(root->right);\n    return root;\n}",
+          "c": "typedef struct TreeNode { int val; struct TreeNode* left; struct TreeNode* right; } TreeNode;\n\nTreeNode* invertTree(TreeNode* root) {\n    if (!root) return NULL;\n    TreeNode* tmp = root->left;\n    root->left = root->right;\n    root->right = tmp;\n    invertTree(root->left);\n    invertTree(root->right);\n    return root;\n}",
+          "java": "static TreeNode invertTree(TreeNode root) {\n    if (root == null) return null;\n    TreeNode tmp = root.left;\n    root.left = root.right;\n    root.right = tmp;\n    invertTree(root.left);\n    invertTree(root.right);\n    return root;\n}",
+          "python": "def invert_tree(root):\n    if not root:\n        return None\n    root.left, root.right = root.right, root.left\n    invert_tree(root.left)\n    invert_tree(root.right)\n    return root",
+          "javascript": "function invertTree(root) {\n    if (!root) return null;\n    [root.left, root.right] = [root.right, root.left];\n    invertTree(root.left);\n    invertTree(root.right);\n    return root;\n}"
+        }
+      }
+    },
+    {
+      "id": "tree-006",
+      "title": {
+        "en": "Check Balanced Binary Tree",
+        "hi": "Balanced Binary Tree Check Karo"
+      },
+      "difficulty": "medium",
+      "description": {
+        "en": "Given a binary tree, determine if it is height-balanced. A height-balanced binary tree is one in which the left and right subtrees of every node differ in height by no more than 1.",
+        "hi": "Binary tree diya gaya hai, determine karo ki yeh height-balanced hai ya nahi. Height-balanced binary tree mein har node ke left aur right subtrees ki height mein 1 se zyada ka antar nahi hota."
+      },
+      "examples": [
+        {
+          "input": "root = [3,9,20,null,null,15,7]",
+          "output": "true",
+          "explanation": {
+            "en": "Heights differ by at most 1 at every node",
+            "hi": "Har node par heights mein zyada se zyada 1 ka antar hai"
+          }
+        },
+        {
+          "input": "root = [1,2,2,3,3,null,null,4,4]",
+          "output": "false",
+          "explanation": {
+            "en": "Left subtree height is 3, right subtree height is 1",
+            "hi": "Left subtree height 3 hai, right subtree height 1 hai"
+          }
+        }
+      ],
+      "constraints": [
+        "0 <= nodes <= 5000"
+      ],
+      "hints": [
+        {
+          "en": "Compute height at each node. If |left_height - right_height| > 1 at any node, return false. Optimize by passing height back up.",
+          "hi": "Har node par height compute karo. Agar kisi bhi node par |left_height - right_height| > 1 hai, false return karo. Height upar return karke optimize karo."
+        }
+      ],
+      "starterCode": {
+        "cpp": "struct TreeNode { int val; TreeNode* left; TreeNode* right; TreeNode(int x):val(x),left(nullptr),right(nullptr){} };\n\nbool isBalanced(TreeNode* root) {\n    // TODO: Check if tree is height-balanced\n    // Hint: return -1 from helper if subtree is unbalanced\n}",
+        "c": "typedef struct TreeNode { int val; struct TreeNode* left; struct TreeNode* right; } TreeNode;\n\nint checkBalance(TreeNode* root) {\n    // TODO: Return height or -1 if unbalanced\n}\n\nint isBalanced(TreeNode* root) {\n    return checkBalance(root) != -1;\n}",
+        "java": "static boolean isBalanced(TreeNode root) {\n    // TODO: Check if tree is height-balanced\n}",
+        "python": "def is_balanced(root):\n    # TODO: Check if tree is height-balanced\n    pass",
+        "javascript": "function isBalanced(root) {\n    // TODO: Check if tree is height-balanced\n}"
+      },
+      "solution": {
+        "approach": {
+          "en": "Helper function returns height if balanced, -1 if unbalanced. At each node: compute left and right heights. If either returns -1, or abs(lh-rh) > 1, return -1. Otherwise return 1+max(lh,rh).",
+          "hi": "Helper function balanced hone par height return karta hai, unbalanced hone par -1. Har node par: left aur right heights compute karo. Agar koi -1 return kare, ya abs(lh-rh) > 1 ho, -1 return karo. Warna 1+max(lh,rh) return karo."
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(h)",
+        "code": {
+          "cpp": "#include <cmath>\nstruct TreeNode { int val; TreeNode* left; TreeNode* right; TreeNode(int x):val(x),left(nullptr),right(nullptr){} };\n\nint checkBalance(TreeNode* root) {\n    if (!root) return 0;\n    int lh = checkBalance(root->left);\n    if (lh == -1) return -1;\n    int rh = checkBalance(root->right);\n    if (rh == -1) return -1;\n    if (abs(lh - rh) > 1) return -1;\n    return 1 + std::max(lh, rh);\n}\n\nbool isBalanced(TreeNode* root) {\n    return checkBalance(root) != -1;\n}",
+          "c": "int checkBalance(TreeNode* root) {\n    if (!root) return 0;\n    int lh = checkBalance(root->left);\n    if (lh == -1) return -1;\n    int rh = checkBalance(root->right);\n    if (rh == -1) return -1;\n    int diff = lh - rh;\n    if (diff < -1 || diff > 1) return -1;\n    return 1 + (lh > rh ? lh : rh);\n}\n\nint isBalanced(TreeNode* root) {\n    return checkBalance(root) != -1;\n}",
+          "java": "static int checkBalance(TreeNode root) {\n    if (root == null) return 0;\n    int lh = checkBalance(root.left);\n    if (lh == -1) return -1;\n    int rh = checkBalance(root.right);\n    if (rh == -1) return -1;\n    if (Math.abs(lh - rh) > 1) return -1;\n    return 1 + Math.max(lh, rh);\n}\n\nstatic boolean isBalanced(TreeNode root) {\n    return checkBalance(root) != -1;\n}",
+          "python": "def check_balance(root):\n    if not root:\n        return 0\n    lh = check_balance(root.left)\n    if lh == -1: return -1\n    rh = check_balance(root.right)\n    if rh == -1: return -1\n    if abs(lh - rh) > 1: return -1\n    return 1 + max(lh, rh)\n\ndef is_balanced(root):\n    return check_balance(root) != -1",
+          "javascript": "function checkBalance(root) {\n    if (!root) return 0;\n    const lh = checkBalance(root.left);\n    if (lh === -1) return -1;\n    const rh = checkBalance(root.right);\n    if (rh === -1) return -1;\n    if (Math.abs(lh - rh) > 1) return -1;\n    return 1 + Math.max(lh, rh);\n}\n\nfunction isBalanced(root) {\n    return checkBalance(root) !== -1;\n}"
+        }
+      }
+    },
+    {
+      "id": "tree-007",
+      "title": {
+        "en": "Lowest Common Ancestor (LCA)",
+        "hi": "Lowest Common Ancestor (LCA)"
+      },
+      "difficulty": "medium",
+      "description": {
+        "en": "Given a binary tree and two nodes p and q, find their Lowest Common Ancestor (LCA). The LCA is the deepest node that has both p and q as descendants.",
+        "hi": "Binary tree aur do nodes p aur q diye gaye hain, unka Lowest Common Ancestor (LCA) dhundo. LCA woh deepest node hai jiske dono p aur q descendants hain."
+      },
+      "examples": [
+        {
+          "input": "root = [3,5,1,6,2,0,8], p = 5, q = 1",
+          "output": "3",
+          "explanation": {
+            "en": "LCA of nodes 5 and 1 is 3",
+            "hi": "Nodes 5 aur 1 ka LCA 3 hai"
+          }
+        },
+        {
+          "input": "root = [3,5,1,6,2], p = 5, q = 4",
+          "output": "5",
+          "explanation": {
+            "en": "5 is an ancestor of 4, so LCA is 5",
+            "hi": "5, 4 ka ancestor hai, isliye LCA 5 hai"
+          }
+        }
+      ],
+      "constraints": [
+        "2 <= nodes <= 10^5",
+        "All node values are unique"
+      ],
+      "hints": [
+        {
+          "en": "If root is null, or root is p or q, return root. Recurse left and right. If both return non-null, root is LCA. Else return the non-null result.",
+          "hi": "Agar root null hai, ya root p ya q hai, root return karo. Left aur right recurse karo. Agar dono non-null return karein, root LCA hai. Warna non-null result return karo."
+        }
+      ],
+      "starterCode": {
+        "cpp": "struct TreeNode { int val; TreeNode* left; TreeNode* right; TreeNode(int x):val(x),left(nullptr),right(nullptr){} };\n\nTreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {\n    // TODO: Find LCA\n}",
+        "c": "typedef struct TreeNode { int val; struct TreeNode* left; struct TreeNode* right; } TreeNode;\n\nTreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {\n    // TODO: Find LCA\n}",
+        "java": "static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {\n    // TODO: Find LCA\n}",
+        "python": "def lowest_common_ancestor(root, p, q):\n    # TODO: Find LCA\n    pass",
+        "javascript": "function lowestCommonAncestor(root, p, q) {\n    // TODO: Find LCA\n}"
+      },
+      "solution": {
+        "approach": {
+          "en": "If root is null or equals p or q, return root. Recurse on left and right. If both return non-null, current node is LCA. If only one is non-null, propagate that up.",
+          "hi": "Agar root null hai ya p ya q ke barabar hai, root return karo. Left aur right par recurse karo. Agar dono non-null return karein, current node LCA hai. Agar sirf ek non-null hai, use upar propagate karo."
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(h)",
+        "code": {
+          "cpp": "TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {\n    if (!root || root == p || root == q) return root;\n    TreeNode* left = lowestCommonAncestor(root->left, p, q);\n    TreeNode* right = lowestCommonAncestor(root->right, p, q);\n    if (left && right) return root;\n    return left ? left : right;\n}",
+          "c": "TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {\n    if (!root || root == p || root == q) return root;\n    TreeNode* left = lowestCommonAncestor(root->left, p, q);\n    TreeNode* right = lowestCommonAncestor(root->right, p, q);\n    if (left && right) return root;\n    return left ? left : right;\n}",
+          "java": "static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {\n    if (root == null || root == p || root == q) return root;\n    TreeNode left = lowestCommonAncestor(root.left, p, q);\n    TreeNode right = lowestCommonAncestor(root.right, p, q);\n    if (left != null && right != null) return root;\n    return left != null ? left : right;\n}",
+          "python": "def lowest_common_ancestor(root, p, q):\n    if not root or root == p or root == q:\n        return root\n    left = lowest_common_ancestor(root.left, p, q)\n    right = lowest_common_ancestor(root.right, p, q)\n    if left and right:\n        return root\n    return left if left else right",
+          "javascript": "function lowestCommonAncestor(root, p, q) {\n    if (!root || root === p || root === q) return root;\n    const left = lowestCommonAncestor(root.left, p, q);\n    const right = lowestCommonAncestor(root.right, p, q);\n    if (left && right) return root;\n    return left || right;\n}"
+        }
+      }
+    },
+    {
+      "id": "tree-008",
+      "title": {
+        "en": "BST Insert and Search",
+        "hi": "BST Insert aur Search"
+      },
+      "difficulty": "easy",
+      "description": {
+        "en": "Implement insert and search operations for a Binary Search Tree. Insert a value into the BST and search for a value returning true/false.",
+        "hi": "Binary Search Tree ke liye insert aur search operations implement karo. BST mein value insert karo aur value search karo true/false return karte hue."
+      },
+      "examples": [
+        {
+          "input": "Insert [5,3,7,1,4], Search 4",
+          "output": "true",
+          "explanation": {
+            "en": "4 is in the BST",
+            "hi": "4 BST mein hai"
+          }
+        },
+        {
+          "input": "Insert [5,3,7], Search 6",
+          "output": "false",
+          "explanation": {
+            "en": "6 is not in the BST",
+            "hi": "6 BST mein nahi hai"
+          }
+        }
+      ],
+      "constraints": [
+        "1 <= n <= 1000",
+        "Unique values"
+      ],
+      "hints": [
+        {
+          "en": "For insert: if val < root, go left; else go right. Create new node when null. For search: same logic, return true when found.",
+          "hi": "Insert ke liye: agar val < root hai, left jao; warna right. Null milne par naya node banao. Search ke liye: same logic, milne par true return karo."
+        }
+      ],
+      "starterCode": {
+        "cpp": "struct TreeNode { int val; TreeNode* left; TreeNode* right; TreeNode(int x):val(x),left(nullptr),right(nullptr){} };\n\nTreeNode* insert(TreeNode* root, int val) {\n    // TODO: Insert val into BST\n}\n\nbool search(TreeNode* root, int val) {\n    // TODO: Search for val in BST\n}",
+        "c": "typedef struct TreeNode { int val; struct TreeNode* left; struct TreeNode* right; } TreeNode;\n\nTreeNode* insert(TreeNode* root, int val) {\n    // TODO: Insert val into BST\n}\n\nint search(TreeNode* root, int val) {\n    // TODO: Search for val\n}",
+        "java": "static TreeNode insert(TreeNode root, int val) {\n    // TODO: Insert val\n}\n\nstatic boolean search(TreeNode root, int val) {\n    // TODO: Search for val\n}",
+        "python": "def insert(root, val):\n    # TODO: Insert val into BST\n    pass\n\ndef search(root, val):\n    # TODO: Search for val\n    pass",
+        "javascript": "function insert(root, val) {\n    // TODO: Insert val\n}\n\nfunction search(root, val) {\n    // TODO: Search for val\n}"
+      },
+      "solution": {
+        "approach": {
+          "en": "Insert: compare val with root. If less, recurse left; if greater, recurse right; create node when null. Search: same comparison logic, return true when root.val == val.",
+          "hi": "Insert: val ko root se compare karo. Agar kam hai, left recurse karo; zyada hai to right; null milne par node banao. Search: same comparison logic, root.val == val hone par true return karo."
+        },
+        "timeComplexity": "O(h) average O(log n)",
+        "spaceComplexity": "O(h)",
+        "code": {
+          "cpp": "TreeNode* insert(TreeNode* root, int val) {\n    if (!root) return new TreeNode(val);\n    if (val < root->val) root->left = insert(root->left, val);\n    else if (val > root->val) root->right = insert(root->right, val);\n    return root;\n}\n\nbool search(TreeNode* root, int val) {\n    if (!root) return false;\n    if (root->val == val) return true;\n    if (val < root->val) return search(root->left, val);\n    return search(root->right, val);\n}",
+          "c": "TreeNode* newNode(int v) { TreeNode* n=(TreeNode*)malloc(sizeof(TreeNode)); n->val=v; n->left=n->right=NULL; return n; }\n\nTreeNode* insert(TreeNode* root, int val) {\n    if (!root) return newNode(val);\n    if (val < root->val) root->left = insert(root->left, val);\n    else if (val > root->val) root->right = insert(root->right, val);\n    return root;\n}\n\nint search(TreeNode* root, int val) {\n    if (!root) return 0;\n    if (root->val == val) return 1;\n    if (val < root->val) return search(root->left, val);\n    return search(root->right, val);\n}",
+          "java": "static TreeNode insert(TreeNode root, int val) {\n    if (root == null) return new TreeNode(val);\n    if (val < root.val) root.left = insert(root.left, val);\n    else if (val > root.val) root.right = insert(root.right, val);\n    return root;\n}\n\nstatic boolean search(TreeNode root, int val) {\n    if (root == null) return false;\n    if (root.val == val) return true;\n    if (val < root.val) return search(root.left, val);\n    return search(root.right, val);\n}",
+          "python": "def insert(root, val):\n    if not root:\n        return TreeNode(val)\n    if val < root.val:\n        root.left = insert(root.left, val)\n    elif val > root.val:\n        root.right = insert(root.right, val)\n    return root\n\ndef search(root, val):\n    if not root:\n        return False\n    if root.val == val:\n        return True\n    if val < root.val:\n        return search(root.left, val)\n    return search(root.right, val)",
+          "javascript": "function insert(root, val) {\n    if (!root) return new TreeNode(val);\n    if (val < root.val) root.left = insert(root.left, val);\n    else if (val > root.val) root.right = insert(root.right, val);\n    return root;\n}\n\nfunction search(root, val) {\n    if (!root) return false;\n    if (root.val === val) return true;\n    if (val < root.val) return search(root.left, val);\n    return search(root.right, val);\n}"
+        }
+      }
+    },
+    {
+      "id": "tree-009",
+      "title": {
+        "en": "Validate BST",
+        "hi": "BST Validate Karo"
+      },
+      "difficulty": "medium",
+      "description": {
+        "en": "Given the root of a binary tree, determine if it is a valid binary search tree (BST). A valid BST has: left subtree nodes strictly less than root, right subtree nodes strictly greater, and both subtrees are also valid BSTs.",
+        "hi": "Binary tree ka root diya gaya hai, determine karo ki yeh valid binary search tree (BST) hai ya nahi. Valid BST mein: left subtree nodes strictly root se kam, right subtree nodes strictly zyada, aur dono subtrees bhi valid BSTs hain."
+      },
+      "examples": [
+        {
+          "input": "root = [2,1,3]",
+          "output": "true",
+          "explanation": {
+            "en": "1 < 2 < 3, valid BST",
+            "hi": "1 < 2 < 3, valid BST"
+          }
+        },
+        {
+          "input": "root = [5,1,4,null,null,3,6]",
+          "output": "false",
+          "explanation": {
+            "en": "Right child 4 < root 5, invalid",
+            "hi": "Right child 4 < root 5, invalid"
+          }
+        }
+      ],
+      "constraints": [
+        "1 <= nodes <= 10^4",
+        "-2^31 <= val <= 2^31-1"
+      ],
+      "hints": [
+        {
+          "en": "Pass min and max bounds. For left subtree, max = root.val. For right subtree, min = root.val.",
+          "hi": "Min aur max bounds pass karo. Left subtree ke liye max = root.val. Right subtree ke liye min = root.val."
+        }
+      ],
+      "starterCode": {
+        "cpp": "struct TreeNode { int val; TreeNode* left; TreeNode* right; TreeNode(int x):val(x),left(nullptr),right(nullptr){} };\n\nbool isValidBST(TreeNode* root, long min = LONG_MIN, long max = LONG_MAX) {\n    // TODO: Check BST validity with min/max bounds\n}",
+        "c": "typedef struct TreeNode { int val; struct TreeNode* left; struct TreeNode* right; } TreeNode;\n\nint isValidBSTHelper(TreeNode* root, long min, long max) {\n    // TODO: Validate with bounds\n}\n\nint isValidBST(TreeNode* root) {\n    return isValidBSTHelper(root, -2147483649L, 2147483648L);\n}",
+        "java": "static boolean isValidBST(TreeNode root, long min, long max) {\n    // TODO: Validate with bounds\n}\n\nstatic boolean isValidBST(TreeNode root) {\n    return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);\n}",
+        "python": "def is_valid_bst(root, min_val=float('-inf'), max_val=float('inf')):\n    # TODO: Validate with bounds\n    pass",
+        "javascript": "function isValidBST(root, min = -Infinity, max = Infinity) {\n    // TODO: Validate with bounds\n}"
+      },
+      "solution": {
+        "approach": {
+          "en": "Pass min/max bounds. If node val <= min or >= max, invalid. For left, update max = node.val. For right, update min = node.val. Base case: null is valid.",
+          "hi": "Min/max bounds pass karo. Agar node val <= min ya >= max hai, invalid. Left ke liye max = node.val update karo. Right ke liye min = node.val update karo. Base case: null valid hai."
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(h)",
+        "code": {
+          "cpp": "#include <climits>\nstruct TreeNode { int val; TreeNode* left; TreeNode* right; TreeNode(int x):val(x),left(nullptr),right(nullptr){} };\n\nbool isValidBST(TreeNode* root, long minVal = LONG_MIN, long maxVal = LONG_MAX) {\n    if (!root) return true;\n    if (root->val <= minVal || root->val >= maxVal) return false;\n    return isValidBST(root->left, minVal, root->val) &&\n           isValidBST(root->right, root->val, maxVal);\n}",
+          "c": "typedef struct TreeNode { int val; struct TreeNode* left; struct TreeNode* right; } TreeNode;\n\nint helper(TreeNode* root, long minVal, long maxVal) {\n    if (!root) return 1;\n    if (root->val <= minVal || root->val >= maxVal) return 0;\n    return helper(root->left, minVal, root->val) &&\n           helper(root->right, root->val, maxVal);\n}\n\nint isValidBST(TreeNode* root) {\n    return helper(root, -2147483649L, 2147483648L);\n}",
+          "java": "static boolean isValidBST(TreeNode root, long minVal, long maxVal) {\n    if (root == null) return true;\n    if (root.val <= minVal || root.val >= maxVal) return false;\n    return isValidBST(root.left, minVal, root.val) &&\n           isValidBST(root.right, root.val, maxVal);\n}\n\nstatic boolean isValidBST(TreeNode root) {\n    return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);\n}",
+          "python": "def is_valid_bst(root, min_val=float('-inf'), max_val=float('inf')):\n    if not root:\n        return True\n    if root.val <= min_val or root.val >= max_val:\n        return False\n    return (is_valid_bst(root.left, min_val, root.val) and\n            is_valid_bst(root.right, root.val, max_val))",
+          "javascript": "function isValidBST(root, min = -Infinity, max = Infinity) {\n    if (!root) return true;\n    if (root.val <= min || root.val >= max) return false;\n    return isValidBST(root.left, min, root.val) &&\n           isValidBST(root.right, root.val, max);\n}"
+        }
+      }
+    },
+    {
+      "id": "tree-010",
+      "title": {
+        "en": "Diameter of Binary Tree",
+        "hi": "Binary Tree ka Diameter"
+      },
+      "difficulty": "medium",
+      "description": {
+        "en": "Given the root of a binary tree, return the length of the diameter. The diameter is the length of the longest path between any two nodes (the path may or may not pass through the root).",
+        "hi": "Binary tree ka root diya gaya hai, diameter ki lambai return karo. Diameter kisi bhi do nodes ke beech sabse lamba path hai (path root se pass hoga bhi ya nahi bhi)."
+      },
+      "examples": [
+        {
+          "input": "root = [1,2,3,4,5]",
+          "output": "3",
+          "explanation": {
+            "en": "Path [4,2,1,3] or [5,2,1,3] has length 3",
+            "hi": "Path [4,2,1,3] ya [5,2,1,3] ki lambai 3 hai"
+          }
+        },
+        {
+          "input": "root = [1,2]",
+          "output": "1",
+          "explanation": {
+            "en": "Path [1,2] has length 1",
+            "hi": "Path [1,2] ki lambai 1 hai"
+          }
+        }
+      ],
+      "constraints": [
+        "1 <= nodes <= 10^4"
+      ],
+      "hints": [
+        {
+          "en": "At each node, diameter passing through it = left_height + right_height. Track global maximum.",
+          "hi": "Har node par, us se guzarne wala diameter = left_height + right_height. Global maximum track karo."
+        }
+      ],
+      "starterCode": {
+        "cpp": "struct TreeNode { int val; TreeNode* left; TreeNode* right; TreeNode(int x):val(x),left(nullptr),right(nullptr){} };\n\nint maxDiameter = 0;\n\nint heightHelper(TreeNode* root) {\n    // TODO: Compute height, update maxDiameter\n}\n\nint diameterOfBinaryTree(TreeNode* root) {\n    maxDiameter = 0;\n    heightHelper(root);\n    return maxDiameter;\n}",
+        "c": "int maxDiameter = 0;\n\nint heightHelper(TreeNode* root) {\n    // TODO: Compute height, update maxDiameter\n}\n\nint diameter(TreeNode* root) {\n    maxDiameter = 0;\n    heightHelper(root);\n    return maxDiameter;\n}",
+        "java": "static int maxDiameter = 0;\n\nstatic int heightHelper(TreeNode root) {\n    // TODO: Compute height, update maxDiameter\n}\n\nstatic int diameterOfBinaryTree(TreeNode root) {\n    maxDiameter = 0;\n    heightHelper(root);\n    return maxDiameter;\n}",
+        "python": "def diameter_of_binary_tree(root):\n    max_d = [0]\n    def height(node):\n        # TODO: Compute height, update max_d[0]\n        pass\n    height(root)\n    return max_d[0]",
+        "javascript": "function diameterOfBinaryTree(root) {\n    let maxD = 0;\n    function height(node) {\n        // TODO: Compute height, update maxD\n    }\n    height(root);\n    return maxD;\n}"
+      },
+      "solution": {
+        "approach": {
+          "en": "For each node, compute height of left and right subtrees. Update global max with lh+rh. Return 1+max(lh,rh) as this node's height for the parent.",
+          "hi": "Har node ke liye, left aur right subtrees ki height compute karo. lh+rh se global max update karo. Parent ke liye is node ki height ke roop mein 1+max(lh,rh) return karo."
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(h)",
+        "code": {
+          "cpp": "#include <algorithm>\nstruct TreeNode { int val; TreeNode* left; TreeNode* right; TreeNode(int x):val(x),left(nullptr),right(nullptr){} };\n\nint maxDiameter = 0;\n\nint heightHelper(TreeNode* root) {\n    if (!root) return 0;\n    int lh = heightHelper(root->left);\n    int rh = heightHelper(root->right);\n    maxDiameter = std::max(maxDiameter, lh + rh);\n    return 1 + std::max(lh, rh);\n}\n\nint diameterOfBinaryTree(TreeNode* root) {\n    maxDiameter = 0;\n    heightHelper(root);\n    return maxDiameter;\n}",
+          "c": "int maxDiameter = 0;\n\nint heightHelper(TreeNode* root) {\n    if (!root) return 0;\n    int lh = heightHelper(root->left);\n    int rh = heightHelper(root->right);\n    if (lh + rh > maxDiameter) maxDiameter = lh + rh;\n    return 1 + (lh > rh ? lh : rh);\n}\n\nint diameter(TreeNode* root) {\n    maxDiameter = 0;\n    heightHelper(root);\n    return maxDiameter;\n}",
+          "java": "static int maxDiameter = 0;\n\nstatic int heightHelper(TreeNode root) {\n    if (root == null) return 0;\n    int lh = heightHelper(root.left);\n    int rh = heightHelper(root.right);\n    maxDiameter = Math.max(maxDiameter, lh + rh);\n    return 1 + Math.max(lh, rh);\n}\n\nstatic int diameterOfBinaryTree(TreeNode root) {\n    maxDiameter = 0;\n    heightHelper(root);\n    return maxDiameter;\n}",
+          "python": "def diameter_of_binary_tree(root):\n    max_d = [0]\n    def height(node):\n        if not node: return 0\n        lh = height(node.left)\n        rh = height(node.right)\n        max_d[0] = max(max_d[0], lh + rh)\n        return 1 + max(lh, rh)\n    height(root)\n    return max_d[0]",
+          "javascript": "function diameterOfBinaryTree(root) {\n    let maxD = 0;\n    function height(node) {\n        if (!node) return 0;\n        const lh = height(node.left);\n        const rh = height(node.right);\n        maxD = Math.max(maxD, lh + rh);\n        return 1 + Math.max(lh, rh);\n    }\n    height(root);\n    return maxD;\n}"
+        }
+      }
+    },
+    {
+      "id": "tree-011",
+      "title": {
+        "en": "Path Sum",
+        "hi": "Path Sum"
+      },
+      "difficulty": "medium",
+      "description": {
+        "en": "Given the root of a binary tree and an integer targetSum, return true if the tree has a root-to-leaf path such that adding all values along the path equals targetSum.",
+        "hi": "Binary tree ka root aur ek integer targetSum diya gaya hai, true return karo agar tree mein ek root-to-leaf path hai jisme saare values ka sum targetSum ke barabar ho."
+      },
+      "examples": [
+        {
+          "input": "root = [5,4,8,11,null,13,4,7,2], targetSum = 22",
+          "output": "true",
+          "explanation": {
+            "en": "Path 5->4->11->2 has sum 22",
+            "hi": "Path 5->4->11->2 ka sum 22 hai"
+          }
+        },
+        {
+          "input": "root = [1,2,3], targetSum = 5",
+          "output": "false",
+          "explanation": {
+            "en": "No root-to-leaf path with sum 5",
+            "hi": "Sum 5 wala koi root-to-leaf path nahi hai"
+          }
+        }
+      ],
+      "constraints": [
+        "0 <= nodes <= 5000",
+        "-1000 <= val, targetSum <= 1000"
+      ],
+      "hints": [
+        {
+          "en": "Subtract root value from targetSum, recurse to children. Base case: leaf node with remaining sum == 0 returns true.",
+          "hi": "Root value targetSum se subtract karo, children par recurse karo. Base case: remaining sum == 0 wala leaf node true return karta hai."
+        }
+      ],
+      "starterCode": {
+        "cpp": "struct TreeNode { int val; TreeNode* left; TreeNode* right; TreeNode(int x):val(x),left(nullptr),right(nullptr){} };\n\nbool hasPathSum(TreeNode* root, int targetSum) {\n    // TODO: Check if path with targetSum exists\n}",
+        "c": "typedef struct TreeNode { int val; struct TreeNode* left; struct TreeNode* right; } TreeNode;\n\nint hasPathSum(TreeNode* root, int targetSum) {\n    // TODO: Check if path with targetSum exists\n}",
+        "java": "static boolean hasPathSum(TreeNode root, int targetSum) {\n    // TODO: Check if path with targetSum exists\n}",
+        "python": "def has_path_sum(root, target_sum):\n    # TODO: Check if path with targetSum exists\n    pass",
+        "javascript": "function hasPathSum(root, targetSum) {\n    // TODO: Check if path with targetSum exists\n}"
+      },
+      "solution": {
+        "approach": {
+          "en": "If null, return false. If leaf (no children), return root.val == targetSum. Otherwise recurse with targetSum - root.val on both children, return OR of results.",
+          "hi": "Agar null hai, false return karo. Agar leaf (koi children nahi), return root.val == targetSum. Warna dono children par targetSum - root.val ke saath recurse karo, results ka OR return karo."
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(h)",
+        "code": {
+          "cpp": "bool hasPathSum(TreeNode* root, int targetSum) {\n    if (!root) return false;\n    if (!root->left && !root->right) return root->val == targetSum;\n    return hasPathSum(root->left, targetSum - root->val) ||\n           hasPathSum(root->right, targetSum - root->val);\n}",
+          "c": "int hasPathSum(TreeNode* root, int targetSum) {\n    if (!root) return 0;\n    if (!root->left && !root->right) return root->val == targetSum;\n    return hasPathSum(root->left, targetSum - root->val) ||\n           hasPathSum(root->right, targetSum - root->val);\n}",
+          "java": "static boolean hasPathSum(TreeNode root, int targetSum) {\n    if (root == null) return false;\n    if (root.left == null && root.right == null) return root.val == targetSum;\n    return hasPathSum(root.left, targetSum - root.val) ||\n           hasPathSum(root.right, targetSum - root.val);\n}",
+          "python": "def has_path_sum(root, target_sum):\n    if not root:\n        return False\n    if not root.left and not root.right:\n        return root.val == target_sum\n    return (has_path_sum(root.left, target_sum - root.val) or\n            has_path_sum(root.right, target_sum - root.val))",
+          "javascript": "function hasPathSum(root, targetSum) {\n    if (!root) return false;\n    if (!root.left && !root.right) return root.val === targetSum;\n    return hasPathSum(root.left, targetSum - root.val) ||\n           hasPathSum(root.right, targetSum - root.val);\n}"
+        }
+      }
+    },
+    {
+      "id": "tree-012",
+      "title": {
+        "en": "Serialize and Deserialize Binary Tree",
+        "hi": "Binary Tree Ko Serialize aur Deserialize Karo"
+      },
+      "difficulty": "hard",
+      "description": {
+        "en": "Design an algorithm to serialize and deserialize a binary tree. Serialization converts a tree to a string, and deserialization reconstructs the tree from that string.",
+        "hi": "Binary tree ko serialize aur deserialize karne ka algorithm design karo. Serialization tree ko string mein convert karta hai, aur deserialization us string se tree wapas banata hai."
+      },
+      "examples": [
+        {
+          "input": "root = [1,2,3,null,null,4,5]",
+          "output": "serialize -> '1,2,3,null,null,4,5', deserialize -> original tree",
+          "explanation": {
+            "en": "Preorder traversal with null markers",
+            "hi": "Null markers ke saath preorder traversal"
+          }
+        }
+      ],
+      "constraints": [
+        "0 <= nodes <= 10^4"
+      ],
+      "hints": [
+        {
+          "en": "Use preorder traversal for serialization. Use 'null' for empty nodes. For deserialization, split by comma and reconstruct using a queue/index.",
+          "hi": "Serialization ke liye preorder traversal use karo. Empty nodes ke liye 'null' use karo. Deserialization ke liye comma se split karo aur queue/index use karke reconstruct karo."
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include <string>\nstruct TreeNode { int val; TreeNode* left; TreeNode* right; TreeNode(int x):val(x),left(nullptr),right(nullptr){} };\n\nstd::string serialize(TreeNode* root) {\n    // TODO: Convert tree to string\n}\n\nTreeNode* deserialize(std::string data) {\n    // TODO: Reconstruct tree from string\n}",
+        "c": "#include <stdio.h>\n#include <string.h>\ntypedef struct TreeNode { int val; struct TreeNode* left; struct TreeNode* right; } TreeNode;\n\nvoid serialize(TreeNode* root, char* buf, int* pos) {\n    // TODO: Convert tree to string\n}\n\nTreeNode* deserialize(char* data, int* pos) {\n    // TODO: Reconstruct tree\n}",
+        "java": "import java.util.*;\n\nstatic String serialize(TreeNode root) {\n    // TODO: Convert tree to string\n}\n\nstatic TreeNode deserialize(String data) {\n    // TODO: Reconstruct tree\n}",
+        "python": "def serialize(root):\n    # TODO: Convert tree to string\n    pass\n\ndef deserialize(data):\n    # TODO: Reconstruct tree from string\n    pass",
+        "javascript": "function serialize(root) {\n    // TODO: Convert tree to string\n}\n\nfunction deserialize(data) {\n    // TODO: Reconstruct tree from string\n}"
+      },
+      "solution": {
+        "approach": {
+          "en": "Serialize: preorder traversal, use 'null' for null nodes, comma-separated. Deserialize: split by comma into queue, recursively build tree using preorder: take first value, if 'null' return null, else create node with left=deserialize(), right=deserialize().",
+          "hi": "Serialize: preorder traversal, null nodes ke liye 'null' use karo, comma-separated. Deserialize: comma se queue mein split karo, preorder use karke recursively tree banao: pehla value lo, agar 'null' hai to null return karo, warna node banao left=deserialize(), right=deserialize() ke saath."
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(n)",
+        "code": {
+          "cpp": "#include <string>\n#include <sstream>\n#include <queue>\nstruct TreeNode { int val; TreeNode* left; TreeNode* right; TreeNode(int x):val(x),left(nullptr),right(nullptr){} };\n\nstd::string serialize(TreeNode* root) {\n    if (!root) return \"null,\";\n    return std::to_string(root->val) + \",\" + serialize(root->left) + serialize(root->right);\n}\n\nTreeNode* deserializeHelper(std::queue<std::string>& q) {\n    std::string val = q.front(); q.pop();\n    if (val == \"null\") return nullptr;\n    TreeNode* node = new TreeNode(std::stoi(val));\n    node->left = deserializeHelper(q);\n    node->right = deserializeHelper(q);\n    return node;\n}\n\nTreeNode* deserialize(std::string data) {\n    std::queue<std::string> q;\n    std::stringstream ss(data);\n    std::string token;\n    while (std::getline(ss, token, ',')) q.push(token);\n    return deserializeHelper(q);\n}",
+          "c": "// C implementation using preorder with array\n#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\ntypedef struct TreeNode { int val; struct TreeNode* left; struct TreeNode* right; } TreeNode;\nTreeNode* newNode(int v) { TreeNode* n=(TreeNode*)malloc(sizeof(TreeNode)); n->val=v; n->left=n->right=NULL; return n; }\n\nint pos = 0;\nchar serialized[100000];\n\nvoid serializeHelper(TreeNode* root) {\n    if (!root) { pos += sprintf(serialized + pos, \"null,\"); return; }\n    pos += sprintf(serialized + pos, \"%d,\", root->val);\n    serializeHelper(root->left);\n    serializeHelper(root->right);\n}\n\nchar** tokens;\nint tIdx;\n\nTreeNode* deserializeHelper() {\n    char* tok = tokens[tIdx++];\n    if (strcmp(tok, \"null\") == 0) return NULL;\n    TreeNode* node = newNode(atoi(tok));\n    node->left = deserializeHelper();\n    node->right = deserializeHelper();\n    return node;\n}",
+          "java": "import java.util.*;\n\nstatic String serialize(TreeNode root) {\n    if (root == null) return \"null,\";\n    return root.val + \",\" + serialize(root.left) + serialize(root.right);\n}\n\nstatic TreeNode deserializeHelper(Queue<String> q) {\n    String val = q.poll();\n    if (val.equals(\"null\")) return null;\n    TreeNode node = new TreeNode(Integer.parseInt(val));\n    node.left = deserializeHelper(q);\n    node.right = deserializeHelper(q);\n    return node;\n}\n\nstatic TreeNode deserialize(String data) {\n    Queue<String> q = new LinkedList<>(Arrays.asList(data.split(\",\")));\n    return deserializeHelper(q);\n}",
+          "python": "def serialize(root):\n    if not root:\n        return 'null,'\n    return str(root.val) + ',' + serialize(root.left) + serialize(root.right)\n\ndef deserialize(data):\n    tokens = iter(data.split(','))\n    def helper():\n        val = next(tokens)\n        if val == 'null':\n            return None\n        node = TreeNode(int(val))\n        node.left = helper()\n        node.right = helper()\n        return node\n    return helper()",
+          "javascript": "function serialize(root) {\n    if (!root) return 'null,';\n    return root.val + ',' + serialize(root.left) + serialize(root.right);\n}\n\nfunction deserialize(data) {\n    const tokens = data.split(',');\n    let idx = 0;\n    function helper() {\n        const val = tokens[idx++];\n        if (val === 'null') return null;\n        const node = new TreeNode(parseInt(val));\n        node.left = helper();\n        node.right = helper();\n        return node;\n    }\n    return helper();\n}"
+        }
+      }
+    },
+    {
+      "id": "tree-013",
+      "title": {
+        "en": "Zigzag Level Order Traversal",
+        "hi": "Zigzag Level Order Traversal"
+      },
+      "difficulty": "medium",
+      "description": {
+        "en": "Given the root of a binary tree, return the zigzag level order traversal of its nodes' values. (i.e., from left to right, then right to left for the next level, alternating).",
+        "hi": "Binary tree ka root diya gaya hai, nodes ke values ka zigzag level order traversal return karo. (yaani, pehle left se right, phir next level mein right se left, alternating)."
+      },
+      "examples": [
+        {
+          "input": "root = [3,9,20,null,null,15,7]",
+          "output": "[[3],[20,9],[15,7]]",
+          "explanation": {
+            "en": "Level 0: left->right [3], Level 1: right->left [20,9], Level 2: left->right [15,7]",
+            "hi": "Level 0: left->right [3], Level 1: right->left [20,9], Level 2: left->right [15,7]"
+          }
+        }
+      ],
+      "constraints": [
+        "0 <= nodes <= 2000"
+      ],
+      "hints": [
+        {
+          "en": "Do BFS level order. Track a boolean 'leftToRight'. Reverse each odd level's result.",
+          "hi": "BFS level order karo. Boolean 'leftToRight' track karo. Har odd level ka result reverse karo."
+        }
+      ],
+      "starterCode": {
+        "cpp": "struct TreeNode { int val; TreeNode* left; TreeNode* right; TreeNode(int x):val(x),left(nullptr),right(nullptr){} };\n#include <vector>\n#include <queue>\n\nstd::vector<std::vector<int>> zigzagLevelOrder(TreeNode* root) {\n    // TODO: BFS with alternating direction\n}",
+        "c": "typedef struct TreeNode { int val; struct TreeNode* left; struct TreeNode* right; } TreeNode;\n\nvoid zigzagLevelOrder(TreeNode* root) {\n    // TODO: BFS with alternating direction\n}",
+        "java": "import java.util.*;\n\nstatic List<List<Integer>> zigzagLevelOrder(TreeNode root) {\n    // TODO: BFS with alternating direction\n}",
+        "python": "from collections import deque\n\ndef zigzag_level_order(root):\n    # TODO: BFS with alternating direction\n    pass",
+        "javascript": "function zigzagLevelOrder(root) {\n    // TODO: BFS with alternating direction\n}"
+      },
+      "solution": {
+        "approach": {
+          "en": "BFS level order traversal. Keep a boolean leftToRight. For each level, collect nodes left-to-right. If leftToRight is false, reverse the level before adding to result. Toggle leftToRight after each level.",
+          "hi": "BFS level order traversal. Boolean leftToRight rakho. Har level ke liye, nodes left-to-right collect karo. Agar leftToRight false hai, level ko result mein add karne se pehle reverse karo. Har level ke baad leftToRight toggle karo."
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(n)",
+        "code": {
+          "cpp": "#include <vector>\n#include <queue>\n#include <algorithm>\nstruct TreeNode { int val; TreeNode* left; TreeNode* right; TreeNode(int x):val(x),left(nullptr),right(nullptr){} };\n\nstd::vector<std::vector<int>> zigzagLevelOrder(TreeNode* root) {\n    std::vector<std::vector<int>> result;\n    if (!root) return result;\n    std::queue<TreeNode*> q;\n    q.push(root);\n    bool leftToRight = true;\n    while (!q.empty()) {\n        int size = q.size();\n        std::vector<int> level;\n        for (int i = 0; i < size; i++) {\n            TreeNode* node = q.front(); q.pop();\n            level.push_back(node->val);\n            if (node->left) q.push(node->left);\n            if (node->right) q.push(node->right);\n        }\n        if (!leftToRight) std::reverse(level.begin(), level.end());\n        result.push_back(level);\n        leftToRight = !leftToRight;\n    }\n    return result;\n}",
+          "c": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct TreeNode { int val; struct TreeNode* left; struct TreeNode* right; } TreeNode;\n\nvoid zigzagLevelOrder(TreeNode* root) {\n    if (!root) return;\n    TreeNode* q[10000]; int front=0, back=0;\n    q[back++] = root;\n    int leftToRight = 1;\n    while (front < back) {\n        int size = back - front;\n        int level[10000]; int li = 0;\n        for (int i = 0; i < size; i++) {\n            TreeNode* node = q[front++];\n            level[li++] = node->val;\n            if (node->left) q[back++] = node->left;\n            if (node->right) q[back++] = node->right;\n        }\n        if (!leftToRight) {\n            for (int i=0, j=li-1; i<j; i++, j--) { int t=level[i]; level[i]=level[j]; level[j]=t; }\n        }\n        for (int i = 0; i < li; i++) printf(\"%d \", level[i]);\n        printf(\"\\n\");\n        leftToRight = !leftToRight;\n    }\n}",
+          "java": "import java.util.*;\n\nstatic List<List<Integer>> zigzagLevelOrder(TreeNode root) {\n    List<List<Integer>> result = new ArrayList<>();\n    if (root == null) return result;\n    Queue<TreeNode> q = new LinkedList<>();\n    q.add(root);\n    boolean leftToRight = true;\n    while (!q.isEmpty()) {\n        int size = q.size();\n        List<Integer> level = new ArrayList<>();\n        for (int i = 0; i < size; i++) {\n            TreeNode node = q.poll();\n            level.add(node.val);\n            if (node.left != null) q.add(node.left);\n            if (node.right != null) q.add(node.right);\n        }\n        if (!leftToRight) Collections.reverse(level);\n        result.add(level);\n        leftToRight = !leftToRight;\n    }\n    return result;\n}",
+          "python": "from collections import deque\n\ndef zigzag_level_order(root):\n    if not root:\n        return []\n    result = []\n    q = deque([root])\n    left_to_right = True\n    while q:\n        size = len(q)\n        level = []\n        for _ in range(size):\n            node = q.popleft()\n            level.append(node.val)\n            if node.left: q.append(node.left)\n            if node.right: q.append(node.right)\n        if not left_to_right:\n            level.reverse()\n        result.append(level)\n        left_to_right = not left_to_right\n    return result",
+          "javascript": "function zigzagLevelOrder(root) {\n    if (!root) return [];\n    const result = [];\n    const q = [root];\n    let leftToRight = true;\n    while (q.length) {\n        const size = q.length;\n        const level = [];\n        for (let i = 0; i < size; i++) {\n            const node = q.shift();\n            level.push(node.val);\n            if (node.left) q.push(node.left);\n            if (node.right) q.push(node.right);\n        }\n        if (!leftToRight) level.reverse();\n        result.push(level);\n        leftToRight = !leftToRight;\n    }\n    return result;\n}"
+        }
+      }
+    }
+  ]
+}
