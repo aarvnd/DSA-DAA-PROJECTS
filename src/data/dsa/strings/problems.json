@@ -1,0 +1,432 @@
+{
+  "topicId": "strings",
+  "problems": [
+    {
+      "id": "str-001",
+      "title": "Reverse a String",
+      "titleHi": "String ko Ulta Karo",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given a string, reverse it and print the reversed string.",
+        "hi": "Ek string diya hai, usse ulta karo aur reversed string print karo."
+      },
+      "examples": [
+        { "input": "hello", "output": "olleh", "explanation": { "en": "Reverse of 'hello' is 'olleh'", "hi": "'hello' ka reverse 'olleh' hota hai" } },
+        { "input": "abcde", "output": "edcba", "explanation": { "en": "Reverse of 'abcde' is 'edcba'", "hi": "'abcde' ka reverse 'edcba' hota hai" } }
+      ],
+      "constraints": ["1 <= s.length <= 10^5", "String contains only lowercase English letters"],
+      "hints": [
+        { "en": "Use two pointers - one at start, one at end", "hi": "Two pointers use karo - ek start pe, ek end pe" },
+        { "en": "Swap characters from both ends moving inward", "hi": "Dono ends se characters swap karte hue andar aao" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<string>\nusing namespace std;\n\nstring reverseString(string s) {\n    // Write your code here\n    return s;\n}\n\nint main() {\n    string s;\n    cin >> s;\n    cout << reverseString(s);\n}",
+        "python": "def reverse_string(s):\n    # Write your code here\n    pass\n\ns = input()\nprint(reverse_string(s))",
+        "java": "import java.util.*;\npublic class Main {\n    public static String reverseString(String s) {\n        // Write your code here\n        return s;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        System.out.println(reverseString(s));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst s = lines[0];\nfunction reverseString(s) {\n    // Write your code here\n}\nconsole.log(reverseString(s));",
+        "c": "#include<stdio.h>\n#include<string.h>\nvoid reverseString(char s[]) {\n    // Write your code here\n}\nint main() {\n    char s[100001];\n    scanf(\"%s\", s);\n    reverseString(s);\n    printf(\"%s\", s);\n}"
+      },
+      "testCases": [
+        { "input": "hello", "expectedOutput": "olleh" },
+        { "input": "abcde", "expectedOutput": "edcba" },
+        { "input": "a", "expectedOutput": "a" },
+        { "input": "abba", "expectedOutput": "abba" }
+      ],
+      "solution": {
+        "approach": { "en": "Use two pointers from both ends and swap characters until they meet.", "hi": "Dono ends se two pointers use karo aur characters swap karo jab tak wo milein nahi." },
+        "code": {
+          "cpp": "string reverseString(string s) {\n    int l = 0, r = s.length()-1;\n    while(l < r) { swap(s[l], s[r]); l++; r--; }\n    return s;\n}",
+          "python": "def reverse_string(s):\n    return s[::-1]"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["string", "two-pointer", "basic"]
+    },
+    {
+      "id": "str-002",
+      "title": "Check Palindrome",
+      "titleHi": "Palindrome Check Karo",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given a string, check if it is a palindrome. A palindrome reads the same forwards and backwards. Print 'true' if it is a palindrome, otherwise print 'false'.",
+        "hi": "Ek string diya hai, check karo ye palindrome hai ya nahi. Palindrome wo string hai jo aage se aur peeche se same padhti hai. Agar palindrome hai toh 'true' print karo, nahi toh 'false'."
+      },
+      "examples": [
+        { "input": "racecar", "output": "true", "explanation": { "en": "'racecar' reads the same forwards and backwards", "hi": "'racecar' aage se aur peeche se same hai" } },
+        { "input": "hello", "output": "false", "explanation": { "en": "'hello' reversed is 'olleh', not same", "hi": "'hello' ka reverse 'olleh' hai, same nahi hai" } }
+      ],
+      "constraints": ["1 <= s.length <= 10^5", "String contains only lowercase English letters"],
+      "hints": [
+        { "en": "Compare characters from both ends moving inward", "hi": "Dono ends se characters compare karo andar ki taraf" },
+        { "en": "If any mismatch is found, it's not a palindrome", "hi": "Agar koi mismatch mile toh palindrome nahi hai" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<string>\nusing namespace std;\n\nbool isPalindrome(string s) {\n    // Write your code here\n    return false;\n}\n\nint main() {\n    string s;\n    cin >> s;\n    cout << (isPalindrome(s) ? \"true\" : \"false\");\n}",
+        "python": "def is_palindrome(s):\n    # Write your code here\n    pass\n\ns = input()\nprint(\"true\" if is_palindrome(s) else \"false\")",
+        "java": "import java.util.*;\npublic class Main {\n    public static boolean isPalindrome(String s) {\n        // Write your code here\n        return false;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        System.out.println(isPalindrome(s) ? \"true\" : \"false\");\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst s = lines[0];\nfunction isPalindrome(s) {\n    // Write your code here\n}\nconsole.log(isPalindrome(s) ? \"true\" : \"false\");",
+        "c": "#include<stdio.h>\n#include<string.h>\n#include<stdbool.h>\nbool isPalindrome(char s[]) {\n    // Write your code here\n    return false;\n}\nint main() {\n    char s[100001];\n    scanf(\"%s\", s);\n    printf(\"%s\", isPalindrome(s) ? \"true\" : \"false\");\n}"
+      },
+      "testCases": [
+        { "input": "racecar", "expectedOutput": "true" },
+        { "input": "hello", "expectedOutput": "false" },
+        { "input": "a", "expectedOutput": "true" },
+        { "input": "abba", "expectedOutput": "true" },
+        { "input": "abcba", "expectedOutput": "true" }
+      ],
+      "solution": {
+        "approach": { "en": "Use two pointers from start and end, compare characters moving inward.", "hi": "Start aur end se two pointers use karo, andar ki taraf characters compare karo." },
+        "code": {
+          "cpp": "bool isPalindrome(string s) {\n    int l = 0, r = s.length()-1;\n    while(l < r) { if(s[l] != s[r]) return false; l++; r--; }\n    return true;\n}",
+          "python": "def is_palindrome(s):\n    return s == s[::-1]"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["string", "two-pointer", "palindrome"]
+    },
+    {
+      "id": "str-003",
+      "title": "Count Vowels and Consonants",
+      "titleHi": "Vowels aur Consonants Gino",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given a string of lowercase English letters, count the number of vowels and consonants. Print the vowel count and consonant count separated by a space.",
+        "hi": "Ek string diya hai lowercase English letters ka, usme vowels aur consonants ki count dhundho. Vowel count aur consonant count space se separated print karo."
+      },
+      "examples": [
+        { "input": "hello", "output": "2 3", "explanation": { "en": "Vowels: e, o (2). Consonants: h, l, l (3)", "hi": "Vowels: e, o (2). Consonants: h, l, l (3)" } },
+        { "input": "aeiou", "output": "5 0", "explanation": { "en": "All 5 characters are vowels", "hi": "Saare 5 characters vowels hain" } }
+      ],
+      "constraints": ["1 <= s.length <= 10^5", "String contains only lowercase English letters"],
+      "hints": [
+        { "en": "Vowels are a, e, i, o, u. Everything else is a consonant", "hi": "Vowels hain a, e, i, o, u. Baaki sab consonants hain" },
+        { "en": "Iterate through the string and check each character", "hi": "String mein iterate karo aur har character check karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<string>\nusing namespace std;\n\nint main() {\n    string s;\n    cin >> s;\n    // Count vowels and consonants\n    // Print: vowels consonants\n}",
+        "python": "s = input()\n# Count vowels and consonants\n# Print: vowels consonants",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        // Count vowels and consonants\n        // Print: vowels consonants\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst s = lines[0];\n// Count vowels and consonants\n// Print: vowels consonants",
+        "c": "#include<stdio.h>\n#include<string.h>\nint main() {\n    char s[100001];\n    scanf(\"%s\", s);\n    // Count vowels and consonants\n    // Print: vowels consonants\n}"
+      },
+      "testCases": [
+        { "input": "hello", "expectedOutput": "2 3" },
+        { "input": "aeiou", "expectedOutput": "5 0" },
+        { "input": "bcdfg", "expectedOutput": "0 5" },
+        { "input": "programming", "expectedOutput": "3 8" }
+      ],
+      "solution": {
+        "approach": { "en": "Iterate through the string, check if each character is a vowel or consonant.", "hi": "String mein iterate karo, har character check karo vowel hai ya consonant." },
+        "code": {
+          "cpp": "int v=0,c=0;\nstring vowels=\"aeiou\";\nfor(char ch:s){\n    if(vowels.find(ch)!=string::npos) v++;\n    else c++;\n}\ncout<<v<<\" \"<<c;",
+          "python": "vowels = set('aeiou')\nv = sum(1 for ch in s if ch in vowels)\nc = len(s) - v\nprint(v, c)"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["string", "basic", "counting"]
+    },
+    {
+      "id": "str-004",
+      "title": "Check Anagram",
+      "titleHi": "Anagram Check Karo",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given two strings, check if they are anagrams of each other. Two strings are anagrams if they contain the same characters with the same frequency. Print 'true' if they are anagrams, otherwise 'false'.",
+        "hi": "Do strings diye hain, check karo ye ek dusre ke anagram hain ya nahi. Do strings anagram hain agar unme same characters same frequency mein hain. Agar anagram hain toh 'true' print karo, nahi toh 'false'."
+      },
+      "examples": [
+        { "input": "listen\nsilent", "output": "true", "explanation": { "en": "Both contain: e, i, l, n, s, t", "hi": "Dono mein same characters hain: e, i, l, n, s, t" } },
+        { "input": "hello\nworld", "output": "false", "explanation": { "en": "Different characters present", "hi": "Alag characters hain dono mein" } }
+      ],
+      "constraints": ["1 <= s1.length, s2.length <= 10^5", "Strings contain only lowercase English letters"],
+      "hints": [
+        { "en": "If lengths are different, they can't be anagrams", "hi": "Agar lengths alag hain, toh anagram nahi ho sakte" },
+        { "en": "Count frequency of each character in both strings", "hi": "Dono strings mein har character ki frequency count karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<string>\nusing namespace std;\n\nbool isAnagram(string s1, string s2) {\n    // Write your code here\n    return false;\n}\n\nint main() {\n    string s1, s2;\n    cin >> s1 >> s2;\n    cout << (isAnagram(s1, s2) ? \"true\" : \"false\");\n}",
+        "python": "def is_anagram(s1, s2):\n    # Write your code here\n    pass\n\ns1 = input()\ns2 = input()\nprint(\"true\" if is_anagram(s1, s2) else \"false\")",
+        "java": "import java.util.*;\npublic class Main {\n    public static boolean isAnagram(String s1, String s2) {\n        // Write your code here\n        return false;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s1 = sc.next();\n        String s2 = sc.next();\n        System.out.println(isAnagram(s1, s2) ? \"true\" : \"false\");\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst s1 = lines[0];\nconst s2 = lines[1];\nfunction isAnagram(s1, s2) {\n    // Write your code here\n}\nconsole.log(isAnagram(s1, s2) ? \"true\" : \"false\");",
+        "c": "#include<stdio.h>\n#include<string.h>\n#include<stdbool.h>\nbool isAnagram(char s1[], char s2[]) {\n    // Write your code here\n    return false;\n}\nint main() {\n    char s1[100001], s2[100001];\n    scanf(\"%s\", s1);\n    scanf(\"%s\", s2);\n    printf(\"%s\", isAnagram(s1, s2) ? \"true\" : \"false\");\n}"
+      },
+      "testCases": [
+        { "input": "listen\nsilent", "expectedOutput": "true" },
+        { "input": "hello\nworld", "expectedOutput": "false" },
+        { "input": "triangle\nintegral", "expectedOutput": "true" },
+        { "input": "abc\nab", "expectedOutput": "false" }
+      ],
+      "solution": {
+        "approach": { "en": "Use a frequency array of size 26. Increment for s1 chars, decrement for s2 chars. If all zeros, they are anagrams.", "hi": "Size 26 ka frequency array use karo. s1 ke characters ke liye increment, s2 ke liye decrement. Agar sab zero hain toh anagram hain." },
+        "code": {
+          "cpp": "bool isAnagram(string s1, string s2) {\n    if(s1.length() != s2.length()) return false;\n    int freq[26] = {0};\n    for(int i = 0; i < s1.length(); i++) {\n        freq[s1[i]-'a']++;\n        freq[s2[i]-'a']--;\n    }\n    for(int i = 0; i < 26; i++) if(freq[i] != 0) return false;\n    return true;\n}",
+          "python": "def is_anagram(s1, s2):\n    from collections import Counter\n    return Counter(s1) == Counter(s2)"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["string", "hashing", "anagram"]
+    },
+    {
+      "id": "str-005",
+      "title": "First Non-Repeating Character",
+      "titleHi": "Pehla Non-Repeating Character",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given a string, find the first non-repeating character and print its index (0-based). If no such character exists, print -1.",
+        "hi": "Ek string diya hai, pehla non-repeating character dhundho aur uska index (0-based) print karo. Agar aisa koi character nahi hai toh -1 print karo."
+      },
+      "examples": [
+        { "input": "leetcode", "output": "0", "explanation": { "en": "'l' is the first character that appears only once", "hi": "'l' pehla character hai jo sirf ek baar aaya hai" } },
+        { "input": "aabb", "output": "-1", "explanation": { "en": "All characters repeat, so return -1", "hi": "Saare characters repeat hote hain, toh -1 return karo" } }
+      ],
+      "constraints": ["1 <= s.length <= 10^5", "String contains only lowercase English letters"],
+      "hints": [
+        { "en": "First count frequency of each character", "hi": "Pehle har character ki frequency count karo" },
+        { "en": "Then iterate again to find first character with frequency 1", "hi": "Phir dobara iterate karo pehla character dhundhne ke liye jiska frequency 1 hai" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<string>\nusing namespace std;\n\nint firstNonRepeating(string s) {\n    // Write your code here\n    return -1;\n}\n\nint main() {\n    string s;\n    cin >> s;\n    cout << firstNonRepeating(s);\n}",
+        "python": "def first_non_repeating(s):\n    # Write your code here\n    pass\n\ns = input()\nprint(first_non_repeating(s))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int firstNonRepeating(String s) {\n        // Write your code here\n        return -1;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        System.out.println(firstNonRepeating(s));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst s = lines[0];\nfunction firstNonRepeating(s) {\n    // Write your code here\n}\nconsole.log(firstNonRepeating(s));",
+        "c": "#include<stdio.h>\n#include<string.h>\nint firstNonRepeating(char s[]) {\n    // Write your code here\n    return -1;\n}\nint main() {\n    char s[100001];\n    scanf(\"%s\", s);\n    printf(\"%d\", firstNonRepeating(s));\n}"
+      },
+      "testCases": [
+        { "input": "leetcode", "expectedOutput": "0" },
+        { "input": "aabb", "expectedOutput": "-1" },
+        { "input": "aabbc", "expectedOutput": "4" },
+        { "input": "abcabc", "expectedOutput": "-1" },
+        { "input": "z", "expectedOutput": "0" }
+      ],
+      "solution": {
+        "approach": { "en": "Two pass approach: first count frequencies, then find first char with count 1.", "hi": "Do baar iterate karo: pehle frequencies count karo, phir pehla char dhundho jiska count 1 hai." },
+        "code": {
+          "cpp": "int firstNonRepeating(string s) {\n    int freq[26] = {0};\n    for(char c : s) freq[c-'a']++;\n    for(int i = 0; i < s.length(); i++)\n        if(freq[s[i]-'a'] == 1) return i;\n    return -1;\n}",
+          "python": "def first_non_repeating(s):\n    from collections import Counter\n    freq = Counter(s)\n    for i, ch in enumerate(s):\n        if freq[ch] == 1:\n            return i\n    return -1"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["string", "hashing", "frequency"]
+    },
+    {
+      "id": "str-006",
+      "title": "Longest Substring Without Repeating Characters",
+      "titleHi": "Bina Repeating Characters Wala Sabse Lamba Substring",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given a string, find the length of the longest substring without repeating characters.",
+        "hi": "Ek string diya hai, bina repeating characters wale sabse lambe substring ki length dhundho."
+      },
+      "examples": [
+        { "input": "abcabcbb", "output": "3", "explanation": { "en": "The longest substring without repeating is 'abc' with length 3", "hi": "Bina repeating wala sabse lamba substring 'abc' hai jiska length 3 hai" } },
+        { "input": "bbbbb", "output": "1", "explanation": { "en": "The longest substring is 'b' with length 1", "hi": "Sabse lamba substring 'b' hai jiska length 1 hai" } }
+      ],
+      "constraints": ["0 <= s.length <= 5 * 10^4", "String contains English letters, digits, symbols, and spaces"],
+      "hints": [
+        { "en": "Use sliding window technique", "hi": "Sliding window technique use karo" },
+        { "en": "Use a set or map to track characters in current window", "hi": "Current window mein characters track karne ke liye set ya map use karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<string>\nusing namespace std;\n\nint longestSubstring(string s) {\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    string s;\n    cin >> s;\n    cout << longestSubstring(s);\n}",
+        "python": "def longest_substring(s):\n    # Write your code here\n    pass\n\ns = input()\nprint(longest_substring(s))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int longestSubstring(String s) {\n        // Write your code here\n        return 0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        System.out.println(longestSubstring(s));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst s = lines[0];\nfunction longestSubstring(s) {\n    // Write your code here\n}\nconsole.log(longestSubstring(s));",
+        "c": "#include<stdio.h>\n#include<string.h>\nint longestSubstring(char s[]) {\n    // Write your code here\n    return 0;\n}\nint main() {\n    char s[50001];\n    scanf(\"%s\", s);\n    printf(\"%d\", longestSubstring(s));\n}"
+      },
+      "testCases": [
+        { "input": "abcabcbb", "expectedOutput": "3" },
+        { "input": "bbbbb", "expectedOutput": "1" },
+        { "input": "pwwkew", "expectedOutput": "3" },
+        { "input": "abcdef", "expectedOutput": "6" },
+        { "input": "a", "expectedOutput": "1" }
+      ],
+      "solution": {
+        "approach": { "en": "Use sliding window with a hash set. Expand window right, shrink from left when duplicate found.", "hi": "Sliding window hash set ke saath use karo. Right se expand karo, duplicate mile toh left se shrink karo." },
+        "code": {
+          "cpp": "int longestSubstring(string s) {\n    int n = s.length(), maxLen = 0;\n    unordered_set<char> st;\n    int l = 0;\n    for(int r = 0; r < n; r++) {\n        while(st.count(s[r])) { st.erase(s[l]); l++; }\n        st.insert(s[r]);\n        maxLen = max(maxLen, r - l + 1);\n    }\n    return maxLen;\n}",
+          "python": "def longest_substring(s):\n    char_set = set()\n    l = 0\n    max_len = 0\n    for r in range(len(s)):\n        while s[r] in char_set:\n            char_set.remove(s[l])\n            l += 1\n        char_set.add(s[r])\n        max_len = max(max_len, r - l + 1)\n    return max_len"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(min(n, m)) where m is charset size"
+      },
+      "tags": ["string", "sliding-window", "hashing"]
+    },
+    {
+      "id": "str-007",
+      "title": "String Compression",
+      "titleHi": "String Compression",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given a string of lowercase letters, compress it by replacing consecutive duplicate characters with the character followed by the count. If a character appears only once, just write the character without count. Print the compressed string.",
+        "hi": "Ek lowercase letters ki string diya hai, usse compress karo consecutive duplicate characters ko character aur count se replace karke. Agar character sirf ek baar aaya hai toh count mat likho. Compressed string print karo."
+      },
+      "examples": [
+        { "input": "aaabbbccc", "output": "a3b3c3", "explanation": { "en": "'a' appears 3 times, 'b' 3 times, 'c' 3 times", "hi": "'a' 3 baar, 'b' 3 baar, 'c' 3 baar aaya" } },
+        { "input": "abcde", "output": "abcde", "explanation": { "en": "No consecutive duplicates, string stays the same", "hi": "Koi consecutive duplicate nahi, string waisi hi rahegi" } }
+      ],
+      "constraints": ["1 <= s.length <= 10^5", "String contains only lowercase English letters"],
+      "hints": [
+        { "en": "Use a counter that increments for consecutive same characters", "hi": "Consecutive same characters ke liye counter use karo" },
+        { "en": "When a different character is found, append the previous char and its count (if > 1)", "hi": "Jab alag character mile toh pichla char aur uska count (agar > 1) append karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<string>\nusing namespace std;\n\nstring compress(string s) {\n    // Write your code here\n    return s;\n}\n\nint main() {\n    string s;\n    cin >> s;\n    cout << compress(s);\n}",
+        "python": "def compress(s):\n    # Write your code here\n    pass\n\ns = input()\nprint(compress(s))",
+        "java": "import java.util.*;\npublic class Main {\n    public static String compress(String s) {\n        // Write your code here\n        return s;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        System.out.println(compress(s));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst s = lines[0];\nfunction compress(s) {\n    // Write your code here\n}\nconsole.log(compress(s));",
+        "c": "#include<stdio.h>\n#include<string.h>\nvoid compress(char s[], char result[]) {\n    // Write your code here\n}\nint main() {\n    char s[100001], result[200002];\n    scanf(\"%s\", s);\n    compress(s, result);\n    printf(\"%s\", result);\n}"
+      },
+      "testCases": [
+        { "input": "aaabbbccc", "expectedOutput": "a3b3c3" },
+        { "input": "abcde", "expectedOutput": "abcde" },
+        { "input": "aabcccccaaa", "expectedOutput": "a2bc5a3" },
+        { "input": "aaaa", "expectedOutput": "a4" },
+        { "input": "a", "expectedOutput": "a" }
+      ],
+      "solution": {
+        "approach": { "en": "Iterate through string, count consecutive characters and build compressed result.", "hi": "String mein iterate karo, consecutive characters count karo aur compressed result banao." },
+        "code": {
+          "cpp": "string compress(string s) {\n    string result = \"\";\n    int n = s.length();\n    for(int i = 0; i < n; i++) {\n        int count = 1;\n        while(i+1 < n && s[i] == s[i+1]) { count++; i++; }\n        result += s[i];\n        if(count > 1) result += to_string(count);\n    }\n    return result;\n}",
+          "python": "def compress(s):\n    result = []\n    i = 0\n    while i < len(s):\n        count = 1\n        while i + 1 < len(s) and s[i] == s[i+1]:\n            count += 1\n            i += 1\n        result.append(s[i])\n        if count > 1:\n            result.append(str(count))\n        i += 1\n    return ''.join(result)"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["string", "two-pointer", "compression"]
+    },
+    {
+      "id": "str-008",
+      "title": "Longest Palindromic Substring",
+      "titleHi": "Sabse Lamba Palindromic Substring",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given a string, find the longest palindromic substring. If there are multiple with the same length, return the first one found. Print the longest palindromic substring.",
+        "hi": "Ek string diya hai, sabse lamba palindromic substring dhundho. Agar same length ke multiple hain toh pehla wala return karo. Sabse lamba palindromic substring print karo."
+      },
+      "examples": [
+        { "input": "babad", "output": "bab", "explanation": { "en": "'bab' is a palindrome of length 3. 'aba' is also valid.", "hi": "'bab' length 3 ka palindrome hai. 'aba' bhi valid hai." } },
+        { "input": "cbbd", "output": "bb", "explanation": { "en": "'bb' is the longest palindromic substring", "hi": "'bb' sabse lamba palindromic substring hai" } }
+      ],
+      "constraints": ["1 <= s.length <= 1000", "String contains only lowercase English letters"],
+      "hints": [
+        { "en": "Expand around center technique: try each character as center", "hi": "Expand around center technique: har character ko center maanke try karo" },
+        { "en": "Consider both odd-length and even-length palindromes", "hi": "Odd-length aur even-length dono palindromes consider karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<string>\nusing namespace std;\n\nstring longestPalindrome(string s) {\n    // Write your code here\n    return \"\";\n}\n\nint main() {\n    string s;\n    cin >> s;\n    cout << longestPalindrome(s);\n}",
+        "python": "def longest_palindrome(s):\n    # Write your code here\n    pass\n\ns = input()\nprint(longest_palindrome(s))",
+        "java": "import java.util.*;\npublic class Main {\n    public static String longestPalindrome(String s) {\n        // Write your code here\n        return \"\";\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        System.out.println(longestPalindrome(s));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst s = lines[0];\nfunction longestPalindrome(s) {\n    // Write your code here\n}\nconsole.log(longestPalindrome(s));",
+        "c": "#include<stdio.h>\n#include<string.h>\nvoid longestPalindrome(char s[], char result[]) {\n    // Write your code here\n}\nint main() {\n    char s[1001], result[1001];\n    scanf(\"%s\", s);\n    longestPalindrome(s, result);\n    printf(\"%s\", result);\n}"
+      },
+      "testCases": [
+        { "input": "babad", "expectedOutput": "bab" },
+        { "input": "cbbd", "expectedOutput": "bb" },
+        { "input": "a", "expectedOutput": "a" },
+        { "input": "racecar", "expectedOutput": "racecar" },
+        { "input": "abcd", "expectedOutput": "a" }
+      ],
+      "solution": {
+        "approach": { "en": "Expand around each center (both single and double centers) to find the longest palindrome.", "hi": "Har center (single aur double dono) se expand karo sabse lamba palindrome dhundhne ke liye." },
+        "code": {
+          "cpp": "string longestPalindrome(string s) {\n    int n = s.length(), start = 0, maxLen = 1;\n    auto expand = [&](int l, int r) {\n        while(l >= 0 && r < n && s[l] == s[r]) { l--; r++; }\n        if(r - l - 1 > maxLen) { start = l + 1; maxLen = r - l - 1; }\n    };\n    for(int i = 0; i < n; i++) { expand(i, i); expand(i, i+1); }\n    return s.substr(start, maxLen);\n}",
+          "python": "def longest_palindrome(s):\n    n = len(s)\n    start, max_len = 0, 1\n    def expand(l, r):\n        nonlocal start, max_len\n        while l >= 0 and r < n and s[l] == s[r]:\n            l -= 1\n            r += 1\n        if r - l - 1 > max_len:\n            start, max_len = l + 1, r - l - 1\n    for i in range(n):\n        expand(i, i)\n        expand(i, i + 1)\n    return s[start:start + max_len]"
+        },
+        "timeComplexity": "O(n^2)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["string", "palindrome", "dynamic-programming"]
+    },
+    {
+      "id": "str-009",
+      "title": "Pattern Matching (Naive)",
+      "titleHi": "Pattern Matching (Simple Tarika)",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given a text string and a pattern string, find all occurrences of the pattern in the text. Print the starting indices (0-based) of all occurrences separated by spaces. If pattern is not found, print -1.",
+        "hi": "Ek text string aur ek pattern string diya hai, text mein pattern ke saare occurrences dhundho. Saare occurrences ke starting indices (0-based) space se separated print karo. Agar pattern nahi milta toh -1 print karo."
+      },
+      "examples": [
+        { "input": "AABAACAADAABAABA\nAABA", "output": "0 9 12", "explanation": { "en": "Pattern 'AABA' found at indices 0, 9, and 12", "hi": "Pattern 'AABA' indices 0, 9, aur 12 pe mila" } },
+        { "input": "abcdef\nxyz", "output": "-1", "explanation": { "en": "Pattern 'xyz' not found in text", "hi": "Pattern 'xyz' text mein nahi mila" } }
+      ],
+      "constraints": ["1 <= text.length <= 10^5", "1 <= pattern.length <= text.length", "Strings contain uppercase or lowercase English letters"],
+      "hints": [
+        { "en": "Check pattern at every position in text", "hi": "Text ki har position pe pattern check karo" },
+        { "en": "At each position, compare character by character", "hi": "Har position pe character by character compare karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<string>\n#include<vector>\nusing namespace std;\n\nvector<int> patternMatch(string text, string pattern) {\n    // Write your code here\n    return {};\n}\n\nint main() {\n    string text, pattern;\n    cin >> text >> pattern;\n    vector<int> res = patternMatch(text, pattern);\n    if(res.empty()) cout << -1;\n    else for(int i=0;i<res.size();i++) cout << res[i] << (i<res.size()-1?\" \":\"\");\n}",
+        "python": "def pattern_match(text, pattern):\n    # Write your code here\n    pass\n\ntext = input()\npattern = input()\nresult = pattern_match(text, pattern)\nif not result:\n    print(-1)\nelse:\n    print(*result)",
+        "java": "import java.util.*;\npublic class Main {\n    public static List<Integer> patternMatch(String text, String pattern) {\n        // Write your code here\n        return new ArrayList<>();\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String text = sc.next();\n        String pattern = sc.next();\n        List<Integer> res = patternMatch(text, pattern);\n        if(res.isEmpty()) System.out.println(-1);\n        else {\n            StringBuilder sb = new StringBuilder();\n            for(int i=0;i<res.size();i++) {\n                if(i>0) sb.append(\" \");\n                sb.append(res.get(i));\n            }\n            System.out.println(sb.toString());\n        }\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst text = lines[0];\nconst pattern = lines[1];\nfunction patternMatch(text, pattern) {\n    // Write your code here\n}\nconst res = patternMatch(text, pattern);\nconsole.log(res && res.length ? res.join(' ') : -1);",
+        "c": "#include<stdio.h>\n#include<string.h>\nint main() {\n    char text[100001], pattern[100001];\n    scanf(\"%s\", text);\n    scanf(\"%s\", pattern);\n    // Find and print all matching indices\n    // Print -1 if not found\n}"
+      },
+      "testCases": [
+        { "input": "AABAACAADAABAABA\nAABA", "expectedOutput": "0 9 12" },
+        { "input": "abcdef\nxyz", "expectedOutput": "-1" },
+        { "input": "aaaaaa\naa", "expectedOutput": "0 1 2 3 4" },
+        { "input": "hello\nll", "expectedOutput": "2" }
+      ],
+      "solution": {
+        "approach": { "en": "Slide the pattern over the text and check for match at each position.", "hi": "Text ke upar pattern ko slide karo aur har position pe match check karo." },
+        "code": {
+          "cpp": "vector<int> patternMatch(string text, string pattern) {\n    vector<int> res;\n    int n = text.length(), m = pattern.length();\n    for(int i = 0; i <= n - m; i++) {\n        int j;\n        for(j = 0; j < m; j++)\n            if(text[i+j] != pattern[j]) break;\n        if(j == m) res.push_back(i);\n    }\n    return res;\n}",
+          "python": "def pattern_match(text, pattern):\n    result = []\n    n, m = len(text), len(pattern)\n    for i in range(n - m + 1):\n        if text[i:i+m] == pattern:\n            result.append(i)\n    return result"
+        },
+        "timeComplexity": "O(n * m)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["string", "pattern-matching", "brute-force"]
+    },
+    {
+      "id": "str-010",
+      "title": "Minimum Window Substring",
+      "titleHi": "Minimum Window Substring",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given two strings s and t, find the minimum window substring of s that contains all characters of t (including duplicates). If no such window exists, print an empty string. If there are multiple minimum windows, return the first one.",
+        "hi": "Do strings s aur t diye hain, s ka wo minimum window substring dhundho jisme t ke saare characters (duplicates samet) present hain. Agar aisa koi window nahi hai toh empty string print karo. Agar multiple minimum windows hain toh pehla wala return karo."
+      },
+      "examples": [
+        { "input": "ADOBECODEBANC\nABC", "output": "BANC", "explanation": { "en": "'BANC' is the minimum window that contains A, B, and C", "hi": "'BANC' minimum window hai jisme A, B, aur C hain" } },
+        { "input": "a\naa", "output": "", "explanation": { "en": "t has two 'a's but s has only one, so no valid window", "hi": "t mein do 'a' hain par s mein sirf ek hai, toh koi valid window nahi" } }
+      ],
+      "constraints": ["1 <= s.length, t.length <= 10^5", "s and t contain uppercase and lowercase English letters"],
+      "hints": [
+        { "en": "Use sliding window with two pointers", "hi": "Sliding window two pointers ke saath use karo" },
+        { "en": "Maintain a frequency map for characters needed", "hi": "Required characters ke liye frequency map maintain karo" },
+        { "en": "Expand window to the right, shrink from left when all chars found", "hi": "Right se window expand karo, saare chars milne pe left se shrink karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<string>\nusing namespace std;\n\nstring minWindow(string s, string t) {\n    // Write your code here\n    return \"\";\n}\n\nint main() {\n    string s, t;\n    cin >> s >> t;\n    cout << minWindow(s, t);\n}",
+        "python": "def min_window(s, t):\n    # Write your code here\n    pass\n\ns = input()\nt = input()\nresult = min_window(s, t)\nprint(result if result else \"\")",
+        "java": "import java.util.*;\npublic class Main {\n    public static String minWindow(String s, String t) {\n        // Write your code here\n        return \"\";\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        String t = sc.next();\n        System.out.println(minWindow(s, t));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst s = lines[0];\nconst t = lines[1];\nfunction minWindow(s, t) {\n    // Write your code here\n}\nconst result = minWindow(s, t);\nconsole.log(result || \"\");",
+        "c": "#include<stdio.h>\n#include<string.h>\nvoid minWindow(char s[], char t[], char result[]) {\n    // Write your code here\n    result[0] = '\\0';\n}\nint main() {\n    char s[100001], t[100001], result[100001];\n    scanf(\"%s\", s);\n    scanf(\"%s\", t);\n    minWindow(s, t, result);\n    printf(\"%s\", result);\n}"
+      },
+      "testCases": [
+        { "input": "ADOBECODEBANC\nABC", "expectedOutput": "BANC" },
+        { "input": "a\naa", "expectedOutput": "" },
+        { "input": "a\na", "expectedOutput": "a" },
+        { "input": "abc\ncba", "expectedOutput": "abc" },
+        { "input": "AABBCC\nABC", "expectedOutput": "ABBC" }
+      ],
+      "solution": {
+        "approach": { "en": "Use sliding window. Maintain need map and have counter. Expand right to include chars, shrink left to minimize window.", "hi": "Sliding window use karo. Need map aur have counter maintain karo. Right se expand karo chars include karne ke liye, left se shrink karo window minimize karne ke liye." },
+        "code": {
+          "cpp": "string minWindow(string s, string t) {\n    unordered_map<char,int> need, window;\n    for(char c : t) need[c]++;\n    int l = 0, have = 0, needCnt = need.size();\n    int minLen = INT_MAX, start = 0;\n    for(int r = 0; r < s.length(); r++) {\n        window[s[r]]++;\n        if(need.count(s[r]) && window[s[r]] == need[s[r]]) have++;\n        while(have == needCnt) {\n            if(r - l + 1 < minLen) { minLen = r - l + 1; start = l; }\n            window[s[l]]--;\n            if(need.count(s[l]) && window[s[l]] < need[s[l]]) have--;\n            l++;\n        }\n    }\n    return minLen == INT_MAX ? \"\" : s.substr(start, minLen);\n}",
+          "python": "def min_window(s, t):\n    from collections import Counter\n    need = Counter(t)\n    window = {}\n    have, need_cnt = 0, len(need)\n    l = 0\n    min_len = float('inf')\n    start = 0\n    for r in range(len(s)):\n        window[s[r]] = window.get(s[r], 0) + 1\n        if s[r] in need and window[s[r]] == need[s[r]]:\n            have += 1\n        while have == need_cnt:\n            if r - l + 1 < min_len:\n                min_len = r - l + 1\n                start = l\n            window[s[l]] -= 1\n            if s[l] in need and window[s[l]] < need[s[l]]:\n                have -= 1\n            l += 1\n    return s[start:start + min_len] if min_len != float('inf') else ''"
+        },
+        "timeComplexity": "O(n + m)",
+        "spaceComplexity": "O(n + m)"
+      },
+      "tags": ["string", "sliding-window", "hashing", "hard"]
+    }
+  ]
+}

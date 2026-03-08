@@ -1,0 +1,251 @@
+{
+  "topicId": "np-completeness",
+  "problems": [
+    {
+      "id": "np-001",
+      "title": "Verify if P or NP",
+      "titleHi": "P ya NP Classify Karo",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given a list of computational problems, classify each as belonging to class P or class NP (but not known to be in P). For each problem, print 'P' if it can be solved in polynomial time, or 'NP' if it can only be verified in polynomial time but no known polynomial-time solution exists.\n\nProblems to classify:\n1. Sorting an array\n2. Subset Sum\n3. Binary Search\n4. Hamiltonian Cycle\n5. Shortest Path (Dijkstra)\n6. Graph Coloring (k >= 3)\n7. Matrix Multiplication\n8. Travelling Salesman (Decision)",
+        "hi": "Computational problems ki ek list di gayi hai, har ek ko class P ya class NP (jo P mein nahi hai abhi tak) mein classify karo. Har problem ke liye 'P' print karo agar ye polynomial time mein solve ho sakti hai, ya 'NP' print karo agar ye sirf polynomial time mein verify ho sakti hai lekin koi known polynomial-time solution nahi hai.\n\nClassify karne ke liye problems:\n1. Array sorting\n2. Subset Sum\n3. Binary Search\n4. Hamiltonian Cycle\n5. Shortest Path (Dijkstra)\n6. Graph Coloring (k >= 3)\n7. Matrix Multiplication\n8. Travelling Salesman (Decision)"
+      },
+      "examples": [
+        { "input": "Sorting an array", "output": "P", "explanation": { "en": "Sorting can be done in O(n log n) which is polynomial time", "hi": "Sorting O(n log n) mein ho sakti hai jo polynomial time hai" } },
+        { "input": "Subset Sum", "output": "NP", "explanation": { "en": "No known polynomial time algorithm exists, but a solution can be verified in O(n)", "hi": "Koi known polynomial time algorithm nahi hai, lekin solution O(n) mein verify ho sakta hai" } }
+      ],
+      "constraints": ["Each problem name is a valid computational problem", "Output must be exactly 'P' or 'NP'"],
+      "hints": [
+        { "en": "P problems have known polynomial algorithms. Think about which common algorithms you know.", "hi": "P problems ke known polynomial algorithms hain. Socho kaunse common algorithms tumhe pata hain." },
+        { "en": "NP-Complete problems like SAT, Subset Sum, TSP, Hamiltonian Cycle are all in NP but not known to be in P", "hi": "NP-Complete problems jaise SAT, Subset Sum, TSP, Hamiltonian Cycle sab NP mein hain lekin P mein hain ya nahi pata nahi" }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\n#include <string>\n#include <map>\nusing namespace std;\n\nstring classifyProblem(string problem) {\n    // Classify the problem as \"P\" or \"NP\"\n    // Write your code here\n    return \"\";\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cin.ignore();\n    for (int i = 0; i < n; i++) {\n        string problem;\n        getline(cin, problem);\n        cout << classifyProblem(problem) << endl;\n    }\n    return 0;\n}",
+        "python": "def classify_problem(problem):\n    # Classify the problem as 'P' or 'NP'\n    # Write your code here\n    pass\n\nn = int(input())\nfor _ in range(n):\n    problem = input().strip()\n    print(classify_problem(problem))",
+        "java": "import java.util.*;\n\npublic class Main {\n    static String classifyProblem(String problem) {\n        // Classify the problem as \"P\" or \"NP\"\n        // Write your code here\n        return \"\";\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = Integer.parseInt(sc.nextLine());\n        for (int i = 0; i < n; i++) {\n            String problem = sc.nextLine().trim();\n            System.out.println(classifyProblem(problem));\n        }\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\n\nfunction classifyProblem(problem) {\n    // Classify the problem as 'P' or 'NP'\n    // Write your code here\n}\n\nfor (let i = 1; i <= n; i++) {\n    console.log(classifyProblem(lines[i].trim()));\n}",
+        "c": "#include <stdio.h>\n#include <string.h>\n\nconst char* classifyProblem(char* problem) {\n    // Classify the problem as \"P\" or \"NP\"\n    // Write your code here\n    return \"\";\n}\n\nint main() {\n    int n;\n    scanf(\"%d\\n\", &n);\n    char problem[100];\n    for (int i = 0; i < n; i++) {\n        fgets(problem, 100, stdin);\n        problem[strcspn(problem, \"\\n\")] = 0;\n        printf(\"%s\\n\", classifyProblem(problem));\n    }\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "4\nSorting an array\nSubset Sum\nBinary Search\nHamiltonian Cycle", "expectedOutput": "P\nNP\nP\nNP" },
+        { "input": "4\nShortest Path (Dijkstra)\nGraph Coloring (k >= 3)\nMatrix Multiplication\nTravelling Salesman (Decision)", "expectedOutput": "P\nNP\nP\nNP" }
+      ],
+      "solution": {
+        "approach": { "en": "Use a lookup of known P and NP problems. Sorting, searching, shortest path, matrix multiplication are in P. Subset Sum, Hamiltonian Cycle, Graph Coloring, TSP are NP-Complete (in NP, not known to be in P).", "hi": "Known P aur NP problems ka lookup use karo. Sorting, searching, shortest path, matrix multiplication P mein hain. Subset Sum, Hamiltonian Cycle, Graph Coloring, TSP NP-Complete hain (NP mein hain, P mein hain ya nahi pata nahi)." },
+        "code": {
+          "cpp": "string classifyProblem(string problem) {\n    map<string,string> m;\n    m[\"Sorting an array\"]=\"P\"; m[\"Subset Sum\"]=\"NP\";\n    m[\"Binary Search\"]=\"P\"; m[\"Hamiltonian Cycle\"]=\"NP\";\n    m[\"Shortest Path (Dijkstra)\"]=\"P\"; m[\"Graph Coloring (k >= 3)\"]=\"NP\";\n    m[\"Matrix Multiplication\"]=\"P\"; m[\"Travelling Salesman (Decision)\"]=\"NP\";\n    return m[problem];\n}",
+          "python": "def classify_problem(problem):\n    p_problems = {'Sorting an array', 'Binary Search', 'Shortest Path (Dijkstra)', 'Matrix Multiplication'}\n    return 'P' if problem in p_problems else 'NP'"
+        },
+        "timeComplexity": "O(1) per query",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["np-completeness", "theory", "classification"]
+    },
+    {
+      "id": "np-002",
+      "title": "Subset Sum Decision",
+      "titleHi": "Subset Sum Decision Problem",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given a set of n non-negative integers and a target sum, determine if there exists a subset of the given set whose sum is exactly equal to the target. Print 'YES' if such a subset exists, otherwise print 'NO'. This is a classic NP-Complete problem.",
+        "hi": "n non-negative integers ka ek set diya hai aur ek target sum hai. Batao ki kya given set ka koi aisa subset hai jiska sum exactly target ke barabar hai. Agar aisa subset hai toh 'YES' print karo, warna 'NO'. Ye ek classic NP-Complete problem hai."
+      },
+      "examples": [
+        { "input": "6 9\n3 34 4 12 5 2", "output": "YES", "explanation": { "en": "Subset {4, 5} has sum = 9", "hi": "Subset {4, 5} ka sum = 9 hai" } },
+        { "input": "3 11\n1 2 3", "output": "NO", "explanation": { "en": "No subset sums to 11. Maximum possible sum is 6.", "hi": "Koi subset 11 nahi banata. Maximum possible sum 6 hai." } }
+      ],
+      "constraints": ["1 <= n <= 20", "0 <= arr[i] <= 10^6", "0 <= target <= 10^7"],
+      "hints": [
+        { "en": "For small n, try all 2^n subsets using bitmask or recursion", "hi": "Chhote n ke liye 2^n saare subsets try karo bitmask ya recursion se" },
+        { "en": "Dynamic programming approach: dp[i][j] = can we make sum j using first i elements?", "hi": "Dynamic programming approach: dp[i][j] = kya hum pehle i elements se sum j bana sakte hain?" }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nbool subsetSum(vector<int>& arr, int target) {\n    // Write your code here\n    return false;\n}\n\nint main() {\n    int n, target;\n    cin >> n >> target;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    cout << (subsetSum(arr, target) ? \"YES\" : \"NO\") << endl;\n    return 0;\n}",
+        "python": "def subset_sum(arr, target):\n    # Write your code here\n    pass\n\nn, target = map(int, input().split())\narr = list(map(int, input().split()))\nprint(\"YES\" if subset_sum(arr, target) else \"NO\")",
+        "java": "import java.util.*;\n\npublic class Main {\n    static boolean subsetSum(int[] arr, int target) {\n        // Write your code here\n        return false;\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), target = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        System.out.println(subsetSum(arr, target) ? \"YES\" : \"NO\");\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [n, target] = lines[0].split(' ').map(Number);\nconst arr = lines[1].split(' ').map(Number);\n\nfunction subsetSum(arr, target) {\n    // Write your code here\n}\n\nconsole.log(subsetSum(arr, target) ? \"YES\" : \"NO\");",
+        "c": "#include <stdio.h>\n#include <stdbool.h>\n\nbool subsetSum(int arr[], int n, int target) {\n    // Write your code here\n    return false;\n}\n\nint main() {\n    int n, target;\n    scanf(\"%d %d\", &n, &target);\n    int arr[n];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &arr[i]);\n    printf(\"%s\\n\", subsetSum(arr, n, target) ? \"YES\" : \"NO\");\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "6 9\n3 34 4 12 5 2", "expectedOutput": "YES" },
+        { "input": "3 11\n1 2 3", "expectedOutput": "NO" },
+        { "input": "5 10\n1 2 3 4 5", "expectedOutput": "YES" },
+        { "input": "1 0\n5", "expectedOutput": "YES" }
+      ],
+      "solution": {
+        "approach": { "en": "Use recursion or DP. For each element, either include it in the subset or exclude it. DP builds a table dp[i][j] indicating whether sum j is achievable using first i elements.", "hi": "Recursion ya DP use karo. Har element ke liye, ya toh use subset mein include karo ya exclude karo. DP ek table dp[i][j] banata hai jo batata hai ki sum j pehle i elements se achieve ho sakta hai ya nahi." },
+        "code": {
+          "cpp": "bool subsetSum(vector<int>& arr, int target) {\n    int n = arr.size();\n    vector<vector<bool>> dp(n+1, vector<bool>(target+1, false));\n    for (int i = 0; i <= n; i++) dp[i][0] = true;\n    for (int i = 1; i <= n; i++) {\n        for (int j = 1; j <= target; j++) {\n            dp[i][j] = dp[i-1][j];\n            if (arr[i-1] <= j) dp[i][j] = dp[i][j] || dp[i-1][j-arr[i-1]];\n        }\n    }\n    return dp[n][target];\n}",
+          "python": "def subset_sum(arr, target):\n    n = len(arr)\n    dp = [[False] * (target + 1) for _ in range(n + 1)]\n    for i in range(n + 1):\n        dp[i][0] = True\n    for i in range(1, n + 1):\n        for j in range(1, target + 1):\n            dp[i][j] = dp[i-1][j]\n            if arr[i-1] <= j:\n                dp[i][j] = dp[i][j] or dp[i-1][j-arr[i-1]]\n    return dp[n][target]"
+        },
+        "timeComplexity": "O(n * target)",
+        "spaceComplexity": "O(n * target)"
+      },
+      "tags": ["np-completeness", "dynamic-programming", "subset-sum"]
+    },
+    {
+      "id": "np-003",
+      "title": "Vertex Cover",
+      "titleHi": "Vertex Cover Problem",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given an undirected graph with n vertices and m edges, find the minimum vertex cover - the smallest set of vertices such that every edge in the graph has at least one endpoint in the set. Since finding the exact minimum vertex cover is NP-Complete, implement a 2-approximation algorithm.\n\nPrint the size of the vertex cover found, followed by the vertices in the cover (sorted).",
+        "hi": "Ek undirected graph diya hai jisme n vertices aur m edges hain. Minimum vertex cover dhundho - vertices ka sabse chhota set jisme graph ki har edge ka kam se kam ek endpoint ho. Kyunki exact minimum vertex cover dhundhna NP-Complete hai, ek 2-approximation algorithm implement karo.\n\nVertex cover ka size print karo, phir cover mein vertices (sorted) print karo."
+      },
+      "examples": [
+        { "input": "5 4\n0 1\n0 2\n1 3\n3 4", "output": "4\n0 1 3 4", "explanation": { "en": "The 2-approximation picks edges and adds both endpoints. Actual minimum cover could be {0, 3} (size 2), but approximation guarantees at most 2x optimal.", "hi": "2-approximation edges pick karke dono endpoints add karta hai. Actual minimum cover {0, 3} (size 2) ho sakta hai, lekin approximation guarantee karta hai ki optimal se 2x se zyada nahi hoga." } }
+      ],
+      "constraints": ["1 <= n <= 1000", "0 <= m <= n*(n-1)/2", "0 <= u, v < n", "Graph has no self-loops or duplicate edges"],
+      "hints": [
+        { "en": "Pick any uncovered edge, add BOTH endpoints to cover, remove all edges incident to these vertices", "hi": "Koi uncovered edge pick karo, DONO endpoints ko cover mein daalo, in vertices se connected saari edges hatao" },
+        { "en": "This greedy approach gives at most 2x the optimal vertex cover size", "hi": "Ye greedy approach optimal vertex cover size ka zyaada se zyaada 2 guna deta hai" }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\n#include <vector>\n#include <set>\n#include <algorithm>\nusing namespace std;\n\nvector<int> vertexCover(int n, vector<pair<int,int>>& edges) {\n    // Implement 2-approximation vertex cover\n    // Write your code here\n    return {};\n}\n\nint main() {\n    int n, m;\n    cin >> n >> m;\n    vector<pair<int,int>> edges(m);\n    for (int i = 0; i < m; i++) cin >> edges[i].first >> edges[i].second;\n    auto cover = vertexCover(n, edges);\n    cout << cover.size() << endl;\n    for (int i = 0; i < cover.size(); i++) {\n        if (i > 0) cout << \" \";\n        cout << cover[i];\n    }\n    cout << endl;\n    return 0;\n}",
+        "python": "def vertex_cover(n, edges):\n    # Implement 2-approximation vertex cover\n    # Write your code here\n    pass\n\nn, m = map(int, input().split())\nedges = []\nfor _ in range(m):\n    u, v = map(int, input().split())\n    edges.append((u, v))\ncover = vertex_cover(n, edges)\nprint(len(cover))\nprint(*sorted(cover))",
+        "java": "import java.util.*;\n\npublic class Main {\n    static List<Integer> vertexCover(int n, int[][] edges) {\n        // Implement 2-approximation vertex cover\n        // Write your code here\n        return new ArrayList<>();\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), m = sc.nextInt();\n        int[][] edges = new int[m][2];\n        for (int i = 0; i < m; i++) {\n            edges[i][0] = sc.nextInt();\n            edges[i][1] = sc.nextInt();\n        }\n        List<Integer> cover = vertexCover(n, edges);\n        Collections.sort(cover);\n        System.out.println(cover.size());\n        StringBuilder sb = new StringBuilder();\n        for (int i = 0; i < cover.size(); i++) {\n            if (i > 0) sb.append(\" \");\n            sb.append(cover.get(i));\n        }\n        System.out.println(sb);\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [n, m] = lines[0].split(' ').map(Number);\nconst edges = [];\nfor (let i = 1; i <= m; i++) {\n    const [u, v] = lines[i].split(' ').map(Number);\n    edges.push([u, v]);\n}\n\nfunction vertexCover(n, edges) {\n    // Implement 2-approximation vertex cover\n    // Write your code here\n}\n\nconst cover = vertexCover(n, edges);\nconsole.log(cover.length);\nconsole.log(cover.sort((a,b) => a-b).join(' '));",
+        "c": "#include <stdio.h>\n#include <stdbool.h>\n#include <stdlib.h>\n\nint cmp(const void* a, const void* b) { return *(int*)a - *(int*)b; }\n\nint main() {\n    int n, m;\n    scanf(\"%d %d\", &n, &m);\n    int edges[m][2];\n    for (int i = 0; i < m; i++) scanf(\"%d %d\", &edges[i][0], &edges[i][1]);\n    \n    // Implement 2-approximation vertex cover\n    int cover[2*m], coverSize = 0;\n    bool used[m];\n    for (int i = 0; i < m; i++) used[i] = false;\n    \n    // Write your code here\n    \n    qsort(cover, coverSize, sizeof(int), cmp);\n    printf(\"%d\\n\", coverSize);\n    for (int i = 0; i < coverSize; i++) {\n        if (i > 0) printf(\" \");\n        printf(\"%d\", cover[i]);\n    }\n    printf(\"\\n\");\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "4 4\n0 1\n1 2\n2 3\n0 3", "expectedOutput": "4\n0 1 2 3" },
+        { "input": "3 3\n0 1\n1 2\n0 2", "expectedOutput": "2\n0 1" },
+        { "input": "4 2\n0 1\n2 3", "expectedOutput": "4\n0 1 2 3" }
+      ],
+      "solution": {
+        "approach": { "en": "2-Approximation: While there are uncovered edges, pick an arbitrary edge (u,v), add both u and v to the cover, and remove all edges incident to u or v. The result is at most 2x optimal.", "hi": "2-Approximation: Jab tak uncovered edges hain, ek arbitrary edge (u,v) pick karo, u aur v dono ko cover mein daalo, aur u ya v se connected saari edges hatao. Result optimal se zyaada se zyaada 2 guna hoga." },
+        "code": {
+          "cpp": "vector<int> vertexCover(int n, vector<pair<int,int>>& edges) {\n    set<int> cover;\n    vector<bool> used(edges.size(), false);\n    for (int i = 0; i < edges.size(); i++) {\n        if (!used[i]) {\n            int u = edges[i].first, v = edges[i].second;\n            cover.insert(u);\n            cover.insert(v);\n            for (int j = i; j < edges.size(); j++) {\n                if (edges[j].first == u || edges[j].second == u ||\n                    edges[j].first == v || edges[j].second == v)\n                    used[j] = true;\n            }\n        }\n    }\n    return vector<int>(cover.begin(), cover.end());\n}",
+          "python": "def vertex_cover(n, edges):\n    cover = set()\n    used = [False] * len(edges)\n    for i, (u, v) in enumerate(edges):\n        if not used[i]:\n            cover.add(u)\n            cover.add(v)\n            for j in range(i, len(edges)):\n                eu, ev = edges[j]\n                if eu in (u, v) or ev in (u, v):\n                    used[j] = True\n    return sorted(cover)"
+        },
+        "timeComplexity": "O(m^2) for naive, O(m) with adjacency list",
+        "spaceComplexity": "O(n + m)"
+      },
+      "tags": ["np-completeness", "approximation", "graph", "vertex-cover"]
+    },
+    {
+      "id": "np-004",
+      "title": "Graph Coloring Decision",
+      "titleHi": "Graph Coloring Decision Problem",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given an undirected graph with n vertices and m edges, determine if the graph can be properly colored using at most k colors such that no two adjacent vertices share the same color. Print 'YES' if possible, 'NO' otherwise.\n\nA proper coloring assigns a color to each vertex so that for every edge (u, v), vertex u and vertex v have different colors. This is the k-colorability decision problem, which is NP-Complete for k >= 3.",
+        "hi": "Ek undirected graph diya hai jisme n vertices aur m edges hain. Batao ki kya graph ko zyaada se zyaada k colors se properly color kiya ja sakta hai taaki koi do adjacent vertices ka same color na ho. Agar possible hai toh 'YES' print karo, warna 'NO'.\n\nProper coloring mein har vertex ko ek color assign hota hai taaki har edge (u, v) ke liye, u aur v ka color alag ho. Ye k-colorability decision problem hai, jo k >= 3 ke liye NP-Complete hai."
+      },
+      "examples": [
+        { "input": "4 4 3\n0 1\n1 2\n2 3\n3 0", "output": "YES", "explanation": { "en": "Color 0->Red, 1->Blue, 2->Red, 3->Blue. A cycle of even length needs only 2 colors.", "hi": "Color 0->Red, 1->Blue, 2->Red, 3->Blue. Even length cycle ko sirf 2 colors chahiye." } },
+        { "input": "4 6 2\n0 1\n0 2\n0 3\n1 2\n1 3\n2 3", "output": "NO", "explanation": { "en": "This is K4 (complete graph on 4 vertices), needs 4 colors. Cannot be done with 2.", "hi": "Ye K4 hai (4 vertices ka complete graph), 4 colors chahiye. 2 se nahi ho sakta." } }
+      ],
+      "constraints": ["1 <= n <= 15", "0 <= m <= n*(n-1)/2", "1 <= k <= n", "No self-loops or duplicate edges"],
+      "hints": [
+        { "en": "Use backtracking: try assigning each color (1 to k) to each vertex and check if the assignment is valid", "hi": "Backtracking use karo: har vertex ko har color (1 se k) assign karke dekho ki assignment valid hai ya nahi" },
+        { "en": "Pruning: if a vertex's neighbor already has a color, don't try that color for the current vertex", "hi": "Pruning: agar vertex ke neighbor ka color already assign hai, toh current vertex ke liye wo color mat try karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nbool canColor(vector<vector<int>>& adj, int n, int k) {\n    // Determine if graph can be colored with k colors\n    // Write your code here\n    return false;\n}\n\nint main() {\n    int n, m, k;\n    cin >> n >> m >> k;\n    vector<vector<int>> adj(n);\n    for (int i = 0; i < m; i++) {\n        int u, v;\n        cin >> u >> v;\n        adj[u].push_back(v);\n        adj[v].push_back(u);\n    }\n    cout << (canColor(adj, n, k) ? \"YES\" : \"NO\") << endl;\n    return 0;\n}",
+        "python": "def can_color(adj, n, k):\n    # Determine if graph can be colored with k colors\n    # Write your code here\n    pass\n\nn, m, k = map(int, input().split())\nadj = [[] for _ in range(n)]\nfor _ in range(m):\n    u, v = map(int, input().split())\n    adj[u].append(v)\n    adj[v].append(u)\nprint(\"YES\" if can_color(adj, n, k) else \"NO\")",
+        "java": "import java.util.*;\n\npublic class Main {\n    static boolean canColor(List<List<Integer>> adj, int n, int k) {\n        // Determine if graph can be colored with k colors\n        // Write your code here\n        return false;\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), m = sc.nextInt(), k = sc.nextInt();\n        List<List<Integer>> adj = new ArrayList<>();\n        for (int i = 0; i < n; i++) adj.add(new ArrayList<>());\n        for (int i = 0; i < m; i++) {\n            int u = sc.nextInt(), v = sc.nextInt();\n            adj.get(u).add(v);\n            adj.get(v).add(u);\n        }\n        System.out.println(canColor(adj, n, k) ? \"YES\" : \"NO\");\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [n, m, k] = lines[0].split(' ').map(Number);\nconst adj = Array.from({length: n}, () => []);\nfor (let i = 1; i <= m; i++) {\n    const [u, v] = lines[i].split(' ').map(Number);\n    adj[u].push(v);\n    adj[v].push(u);\n}\n\nfunction canColor(adj, n, k) {\n    // Determine if graph can be colored with k colors\n    // Write your code here\n}\n\nconsole.log(canColor(adj, n, k) ? \"YES\" : \"NO\");",
+        "c": "#include <stdio.h>\n#include <stdbool.h>\n\n#define MAXN 16\nint adj[MAXN][MAXN], deg[MAXN];\n\nbool canColor(int n, int k) {\n    // Determine if graph can be colored with k colors\n    // Write your code here\n    return false;\n}\n\nint main() {\n    int n, m, k;\n    scanf(\"%d %d %d\", &n, &m, &k);\n    for (int i = 0; i < m; i++) {\n        int u, v;\n        scanf(\"%d %d\", &u, &v);\n        adj[u][deg[u]++] = v;\n        adj[v][deg[v]++] = u;\n    }\n    printf(\"%s\\n\", canColor(n, k) ? \"YES\" : \"NO\");\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "4 4 3\n0 1\n1 2\n2 3\n3 0", "expectedOutput": "YES" },
+        { "input": "4 6 2\n0 1\n0 2\n0 3\n1 2\n1 3\n2 3", "expectedOutput": "NO" },
+        { "input": "3 3 3\n0 1\n1 2\n0 2", "expectedOutput": "YES" },
+        { "input": "5 0 1\n", "expectedOutput": "YES" }
+      ],
+      "solution": {
+        "approach": { "en": "Use backtracking. Try to assign colors 1..k to vertices one by one. For each vertex, try each color and check if any neighbor has the same color. If valid, recurse to the next vertex. If no color works, backtrack.", "hi": "Backtracking use karo. Vertices ko ek ek karke colors 1..k assign karne ki koshish karo. Har vertex ke liye, har color try karo aur check karo ki kisi neighbor ka same color toh nahi. Agar valid hai toh next vertex pe recurse karo. Agar koi color kaam nahi karta, toh backtrack karo." },
+        "code": {
+          "cpp": "int color[20];\nbool isSafe(vector<vector<int>>& adj, int v, int c) {\n    for (int u : adj[v]) if (color[u] == c) return false;\n    return true;\n}\nbool solve(vector<vector<int>>& adj, int n, int k, int v) {\n    if (v == n) return true;\n    for (int c = 1; c <= k; c++) {\n        if (isSafe(adj, v, c)) {\n            color[v] = c;\n            if (solve(adj, n, k, v + 1)) return true;\n            color[v] = 0;\n        }\n    }\n    return false;\n}\nbool canColor(vector<vector<int>>& adj, int n, int k) {\n    memset(color, 0, sizeof(color));\n    return solve(adj, n, k, 0);\n}",
+          "python": "def can_color(adj, n, k):\n    color = [0] * n\n    def is_safe(v, c):\n        return all(color[u] != c for u in adj[v])\n    def solve(v):\n        if v == n:\n            return True\n        for c in range(1, k + 1):\n            if is_safe(v, c):\n                color[v] = c\n                if solve(v + 1):\n                    return True\n                color[v] = 0\n        return False\n    return solve(0)"
+        },
+        "timeComplexity": "O(k^n) worst case (exponential, as expected for NP-Complete)",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["np-completeness", "backtracking", "graph", "coloring"]
+    },
+    {
+      "id": "np-005",
+      "title": "TSP Approximation",
+      "titleHi": "TSP Approximation Algorithm",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given a complete graph with n cities and the distance between every pair of cities, find an approximate solution to the Travelling Salesman Problem using the Nearest Neighbor heuristic.\n\nThe salesman must visit every city exactly once and return to the starting city (city 0), minimizing the total travel distance.\n\nSince TSP is NP-Complete, implement the Nearest Neighbor heuristic: from the current city, always go to the nearest unvisited city.\n\nPrint the total distance of the tour found, followed by the order of cities visited.",
+        "hi": "Ek complete graph diya hai jisme n cities hain aur har pair of cities ke beech distance diya hai. Travelling Salesman Problem ka approximate solution Nearest Neighbor heuristic se dhundho.\n\nSalesman ko har city exactly ek baar visit karna hai aur starting city (city 0) pe wapas aana hai, total travel distance minimize karke.\n\nKyunki TSP NP-Complete hai, Nearest Neighbor heuristic implement karo: current city se hamesha sabse nearest unvisited city pe jao.\n\nTour ka total distance print karo, phir cities ka visit order print karo."
+      },
+      "examples": [
+        { "input": "4\n0 10 15 20\n10 0 35 25\n15 35 0 30\n20 25 30 0", "output": "80\n0 1 3 2 0", "explanation": { "en": "Starting at 0: nearest is 1 (dist=10), from 1 nearest unvisited is 3 (dist=25), from 3 nearest unvisited is 2 (dist=30), return to 0 (dist=15). Total = 10+25+30+15 = 80.", "hi": "0 se start: nearest 1 hai (dist=10), 1 se nearest unvisited 3 hai (dist=25), 3 se nearest unvisited 2 hai (dist=30), 0 pe wapas (dist=15). Total = 10+25+30+15 = 80." } }
+      ],
+      "constraints": ["2 <= n <= 1000", "1 <= dist[i][j] <= 10^6", "dist[i][j] = dist[j][i]", "dist[i][i] = 0", "Start and end at city 0"],
+      "hints": [
+        { "en": "Start at city 0, mark it visited. At each step, find the nearest unvisited city and move there.", "hi": "City 0 se start karo, visited mark karo. Har step pe nearest unvisited city dhundho aur wahan jao." },
+        { "en": "Don't forget to add the distance from the last city back to city 0", "hi": "Last city se city 0 ka distance add karna mat bhoolna" }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\n#include <vector>\n#include <climits>\nusing namespace std;\n\npair<int, vector<int>> tspNearestNeighbor(vector<vector<int>>& dist, int n) {\n    // Implement Nearest Neighbor TSP heuristic\n    // Return {totalDistance, path}\n    // Write your code here\n    return {0, {}};\n}\n\nint main() {\n    int n;\n    cin >> n;\n    vector<vector<int>> dist(n, vector<int>(n));\n    for (int i = 0; i < n; i++)\n        for (int j = 0; j < n; j++)\n            cin >> dist[i][j];\n    auto [cost, path] = tspNearestNeighbor(dist, n);\n    cout << cost << endl;\n    for (int i = 0; i < path.size(); i++) {\n        if (i > 0) cout << \" \";\n        cout << path[i];\n    }\n    cout << endl;\n    return 0;\n}",
+        "python": "def tsp_nearest_neighbor(dist, n):\n    # Implement Nearest Neighbor TSP heuristic\n    # Return (total_distance, path)\n    # Write your code here\n    pass\n\nn = int(input())\ndist = []\nfor i in range(n):\n    row = list(map(int, input().split()))\n    dist.append(row)\ncost, path = tsp_nearest_neighbor(dist, n)\nprint(cost)\nprint(*path)",
+        "java": "import java.util.*;\n\npublic class Main {\n    static int[] tspNearestNeighbor(int[][] dist, int n) {\n        // Return array where [0] = cost, rest = path\n        // Write your code here\n        return new int[]{};\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[][] dist = new int[n][n];\n        for (int i = 0; i < n; i++)\n            for (int j = 0; j < n; j++)\n                dist[i][j] = sc.nextInt();\n        int[] result = tspNearestNeighbor(dist, n);\n        System.out.println(result[0]);\n        StringBuilder sb = new StringBuilder();\n        for (int i = 1; i < result.length; i++) {\n            if (i > 1) sb.append(\" \");\n            sb.append(result[i]);\n        }\n        System.out.println(sb);\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst dist = [];\nfor (let i = 0; i < n; i++) {\n    dist.push(lines[i + 1].split(' ').map(Number));\n}\n\nfunction tspNearestNeighbor(dist, n) {\n    // Implement Nearest Neighbor TSP heuristic\n    // Return {cost, path}\n    // Write your code here\n}\n\nconst {cost, path} = tspNearestNeighbor(dist, n);\nconsole.log(cost);\nconsole.log(path.join(' '));",
+        "c": "#include <stdio.h>\n#include <limits.h>\n#include <stdbool.h>\n\nint main() {\n    int n;\n    scanf(\"%d\", &n);\n    int dist[n][n];\n    for (int i = 0; i < n; i++)\n        for (int j = 0; j < n; j++)\n            scanf(\"%d\", &dist[i][j]);\n\n    // Implement Nearest Neighbor TSP heuristic\n    // Write your code here\n\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "4\n0 10 15 20\n10 0 35 25\n15 35 0 30\n20 25 30 0", "expectedOutput": "80\n0 1 3 2 0" },
+        { "input": "3\n0 5 10\n5 0 8\n10 8 0", "expectedOutput": "23\n0 1 2 0" },
+        { "input": "2\n0 7\n7 0", "expectedOutput": "14\n0 1 0" }
+      ],
+      "solution": {
+        "approach": { "en": "Nearest Neighbor Heuristic: Start at city 0. At each step, move to the closest unvisited city. After visiting all cities, return to the start. This is a greedy O(n^2) approximation.", "hi": "Nearest Neighbor Heuristic: City 0 se shuru karo. Har step pe sabse closest unvisited city pe jao. Saari cities visit karne ke baad start pe wapas aao. Ye ek greedy O(n^2) approximation hai." },
+        "code": {
+          "cpp": "pair<int, vector<int>> tspNearestNeighbor(vector<vector<int>>& dist, int n) {\n    vector<bool> visited(n, false);\n    vector<int> path = {0};\n    visited[0] = true;\n    int total = 0, curr = 0;\n    for (int i = 1; i < n; i++) {\n        int nearest = -1, minD = INT_MAX;\n        for (int j = 0; j < n; j++) {\n            if (!visited[j] && dist[curr][j] < minD) {\n                minD = dist[curr][j]; nearest = j;\n            }\n        }\n        visited[nearest] = true;\n        total += minD;\n        path.push_back(nearest);\n        curr = nearest;\n    }\n    total += dist[curr][0];\n    path.push_back(0);\n    return {total, path};\n}",
+          "python": "def tsp_nearest_neighbor(dist, n):\n    visited = [False] * n\n    path = [0]\n    visited[0] = True\n    total = 0\n    curr = 0\n    for _ in range(n - 1):\n        nearest = min(\n            (j for j in range(n) if not visited[j]),\n            key=lambda j: dist[curr][j]\n        )\n        total += dist[curr][nearest]\n        visited[nearest] = True\n        path.append(nearest)\n        curr = nearest\n    total += dist[curr][0]\n    path.append(0)\n    return total, path"
+        },
+        "timeComplexity": "O(n^2)",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["np-completeness", "approximation", "tsp", "greedy"]
+    },
+    {
+      "id": "np-006",
+      "title": "Satisfiability Check",
+      "titleHi": "Satisfiability (SAT) Check",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given a Boolean formula in Conjunctive Normal Form (CNF) with n variables and m clauses, determine if there exists an assignment of truth values to the variables that makes the entire formula TRUE. Print 'SATISFIABLE' followed by the assignment, or 'UNSATISFIABLE'.\n\nEach clause is a disjunction (OR) of literals. A literal is either a variable (x_i) or its negation (-x_i). The formula is a conjunction (AND) of all clauses.\n\nInput format: First line has n (variables) and m (clauses). Next m lines each have a clause: space-separated integers where positive i means x_i is true and negative -i means x_i is false, ending with 0.",
+        "hi": "Ek Boolean formula diya hai Conjunctive Normal Form (CNF) mein jisme n variables aur m clauses hain. Batao ki kya variables ko koi aisi truth values assign ki ja sakti hain ki poora formula TRUE ho jaye. 'SATISFIABLE' print karo assignment ke saath, ya 'UNSATISFIABLE' print karo.\n\nHar clause ek disjunction (OR) hai literals ka. Literal ek variable (x_i) ya uska negation (-x_i) hota hai. Formula saare clauses ka conjunction (AND) hai.\n\nInput format: Pehli line mein n (variables) aur m (clauses). Agle m lines mein har ek clause hai: space-separated integers jahan positive i ka matlab x_i true hai aur negative -i ka matlab x_i false hai, 0 se end hota hai."
+      },
+      "examples": [
+        { "input": "3 3\n1 -2 0\n2 3 0\n-1 -3 0", "output": "SATISFIABLE\n1 -2 -3", "explanation": { "en": "x1=T, x2=F, x3=F satisfies all clauses: (T OR T)=T, (F OR F)=F... Let's check: clause1: x1 OR NOT x2 = T OR T = T, clause2: x2 OR x3 = F OR F = F. Actually x1=T, x2=T, x3=F: clause1: T OR F = T, clause2: T OR F = T, clause3: F OR T = T. Assignment: 1 2 -3", "hi": "x1=T, x2=T, x3=F se saare clauses satisfy hote hain: clause1: x1 OR NOT x2 = T OR F = T, clause2: x2 OR x3 = T OR F = T, clause3: NOT x1 OR NOT x3 = F OR T = T" } },
+        { "input": "1 2\n1 0\n-1 0", "output": "UNSATISFIABLE", "explanation": { "en": "x1 must be both TRUE and FALSE - impossible", "hi": "x1 ko TRUE bhi hona chahiye aur FALSE bhi - impossible" } }
+      ],
+      "constraints": ["1 <= n <= 20", "1 <= m <= 100", "Each clause has at least 1 literal", "Variables numbered 1 to n"],
+      "hints": [
+        { "en": "Try all 2^n assignments using brute force (bitmask) since n is small", "hi": "Saare 2^n assignments try karo brute force (bitmask) se kyunki n chhota hai" },
+        { "en": "For each assignment, check if all clauses are satisfied", "hi": "Har assignment ke liye check karo ki saare clauses satisfy hote hain ya nahi" }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nstring solveSAT(int n, vector<vector<int>>& clauses) {\n    // Determine if the CNF formula is satisfiable\n    // If yes, return \"SATISFIABLE\" and the assignment\n    // If no, return \"UNSATISFIABLE\"\n    // Write your code here\n    return \"UNSATISFIABLE\";\n}\n\nint main() {\n    int n, m;\n    cin >> n >> m;\n    vector<vector<int>> clauses(m);\n    for (int i = 0; i < m; i++) {\n        int lit;\n        while (cin >> lit && lit != 0) {\n            clauses[i].push_back(lit);\n        }\n    }\n    cout << solveSAT(n, clauses) << endl;\n    return 0;\n}",
+        "python": "def solve_sat(n, clauses):\n    # Determine if the CNF formula is satisfiable\n    # Return (True, assignment) or (False, None)\n    # Write your code here\n    pass\n\nn, m = map(int, input().split())\nclauses = []\nfor _ in range(m):\n    clause = list(map(int, input().split()))\n    clause.pop()  # remove trailing 0\n    clauses.append(clause)\nresult = solve_sat(n, clauses)\nif result[0]:\n    print(\"SATISFIABLE\")\n    print(*result[1])\nelse:\n    print(\"UNSATISFIABLE\")",
+        "java": "import java.util.*;\n\npublic class Main {\n    static String solveSAT(int n, List<List<Integer>> clauses) {\n        // Determine if the CNF formula is satisfiable\n        // Write your code here\n        return \"UNSATISFIABLE\";\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), m = sc.nextInt();\n        List<List<Integer>> clauses = new ArrayList<>();\n        for (int i = 0; i < m; i++) {\n            List<Integer> clause = new ArrayList<>();\n            int lit;\n            while ((lit = sc.nextInt()) != 0) clause.add(lit);\n            clauses.add(clause);\n        }\n        System.out.println(solveSAT(n, clauses));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [n, m] = lines[0].split(' ').map(Number);\nconst clauses = [];\nfor (let i = 1; i <= m; i++) {\n    const lits = lines[i].split(' ').map(Number);\n    lits.pop(); // remove trailing 0\n    clauses.push(lits);\n}\n\nfunction solveSAT(n, clauses) {\n    // Determine if the CNF formula is satisfiable\n    // Write your code here\n}\n\nconst result = solveSAT(n, clauses);\nif (result) {\n    console.log(\"SATISFIABLE\");\n    console.log(result.join(' '));\n} else {\n    console.log(\"UNSATISFIABLE\");\n}",
+        "c": "#include <stdio.h>\n#include <stdbool.h>\n\n#define MAXN 21\n#define MAXM 101\n#define MAXL 50\n\nint clauses[MAXM][MAXL];\nint clauseLen[MAXM];\n\nint main() {\n    int n, m;\n    scanf(\"%d %d\", &n, &m);\n    for (int i = 0; i < m; i++) {\n        int lit, j = 0;\n        while (scanf(\"%d\", &lit) && lit != 0) {\n            clauses[i][j++] = lit;\n        }\n        clauseLen[i] = j;\n    }\n\n    // Determine if satisfiable\n    // Write your code here\n\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "3 3\n1 -2 0\n2 3 0\n-1 -3 0", "expectedOutput": "SATISFIABLE\n1 2 -3" },
+        { "input": "1 2\n1 0\n-1 0", "expectedOutput": "UNSATISFIABLE" },
+        { "input": "2 3\n1 2 0\n-1 2 0\n1 -2 0", "expectedOutput": "SATISFIABLE\n1 2" },
+        { "input": "2 4\n1 2 0\n-1 2 0\n1 -2 0\n-1 -2 0", "expectedOutput": "UNSATISFIABLE" }
+      ],
+      "solution": {
+        "approach": { "en": "Brute force: try all 2^n truth assignments using bitmask. For each assignment, evaluate all clauses. A clause is satisfied if at least one literal is true. The formula is satisfied if all clauses are satisfied.", "hi": "Brute force: bitmask se saare 2^n truth assignments try karo. Har assignment ke liye saare clauses evaluate karo. Ek clause satisfy hota hai agar kam se kam ek literal true ho. Formula satisfy hota hai agar saare clauses satisfy hon." },
+        "code": {
+          "cpp": "string solveSAT(int n, vector<vector<int>>& clauses) {\n    for (int mask = 0; mask < (1 << n); mask++) {\n        bool allSat = true;\n        for (auto& clause : clauses) {\n            bool clauseSat = false;\n            for (int lit : clause) {\n                int var = abs(lit) - 1;\n                bool val = (mask >> var) & 1;\n                if (lit > 0 && val) clauseSat = true;\n                if (lit < 0 && !val) clauseSat = true;\n            }\n            if (!clauseSat) { allSat = false; break; }\n        }\n        if (allSat) {\n            string result = \"SATISFIABLE\\n\";\n            for (int i = 0; i < n; i++) {\n                if (i > 0) result += \" \";\n                result += ((mask >> i) & 1) ? to_string(i+1) : \"-\" + to_string(i+1);\n            }\n            return result;\n        }\n    }\n    return \"UNSATISFIABLE\";\n}",
+          "python": "def solve_sat(n, clauses):\n    for mask in range(1 << n):\n        assignment = [(mask >> i) & 1 for i in range(n)]\n        all_sat = True\n        for clause in clauses:\n            clause_sat = False\n            for lit in clause:\n                var = abs(lit) - 1\n                if lit > 0 and assignment[var] == 1:\n                    clause_sat = True\n                if lit < 0 and assignment[var] == 0:\n                    clause_sat = True\n            if not clause_sat:\n                all_sat = False\n                break\n        if all_sat:\n            result = []\n            for i in range(n):\n                result.append(i+1 if assignment[i] else -(i+1))\n            return (True, result)\n    return (False, None)"
+        },
+        "timeComplexity": "O(2^n * m * L) where L is max clause length",
+        "spaceComplexity": "O(n + m*L)"
+      },
+      "tags": ["np-completeness", "sat", "brute-force", "backtracking"]
+    }
+  ]
+}

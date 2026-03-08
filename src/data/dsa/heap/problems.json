@@ -1,0 +1,443 @@
+{
+  "topicId": "heap",
+  "problems": [
+    {
+      "id": "heap-001",
+      "title": "Kth Largest Element",
+      "titleHi": "Kth Sabse Bada Element Dhundho",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given an array of N integers and a number K, find the Kth largest element in the array.",
+        "hi": "N integers ka array aur ek number K diya hai, array mein Kth sabse bada element dhundho."
+      },
+      "examples": [
+        { "input": "6\n3 2 1 5 6 4\n2", "output": "5", "explanation": { "en": "Sorted array: [1,2,3,4,5,6]. 2nd largest is 5.", "hi": "Sorted array: [1,2,3,4,5,6]. 2nd sabse bada 5 hai." } },
+        { "input": "9\n3 2 3 1 2 4 5 5 6\n4", "output": "4", "explanation": { "en": "Sorted array: [1,2,2,3,3,4,5,5,6]. 4th largest is 4.", "hi": "Sorted array: [1,2,2,3,3,4,5,5,6]. 4th sabse bada 4 hai." } }
+      ],
+      "constraints": ["1 <= N <= 10^5", "1 <= K <= N", "-10^4 <= arr[i] <= 10^4"],
+      "hints": [
+        { "en": "Use a Min Heap of size K. The top of the heap will be the Kth largest.", "hi": "Size K ka Min Heap use karo. Heap ka top Kth largest hoga." },
+        { "en": "Push elements into heap. If size exceeds K, pop the minimum.", "hi": "Elements ko heap mein push karo. Agar size K se zyada ho jaye to minimum pop karo." }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<queue>\n#include<vector>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    vector<int> arr(n);\n    for(int i=0;i<n;i++) cin>>arr[i];\n    int k; cin>>k;\n    // Find and print Kth largest element\n}",
+        "python": "n = int(input())\narr = list(map(int, input().split()))\nk = int(input())\n# Find and print Kth largest element",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n        int k = sc.nextInt();\n        // Find and print Kth largest element\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);\nconst k = parseInt(lines[2]);\n// Find and print Kth largest element",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    int k; scanf(\"%d\",&k);\n    // Find and print Kth largest element\n}"
+      },
+      "testCases": [
+        { "input": "6\n3 2 1 5 6 4\n2", "expectedOutput": "5" },
+        { "input": "9\n3 2 3 1 2 4 5 5 6\n4", "expectedOutput": "4" },
+        { "input": "1\n1\n1", "expectedOutput": "1" },
+        { "input": "5\n7 7 7 7 7\n3", "expectedOutput": "7" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use a Min Heap of size K. Iterate through the array, push each element. If heap size exceeds K, pop the minimum. After processing all elements, the top of the heap is the Kth largest.",
+          "hi": "Size K ka Min Heap use karo. Array mein iterate karo, har element push karo. Agar heap size K se zyada ho jaye to minimum pop karo. Saare elements process karne ke baad, heap ka top Kth largest hai."
+        },
+        "code": {
+          "cpp": "priority_queue<int, vector<int>, greater<int>> minHeap;\nfor(int i=0;i<n;i++){\n    minHeap.push(arr[i]);\n    if((int)minHeap.size()>k) minHeap.pop();\n}\ncout<<minHeap.top();",
+          "python": "import heapq\nmin_heap = []\nfor x in arr:\n    heapq.heappush(min_heap, x)\n    if len(min_heap) > k:\n        heapq.heappop(min_heap)\nprint(min_heap[0])"
+        },
+        "timeComplexity": "O(n log k)",
+        "spaceComplexity": "O(k)"
+      },
+      "tags": ["heap", "priority-queue", "sorting"]
+    },
+    {
+      "id": "heap-002",
+      "title": "Sort Array using Heap",
+      "titleHi": "Heap se Array Sort Karo",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given an array of N integers, sort the array in ascending order using Heap Sort algorithm.",
+        "hi": "N integers ka array diya hai, Heap Sort algorithm use karke array ko ascending order mein sort karo."
+      },
+      "examples": [
+        { "input": "6\n12 11 13 5 6 7", "output": "5 6 7 11 12 13", "explanation": { "en": "Build max heap, then extract max repeatedly to get sorted array.", "hi": "Max heap banao, phir baar baar max extract karke sorted array paao." } },
+        { "input": "5\n5 4 3 2 1", "output": "1 2 3 4 5", "explanation": { "en": "Reverse sorted input gets sorted correctly.", "hi": "Ulta sorted input sahi se sort ho jaata hai." } }
+      ],
+      "constraints": ["1 <= N <= 10^5", "-10^9 <= arr[i] <= 10^9"],
+      "hints": [
+        { "en": "Build a Max Heap from the array in O(n) time.", "hi": "Array se Max Heap banao O(n) time mein." },
+        { "en": "Swap root with last element, reduce heap size, heapify down from root.", "hi": "Root ko last element se swap karo, heap size kam karo, root se heapify down karo." }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    vector<int> arr(n);\n    for(int i=0;i<n;i++) cin>>arr[i];\n    // Heap sort and print sorted array\n}",
+        "python": "n = int(input())\narr = list(map(int, input().split()))\n# Heap sort and print sorted array",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n        // Heap sort and print sorted array\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);\n// Heap sort and print sorted array",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    // Heap sort and print sorted array\n}"
+      },
+      "testCases": [
+        { "input": "6\n12 11 13 5 6 7", "expectedOutput": "5 6 7 11 12 13" },
+        { "input": "5\n5 4 3 2 1", "expectedOutput": "1 2 3 4 5" },
+        { "input": "1\n42", "expectedOutput": "42" },
+        { "input": "4\n3 3 1 1", "expectedOutput": "1 1 3 3" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Build a Max Heap in O(n) by calling heapify from last non-leaf node to root. Then repeatedly swap root (max) with last unsorted element and heapify down.",
+          "hi": "Last non-leaf node se root tak heapify call karke O(n) mein Max Heap banao. Phir baar baar root (max) ko last unsorted element se swap karo aur heapify down karo."
+        },
+        "code": {
+          "cpp": "void heapify(vector<int>& a, int n, int i){\n    int largest=i,l=2*i+1,r=2*i+2;\n    if(l<n&&a[l]>a[largest]) largest=l;\n    if(r<n&&a[r]>a[largest]) largest=r;\n    if(largest!=i){swap(a[i],a[largest]);heapify(a,n,largest);}\n}\n// In main:\nfor(int i=n/2-1;i>=0;i--) heapify(arr,n,i);\nfor(int i=n-1;i>0;i--){swap(arr[0],arr[i]);heapify(arr,i,0);}\nfor(int i=0;i<n;i++) cout<<arr[i]<<(i<n-1?\" \":\"\");",
+          "python": "def heapify(a,n,i):\n    largest=i; l=2*i+1; r=2*i+2\n    if l<n and a[l]>a[largest]: largest=l\n    if r<n and a[r]>a[largest]: largest=r\n    if largest!=i:\n        a[i],a[largest]=a[largest],a[i]\n        heapify(a,n,largest)\nfor i in range(n//2-1,-1,-1): heapify(arr,n,i)\nfor i in range(n-1,0,-1):\n    arr[0],arr[i]=arr[i],arr[0]\n    heapify(arr,i,0)\nprint(*arr)"
+        },
+        "timeComplexity": "O(n log n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["heap", "sorting", "heap-sort"]
+    },
+    {
+      "id": "heap-003",
+      "title": "Merge K Sorted Arrays",
+      "titleHi": "K Sorted Arrays ko Merge Karo",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given K sorted arrays of size N each, merge them into a single sorted array.",
+        "hi": "K sorted arrays diye hain jinka size N hai, unhe ek single sorted array mein merge karo."
+      },
+      "examples": [
+        { "input": "3 4\n1 3 5 7\n2 4 6 8\n0 9 10 11", "output": "0 1 2 3 4 5 6 7 8 9 10 11", "explanation": { "en": "All three sorted arrays merged into one sorted array.", "hi": "Teeno sorted arrays ko ek sorted array mein merge kar diya." } }
+      ],
+      "constraints": ["1 <= K <= 100", "1 <= N <= 1000", "-10^6 <= arr[i][j] <= 10^6"],
+      "hints": [
+        { "en": "Use a Min Heap of size K. Push first element from each array with array index and element index.", "hi": "Size K ka Min Heap use karo. Har array ka pehla element array index aur element index ke saath push karo." },
+        { "en": "Pop minimum from heap, add to result, push next element from same array.", "hi": "Heap se minimum pop karo, result mein add karo, same array se next element push karo." }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<queue>\n#include<vector>\nusing namespace std;\nint main() {\n    int k, n; cin>>k>>n;\n    vector<vector<int>> arr(k, vector<int>(n));\n    for(int i=0;i<k;i++) for(int j=0;j<n;j++) cin>>arr[i][j];\n    // Merge and print sorted result\n}",
+        "python": "k, n = map(int, input().split())\narr = []\nfor _ in range(k):\n    arr.append(list(map(int, input().split())))\n# Merge and print sorted result",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int k = sc.nextInt(), n = sc.nextInt();\n        int[][] arr = new int[k][n];\n        for(int i=0;i<k;i++) for(int j=0;j<n;j++) arr[i][j]=sc.nextInt();\n        // Merge and print sorted result\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [k, n] = lines[0].split(' ').map(Number);\nconst arr = [];\nfor(let i=1;i<=k;i++) arr.push(lines[i].split(' ').map(Number));\n// Merge and print sorted result",
+        "c": "#include<stdio.h>\nint main() {\n    int k, n; scanf(\"%d %d\",&k,&n);\n    int arr[k][n];\n    for(int i=0;i<k;i++) for(int j=0;j<n;j++) scanf(\"%d\",&arr[i][j]);\n    // Merge and print sorted result\n}"
+      },
+      "testCases": [
+        { "input": "3 4\n1 3 5 7\n2 4 6 8\n0 9 10 11", "expectedOutput": "0 1 2 3 4 5 6 7 8 9 10 11" },
+        { "input": "2 3\n1 2 3\n4 5 6", "expectedOutput": "1 2 3 4 5 6" },
+        { "input": "1 4\n10 20 30 40", "expectedOutput": "10 20 30 40" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use a Min Heap storing (value, array_index, element_index). Push first element of each array. Pop min, add to result, push next element from same array if available.",
+          "hi": "Min Heap use karo jisme (value, array_index, element_index) store ho. Har array ka pehla element push karo. Min pop karo, result mein daalo, same array se next element push karo agar available hai."
+        },
+        "code": {
+          "cpp": "// {value, array_index, element_index}\npriority_queue<tuple<int,int,int>, vector<tuple<int,int,int>>, greater<>> pq;\nfor(int i=0;i<k;i++) pq.push({arr[i][0],i,0});\nvector<int> res;\nwhile(!pq.empty()){\n    auto [val,ai,ei]=pq.top(); pq.pop();\n    res.push_back(val);\n    if(ei+1<n) pq.push({arr[ai][ei+1],ai,ei+1});\n}\nfor(int i=0;i<res.size();i++) cout<<res[i]<<(i<res.size()-1?\" \":\"\");",
+          "python": "import heapq\npq = []\nfor i in range(k):\n    heapq.heappush(pq, (arr[i][0], i, 0))\nres = []\nwhile pq:\n    val, ai, ei = heapq.heappop(pq)\n    res.append(val)\n    if ei + 1 < n:\n        heapq.heappush(pq, (arr[ai][ei+1], ai, ei+1))\nprint(*res)"
+        },
+        "timeComplexity": "O(K*N log K)",
+        "spaceComplexity": "O(K*N)"
+      },
+      "tags": ["heap", "priority-queue", "merge", "divide-and-conquer"]
+    },
+    {
+      "id": "heap-004",
+      "title": "Find Median in Stream",
+      "titleHi": "Stream mein Median Dhundho",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given a stream of integers, find the median after each element is added. The median is the middle value in a sorted list. If the list has even size, the median is the average of the two middle values (print floor value).",
+        "hi": "Integers ka stream diya hai, har element add hone ke baad median dhundho. Median sorted list ki beech wali value hai. Agar list ka size even hai to median do beech wali values ka average hai (floor value print karo)."
+      },
+      "examples": [
+        { "input": "5\n5 15 1 3 8", "output": "5\n10\n5\n4\n5", "explanation": { "en": "After 5: median=5. After 15: median=(5+15)/2=10. After 1: sorted=[1,5,15], median=5. After 3: sorted=[1,3,5,15], median=(3+5)/2=4. After 8: sorted=[1,3,5,8,15], median=5.", "hi": "5 ke baad: median=5. 15 ke baad: median=(5+15)/2=10. 1 ke baad: sorted=[1,5,15], median=5. 3 ke baad: sorted=[1,3,5,15], median=(3+5)/2=4. 8 ke baad: sorted=[1,3,5,8,15], median=5." } }
+      ],
+      "constraints": ["1 <= N <= 10^5", "-10^5 <= arr[i] <= 10^5"],
+      "hints": [
+        { "en": "Use two heaps: a Max Heap for the left half and a Min Heap for the right half.", "hi": "Do heaps use karo: left half ke liye Max Heap aur right half ke liye Min Heap." },
+        { "en": "Balance the heaps so that their sizes differ by at most 1.", "hi": "Heaps ko balance karo taaki unke sizes mein zyada se zyada 1 ka difference ho." }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<queue>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    // For each element, print running median\n}",
+        "python": "n = int(input())\narr = list(map(int, input().split()))\n# For each element, print running median",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        // For each element, print running median\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);\n// For each element, print running median",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    // For each element, print running median\n}"
+      },
+      "testCases": [
+        { "input": "5\n5 15 1 3 8", "expectedOutput": "5\n10\n5\n4\n5" },
+        { "input": "3\n1 2 3", "expectedOutput": "1\n1\n2" },
+        { "input": "1\n42", "expectedOutput": "42" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Maintain two heaps: maxHeap (left half) and minHeap (right half). For each new number, add to maxHeap if <= maxHeap top, else add to minHeap. Balance so sizes differ by at most 1. Median is top of larger heap, or floor of average of both tops if equal size.",
+          "hi": "Do heaps maintain karo: maxHeap (left half) aur minHeap (right half). Har naye number ke liye, agar maxHeap top se chhota ya barabar hai to maxHeap mein daalo, nahi to minHeap mein. Balance karo taaki sizes mein max 1 ka difference ho. Median bade heap ka top hai, ya agar dono equal size hain to dono tops ka floor average."
+        },
+        "code": {
+          "cpp": "priority_queue<int> maxH; // left half\npriority_queue<int,vector<int>,greater<int>> minH; // right half\nfor(int i=0;i<n;i++){\n    int x; cin>>x;\n    if(maxH.empty()||x<=maxH.top()) maxH.push(x);\n    else minH.push(x);\n    // Balance\n    if(maxH.size()>minH.size()+1){minH.push(maxH.top());maxH.pop();}\n    if(minH.size()>maxH.size()){maxH.push(minH.top());minH.pop();}\n    // Median\n    if(maxH.size()>minH.size()) cout<<maxH.top()<<\"\\n\";\n    else cout<<(maxH.top()+minH.top())/2<<\"\\n\";\n}",
+          "python": "import heapq\nmax_h = []  # negated for max heap\nmin_h = []\nfor x in arr:\n    if not max_h or x <= -max_h[0]:\n        heapq.heappush(max_h, -x)\n    else:\n        heapq.heappush(min_h, x)\n    # Balance\n    if len(max_h) > len(min_h) + 1:\n        heapq.heappush(min_h, -heapq.heappop(max_h))\n    if len(min_h) > len(max_h):\n        heapq.heappush(max_h, -heapq.heappop(min_h))\n    # Median\n    if len(max_h) > len(min_h):\n        print(-max_h[0])\n    else:\n        print((-max_h[0] + min_h[0]) // 2)"
+        },
+        "timeComplexity": "O(n log n)",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["heap", "two-heaps", "median", "design"]
+    },
+    {
+      "id": "heap-005",
+      "title": "Top K Frequent Elements",
+      "titleHi": "Top K Frequent Elements Dhundho",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given an array of N integers and a number K, return the K most frequent elements. Output them in any order.",
+        "hi": "N integers ka array aur ek number K diya hai, K sabse zyada baar aane wale elements return karo. Kisi bhi order mein output do."
+      },
+      "examples": [
+        { "input": "6\n1 1 1 2 2 3\n2", "output": "1 2", "explanation": { "en": "1 appears 3 times, 2 appears 2 times. Top 2 frequent are 1 and 2.", "hi": "1 teen baar aata hai, 2 do baar aata hai. Top 2 frequent 1 aur 2 hain." } },
+        { "input": "1\n1\n1", "output": "1", "explanation": { "en": "Only one element.", "hi": "Sirf ek element hai." } }
+      ],
+      "constraints": ["1 <= N <= 10^5", "1 <= K <= number of unique elements", "-10^4 <= arr[i] <= 10^4"],
+      "hints": [
+        { "en": "Count frequency using a hash map, then use a Min Heap of size K on frequencies.", "hi": "Hash map se frequency count karo, phir frequencies pe size K ka Min Heap use karo." },
+        { "en": "The Min Heap keeps the K elements with highest frequency.", "hi": "Min Heap K sabse zyada frequency wale elements rakhega." }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<queue>\n#include<vector>\n#include<unordered_map>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    vector<int> arr(n);\n    for(int i=0;i<n;i++) cin>>arr[i];\n    int k; cin>>k;\n    // Find and print K most frequent elements\n}",
+        "python": "n = int(input())\narr = list(map(int, input().split()))\nk = int(input())\n# Find and print K most frequent elements",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n        int k = sc.nextInt();\n        // Find and print K most frequent elements\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);\nconst k = parseInt(lines[2]);\n// Find and print K most frequent elements",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    int k; scanf(\"%d\",&k);\n    // Find and print K most frequent elements\n}"
+      },
+      "testCases": [
+        { "input": "6\n1 1 1 2 2 3\n2", "expectedOutput": "1 2" },
+        { "input": "1\n1\n1", "expectedOutput": "1" },
+        { "input": "7\n1 2 2 3 3 3 4\n1", "expectedOutput": "3" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Count frequencies with a hash map. Use a Min Heap of size K storing (frequency, element). For each entry, push to heap. If size > K, pop minimum. Remaining K elements are the answer.",
+          "hi": "Hash map se frequencies count karo. Size K ka Min Heap use karo jisme (frequency, element) store ho. Har entry ke liye heap mein push karo. Agar size K se zyada ho to minimum pop karo. Bache hue K elements answer hain."
+        },
+        "code": {
+          "cpp": "unordered_map<int,int> freq;\nfor(int x:arr) freq[x]++;\npriority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;\nfor(auto& [val,cnt]:freq){\n    pq.push({cnt,val});\n    if((int)pq.size()>k) pq.pop();\n}\nvector<int> res;\nwhile(!pq.empty()){res.push_back(pq.top().second);pq.pop();}\nsort(res.begin(),res.end());\nfor(int i=0;i<res.size();i++) cout<<res[i]<<(i<res.size()-1?\" \":\"\");",
+          "python": "from collections import Counter\nimport heapq\nfreq = Counter(arr)\nheap = []\nfor val, cnt in freq.items():\n    heapq.heappush(heap, (cnt, val))\n    if len(heap) > k:\n        heapq.heappop(heap)\nres = sorted([x[1] for x in heap])\nprint(*res)"
+        },
+        "timeComplexity": "O(n log k)",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["heap", "hash-map", "sorting", "frequency"]
+    },
+    {
+      "id": "heap-006",
+      "title": "Kth Smallest in Sorted Matrix",
+      "titleHi": "Sorted Matrix mein Kth Sabse Chhota",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given an N x N matrix where each row and each column is sorted in ascending order, find the Kth smallest element in the matrix.",
+        "hi": "N x N matrix diya hai jisme har row aur har column ascending order mein sorted hai, matrix mein Kth sabse chhota element dhundho."
+      },
+      "examples": [
+        { "input": "3\n1 5 9\n10 11 13\n12 13 15\n8", "output": "13", "explanation": { "en": "Sorted elements: [1,5,9,10,11,12,13,13,15]. 8th smallest is 13.", "hi": "Sorted elements: [1,5,9,10,11,12,13,13,15]. 8th sabse chhota 13 hai." } }
+      ],
+      "constraints": ["1 <= N <= 300", "1 <= K <= N*N", "-10^9 <= matrix[i][j] <= 10^9"],
+      "hints": [
+        { "en": "Use a Min Heap. Push first element of each row. Pop K times.", "hi": "Min Heap use karo. Har row ka pehla element push karo. K baar pop karo." },
+        { "en": "Each time you pop, push the next element from the same row.", "hi": "Har baar pop karne pe, same row se next element push karo." }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<queue>\n#include<vector>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    vector<vector<int>> mat(n, vector<int>(n));\n    for(int i=0;i<n;i++) for(int j=0;j<n;j++) cin>>mat[i][j];\n    int k; cin>>k;\n    // Find and print Kth smallest element\n}",
+        "python": "n = int(input())\nmat = []\nfor _ in range(n):\n    mat.append(list(map(int, input().split())))\nk = int(input())\n# Find and print Kth smallest element",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[][] mat = new int[n][n];\n        for(int i=0;i<n;i++) for(int j=0;j<n;j++) mat[i][j]=sc.nextInt();\n        int k = sc.nextInt();\n        // Find and print Kth smallest element\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst mat = [];\nfor(let i=1;i<=n;i++) mat.push(lines[i].split(' ').map(Number));\nconst k = parseInt(lines[n+1]);\n// Find and print Kth smallest element",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int mat[n][n];\n    for(int i=0;i<n;i++) for(int j=0;j<n;j++) scanf(\"%d\",&mat[i][j]);\n    int k; scanf(\"%d\",&k);\n    // Find and print Kth smallest element\n}"
+      },
+      "testCases": [
+        { "input": "3\n1 5 9\n10 11 13\n12 13 15\n8", "expectedOutput": "13" },
+        { "input": "2\n1 2\n3 4\n3", "expectedOutput": "3" },
+        { "input": "1\n5\n1", "expectedOutput": "5" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use Min Heap with entries (value, row, col). Push first element of each row. Pop minimum K times. Each time, push the next element from the same row if it exists.",
+          "hi": "Min Heap use karo jisme (value, row, col) entries hon. Har row ka pehla element push karo. K baar minimum pop karo. Har baar same row se next element push karo agar exist karta hai."
+        },
+        "code": {
+          "cpp": "priority_queue<tuple<int,int,int>,vector<tuple<int,int,int>>,greater<>> pq;\nfor(int i=0;i<n;i++) pq.push({mat[i][0],i,0});\nint ans=0;\nfor(int i=0;i<k;i++){\n    auto [val,r,c]=pq.top(); pq.pop();\n    ans=val;\n    if(c+1<n) pq.push({mat[r][c+1],r,c+1});\n}\ncout<<ans;",
+          "python": "import heapq\npq = [(mat[i][0], i, 0) for i in range(n)]\nheapq.heapify(pq)\nans = 0\nfor _ in range(k):\n    ans, r, c = heapq.heappop(pq)\n    if c + 1 < n:\n        heapq.heappush(pq, (mat[r][c+1], r, c+1))\nprint(ans)"
+        },
+        "timeComplexity": "O(K log N)",
+        "spaceComplexity": "O(N)"
+      },
+      "tags": ["heap", "matrix", "priority-queue", "binary-search"]
+    },
+    {
+      "id": "heap-007",
+      "title": "Connect N Ropes with Minimum Cost",
+      "titleHi": "N Rassiyon ko Minimum Cost mein Jodo",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given N ropes of different lengths, connect all ropes into one rope. The cost to connect two ropes is the sum of their lengths. Find the minimum total cost to connect all ropes.",
+        "hi": "N alag-alag lambaai ki rassiyaan di hain, sabhi rassiyon ko ek rassi mein jodo. Do rassiyon ko jodne ki cost unki lambaiyon ka sum hai. Sabhi rassiyon ko jodne ki minimum total cost dhundho."
+      },
+      "examples": [
+        { "input": "4\n4 3 2 6", "output": "29", "explanation": { "en": "Connect 2+3=5 (cost 5), 4+5=9 (cost 9), 6+9=15 (cost 15). Total = 5+9+15 = 29.", "hi": "2+3=5 jodo (cost 5), 4+5=9 jodo (cost 9), 6+9=15 jodo (cost 15). Total = 5+9+15 = 29." } }
+      ],
+      "constraints": ["1 <= N <= 10^5", "1 <= lengths[i] <= 10^6"],
+      "hints": [
+        { "en": "Always connect the two shortest ropes first to minimize cost.", "hi": "Hamesha sabse chhoti do rassiyaan pehle jodo taaki cost minimum ho." },
+        { "en": "Use a Min Heap to always get the two smallest ropes efficiently.", "hi": "Min Heap use karo taaki efficiently do sabse chhoti rassiyaan mil sakein." }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<queue>\n#include<vector>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    vector<int> ropes(n);\n    for(int i=0;i<n;i++) cin>>ropes[i];\n    // Find and print minimum cost\n}",
+        "python": "n = int(input())\nropes = list(map(int, input().split()))\n# Find and print minimum cost",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] ropes = new int[n];\n        for(int i=0;i<n;i++) ropes[i]=sc.nextInt();\n        // Find and print minimum cost\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst ropes = lines[1].split(' ').map(Number);\n// Find and print minimum cost",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int ropes[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&ropes[i]);\n    // Find and print minimum cost\n}"
+      },
+      "testCases": [
+        { "input": "4\n4 3 2 6", "expectedOutput": "29" },
+        { "input": "3\n1 2 3", "expectedOutput": "9" },
+        { "input": "2\n5 10", "expectedOutput": "15" },
+        { "input": "1\n100", "expectedOutput": "0" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use a Min Heap. Push all rope lengths. While heap has more than 1 element: pop two smallest, add their sum to total cost, push their sum back. This greedy approach minimizes cost.",
+          "hi": "Min Heap use karo. Sabhi rope lengths push karo. Jab tak heap mein 1 se zyada elements hain: do sabse chhote pop karo, unka sum total cost mein add karo, unka sum wapas push karo. Ye greedy approach cost minimize karti hai."
+        },
+        "code": {
+          "cpp": "priority_queue<long long,vector<long long>,greater<long long>> pq;\nfor(int i=0;i<n;i++) pq.push(ropes[i]);\nlong long cost=0;\nwhile(pq.size()>1){\n    long long a=pq.top();pq.pop();\n    long long b=pq.top();pq.pop();\n    cost+=a+b;\n    pq.push(a+b);\n}\ncout<<cost;",
+          "python": "import heapq\nheapq.heapify(ropes)\ncost = 0\nwhile len(ropes) > 1:\n    a = heapq.heappop(ropes)\n    b = heapq.heappop(ropes)\n    cost += a + b\n    heapq.heappush(ropes, a + b)\nprint(cost)"
+        },
+        "timeComplexity": "O(n log n)",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["heap", "greedy", "priority-queue"]
+    },
+    {
+      "id": "heap-008",
+      "title": "Last Stone Weight",
+      "titleHi": "Aakhri Patthar ka Weight",
+      "difficulty": "easy",
+      "description": {
+        "en": "You have a collection of stones with positive integer weights. Each turn, pick the two heaviest stones and smash them. If they have equal weight, both are destroyed. If not, the stone with smaller weight is destroyed, and the other stone's weight is reduced by the smaller weight. Return the weight of the last remaining stone, or 0 if none remain.",
+        "hi": "Tumhare paas positive integer weights wale pattharon ka collection hai. Har turn mein, do sabse bhaari patthar uthao aur takrao. Agar dono ka weight barabar hai to dono destroy ho jaate hain. Agar nahi to chhote weight wala destroy ho jaata hai aur doosre ka weight chhote weight se kam ho jaata hai. Aakhri bache hue patthar ka weight return karo, ya 0 agar koi nahi bacha."
+      },
+      "examples": [
+        { "input": "6\n2 7 4 1 8 1", "output": "1", "explanation": { "en": "Smash 8,7->1, smash 4,2->2, smash 2,1->1, smash 1,1->0. Last stone: 1.", "hi": "8,7 takrao->1, 4,2 takrao->2, 2,1 takrao->1, 1,1 takrao->0. Aakhri patthar: 1." } }
+      ],
+      "constraints": ["1 <= N <= 30", "1 <= stones[i] <= 1000"],
+      "hints": [
+        { "en": "Use a Max Heap. Pop two largest, push their difference if non-zero.", "hi": "Max Heap use karo. Do sabse bade pop karo, unka difference push karo agar non-zero hai." }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<queue>\n#include<vector>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    vector<int> stones(n);\n    for(int i=0;i<n;i++) cin>>stones[i];\n    // Find and print last stone weight\n}",
+        "python": "n = int(input())\nstones = list(map(int, input().split()))\n# Find and print last stone weight",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] stones = new int[n];\n        for(int i=0;i<n;i++) stones[i]=sc.nextInt();\n        // Find and print last stone weight\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst stones = lines[1].split(' ').map(Number);\n// Find and print last stone weight",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int stones[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&stones[i]);\n    // Find and print last stone weight\n}"
+      },
+      "testCases": [
+        { "input": "6\n2 7 4 1 8 1", "expectedOutput": "1" },
+        { "input": "1\n1", "expectedOutput": "1" },
+        { "input": "2\n5 5", "expectedOutput": "0" },
+        { "input": "3\n10 4 2", "expectedOutput": "4" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use a Max Heap. Push all stones. While heap has more than 1 element: pop two largest. If they differ, push the difference back. Return last element or 0.",
+          "hi": "Max Heap use karo. Saare patthar push karo. Jab tak heap mein 1 se zyada elements hain: do sabse bade pop karo. Agar different hain to difference wapas push karo. Last element return karo ya 0."
+        },
+        "code": {
+          "cpp": "priority_queue<int> pq(stones.begin(), stones.end());\nwhile(pq.size()>1){\n    int a=pq.top();pq.pop();\n    int b=pq.top();pq.pop();\n    if(a!=b) pq.push(a-b);\n}\ncout<<(pq.empty()?0:pq.top());",
+          "python": "import heapq\nmax_h = [-s for s in stones]\nheapq.heapify(max_h)\nwhile len(max_h) > 1:\n    a = -heapq.heappop(max_h)\n    b = -heapq.heappop(max_h)\n    if a != b:\n        heapq.heappush(max_h, -(a - b))\nprint(-max_h[0] if max_h else 0)"
+        },
+        "timeComplexity": "O(n log n)",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["heap", "greedy", "simulation"]
+    },
+    {
+      "id": "heap-009",
+      "title": "K Closest Points to Origin",
+      "titleHi": "Origin ke K Sabse Nazdeeki Points",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given an array of points where points[i] = [xi, yi] represents a point on the 2D plane, return the K closest points to the origin (0, 0). The distance is Euclidean distance. Print points sorted by distance.",
+        "hi": "Points ka array diya hai jahan points[i] = [xi, yi] 2D plane pe ek point hai, origin (0, 0) ke K sabse nazdeeki points return karo. Distance Euclidean distance hai. Points ko distance ke hisaab se sort karke print karo."
+      },
+      "examples": [
+        { "input": "4\n3 3\n5 -1\n-2 4\n1 1\n2", "output": "1 1\n3 3", "explanation": { "en": "Distances: (3,3)=sqrt(18), (5,-1)=sqrt(26), (-2,4)=sqrt(20), (1,1)=sqrt(2). 2 closest: (1,1) and (3,3).", "hi": "Distances: (3,3)=sqrt(18), (5,-1)=sqrt(26), (-2,4)=sqrt(20), (1,1)=sqrt(2). 2 sabse nazdeek: (1,1) aur (3,3)." } }
+      ],
+      "constraints": ["1 <= N <= 10^4", "1 <= K <= N", "-10^4 <= xi, yi <= 10^4"],
+      "hints": [
+        { "en": "Use a Max Heap of size K based on distance. No need to compute sqrt - compare squared distances.", "hi": "Distance ke basis pe size K ka Max Heap use karo. Sqrt calculate karne ki zaroorat nahi - squared distances compare karo." },
+        { "en": "Push points into heap. If size > K, pop the farthest point.", "hi": "Points ko heap mein push karo. Agar size K se zyada ho to sabse door wala point pop karo." }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<queue>\n#include<vector>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    vector<pair<int,int>> points(n);\n    for(int i=0;i<n;i++) cin>>points[i].first>>points[i].second;\n    int k; cin>>k;\n    // Find and print K closest points\n}",
+        "python": "n = int(input())\npoints = []\nfor _ in range(n):\n    x, y = map(int, input().split())\n    points.append((x, y))\nk = int(input())\n# Find and print K closest points",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[][] points = new int[n][2];\n        for(int i=0;i<n;i++){points[i][0]=sc.nextInt();points[i][1]=sc.nextInt();}\n        int k = sc.nextInt();\n        // Find and print K closest points\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst points = [];\nfor(let i=1;i<=n;i++){const [x,y]=lines[i].split(' ').map(Number);points.push([x,y]);}\nconst k = parseInt(lines[n+1]);\n// Find and print K closest points",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int px[n], py[n];\n    for(int i=0;i<n;i++) scanf(\"%d %d\",&px[i],&py[i]);\n    int k; scanf(\"%d\",&k);\n    // Find and print K closest points\n}"
+      },
+      "testCases": [
+        { "input": "4\n3 3\n5 -1\n-2 4\n1 1\n2", "expectedOutput": "1 1\n3 3" },
+        { "input": "3\n1 0\n0 1\n2 2\n2", "expectedOutput": "1 0\n0 1" },
+        { "input": "1\n5 5\n1", "expectedOutput": "5 5" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use a Max Heap of size K storing (-distance^2, x, y). For each point, push to heap. If size > K, pop the farthest. Finally, sort remaining points by distance and print.",
+          "hi": "Size K ka Max Heap use karo jisme (-distance^2, x, y) store ho. Har point ke liye heap mein push karo. Agar size K se zyada ho to sabse door wala pop karo. Aakhir mein bache hue points ko distance se sort karke print karo."
+        },
+        "code": {
+          "cpp": "// Max heap: {dist^2, x, y}\npriority_queue<tuple<int,int,int>> pq;\nfor(auto& [x,y]:points){\n    pq.push({x*x+y*y,x,y});\n    if((int)pq.size()>k) pq.pop();\n}\nvector<tuple<int,int,int>> res;\nwhile(!pq.empty()){res.push_back(pq.top());pq.pop();}\nsort(res.begin(),res.end());\nfor(auto& [d,x,y]:res) cout<<x<<\" \"<<y<<\"\\n\";",
+          "python": "import heapq\nmax_h = []\nfor x, y in points:\n    d = x*x + y*y\n    heapq.heappush(max_h, (-d, x, y))\n    if len(max_h) > k:\n        heapq.heappop(max_h)\nres = sorted(max_h, key=lambda t: -t[0])\nfor _, x, y in res:\n    print(x, y)"
+        },
+        "timeComplexity": "O(n log k)",
+        "spaceComplexity": "O(k)"
+      },
+      "tags": ["heap", "geometry", "priority-queue", "sorting"]
+    },
+    {
+      "id": "heap-010",
+      "title": "Reorganize String",
+      "titleHi": "String ko Reorganize Karo",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given a string S, rearrange the characters so that no two adjacent characters are the same. If not possible, return \"impossible\". If multiple valid answers exist, return any.",
+        "hi": "Ek string S diya hai, characters ko aisa arrange karo ki koi do adjacent characters same na hon. Agar possible nahi hai to \"impossible\" return karo. Agar multiple valid answers hain to koi bhi return karo."
+      },
+      "examples": [
+        { "input": "aab", "output": "aba", "explanation": { "en": "Rearranged so no two adjacent characters are same.", "hi": "Aisa arrange kiya ki koi do adjacent characters same nahi hain." } },
+        { "input": "aaab", "output": "impossible", "explanation": { "en": "Not possible to rearrange - 'a' appears too many times.", "hi": "Rearrange possible nahi - 'a' bahut zyada baar aata hai." } }
+      ],
+      "constraints": ["1 <= S.length <= 500", "S consists of lowercase English letters"],
+      "hints": [
+        { "en": "Use a Max Heap based on character frequency. Always place the most frequent character first.", "hi": "Character frequency ke basis pe Max Heap use karo. Hamesha sabse zyada frequency wala character pehle lagao." },
+        { "en": "After placing a character, push the previously placed character back (if frequency > 0) to avoid adjacency.", "hi": "Ek character lagane ke baad, pehle wale character ko wapas push karo (agar frequency > 0 hai) taaki adjacency avoid ho." }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<queue>\n#include<string>\n#include<unordered_map>\nusing namespace std;\nint main() {\n    string s; cin>>s;\n    // Reorganize and print result\n}",
+        "python": "s = input()\n# Reorganize and print result",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        String s = new Scanner(System.in).next();\n        // Reorganize and print result\n    }\n}",
+        "javascript": "const s = require('fs').readFileSync('/dev/stdin','utf8').trim();\n// Reorganize and print result",
+        "c": "#include<stdio.h>\n#include<string.h>\nint main() {\n    char s[501]; scanf(\"%s\",s);\n    // Reorganize and print result\n}"
+      },
+      "testCases": [
+        { "input": "aab", "expectedOutput": "aba" },
+        { "input": "aaab", "expectedOutput": "impossible" },
+        { "input": "a", "expectedOutput": "a" },
+        { "input": "aabb", "expectedOutput": "abab" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Count frequencies. Use Max Heap of (freq, char). Pop most frequent, append to result. Hold the previous character aside. Push previous back if its frequency > 0. If heap is empty but previous still has frequency, return impossible.",
+          "hi": "Frequencies count karo. Max Heap use karo (freq, char) ka. Sabse zyada frequent pop karo, result mein append karo. Previous character ko side mein rakho. Previous ko wapas push karo agar frequency > 0 hai. Agar heap khaali hai lekin previous ki frequency abhi bhi hai to impossible return karo."
+        },
+        "code": {
+          "cpp": "unordered_map<char,int> freq;\nfor(char c:s) freq[c]++;\npriority_queue<pair<int,char>> pq;\nfor(auto& [c,f]:freq) pq.push({f,c});\nstring res=\"\";\npair<int,char> prev={0,'#'};\nwhile(!pq.empty()){\n    auto [f,c]=pq.top(); pq.pop();\n    res+=c;\n    if(prev.first>0) pq.push(prev);\n    prev={f-1,c};\n}\nif((int)res.size()!=(int)s.size()) cout<<\"impossible\";\nelse cout<<res;",
+          "python": "from collections import Counter\nimport heapq\nfreq = Counter(s)\nmax_h = [(-cnt, ch) for ch, cnt in freq.items()]\nheapq.heapify(max_h)\nres = []\nprev = (0, '#')\nwhile max_h:\n    cnt, ch = heapq.heappop(max_h)\n    res.append(ch)\n    if prev[0] < 0:\n        heapq.heappush(max_h, prev)\n    prev = (cnt + 1, ch)\nresult = ''.join(res)\nprint(result if len(result) == len(s) else 'impossible')"
+        },
+        "timeComplexity": "O(n log 26) = O(n)",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["heap", "greedy", "string", "hash-map"]
+    }
+  ]
+}

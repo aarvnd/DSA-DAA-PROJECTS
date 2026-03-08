@@ -1,0 +1,320 @@
+{
+  "topicId": "linked-list",
+  "problems": [
+    {
+      "id": "ll-001",
+      "title": "Create & Traverse Linked List",
+      "titleHi": "Linked List Banao aur Traverse Karo",
+      "difficulty": "easy",
+      "description": { "en": "Given n elements, create a singly linked list and print all elements separated by spaces.", "hi": "N elements diye hain, ek singly linked list banao aur saare elements space se separate karke print karo." },
+      "examples": [
+        { "input": "5\n1 2 3 4 5", "output": "1 2 3 4 5", "explanation": { "en": "Create list with 1->2->3->4->5, then traverse and print each node", "hi": "1->2->3->4->5 wali list banao, phir traverse karke har node print karo" } }
+      ],
+      "constraints": ["1 <= n <= 10^5", "1 <= elements <= 10^9"],
+      "hints": [{ "en": "Create a head node, then keep adding new nodes at the tail", "hi": "Head node banao, phir tail pe naye nodes add karte jao" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\nstruct Node {\n    int data;\n    Node* next;\n    Node(int val) : data(val), next(NULL) {}\n};\nint main() {\n    int n; cin>>n;\n    // Create and traverse linked list\n}",
+        "python": "class Node:\n    def __init__(self, data):\n        self.data = data\n        self.next = None\n\nn = int(input())\narr = list(map(int, input().split()))\n# Create and traverse linked list",
+        "java": "import java.util.*;\nclass Node {\n    int data;\n    Node next;\n    Node(int val) { data = val; next = null; }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);\n// Create and traverse linked list",
+        "c": "#include<stdio.h>\n#include<stdlib.h>\nstruct Node {\n    int data;\n    struct Node* next;\n};\nint main() {\n    int n; scanf(\"%d\",&n);\n}"
+      },
+      "testCases": [
+        { "input": "5\n1 2 3 4 5", "expectedOutput": "1 2 3 4 5" },
+        { "input": "3\n10 20 30", "expectedOutput": "10 20 30" },
+        { "input": "1\n42", "expectedOutput": "42" }
+      ],
+      "solution": {
+        "approach": { "en": "Create head with first element, then iterate and add remaining elements at tail. Traverse from head to NULL printing each node.", "hi": "Pehle element se head banao, phir baaki elements ko tail pe add karo. Head se NULL tak traverse karke har node print karo." },
+        "code": { "cpp": "int x; cin>>x;\nNode* head = new Node(x);\nNode* tail = head;\nfor(int i=1;i<n;i++){\n    cin>>x;\n    tail->next = new Node(x);\n    tail = tail->next;\n}\nNode* temp = head;\nwhile(temp){\n    cout<<temp->data;\n    if(temp->next) cout<<\" \";\n    temp = temp->next;\n}", "python": "head = Node(arr[0])\ntail = head\nfor i in range(1, n):\n    tail.next = Node(arr[i])\n    tail = tail.next\nresult = []\ntemp = head\nwhile temp:\n    result.append(str(temp.data))\n    temp = temp.next\nprint(' '.join(result))" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(n)"
+      },
+      "tags": ["linked-list", "basics"]
+    },
+    {
+      "id": "ll-002",
+      "title": "Insert at Beginning",
+      "titleHi": "Beginning mein Insert Karo",
+      "difficulty": "easy",
+      "description": { "en": "Given a linked list of n elements, insert a new element at the beginning and print the resulting list.", "hi": "N elements ki linked list diye hain, ek naya element beginning mein insert karo aur resulting list print karo." },
+      "examples": [
+        { "input": "4\n2 3 4 5\n1", "output": "1 2 3 4 5", "explanation": { "en": "Insert 1 at beginning of [2,3,4,5] gives [1,2,3,4,5]", "hi": "[2,3,4,5] ke beginning mein 1 insert karo to [1,2,3,4,5] milega" } }
+      ],
+      "constraints": ["1 <= n <= 10^5", "1 <= elements <= 10^9"],
+      "hints": [{ "en": "Create new node, point its next to current head, update head to new node", "hi": "Naya node banao, uska next current head ko point karo, head ko naye node pe update karo" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\nstruct Node {\n    int data;\n    Node* next;\n    Node(int val) : data(val), next(NULL) {}\n};\nint main() {\n    int n; cin>>n;\n    // Read list, read new element, insert at beginning\n}",
+        "python": "class Node:\n    def __init__(self, data):\n        self.data = data\n        self.next = None\n\nn = int(input())\narr = list(map(int, input().split()))\nval = int(input())\n# Insert val at beginning and print",
+        "java": "import java.util.*;\nclass Node {\n    int data;\n    Node next;\n    Node(int val) { data = val; next = null; }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);\nconst val = parseInt(lines[2]);",
+        "c": "#include<stdio.h>\n#include<stdlib.h>\nstruct Node {\n    int data;\n    struct Node* next;\n};\nint main() {\n    int n; scanf(\"%d\",&n);\n}"
+      },
+      "testCases": [
+        { "input": "4\n2 3 4 5\n1", "expectedOutput": "1 2 3 4 5" },
+        { "input": "3\n10 20 30\n5", "expectedOutput": "5 10 20 30" },
+        { "input": "1\n100\n50", "expectedOutput": "50 100" }
+      ],
+      "solution": {
+        "approach": { "en": "Create the linked list from input, then create a new node with the given value and set its next to current head. The new node becomes the head.", "hi": "Input se linked list banao, phir given value ka naya node banao aur uska next current head pe set karo. Naya node head ban jayega." },
+        "code": { "cpp": "// Build list\nint x; cin>>x;\nNode* head = new Node(x);\nNode* tail = head;\nfor(int i=1;i<n;i++){ cin>>x; tail->next=new Node(x); tail=tail->next; }\nint val; cin>>val;\nNode* newNode = new Node(val);\nnewNode->next = head;\nhead = newNode;\nNode* temp=head;\nwhile(temp){ cout<<temp->data; if(temp->next)cout<<\" \"; temp=temp->next; }", "python": "head = Node(arr[0])\ntail = head\nfor i in range(1, n):\n    tail.next = Node(arr[i])\n    tail = tail.next\nnew_node = Node(val)\nnew_node.next = head\nhead = new_node\nresult = []\ntemp = head\nwhile temp:\n    result.append(str(temp.data))\n    temp = temp.next\nprint(' '.join(result))" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(n)"
+      },
+      "tags": ["linked-list", "insertion"]
+    },
+    {
+      "id": "ll-003",
+      "title": "Delete a Node",
+      "titleHi": "Node Delete Karo",
+      "difficulty": "easy",
+      "description": { "en": "Given a linked list and a value, delete the first occurrence of that value and print the resulting list. If the value is not found, print the original list.", "hi": "Linked list aur ek value diye hain, us value ka pehla occurrence delete karo aur resulting list print karo. Agar value nahi mili to original list print karo." },
+      "examples": [
+        { "input": "5\n1 2 3 4 5\n3", "output": "1 2 4 5", "explanation": { "en": "Delete node with value 3 from the list", "hi": "List se value 3 wala node delete karo" } },
+        { "input": "4\n10 20 30 40\n10", "output": "20 30 40", "explanation": { "en": "Delete head node (value 10)", "hi": "Head node delete karo (value 10)" } }
+      ],
+      "constraints": ["1 <= n <= 10^5", "1 <= elements <= 10^9"],
+      "hints": [{ "en": "Handle head deletion separately. For other nodes, find the previous node and skip the target.", "hi": "Head deletion alag handle karo. Baaki nodes ke liye previous node dhundho aur target ko skip karo." }],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\nstruct Node {\n    int data;\n    Node* next;\n    Node(int val) : data(val), next(NULL) {}\n};\nint main() {\n    int n; cin>>n;\n    // Read list, read value to delete\n}",
+        "python": "class Node:\n    def __init__(self, data):\n        self.data = data\n        self.next = None\n\nn = int(input())\narr = list(map(int, input().split()))\nval = int(input())\n# Delete first occurrence of val",
+        "java": "import java.util.*;\nclass Node {\n    int data;\n    Node next;\n    Node(int val) { data = val; next = null; }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);\nconst val = parseInt(lines[2]);",
+        "c": "#include<stdio.h>\n#include<stdlib.h>\nstruct Node {\n    int data;\n    struct Node* next;\n};\nint main() {\n    int n; scanf(\"%d\",&n);\n}"
+      },
+      "testCases": [
+        { "input": "5\n1 2 3 4 5\n3", "expectedOutput": "1 2 4 5" },
+        { "input": "4\n10 20 30 40\n10", "expectedOutput": "20 30 40" },
+        { "input": "3\n5 10 15\n20", "expectedOutput": "5 10 15" },
+        { "input": "1\n42\n42", "expectedOutput": "" }
+      ],
+      "solution": {
+        "approach": { "en": "If head matches, move head to next. Otherwise traverse to find the node before the target and skip it.", "hi": "Agar head match karta hai, head ko next pe le jao. Warna traverse karke target se pehle wala node dhundho aur skip karo." },
+        "code": { "cpp": "// Build list\nint x; cin>>x;\nNode* head = new Node(x);\nNode* tail = head;\nfor(int i=1;i<n;i++){ cin>>x; tail->next=new Node(x); tail=tail->next; }\nint val; cin>>val;\nif(head->data==val){ head=head->next; }\nelse {\n    Node* temp=head;\n    while(temp->next && temp->next->data!=val) temp=temp->next;\n    if(temp->next) temp->next=temp->next->next;\n}\nNode* temp=head;\nbool first=true;\nwhile(temp){ if(!first)cout<<\" \"; cout<<temp->data; first=false; temp=temp->next; }", "python": "head = Node(arr[0])\ntail = head\nfor i in range(1, n):\n    tail.next = Node(arr[i])\n    tail = tail.next\nif head.data == val:\n    head = head.next\nelse:\n    temp = head\n    while temp.next and temp.next.data != val:\n        temp = temp.next\n    if temp.next:\n        temp.next = temp.next.next\nresult = []\ntemp = head\nwhile temp:\n    result.append(str(temp.data))\n    temp = temp.next\nprint(' '.join(result))" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(1)"
+      },
+      "tags": ["linked-list", "deletion"]
+    },
+    {
+      "id": "ll-004",
+      "title": "Reverse a Linked List",
+      "titleHi": "Linked List Ulta Karo",
+      "difficulty": "easy",
+      "description": { "en": "Given a singly linked list, reverse it and print the reversed list.", "hi": "Singly linked list diye hain, use reverse karo aur reversed list print karo." },
+      "examples": [
+        { "input": "5\n1 2 3 4 5", "output": "5 4 3 2 1", "explanation": { "en": "Reverse the list: 1->2->3->4->5 becomes 5->4->3->2->1", "hi": "List ulta karo: 1->2->3->4->5 ban jayegi 5->4->3->2->1" } }
+      ],
+      "constraints": ["1 <= n <= 10^5", "1 <= elements <= 10^9"],
+      "hints": [{ "en": "Use three pointers: prev, curr, next. Reverse the direction of each pointer.", "hi": "Teen pointers use karo: prev, curr, next. Har pointer ki direction ulta karo." }],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\nstruct Node {\n    int data;\n    Node* next;\n    Node(int val) : data(val), next(NULL) {}\n};\nint main() {\n    int n; cin>>n;\n    // Read list, reverse it, print\n}",
+        "python": "class Node:\n    def __init__(self, data):\n        self.data = data\n        self.next = None\n\nn = int(input())\narr = list(map(int, input().split()))\n# Reverse linked list and print",
+        "java": "import java.util.*;\nclass Node {\n    int data;\n    Node next;\n    Node(int val) { data = val; next = null; }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);",
+        "c": "#include<stdio.h>\n#include<stdlib.h>\nstruct Node {\n    int data;\n    struct Node* next;\n};\nint main() {\n    int n; scanf(\"%d\",&n);\n}"
+      },
+      "testCases": [
+        { "input": "5\n1 2 3 4 5", "expectedOutput": "5 4 3 2 1" },
+        { "input": "3\n10 20 30", "expectedOutput": "30 20 10" },
+        { "input": "1\n42", "expectedOutput": "42" }
+      ],
+      "solution": {
+        "approach": { "en": "Use iterative approach with prev, curr, next pointers. At each step, reverse curr's pointer to prev, then advance all three pointers.", "hi": "Iterative approach use karo prev, curr, next pointers ke saath. Har step pe curr ka pointer prev ki taraf reverse karo, phir teeno pointers ko aage badhao." },
+        "code": { "cpp": "int x; cin>>x;\nNode* head = new Node(x);\nNode* tail = head;\nfor(int i=1;i<n;i++){ cin>>x; tail->next=new Node(x); tail=tail->next; }\nNode* prev=NULL; Node* curr=head;\nwhile(curr){\n    Node* nxt=curr->next;\n    curr->next=prev;\n    prev=curr;\n    curr=nxt;\n}\nhead=prev;\nNode* temp=head;\nwhile(temp){ cout<<temp->data; if(temp->next)cout<<\" \"; temp=temp->next; }", "python": "head = Node(arr[0])\ntail = head\nfor i in range(1, n):\n    tail.next = Node(arr[i])\n    tail = tail.next\nprev = None\ncurr = head\nwhile curr:\n    nxt = curr.next\n    curr.next = prev\n    prev = curr\n    curr = nxt\nhead = prev\nresult = []\ntemp = head\nwhile temp:\n    result.append(str(temp.data))\n    temp = temp.next\nprint(' '.join(result))" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(1)"
+      },
+      "tags": ["linked-list", "reversal"]
+    },
+    {
+      "id": "ll-005",
+      "title": "Find Middle Element",
+      "titleHi": "Middle Element Dhundho",
+      "difficulty": "medium",
+      "description": { "en": "Given a singly linked list, find and print the middle element. If the list has even number of nodes, return the second middle node.", "hi": "Singly linked list diye hain, middle element dhundho aur print karo. Agar list mein even number of nodes hain, to second middle node return karo." },
+      "examples": [
+        { "input": "5\n1 2 3 4 5", "output": "3", "explanation": { "en": "Middle of [1,2,3,4,5] is 3", "hi": "[1,2,3,4,5] ka middle 3 hai" } },
+        { "input": "6\n1 2 3 4 5 6", "output": "4", "explanation": { "en": "For even length, second middle: [1,2,3,4,5,6] -> 4", "hi": "Even length ke liye second middle: [1,2,3,4,5,6] -> 4" } }
+      ],
+      "constraints": ["1 <= n <= 10^5", "1 <= elements <= 10^9"],
+      "hints": [{ "en": "Use slow and fast pointer technique. Slow moves 1 step, fast moves 2 steps. When fast reaches end, slow is at middle.", "hi": "Slow aur fast pointer technique use karo. Slow 1 step, fast 2 steps. Jab fast end pe pahunche, slow middle pe hoga." }],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\nstruct Node {\n    int data;\n    Node* next;\n    Node(int val) : data(val), next(NULL) {}\n};\nint main() {\n    int n; cin>>n;\n    // Find middle element\n}",
+        "python": "class Node:\n    def __init__(self, data):\n        self.data = data\n        self.next = None\n\nn = int(input())\narr = list(map(int, input().split()))\n# Find middle element",
+        "java": "import java.util.*;\nclass Node {\n    int data;\n    Node next;\n    Node(int val) { data = val; next = null; }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);",
+        "c": "#include<stdio.h>\n#include<stdlib.h>\nstruct Node {\n    int data;\n    struct Node* next;\n};\nint main() {\n    int n; scanf(\"%d\",&n);\n}"
+      },
+      "testCases": [
+        { "input": "5\n1 2 3 4 5", "expectedOutput": "3" },
+        { "input": "6\n1 2 3 4 5 6", "expectedOutput": "4" },
+        { "input": "1\n10", "expectedOutput": "10" },
+        { "input": "2\n1 2", "expectedOutput": "2" }
+      ],
+      "solution": {
+        "approach": { "en": "Use Floyd's slow-fast pointer. Slow moves 1 step, fast moves 2 steps. When fast reaches NULL or last node, slow points to the middle.", "hi": "Floyd's slow-fast pointer use karo. Slow 1 step, fast 2 steps. Jab fast NULL ya last node pe pahunchta hai, slow middle pe point karta hai." },
+        "code": { "cpp": "int x; cin>>x;\nNode* head = new Node(x);\nNode* tail = head;\nfor(int i=1;i<n;i++){ cin>>x; tail->next=new Node(x); tail=tail->next; }\nNode* slow=head; Node* fast=head;\nwhile(fast && fast->next){\n    slow=slow->next;\n    fast=fast->next->next;\n}\ncout<<slow->data;", "python": "head = Node(arr[0])\ntail = head\nfor i in range(1, n):\n    tail.next = Node(arr[i])\n    tail = tail.next\nslow = fast = head\nwhile fast and fast.next:\n    slow = slow.next\n    fast = fast.next.next\nprint(slow.data)" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(1)"
+      },
+      "tags": ["linked-list", "two-pointers", "fast-slow"]
+    },
+    {
+      "id": "ll-006",
+      "title": "Detect Cycle in Linked List",
+      "titleHi": "Linked List mein Cycle Detect Karo",
+      "difficulty": "medium",
+      "description": { "en": "Given a linked list, determine if it has a cycle. The input gives n nodes and a position pos (0-indexed) where the tail connects to. If pos is -1, there is no cycle. Print 'true' if cycle exists, 'false' otherwise.", "hi": "Linked list diye hain, check karo usme cycle hai ya nahi. Input mein n nodes hain aur ek position pos (0-indexed) jahan tail connect hota hai. Agar pos -1 hai to cycle nahi hai. Cycle hai to 'true' print karo, nahi to 'false'." },
+      "examples": [
+        { "input": "4\n3 2 0 4\n1", "output": "true", "explanation": { "en": "Tail connects to node at index 1 (value 2), forming a cycle", "hi": "Tail index 1 pe (value 2) connect hota hai, cycle ban jaata hai" } },
+        { "input": "3\n1 2 3\n-1", "output": "false", "explanation": { "en": "No cycle, pos is -1", "hi": "Koi cycle nahi hai, pos -1 hai" } }
+      ],
+      "constraints": ["1 <= n <= 10^5", "-1 <= pos < n"],
+      "hints": [{ "en": "Use Floyd's cycle detection: slow pointer moves 1 step, fast moves 2 steps. If they meet, cycle exists.", "hi": "Floyd's cycle detection use karo: slow 1 step, fast 2 steps. Agar milte hain to cycle hai." }],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\nstruct Node {\n    int data;\n    Node* next;\n    Node(int val) : data(val), next(NULL) {}\n};\nint main() {\n    int n; cin>>n;\n    // Read list and pos, detect cycle\n}",
+        "python": "class Node:\n    def __init__(self, data):\n        self.data = data\n        self.next = None\n\nn = int(input())\narr = list(map(int, input().split()))\npos = int(input())\n# Detect cycle",
+        "java": "import java.util.*;\nclass Node {\n    int data;\n    Node next;\n    Node(int val) { data = val; next = null; }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);\nconst pos = parseInt(lines[2]);",
+        "c": "#include<stdio.h>\n#include<stdlib.h>\nstruct Node {\n    int data;\n    struct Node* next;\n};\nint main() {\n    int n; scanf(\"%d\",&n);\n}"
+      },
+      "testCases": [
+        { "input": "4\n3 2 0 4\n1", "expectedOutput": "true" },
+        { "input": "3\n1 2 3\n-1", "expectedOutput": "false" },
+        { "input": "2\n1 2\n0", "expectedOutput": "true" },
+        { "input": "1\n1\n-1", "expectedOutput": "false" }
+      ],
+      "solution": {
+        "approach": { "en": "Build the list and create cycle if pos >= 0. Use Floyd's algorithm with slow (1 step) and fast (2 steps) pointers. If they meet, cycle exists.", "hi": "List banao aur agar pos >= 0 hai to cycle banao. Floyd's algorithm use karo slow (1 step) aur fast (2 steps) pointers ke saath. Agar milte hain to cycle hai." },
+        "code": { "cpp": "int x;\nNode* head = NULL; Node* tail = NULL;\nNode* nodes[n];\nfor(int i=0;i<n;i++){\n    cin>>x;\n    nodes[i]=new Node(x);\n    if(!head) head=tail=nodes[i];\n    else { tail->next=nodes[i]; tail=nodes[i]; }\n}\nint pos; cin>>pos;\nif(pos>=0) tail->next=nodes[pos];\nNode* slow=head; Node* fast=head;\nbool cycle=false;\nwhile(fast&&fast->next){\n    slow=slow->next; fast=fast->next->next;\n    if(slow==fast){cycle=true;break;}\n}\ncout<<(cycle?\"true\":\"false\");", "python": "nodes = [Node(x) for x in arr]\nfor i in range(n-1):\n    nodes[i].next = nodes[i+1]\nif pos >= 0:\n    nodes[-1].next = nodes[pos]\nhead = nodes[0]\nslow = fast = head\ncycle = False\nwhile fast and fast.next:\n    slow = slow.next\n    fast = fast.next.next\n    if slow == fast:\n        cycle = True\n        break\nprint('true' if cycle else 'false')" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(1)"
+      },
+      "tags": ["linked-list", "two-pointers", "fast-slow", "cycle-detection"]
+    },
+    {
+      "id": "ll-007",
+      "title": "Merge Two Sorted Linked Lists",
+      "titleHi": "Do Sorted Linked Lists Merge Karo",
+      "difficulty": "medium",
+      "description": { "en": "Given two sorted linked lists, merge them into a single sorted linked list and print the result.", "hi": "Do sorted linked lists diye hain, unhe ek single sorted linked list mein merge karo aur result print karo." },
+      "examples": [
+        { "input": "3\n1 3 5\n3\n2 4 6", "output": "1 2 3 4 5 6", "explanation": { "en": "Merge [1,3,5] and [2,4,6] into [1,2,3,4,5,6]", "hi": "[1,3,5] aur [2,4,6] ko merge karo [1,2,3,4,5,6] mein" } }
+      ],
+      "constraints": ["0 <= n, m <= 10^5", "Lists are sorted in ascending order"],
+      "hints": [{ "en": "Use a dummy node. Compare heads of both lists, attach smaller one and advance that pointer.", "hi": "Dummy node use karo. Dono lists ke heads compare karo, chhota wala attach karo aur us pointer ko aage badhao." }],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\nstruct Node {\n    int data;\n    Node* next;\n    Node(int val) : data(val), next(NULL) {}\n};\nint main() {\n    int n; cin>>n;\n    // Read two sorted lists, merge them\n}",
+        "python": "class Node:\n    def __init__(self, data):\n        self.data = data\n        self.next = None\n\nn = int(input())\narr1 = list(map(int, input().split())) if n > 0 else []\nm = int(input())\narr2 = list(map(int, input().split())) if m > 0 else []\n# Merge two sorted lists",
+        "java": "import java.util.*;\nclass Node {\n    int data;\n    Node next;\n    Node(int val) { data = val; next = null; }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr1 = n > 0 ? lines[1].split(' ').map(Number) : [];",
+        "c": "#include<stdio.h>\n#include<stdlib.h>\nstruct Node {\n    int data;\n    struct Node* next;\n};\nint main() {\n    int n; scanf(\"%d\",&n);\n}"
+      },
+      "testCases": [
+        { "input": "3\n1 3 5\n3\n2 4 6", "expectedOutput": "1 2 3 4 5 6" },
+        { "input": "2\n1 4\n4\n1 2 3 4", "expectedOutput": "1 1 2 3 4 4" },
+        { "input": "0\n\n3\n1 2 3", "expectedOutput": "1 2 3" },
+        { "input": "3\n5 10 15\n2\n3 12", "expectedOutput": "3 5 10 12 15" }
+      ],
+      "solution": {
+        "approach": { "en": "Create a dummy node. Iterate both lists, always picking the smaller head and advancing that pointer. Attach remaining nodes at end.", "hi": "Dummy node banao. Dono lists iterate karo, hamesha chhota head pick karo aur us pointer ko aage badhao. End mein bache hue nodes attach karo." },
+        "code": { "cpp": "// Build list1\nNode* h1=NULL; Node* t1=NULL;\nfor(int i=0;i<n;i++){int x;cin>>x;Node* nd=new Node(x);if(!h1)h1=t1=nd;else{t1->next=nd;t1=nd;}}\nint m;cin>>m;\nNode* h2=NULL; Node* t2=NULL;\nfor(int i=0;i<m;i++){int x;cin>>x;Node* nd=new Node(x);if(!h2)h2=t2=nd;else{t2->next=nd;t2=nd;}}\nNode dummy(0); Node* tail=&dummy;\nwhile(h1&&h2){\n    if(h1->data<=h2->data){tail->next=h1;h1=h1->next;}\n    else{tail->next=h2;h2=h2->next;}\n    tail=tail->next;\n}\ntail->next=h1?h1:h2;\nNode* temp=dummy.next;\nwhile(temp){cout<<temp->data;if(temp->next)cout<<\" \";temp=temp->next;}", "python": "def build(arr):\n    if not arr: return None\n    head = Node(arr[0])\n    tail = head\n    for x in arr[1:]:\n        tail.next = Node(x)\n        tail = tail.next\n    return head\nh1, h2 = build(arr1), build(arr2)\ndummy = Node(0)\ntail = dummy\nwhile h1 and h2:\n    if h1.data <= h2.data:\n        tail.next = h1; h1 = h1.next\n    else:\n        tail.next = h2; h2 = h2.next\n    tail = tail.next\ntail.next = h1 if h1 else h2\nresult = []\ntemp = dummy.next\nwhile temp:\n    result.append(str(temp.data))\n    temp = temp.next\nprint(' '.join(result))" },
+        "timeComplexity": "O(n + m)", "spaceComplexity": "O(1)"
+      },
+      "tags": ["linked-list", "merge", "two-pointers"]
+    },
+    {
+      "id": "ll-008",
+      "title": "Remove Nth Node from End",
+      "titleHi": "End se Nth Node Hatao",
+      "difficulty": "medium",
+      "description": { "en": "Given a linked list, remove the nth node from the end and print the resulting list.", "hi": "Linked list diye hain, end se nth node hatao aur resulting list print karo." },
+      "examples": [
+        { "input": "5\n1 2 3 4 5\n2", "output": "1 2 3 5", "explanation": { "en": "Remove 2nd node from end (value 4)", "hi": "End se 2nd node hatao (value 4)" } },
+        { "input": "3\n1 2 3\n3", "output": "2 3", "explanation": { "en": "Remove 3rd from end which is the head", "hi": "End se 3rd hatao jo head hai" } }
+      ],
+      "constraints": ["1 <= n <= length of list", "1 <= elements <= 10^9"],
+      "hints": [{ "en": "Use two pointers: move fast pointer n steps ahead, then move both until fast reaches end. Slow's next is the target.", "hi": "Do pointers use karo: fast ko n steps aage bhejo, phir dono ko chalao jab tak fast end pe na pahunch jaye. Slow ka next target hai." }],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\nstruct Node {\n    int data;\n    Node* next;\n    Node(int val) : data(val), next(NULL) {}\n};\nint main() {\n    int n; cin>>n;\n    // Read list and k, remove kth from end\n}",
+        "python": "class Node:\n    def __init__(self, data):\n        self.data = data\n        self.next = None\n\nn = int(input())\narr = list(map(int, input().split()))\nk = int(input())\n# Remove kth from end",
+        "java": "import java.util.*;\nclass Node {\n    int data;\n    Node next;\n    Node(int val) { data = val; next = null; }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);\nconst k = parseInt(lines[2]);",
+        "c": "#include<stdio.h>\n#include<stdlib.h>\nstruct Node {\n    int data;\n    struct Node* next;\n};\nint main() {\n    int n; scanf(\"%d\",&n);\n}"
+      },
+      "testCases": [
+        { "input": "5\n1 2 3 4 5\n2", "expectedOutput": "1 2 3 5" },
+        { "input": "3\n1 2 3\n3", "expectedOutput": "2 3" },
+        { "input": "1\n1\n1", "expectedOutput": "" },
+        { "input": "4\n10 20 30 40\n1", "expectedOutput": "10 20 30" }
+      ],
+      "solution": {
+        "approach": { "en": "Use a dummy node before head. Move fast k steps ahead, then move both slow and fast until fast reaches the last node. Now slow->next is the target node to remove.", "hi": "Head se pehle dummy node use karo. Fast ko k steps aage bhejo, phir slow aur fast dono ko chalao jab tak fast last node pe na pahunch jaye. Ab slow->next target node hai jise remove karna hai." },
+        "code": { "cpp": "int x; cin>>x;\nNode* head=new Node(x);\nNode* tail=head;\nfor(int i=1;i<n;i++){cin>>x;tail->next=new Node(x);tail=tail->next;}\nint k; cin>>k;\nNode dummy(0); dummy.next=head;\nNode* fast=&dummy; Node* slow=&dummy;\nfor(int i=0;i<k;i++) fast=fast->next;\nwhile(fast->next){slow=slow->next;fast=fast->next;}\nslow->next=slow->next->next;\nhead=dummy.next;\nNode* temp=head;\nbool first=true;\nwhile(temp){if(!first)cout<<\" \";cout<<temp->data;first=false;temp=temp->next;}", "python": "head = Node(arr[0])\ntail = head\nfor i in range(1, n):\n    tail.next = Node(arr[i])\n    tail = tail.next\ndummy = Node(0)\ndummy.next = head\nfast = slow = dummy\nfor _ in range(k):\n    fast = fast.next\nwhile fast.next:\n    slow = slow.next\n    fast = fast.next\nslow.next = slow.next.next\nhead = dummy.next\nresult = []\ntemp = head\nwhile temp:\n    result.append(str(temp.data))\n    temp = temp.next\nprint(' '.join(result))" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(1)"
+      },
+      "tags": ["linked-list", "two-pointers"]
+    },
+    {
+      "id": "ll-009",
+      "title": "Palindrome Linked List",
+      "titleHi": "Palindrome Linked List Check Karo",
+      "difficulty": "medium",
+      "description": { "en": "Given a singly linked list, check if it is a palindrome. Print 'true' if it is, 'false' otherwise.", "hi": "Singly linked list diye hain, check karo wo palindrome hai ya nahi. Agar hai to 'true' print karo, nahi to 'false'." },
+      "examples": [
+        { "input": "5\n1 2 3 2 1", "output": "true", "explanation": { "en": "1->2->3->2->1 reads same forward and backward", "hi": "1->2->3->2->1 aage se aur peeche se same padhte hain" } },
+        { "input": "4\n1 2 3 4", "output": "false", "explanation": { "en": "1->2->3->4 is not a palindrome", "hi": "1->2->3->4 palindrome nahi hai" } }
+      ],
+      "constraints": ["1 <= n <= 10^5", "0 <= elements <= 10^9"],
+      "hints": [
+        { "en": "Find the middle using slow-fast pointer, reverse the second half, then compare both halves", "hi": "Slow-fast pointer se middle dhundho, second half reverse karo, phir dono halves compare karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\nstruct Node {\n    int data;\n    Node* next;\n    Node(int val) : data(val), next(NULL) {}\n};\nint main() {\n    int n; cin>>n;\n    // Check if linked list is palindrome\n}",
+        "python": "class Node:\n    def __init__(self, data):\n        self.data = data\n        self.next = None\n\nn = int(input())\narr = list(map(int, input().split()))\n# Check if palindrome",
+        "java": "import java.util.*;\nclass Node {\n    int data;\n    Node next;\n    Node(int val) { data = val; next = null; }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);",
+        "c": "#include<stdio.h>\n#include<stdlib.h>\nstruct Node {\n    int data;\n    struct Node* next;\n};\nint main() {\n    int n; scanf(\"%d\",&n);\n}"
+      },
+      "testCases": [
+        { "input": "5\n1 2 3 2 1", "expectedOutput": "true" },
+        { "input": "4\n1 2 3 4", "expectedOutput": "false" },
+        { "input": "1\n5", "expectedOutput": "true" },
+        { "input": "4\n1 2 2 1", "expectedOutput": "true" }
+      ],
+      "solution": {
+        "approach": { "en": "Find middle with slow-fast pointers, reverse second half, compare first and second halves node by node.", "hi": "Slow-fast pointers se middle dhundho, second half reverse karo, dono halves ko node by node compare karo." },
+        "code": { "cpp": "int x; cin>>x;\nNode* head=new Node(x);\nNode* tail=head;\nfor(int i=1;i<n;i++){cin>>x;tail->next=new Node(x);tail=tail->next;}\n// Find middle\nNode* slow=head; Node* fast=head;\nwhile(fast&&fast->next){slow=slow->next;fast=fast->next->next;}\n// Reverse second half\nNode* prev=NULL; Node* curr=slow;\nwhile(curr){Node* nxt=curr->next;curr->next=prev;prev=curr;curr=nxt;}\n// Compare\nNode* l=head; Node* r=prev;\nbool pal=true;\nwhile(r){if(l->data!=r->data){pal=false;break;}l=l->next;r=r->next;}\ncout<<(pal?\"true\":\"false\");", "python": "head = Node(arr[0])\ntail = head\nfor i in range(1, n):\n    tail.next = Node(arr[i])\n    tail = tail.next\n# Find middle\nslow = fast = head\nwhile fast and fast.next:\n    slow = slow.next\n    fast = fast.next.next\n# Reverse second half\nprev = None\ncurr = slow\nwhile curr:\n    nxt = curr.next\n    curr.next = prev\n    prev = curr\n    curr = nxt\n# Compare\nl, r = head, prev\npal = True\nwhile r:\n    if l.data != r.data:\n        pal = False\n        break\n    l = l.next\n    r = r.next\nprint('true' if pal else 'false')" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(1)"
+      },
+      "tags": ["linked-list", "two-pointers", "fast-slow", "palindrome"]
+    },
+    {
+      "id": "ll-010",
+      "title": "Flatten a Multilevel Linked List",
+      "titleHi": "Multilevel Linked List Flatten Karo",
+      "difficulty": "hard",
+      "description": { "en": "You are given a linked list where each node has a next pointer and a bottom pointer. Each bottom pointer leads to a sorted sub-list. Flatten the list into a single sorted linked list using bottom pointers. Print the flattened sorted list.", "hi": "Ek linked list diye hain jisme har node ka next pointer aur bottom pointer hai. Har bottom pointer ek sorted sub-list ki taraf jaata hai. List ko ek single sorted linked list mein flatten karo bottom pointers use karke. Flattened sorted list print karo." },
+      "examples": [
+        { "input": "4\n5 10 19 28\n3\n7 8 30\n2\n20 22\n1\n35\n2\n40 45", "output": "5 7 8 10 19 20 22 28 30 35 40 45", "explanation": { "en": "Merge all sorted sub-lists into one sorted list: 5->7->8->10->19->20->22->28->30->35->40->45", "hi": "Saari sorted sub-lists ko ek sorted list mein merge karo: 5->7->8->10->19->20->22->28->30->35->40->45" } }
+      ],
+      "constraints": ["1 <= total nodes <= 10^5", "Sub-lists are sorted"],
+      "hints": [
+        { "en": "Start from the last two sub-lists, merge them. Then merge result with the third-last, and so on.", "hi": "Last do sub-lists se shuru karo, unhe merge karo. Phir result ko third-last ke saath merge karo, aur aage bhi aise hi." },
+        { "en": "This is like merging k sorted lists. You can use the merge function from merge sort repeatedly.", "hi": "Ye k sorted lists merge karne jaisa hai. Merge sort ka merge function baar baar use kar sakte ho." }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\nusing namespace std;\nstruct Node {\n    int data;\n    Node* next;\n    Node* bottom;\n    Node(int val) : data(val), next(NULL), bottom(NULL) {}\n};\nint main() {\n    // Read the multilevel structure and flatten\n}",
+        "python": "class Node:\n    def __init__(self, data):\n        self.data = data\n        self.next = None\n        self.bottom = None\n\n# Read input and flatten the multilevel list",
+        "java": "import java.util.*;\nclass Node {\n    int data;\n    Node next, bottom;\n    Node(int val) { data = val; next = null; bottom = null; }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+        "javascript": "class Node {\n    constructor(data) {\n        this.data = data;\n        this.next = null;\n        this.bottom = null;\n    }\n}\nconst lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');",
+        "c": "#include<stdio.h>\n#include<stdlib.h>\nstruct Node {\n    int data;\n    struct Node* next;\n    struct Node* bottom;\n};\nint main() {\n}"
+      },
+      "testCases": [
+        { "input": "4\n5 10 19 28\n3\n7 8 30\n2\n20 22\n1\n35\n2\n40 45", "expectedOutput": "5 7 8 10 19 20 22 28 30 35 40 45" },
+        { "input": "3\n1 5 9\n2\n2 6\n2\n3 7\n1\n10", "expectedOutput": "1 2 3 5 6 7 9 10" }
+      ],
+      "solution": {
+        "approach": { "en": "Use merge function from merge sort. Start from the rightmost two lists, merge them, then merge the result with the next list moving left. Repeat until all lists are merged into one sorted list.", "hi": "Merge sort ka merge function use karo. Rightmost do lists se shuru karo, merge karo, phir result ko next list ke saath merge karo left ki taraf. Repeat karo jab tak saari lists ek sorted list mein merge na ho jaayein." },
+        "code": { "cpp": "Node* merge(Node* a, Node* b) {\n    if(!a) return b;\n    if(!b) return a;\n    Node* result;\n    if(a->data <= b->data) {\n        result = a;\n        result->bottom = merge(a->bottom, b);\n    } else {\n        result = b;\n        result->bottom = merge(a, b->bottom);\n    }\n    result->next = NULL;\n    return result;\n}\n\nNode* flatten(Node* head) {\n    if(!head || !head->next) return head;\n    head->next = flatten(head->next);\n    head = merge(head, head->next);\n    return head;\n}\n// Call flatten(head) and print using bottom pointers", "python": "def merge(a, b):\n    if not a: return b\n    if not b: return a\n    if a.data <= b.data:\n        result = a\n        result.bottom = merge(a.bottom, b)\n    else:\n        result = b\n        result.bottom = merge(a, b.bottom)\n    result.next = None\n    return result\n\ndef flatten(head):\n    if not head or not head.next:\n        return head\n    head.next = flatten(head.next)\n    head = merge(head, head.next)\n    return head\n\n# Call flatten(head) and print using bottom pointers\nnode = flatten(head)\nresult = []\nwhile node:\n    result.append(str(node.data))\n    node = node.bottom\nprint(' '.join(result))" },
+        "timeComplexity": "O(n * m) where n is number of sub-lists, m is average length", "spaceComplexity": "O(1) extra space (ignoring recursion stack)"
+      },
+      "tags": ["linked-list", "merge", "recursion", "hard"]
+    }
+  ]
+}

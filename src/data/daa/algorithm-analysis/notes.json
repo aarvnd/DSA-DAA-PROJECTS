@@ -1,0 +1,186 @@
+{
+  "topicId": "algorithm-analysis",
+  "title": {
+    "en": "Algorithm Analysis - Complete Guide",
+    "hi": "Algorithm Analysis - Poori Jaankari"
+  },
+  "introduction": {
+    "en": "Algorithm Analysis is the process of determining the computational complexity of algorithms — the amount of time and space they require. It helps us compare algorithms, predict performance, and choose the best approach for a given problem. Understanding algorithm analysis is fundamental to writing efficient code.",
+    "hi": "Algorithm Analysis ek process hai jisme hum algorithms ki computational complexity nikalte hain — matlab kitna time aur space lagega. Isse hum algorithms compare kar sakte hain, performance predict kar sakte hain, aur kisi problem ke liye best approach choose kar sakte hain. Efficient code likhne ke liye algorithm analysis samajhna bohot zaroori hai."
+  },
+  "realLifeAnalogy": {
+    "en": "Imagine you need to find a word in a dictionary. You could flip every page from the beginning (linear search — slow), or you could open the middle, decide if the word comes before or after, and keep halving (binary search — fast). Algorithm analysis helps you figure out which approach is better and by how much, before you even start searching!",
+    "hi": "Socho tumhe dictionary mein ek word dhundhna hai. Tum pehle page se har page palat sakte ho (linear search — slow), ya beech mein kholke dekh sakte ho ki word pehle hai ya baad mein, aur aise half karte jao (binary search — fast). Algorithm analysis tumhe bina search shuru kiye bata deta hai ki kaunsa tarika kitna better hai!"
+  },
+  "sections": [
+    {
+      "id": "what-is-algorithm-analysis",
+      "title": {
+        "en": "What is Algorithm Analysis?",
+        "hi": "Algorithm Analysis kya hai?"
+      },
+      "content": {
+        "en": "Algorithm Analysis is the study of how an algorithm's resource consumption (time and space) grows as the input size increases. Instead of measuring actual running time (which depends on hardware), we count the number of basic operations.\n\n**Why Analyze Algorithms?**\n- To compare different solutions for the same problem\n- To predict performance for large inputs\n- To identify bottlenecks in code\n- To make informed design decisions\n\n**Two Main Resources:**\n1. **Time Complexity** — How many operations does the algorithm perform?\n2. **Space Complexity** — How much extra memory does the algorithm use?\n\nWe express complexity as a function of input size `n` using asymptotic notation (like Big-O).",
+        "hi": "Algorithm Analysis mein hum study karte hain ki jaise-jaise input size badhta hai, algorithm kitna time aur space leta hai. Actual running time measure karne ki jagah (jo hardware pe depend karta hai), hum basic operations count karte hain.\n\n**Algorithms Analyze Kyun Karein?**\n- Ek hi problem ke alag-alag solutions compare karne ke liye\n- Bade inputs ke liye performance predict karne ke liye\n- Code mein bottlenecks dhundhne ke liye\n- Sahi design decisions lene ke liye\n\n**Do Main Resources:**\n1. **Time Complexity** — Algorithm kitne operations perform karta hai?\n2. **Space Complexity** — Algorithm kitni extra memory use karta hai?\n\nComplexity ko hum input size `n` ke function ke roop mein likhte hain asymptotic notation (jaise Big-O) use karke."
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\nusing namespace std;\n\n// Example: Counting basic operations\n// Find sum of array - kitne operations hote hain?\nint sumArray(int arr[], int n) {\n    int sum = 0;           // 1 operation (assignment)\n    for (int i = 0; i < n; i++) {  // n+1 comparisons, n increments\n        sum += arr[i];     // n additions, n array accesses\n    }\n    return sum;            // 1 operation\n    // Total: ~3n + 3 operations => O(n)\n}\n\nint main() {\n    int arr[] = {1, 2, 3, 4, 5};\n    cout << \"Sum: \" << sumArray(arr, 5) << endl;\n    return 0;\n}",
+        "python": "# Example: Counting basic operations\n# Find sum of array - kitne operations hote hain?\ndef sum_array(arr):\n    total = 0              # 1 operation (assignment)\n    for x in arr:          # n iterations\n        total += x         # n additions\n    return total           # 1 operation\n    # Total: ~2n + 2 operations => O(n)\n\narr = [1, 2, 3, 4, 5]\nprint(\"Sum:\", sum_array(arr))",
+        "java": "public class Main {\n    // Example: Counting basic operations\n    public static int sumArray(int[] arr) {\n        int sum = 0;           // 1 operation\n        for (int i = 0; i < arr.length; i++) {  // n+1 comparisons\n            sum += arr[i];     // n additions\n        }\n        return sum;            // 1 operation\n        // Total: ~3n + 3 operations => O(n)\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {1, 2, 3, 4, 5};\n        System.out.println(\"Sum: \" + sumArray(arr));\n    }\n}",
+        "javascript": "// Example: Counting basic operations\nfunction sumArray(arr) {\n    let sum = 0;              // 1 operation\n    for (let i = 0; i < arr.length; i++) {  // n+1 comparisons\n        sum += arr[i];        // n additions\n    }\n    return sum;               // 1 operation\n    // Total: ~3n + 3 => O(n)\n}\n\nconst arr = [1, 2, 3, 4, 5];\nconsole.log(\"Sum:\", sumArray(arr));",
+        "c": "#include <stdio.h>\n\n// Example: Counting basic operations\nint sumArray(int arr[], int n) {\n    int sum = 0;           // 1 operation\n    for (int i = 0; i < n; i++) {  // n+1 comparisons\n        sum += arr[i];     // n additions\n    }\n    return sum;            // 1 operation\n    // Total: ~3n + 3 => O(n)\n}\n\nint main() {\n    int arr[] = {1, 2, 3, 4, 5};\n    printf(\"Sum: %d\\n\", sumArray(arr, 5));\n    return 0;\n}"
+      },
+      "keyPoints": [
+        {
+          "en": "We analyze algorithms based on input size n, not actual running time",
+          "hi": "Hum algorithms ko input size n ke basis pe analyze karte hain, actual running time pe nahi"
+        },
+        {
+          "en": "Time Complexity counts operations; Space Complexity counts extra memory used",
+          "hi": "Time Complexity operations count karti hai; Space Complexity extra memory count karti hai"
+        },
+        {
+          "en": "We ignore constants and lower-order terms (3n + 5 becomes O(n))",
+          "hi": "Hum constants aur lower-order terms ignore karte hain (3n + 5 ban jaata hai O(n))"
+        },
+        {
+          "en": "Analysis helps compare algorithms without running them on actual hardware",
+          "hi": "Analysis se hum bina actual hardware pe chalaye algorithms compare kar sakte hain"
+        }
+      ],
+      "timeComplexity": {
+        "constantOps": "O(1)",
+        "singleLoop": "O(n)",
+        "nestedLoop": "O(n^2)",
+        "note": "Depends on algorithm structure"
+      }
+    },
+    {
+      "id": "big-o-notation",
+      "title": {
+        "en": "Big-O Notation",
+        "hi": "Big-O Notation"
+      },
+      "content": {
+        "en": "Big-O notation describes the upper bound of an algorithm's growth rate. It tells us the worst-case scenario for how time or space grows with input size.\n\n**Common Complexities (from fastest to slowest):**\n- **O(1)** — Constant: Array access, hash map lookup\n- **O(log n)** — Logarithmic: Binary search\n- **O(n)** — Linear: Linear search, single loop\n- **O(n log n)** — Linearithmic: Merge sort, efficient sorting\n- **O(n^2)** — Quadratic: Bubble sort, nested loops\n- **O(2^n)** — Exponential: Recursive Fibonacci, subsets\n- **O(n!)** — Factorial: Generating permutations\n\n**Rules for Big-O:**\n1. Drop constants: O(2n) = O(n)\n2. Drop lower-order terms: O(n^2 + n) = O(n^2)\n3. Different inputs use different variables: O(a + b)\n4. Multiply for nested operations: O(n * m)",
+        "hi": "Big-O notation ek algorithm ke growth rate ki upper bound batata hai. Ye batata hai ki worst case mein time ya space input size ke saath kaise badhta hai.\n\n**Common Complexities (fastest se slowest):**\n- **O(1)** — Constant: Array access, hash map lookup\n- **O(log n)** — Logarithmic: Binary search\n- **O(n)** — Linear: Linear search, single loop\n- **O(n log n)** — Linearithmic: Merge sort, efficient sorting\n- **O(n^2)** — Quadratic: Bubble sort, nested loops\n- **O(2^n)** — Exponential: Recursive Fibonacci, subsets\n- **O(n!)** — Factorial: Permutations generate karna\n\n**Big-O ke Rules:**\n1. Constants drop karo: O(2n) = O(n)\n2. Lower-order terms drop karo: O(n^2 + n) = O(n^2)\n3. Alag inputs ke liye alag variables: O(a + b)\n4. Nested operations ke liye multiply karo: O(n * m)"
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\n// O(1) - Constant Time\nint getFirst(int arr[], int n) {\n    return arr[0];  // Always 1 operation, regardless of n\n}\n\n// O(log n) - Logarithmic Time\nint binarySearch(int arr[], int n, int target) {\n    int lo = 0, hi = n - 1;\n    while (lo <= hi) {\n        int mid = lo + (hi - lo) / 2;\n        if (arr[mid] == target) return mid;\n        else if (arr[mid] < target) lo = mid + 1;\n        else hi = mid - 1;\n    }\n    return -1;  // Array har step mein half ho raha hai\n}\n\n// O(n) - Linear Time\nint linearSearch(int arr[], int n, int target) {\n    for (int i = 0; i < n; i++) {\n        if (arr[i] == target) return i;\n    }\n    return -1;  // Worst case: saare elements check\n}\n\n// O(n^2) - Quadratic Time\nvoid bubbleSort(int arr[], int n) {\n    for (int i = 0; i < n - 1; i++) {\n        for (int j = 0; j < n - i - 1; j++) {\n            if (arr[j] > arr[j + 1])\n                swap(arr[j], arr[j + 1]);\n        }\n    }\n}\n\nint main() {\n    int arr[] = {1, 3, 5, 7, 9, 11};\n    int n = 6;\n    cout << \"First: \" << getFirst(arr, n) << endl;           // O(1)\n    cout << \"Binary Search 7: \" << binarySearch(arr, n, 7) << endl; // O(log n)\n    cout << \"Linear Search 7: \" << linearSearch(arr, n, 7) << endl; // O(n)\n    bubbleSort(arr, n);  // O(n^2)\n    return 0;\n}",
+        "python": "# O(1) - Constant Time\ndef get_first(arr):\n    return arr[0]  # Always 1 operation\n\n# O(log n) - Logarithmic Time\ndef binary_search(arr, target):\n    lo, hi = 0, len(arr) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if arr[mid] == target:\n            return mid\n        elif arr[mid] < target:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1  # Har step mein array half\n\n# O(n) - Linear Time\ndef linear_search(arr, target):\n    for i, x in enumerate(arr):\n        if x == target:\n            return i\n    return -1  # Worst case: saare check\n\n# O(n^2) - Quadratic Time\ndef bubble_sort(arr):\n    n = len(arr)\n    for i in range(n - 1):\n        for j in range(n - i - 1):\n            if arr[j] > arr[j + 1]:\n                arr[j], arr[j + 1] = arr[j + 1], arr[j]\n    return arr\n\narr = [1, 3, 5, 7, 9, 11]\nprint(\"First:\", get_first(arr))              # O(1)\nprint(\"Binary Search 7:\", binary_search(arr, 7))  # O(log n)\nprint(\"Linear Search 7:\", linear_search(arr, 7))  # O(n)\nprint(\"Bubble Sorted:\", bubble_sort(arr[:]))       # O(n^2)",
+        "java": "public class Main {\n    // O(1) - Constant Time\n    static int getFirst(int[] arr) {\n        return arr[0];\n    }\n\n    // O(log n) - Logarithmic Time\n    static int binarySearch(int[] arr, int target) {\n        int lo = 0, hi = arr.length - 1;\n        while (lo <= hi) {\n            int mid = lo + (hi - lo) / 2;\n            if (arr[mid] == target) return mid;\n            else if (arr[mid] < target) lo = mid + 1;\n            else hi = mid - 1;\n        }\n        return -1;\n    }\n\n    // O(n) - Linear Time\n    static int linearSearch(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) return i;\n        }\n        return -1;\n    }\n\n    // O(n^2) - Quadratic Time\n    static void bubbleSort(int[] arr) {\n        int n = arr.length;\n        for (int i = 0; i < n - 1; i++)\n            for (int j = 0; j < n - i - 1; j++)\n                if (arr[j] > arr[j + 1]) {\n                    int tmp = arr[j]; arr[j] = arr[j + 1]; arr[j + 1] = tmp;\n                }\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {1, 3, 5, 7, 9, 11};\n        System.out.println(\"First: \" + getFirst(arr));\n        System.out.println(\"Binary Search 7: \" + binarySearch(arr, 7));\n        System.out.println(\"Linear Search 7: \" + linearSearch(arr, 7));\n    }\n}",
+        "javascript": "// O(1) - Constant Time\nfunction getFirst(arr) {\n    return arr[0];\n}\n\n// O(log n) - Logarithmic Time\nfunction binarySearch(arr, target) {\n    let lo = 0, hi = arr.length - 1;\n    while (lo <= hi) {\n        const mid = Math.floor((lo + hi) / 2);\n        if (arr[mid] === target) return mid;\n        else if (arr[mid] < target) lo = mid + 1;\n        else hi = mid - 1;\n    }\n    return -1;\n}\n\n// O(n) - Linear Time\nfunction linearSearch(arr, target) {\n    for (let i = 0; i < arr.length; i++) {\n        if (arr[i] === target) return i;\n    }\n    return -1;\n}\n\n// O(n^2) - Quadratic Time\nfunction bubbleSort(arr) {\n    const n = arr.length;\n    for (let i = 0; i < n - 1; i++)\n        for (let j = 0; j < n - i - 1; j++)\n            if (arr[j] > arr[j + 1])\n                [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];\n    return arr;\n}\n\nconst arr = [1, 3, 5, 7, 9, 11];\nconsole.log(\"First:\", getFirst(arr));\nconsole.log(\"Binary Search 7:\", binarySearch(arr, 7));\nconsole.log(\"Linear Search 7:\", linearSearch(arr, 7));",
+        "c": "#include <stdio.h>\n\n// O(1) - Constant Time\nint getFirst(int arr[], int n) {\n    return arr[0];\n}\n\n// O(log n) - Logarithmic Time\nint binarySearch(int arr[], int n, int target) {\n    int lo = 0, hi = n - 1;\n    while (lo <= hi) {\n        int mid = lo + (hi - lo) / 2;\n        if (arr[mid] == target) return mid;\n        else if (arr[mid] < target) lo = mid + 1;\n        else hi = mid - 1;\n    }\n    return -1;\n}\n\n// O(n) - Linear Time\nint linearSearch(int arr[], int n, int target) {\n    for (int i = 0; i < n; i++)\n        if (arr[i] == target) return i;\n    return -1;\n}\n\n// O(n^2) - Quadratic Time\nvoid bubbleSort(int arr[], int n) {\n    for (int i = 0; i < n - 1; i++)\n        for (int j = 0; j < n - i - 1; j++)\n            if (arr[j] > arr[j + 1]) {\n                int tmp = arr[j]; arr[j] = arr[j + 1]; arr[j + 1] = tmp;\n            }\n}\n\nint main() {\n    int arr[] = {1, 3, 5, 7, 9, 11};\n    int n = 6;\n    printf(\"First: %d\\n\", getFirst(arr, n));\n    printf(\"Binary Search 7: %d\\n\", binarySearch(arr, n, 7));\n    printf(\"Linear Search 7: %d\\n\", linearSearch(arr, n, 7));\n    return 0;\n}"
+      },
+      "keyPoints": [
+        {
+          "en": "Big-O represents the upper bound (worst case) of growth rate",
+          "hi": "Big-O growth rate ki upper bound (worst case) represent karta hai"
+        },
+        {
+          "en": "O(1) < O(log n) < O(n) < O(n log n) < O(n^2) < O(2^n) < O(n!)",
+          "hi": "O(1) < O(log n) < O(n) < O(n log n) < O(n^2) < O(2^n) < O(n!) — ye order yaad rakho"
+        },
+        {
+          "en": "Always drop constants and lower-order terms in Big-O",
+          "hi": "Big-O mein hamesha constants aur lower-order terms drop karo"
+        },
+        {
+          "en": "O(log n) typically means the problem size halves each step (like binary search)",
+          "hi": "O(log n) ka matlab usually problem size har step mein half ho rahi hai (jaise binary search)"
+        }
+      ],
+      "timeComplexity": {
+        "O(1)": "Constant - array access, variable assignment",
+        "O(log n)": "Logarithmic - binary search, balanced BST operations",
+        "O(n)": "Linear - single traversal, linear search",
+        "O(n log n)": "Linearithmic - merge sort, heap sort",
+        "O(n^2)": "Quadratic - bubble sort, nested loops"
+      }
+    },
+    {
+      "id": "best-worst-average-case",
+      "title": {
+        "en": "Best, Worst & Average Case",
+        "hi": "Best, Worst aur Average Case"
+      },
+      "content": {
+        "en": "For any algorithm, we can analyze performance for different types of inputs:\n\n**Best Case (Omega - lower bound):**\n- The minimum time/operations for any input of size n\n- Example: Linear search finds element at first position — O(1)\n\n**Worst Case (Big-O - upper bound):**\n- The maximum time/operations for any input of size n\n- Example: Linear search — element is at last position or not present — O(n)\n- Most commonly used because it guarantees an upper limit\n\n**Average Case (Theta - tight bound):**\n- Expected time over all possible inputs of size n\n- Example: Linear search — on average, checks n/2 elements — O(n)\n- Requires knowledge of input distribution\n\n**Why Worst Case Matters Most:**\n- It gives a guarantee — algorithm will NEVER be slower than this\n- Useful for real-time systems where we need predictable performance\n- Easier to compute than average case",
+        "hi": "Kisi bhi algorithm ke liye, hum alag tarah ke inputs ke liye performance analyze kar sakte hain:\n\n**Best Case (Omega - lower bound):**\n- Size n ke kisi bhi input ke liye minimum time/operations\n- Example: Linear search mein element pehle position pe mil jaaye — O(1)\n\n**Worst Case (Big-O - upper bound):**\n- Size n ke kisi bhi input ke liye maximum time/operations\n- Example: Linear search — element last mein hai ya hai hi nahi — O(n)\n- Sabse zyada use hota hai kyunki ye guarantee deta hai\n\n**Average Case (Theta - tight bound):**\n- Size n ke saare possible inputs ka expected time\n- Example: Linear search — average mein n/2 elements check — O(n)\n- Input distribution ka knowledge chahiye\n\n**Worst Case Sabse Important Kyun Hai:**\n- Ye guarantee deta hai — algorithm isse slow KABHI nahi hoga\n- Real-time systems mein useful hai jahan predictable performance chahiye\n- Average case se compute karna easy hai"
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\nusing namespace std;\n\n// Linear Search - Best, Worst, Average case analysis\nint linearSearch(int arr[], int n, int target) {\n    for (int i = 0; i < n; i++) {\n        if (arr[i] == target)\n            return i;  // Found!\n    }\n    return -1;  // Not found\n}\n// Best Case:  O(1)  — target is at arr[0]\n// Worst Case: O(n)  — target is at arr[n-1] or not present\n// Average:    O(n)  — on average n/2 comparisons\n\n// Insertion Sort - Different cases ka accha example\nvoid insertionSort(int arr[], int n) {\n    for (int i = 1; i < n; i++) {\n        int key = arr[i];\n        int j = i - 1;\n        while (j >= 0 && arr[j] > key) {\n            arr[j + 1] = arr[j];\n            j--;\n        }\n        arr[j + 1] = key;\n    }\n}\n// Best Case:  O(n)    — already sorted array\n// Worst Case: O(n^2)  — reverse sorted array\n// Average:    O(n^2)  — random order\n\nint main() {\n    int arr[] = {5, 3, 8, 1, 9, 2};\n    int n = 6;\n    cout << \"Search 5 (best): index \" << linearSearch(arr, n, 5) << endl;\n    cout << \"Search 2 (worst): index \" << linearSearch(arr, n, 2) << endl;\n    cout << \"Search 99 (worst): index \" << linearSearch(arr, n, 99) << endl;\n    return 0;\n}",
+        "python": "# Linear Search - Best, Worst, Average case analysis\ndef linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i  # Found!\n    return -1  # Not found\n# Best Case:  O(1) — target at index 0\n# Worst Case: O(n) — target at end or absent\n# Average:    O(n) — ~n/2 comparisons\n\n# Insertion Sort - Different cases\ndef insertion_sort(arr):\n    for i in range(1, len(arr)):\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = arr[j]\n            j -= 1\n        arr[j + 1] = key\n    return arr\n# Best Case:  O(n)   — already sorted\n# Worst Case: O(n^2) — reverse sorted\n# Average:    O(n^2) — random order\n\narr = [5, 3, 8, 1, 9, 2]\nprint(\"Search 5 (best):\", linear_search(arr, 5))   # index 0\nprint(\"Search 2 (near worst):\", linear_search(arr, 2))  # index 5\nprint(\"Search 99 (worst):\", linear_search(arr, 99))  # -1",
+        "java": "public class Main {\n    // Linear Search - Case analysis\n    static int linearSearch(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) return i;\n        }\n        return -1;\n    }\n    // Best: O(1), Worst: O(n), Average: O(n)\n\n    // Insertion Sort - Case analysis\n    static void insertionSort(int[] arr) {\n        for (int i = 1; i < arr.length; i++) {\n            int key = arr[i];\n            int j = i - 1;\n            while (j >= 0 && arr[j] > key) {\n                arr[j + 1] = arr[j];\n                j--;\n            }\n            arr[j + 1] = key;\n        }\n    }\n    // Best: O(n), Worst: O(n^2), Average: O(n^2)\n\n    public static void main(String[] args) {\n        int[] arr = {5, 3, 8, 1, 9, 2};\n        System.out.println(\"Search 5: \" + linearSearch(arr, 5));\n        System.out.println(\"Search 99: \" + linearSearch(arr, 99));\n    }\n}",
+        "javascript": "// Linear Search - Case analysis\nfunction linearSearch(arr, target) {\n    for (let i = 0; i < arr.length; i++) {\n        if (arr[i] === target) return i;\n    }\n    return -1;\n}\n// Best: O(1), Worst: O(n), Average: O(n)\n\n// Insertion Sort - Case analysis\nfunction insertionSort(arr) {\n    const a = [...arr];\n    for (let i = 1; i < a.length; i++) {\n        let key = a[i], j = i - 1;\n        while (j >= 0 && a[j] > key) {\n            a[j + 1] = a[j];\n            j--;\n        }\n        a[j + 1] = key;\n    }\n    return a;\n}\n// Best: O(n), Worst: O(n^2), Average: O(n^2)\n\nconst arr = [5, 3, 8, 1, 9, 2];\nconsole.log(\"Search 5 (best):\", linearSearch(arr, 5));\nconsole.log(\"Search 99 (worst):\", linearSearch(arr, 99));",
+        "c": "#include <stdio.h>\n\n// Linear Search\nint linearSearch(int arr[], int n, int target) {\n    for (int i = 0; i < n; i++)\n        if (arr[i] == target) return i;\n    return -1;\n}\n// Best: O(1), Worst: O(n), Average: O(n)\n\n// Insertion Sort\nvoid insertionSort(int arr[], int n) {\n    for (int i = 1; i < n; i++) {\n        int key = arr[i], j = i - 1;\n        while (j >= 0 && arr[j] > key) {\n            arr[j + 1] = arr[j];\n            j--;\n        }\n        arr[j + 1] = key;\n    }\n}\n// Best: O(n), Worst: O(n^2), Average: O(n^2)\n\nint main() {\n    int arr[] = {5, 3, 8, 1, 9, 2};\n    printf(\"Search 5: %d\\n\", linearSearch(arr, 6, 5));\n    printf(\"Search 99: %d\\n\", linearSearch(arr, 6, 99));\n    return 0;\n}"
+      },
+      "keyPoints": [
+        {
+          "en": "Best case uses Omega notation, worst case uses Big-O, average case uses Theta",
+          "hi": "Best case Omega notation use karta hai, worst case Big-O, average case Theta"
+        },
+        {
+          "en": "Worst case is most commonly used as it provides a performance guarantee",
+          "hi": "Worst case sabse zyada use hota hai kyunki ye performance guarantee deta hai"
+        },
+        {
+          "en": "Insertion sort: Best O(n), Worst O(n^2) — big difference between cases!",
+          "hi": "Insertion sort: Best O(n), Worst O(n^2) — cases mein bahut bada difference!"
+        },
+        {
+          "en": "Average case analysis often assumes uniform random distribution of inputs",
+          "hi": "Average case analysis usually assume karta hai ki inputs uniform random distribution mein hain"
+        }
+      ],
+      "timeComplexity": {
+        "linearSearch": { "best": "O(1)", "worst": "O(n)", "average": "O(n)" },
+        "insertionSort": { "best": "O(n)", "worst": "O(n^2)", "average": "O(n^2)" },
+        "binarySearch": { "best": "O(1)", "worst": "O(log n)", "average": "O(log n)" }
+      }
+    },
+    {
+      "id": "recurrence-relations-master-theorem",
+      "title": {
+        "en": "Recurrence Relations & Master Theorem",
+        "hi": "Recurrence Relations aur Master Theorem"
+      },
+      "content": {
+        "en": "A **Recurrence Relation** expresses the running time of a recursive algorithm in terms of smaller inputs. To find the overall complexity, we need to solve the recurrence.\n\n**Common Recurrence Examples:**\n- `T(n) = T(n-1) + O(1)` — Linear recursion — O(n)\n- `T(n) = T(n-1) + O(n)` — Like selection sort — O(n^2)\n- `T(n) = 2T(n/2) + O(n)` — Merge sort — O(n log n)\n- `T(n) = 2T(n/2) + O(1)` — Binary tree traversal — O(n)\n- `T(n) = T(n/2) + O(1)` — Binary search — O(log n)\n\n**Master Theorem** provides a direct formula for recurrences of the form:\n`T(n) = aT(n/b) + O(n^d)`\n\nWhere a >= 1, b > 1, d >= 0:\n- **Case 1:** If d < log_b(a), then T(n) = O(n^(log_b(a)))\n- **Case 2:** If d = log_b(a), then T(n) = O(n^d * log n)\n- **Case 3:** If d > log_b(a), then T(n) = O(n^d)\n\n**Methods to Solve Recurrences:**\n1. Substitution Method — Guess and prove by induction\n2. Recursion Tree Method — Draw tree and sum up work at each level\n3. Master Theorem — Apply formula directly (when applicable)",
+        "hi": "**Recurrence Relation** ek recursive algorithm ka running time chhote inputs ke terms mein express karta hai. Overall complexity nikalne ke liye recurrence solve karni padti hai.\n\n**Common Recurrence Examples:**\n- `T(n) = T(n-1) + O(1)` — Linear recursion — O(n)\n- `T(n) = T(n-1) + O(n)` — Jaise selection sort — O(n^2)\n- `T(n) = 2T(n/2) + O(n)` — Merge sort — O(n log n)\n- `T(n) = 2T(n/2) + O(1)` — Binary tree traversal — O(n)\n- `T(n) = T(n/2) + O(1)` — Binary search — O(log n)\n\n**Master Theorem** recurrences ke liye direct formula deta hai jo is form mein hain:\n`T(n) = aT(n/b) + O(n^d)`\n\nJahan a >= 1, b > 1, d >= 0:\n- **Case 1:** Agar d < log_b(a), toh T(n) = O(n^(log_b(a)))\n- **Case 2:** Agar d = log_b(a), toh T(n) = O(n^d * log n)\n- **Case 3:** Agar d > log_b(a), toh T(n) = O(n^d)\n\n**Recurrences Solve Karne ke Tarike:**\n1. Substitution Method — Guess karo aur induction se prove karo\n2. Recursion Tree Method — Tree draw karo aur har level ka kaam add karo\n3. Master Theorem — Formula directly apply karo (jab applicable ho)"
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\nusing namespace std;\n\n// T(n) = 2T(n/2) + O(n) => O(n log n) — Merge Sort\nvoid merge(int arr[], int l, int m, int r) {\n    int n1 = m - l + 1, n2 = r - m;\n    int L[n1], R[n2];\n    for (int i = 0; i < n1; i++) L[i] = arr[l + i];\n    for (int j = 0; j < n2; j++) R[j] = arr[m + 1 + j];\n    int i = 0, j = 0, k = l;\n    while (i < n1 && j < n2)\n        arr[k++] = (L[i] <= R[j]) ? L[i++] : R[j++];\n    while (i < n1) arr[k++] = L[i++];\n    while (j < n2) arr[k++] = R[j++];\n}\n\nvoid mergeSort(int arr[], int l, int r) {\n    if (l < r) {\n        int m = l + (r - l) / 2;\n        mergeSort(arr, l, m);       // T(n/2)\n        mergeSort(arr, m + 1, r);   // T(n/2)\n        merge(arr, l, m, r);        // O(n)\n    }\n}\n// Master Theorem: a=2, b=2, d=1\n// log_2(2) = 1 = d => Case 2 => O(n log n)\n\n// T(n) = T(n/2) + O(1) => O(log n) — Binary Search\nint binarySearch(int arr[], int l, int r, int x) {\n    if (l <= r) {\n        int mid = l + (r - l) / 2;\n        if (arr[mid] == x) return mid;\n        if (arr[mid] > x) return binarySearch(arr, l, mid - 1, x);\n        return binarySearch(arr, mid + 1, r, x);\n    }\n    return -1;\n}\n// Master Theorem: a=1, b=2, d=0\n// log_2(1) = 0 = d => Case 2 => O(log n)\n\nint main() {\n    int arr[] = {38, 27, 43, 3, 9, 82, 10};\n    int n = 7;\n    mergeSort(arr, 0, n - 1);\n    cout << \"Sorted: \";\n    for (int i = 0; i < n; i++) cout << arr[i] << \" \";\n    cout << endl;\n    cout << \"Search 43: index \" << binarySearch(arr, 0, n - 1, 43) << endl;\n    return 0;\n}",
+        "python": "# T(n) = 2T(n/2) + O(n) => O(n log n) — Merge Sort\ndef merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n    mid = len(arr) // 2\n    left = merge_sort(arr[:mid])     # T(n/2)\n    right = merge_sort(arr[mid:])    # T(n/2)\n    return merge(left, right)        # O(n)\n\ndef merge(left, right):\n    result = []\n    i = j = 0\n    while i < len(left) and j < len(right):\n        if left[i] <= right[j]:\n            result.append(left[i]); i += 1\n        else:\n            result.append(right[j]); j += 1\n    result.extend(left[i:])\n    result.extend(right[j:])\n    return result\n# Master Theorem: a=2, b=2, d=1\n# log_2(2)=1=d => Case 2 => O(n log n)\n\n# T(n) = T(n/2) + O(1) => O(log n) — Binary Search\ndef binary_search(arr, target, lo=0, hi=None):\n    if hi is None: hi = len(arr) - 1\n    if lo > hi: return -1\n    mid = (lo + hi) // 2\n    if arr[mid] == target: return mid\n    elif arr[mid] < target: return binary_search(arr, target, mid + 1, hi)\n    else: return binary_search(arr, target, lo, mid - 1)\n# Master Theorem: a=1, b=2, d=0 => Case 2 => O(log n)\n\n# T(n) = 2T(n/2) + O(1) => O(n) — Count nodes in binary tree style\ndef count_recursive(n):\n    if n <= 1: return 1\n    return 1 + count_recursive(n // 2) + count_recursive(n - n // 2)\n# Master Theorem: a=2, b=2, d=0\n# log_2(2)=1 > 0=d => Case 1 => O(n)\n\narr = [38, 27, 43, 3, 9, 82, 10]\nsorted_arr = merge_sort(arr)\nprint(\"Sorted:\", sorted_arr)\nprint(\"Search 43:\", binary_search(sorted_arr, 43))",
+        "java": "public class Main {\n    // T(n) = 2T(n/2) + O(n) => O(n log n)\n    static void mergeSort(int[] arr, int l, int r) {\n        if (l < r) {\n            int m = (l + r) / 2;\n            mergeSort(arr, l, m);\n            mergeSort(arr, m + 1, r);\n            merge(arr, l, m, r);\n        }\n    }\n\n    static void merge(int[] arr, int l, int m, int r) {\n        int n1 = m - l + 1, n2 = r - m;\n        int[] L = new int[n1], R = new int[n2];\n        for (int i = 0; i < n1; i++) L[i] = arr[l + i];\n        for (int j = 0; j < n2; j++) R[j] = arr[m + 1 + j];\n        int i = 0, j = 0, k = l;\n        while (i < n1 && j < n2)\n            arr[k++] = (L[i] <= R[j]) ? L[i++] : R[j++];\n        while (i < n1) arr[k++] = L[i++];\n        while (j < n2) arr[k++] = R[j++];\n    }\n    // Master Theorem: a=2, b=2, d=1 => Case 2 => O(n log n)\n\n    // T(n) = T(n/2) + O(1) => O(log n)\n    static int binarySearch(int[] arr, int l, int r, int x) {\n        if (l > r) return -1;\n        int mid = (l + r) / 2;\n        if (arr[mid] == x) return mid;\n        if (arr[mid] > x) return binarySearch(arr, l, mid - 1, x);\n        return binarySearch(arr, mid + 1, r, x);\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {38, 27, 43, 3, 9, 82, 10};\n        mergeSort(arr, 0, arr.length - 1);\n        for (int x : arr) System.out.print(x + \" \");\n        System.out.println();\n        System.out.println(\"Search 43: \" + binarySearch(arr, 0, arr.length - 1, 43));\n    }\n}",
+        "javascript": "// T(n) = 2T(n/2) + O(n) => O(n log n) — Merge Sort\nfunction mergeSort(arr) {\n    if (arr.length <= 1) return arr;\n    const mid = Math.floor(arr.length / 2);\n    const left = mergeSort(arr.slice(0, mid));\n    const right = mergeSort(arr.slice(mid));\n    return merge(left, right);\n}\n\nfunction merge(left, right) {\n    const result = [];\n    let i = 0, j = 0;\n    while (i < left.length && j < right.length)\n        result.push(left[i] <= right[j] ? left[i++] : right[j++]);\n    return result.concat(left.slice(i), right.slice(j));\n}\n// Master Theorem: a=2, b=2, d=1 => Case 2 => O(n log n)\n\n// T(n) = T(n/2) + O(1) => O(log n) — Binary Search\nfunction binarySearch(arr, target, lo = 0, hi = arr.length - 1) {\n    if (lo > hi) return -1;\n    const mid = Math.floor((lo + hi) / 2);\n    if (arr[mid] === target) return mid;\n    if (arr[mid] < target) return binarySearch(arr, target, mid + 1, hi);\n    return binarySearch(arr, target, lo, mid - 1);\n}\n// Master Theorem: a=1, b=2, d=0 => Case 2 => O(log n)\n\nconst arr = [38, 27, 43, 3, 9, 82, 10];\nconst sorted = mergeSort(arr);\nconsole.log(\"Sorted:\", sorted);\nconsole.log(\"Search 43:\", binarySearch(sorted, 43));",
+        "c": "#include <stdio.h>\n\n// T(n) = 2T(n/2) + O(n) => O(n log n)\nvoid merge(int arr[], int l, int m, int r) {\n    int n1 = m - l + 1, n2 = r - m;\n    int L[n1], R[n2];\n    for (int i = 0; i < n1; i++) L[i] = arr[l + i];\n    for (int j = 0; j < n2; j++) R[j] = arr[m + 1 + j];\n    int i = 0, j = 0, k = l;\n    while (i < n1 && j < n2)\n        arr[k++] = (L[i] <= R[j]) ? L[i++] : R[j++];\n    while (i < n1) arr[k++] = L[i++];\n    while (j < n2) arr[k++] = R[j++];\n}\n\nvoid mergeSort(int arr[], int l, int r) {\n    if (l < r) {\n        int m = l + (r - l) / 2;\n        mergeSort(arr, l, m);\n        mergeSort(arr, m + 1, r);\n        merge(arr, l, m, r);\n    }\n}\n\n// T(n) = T(n/2) + O(1) => O(log n)\nint binarySearch(int arr[], int l, int r, int x) {\n    if (l > r) return -1;\n    int mid = (l + r) / 2;\n    if (arr[mid] == x) return mid;\n    if (arr[mid] > x) return binarySearch(arr, l, mid - 1, x);\n    return binarySearch(arr, mid + 1, r, x);\n}\n\nint main() {\n    int arr[] = {38, 27, 43, 3, 9, 82, 10};\n    int n = 7;\n    mergeSort(arr, 0, n - 1);\n    printf(\"Sorted: \");\n    for (int i = 0; i < n; i++) printf(\"%d \", arr[i]);\n    printf(\"\\nSearch 43: %d\\n\", binarySearch(arr, 0, n - 1, 43));\n    return 0;\n}"
+      },
+      "keyPoints": [
+        {
+          "en": "Recurrence relations describe time complexity of recursive algorithms",
+          "hi": "Recurrence relations recursive algorithms ki time complexity describe karti hain"
+        },
+        {
+          "en": "Master Theorem: T(n) = aT(n/b) + O(n^d) — compare d with log_b(a)",
+          "hi": "Master Theorem: T(n) = aT(n/b) + O(n^d) — d ko log_b(a) se compare karo"
+        },
+        {
+          "en": "Merge Sort: a=2, b=2, d=1 => d = log_2(2) => Case 2 => O(n log n)",
+          "hi": "Merge Sort: a=2, b=2, d=1 => d = log_2(2) => Case 2 => O(n log n)"
+        },
+        {
+          "en": "Three methods: Substitution, Recursion Tree, and Master Theorem",
+          "hi": "Teen tarike hain: Substitution, Recursion Tree, aur Master Theorem"
+        }
+      ],
+      "timeComplexity": {
+        "T(n)=T(n-1)+O(1)": "O(n)",
+        "T(n)=T(n-1)+O(n)": "O(n^2)",
+        "T(n)=2T(n/2)+O(n)": "O(n log n)",
+        "T(n)=2T(n/2)+O(1)": "O(n)",
+        "T(n)=T(n/2)+O(1)": "O(log n)"
+      }
+    }
+  ]
+}

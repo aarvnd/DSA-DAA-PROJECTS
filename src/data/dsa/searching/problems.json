@@ -1,0 +1,412 @@
+{
+  "topicId": "searching",
+  "problems": [
+    {
+      "id": "search-001",
+      "title": "Linear Search",
+      "titleHi": "Linear Search - Element Dhundho",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given an array of n integers and a target value, find the index of the target in the array. If the target is not found, return -1.",
+        "hi": "Ek array diya hai n integers ka aur ek target value, target ka index dhundho array mein. Agar target nahi milta toh -1 return karo."
+      },
+      "examples": [
+        { "input": "arr = [5, 3, 8, 1, 9], target = 8", "output": "2", "explanation": { "en": "8 is found at index 2", "hi": "8 index 2 pe mila" } },
+        { "input": "arr = [5, 3, 8, 1, 9], target = 7", "output": "-1", "explanation": { "en": "7 is not present in the array", "hi": "7 array mein nahi hai" } }
+      ],
+      "constraints": ["1 <= n <= 10^5", "-10^9 <= arr[i] <= 10^9"],
+      "hints": [
+        { "en": "Traverse the array from start to end and compare each element with target", "hi": "Array ko start se end tak traverse karo aur har element ko target se compare karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\n\nint linearSearch(int arr[], int n, int target) {\n    // Write your code here\n    return -1;\n}\n\nint main() {\n    int n, target;\n    cin >> n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin >> arr[i];\n    cin >> target;\n    cout << linearSearch(arr, n, target);\n}",
+        "python": "def linear_search(arr, target):\n    # Write your code here\n    return -1\n\nn = int(input())\narr = list(map(int, input().split()))\ntarget = int(input())\nprint(linear_search(arr, target))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int linearSearch(int[] arr, int target) {\n        // Write your code here\n        return -1;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i] = sc.nextInt();\n        int target = sc.nextInt();\n        System.out.println(linearSearch(arr, target));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);\nconst target = parseInt(lines[2]);\nfunction linearSearch(arr, target) {\n    // Write your code here\n    return -1;\n}\nconsole.log(linearSearch(arr, target));",
+        "c": "#include<stdio.h>\nint linearSearch(int arr[], int n, int target) {\n    // Write your code here\n    return -1;\n}\nint main() {\n    int n, target;\n    scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    scanf(\"%d\",&target);\n    printf(\"%d\",linearSearch(arr,n,target));\n}"
+      },
+      "testCases": [
+        { "input": "5\n5 3 8 1 9\n8", "expectedOutput": "2" },
+        { "input": "5\n5 3 8 1 9\n7", "expectedOutput": "-1" },
+        { "input": "1\n42\n42", "expectedOutput": "0" }
+      ],
+      "solution": {
+        "approach": { "en": "Iterate through the array and compare each element with target.", "hi": "Array mein iterate karo aur har element ko target se compare karo." },
+        "code": {
+          "cpp": "int linearSearch(int arr[], int n, int target) {\n    for(int i = 0; i < n; i++)\n        if(arr[i] == target) return i;\n    return -1;\n}",
+          "python": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["searching", "linear-search", "basic"]
+    },
+    {
+      "id": "search-002",
+      "title": "Binary Search",
+      "titleHi": "Binary Search - Sorted Array mein Dhundho",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given a sorted array of n integers and a target value, find the index of the target using Binary Search. If the target is not found, return -1.",
+        "hi": "Ek sorted array diya hai n integers ka aur ek target value, Binary Search use karke target ka index dhundho. Agar target nahi milta toh -1 return karo."
+      },
+      "examples": [
+        { "input": "arr = [2, 5, 8, 12, 16, 23, 38], target = 23", "output": "5", "explanation": { "en": "23 is found at index 5", "hi": "23 index 5 pe mila" } },
+        { "input": "arr = [2, 5, 8, 12, 16, 23, 38], target = 10", "output": "-1", "explanation": { "en": "10 is not present in the array", "hi": "10 array mein nahi hai" } }
+      ],
+      "constraints": ["1 <= n <= 10^5", "-10^9 <= arr[i] <= 10^9", "Array is sorted in ascending order"],
+      "hints": [
+        { "en": "Compare target with middle element and eliminate half the search space each time", "hi": "Target ko middle element se compare karo aur har baar aadhi search space eliminate karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\n\nint binarySearch(int arr[], int n, int target) {\n    // Write your code here\n    return -1;\n}\n\nint main() {\n    int n, target;\n    cin >> n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin >> arr[i];\n    cin >> target;\n    cout << binarySearch(arr, n, target);\n}",
+        "python": "def binary_search(arr, target):\n    # Write your code here\n    return -1\n\nn = int(input())\narr = list(map(int, input().split()))\ntarget = int(input())\nprint(binary_search(arr, target))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int binarySearch(int[] arr, int target) {\n        // Write your code here\n        return -1;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i] = sc.nextInt();\n        int target = sc.nextInt();\n        System.out.println(binarySearch(arr, target));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);\nconst target = parseInt(lines[2]);\nfunction binarySearch(arr, target) {\n    // Write your code here\n    return -1;\n}\nconsole.log(binarySearch(arr, target));",
+        "c": "#include<stdio.h>\nint binarySearch(int arr[], int n, int target) {\n    // Write your code here\n    return -1;\n}\nint main() {\n    int n, target;\n    scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    scanf(\"%d\",&target);\n    printf(\"%d\",binarySearch(arr,n,target));\n}"
+      },
+      "testCases": [
+        { "input": "7\n2 5 8 12 16 23 38\n23", "expectedOutput": "5" },
+        { "input": "7\n2 5 8 12 16 23 38\n10", "expectedOutput": "-1" },
+        { "input": "1\n5\n5", "expectedOutput": "0" }
+      ],
+      "solution": {
+        "approach": { "en": "Use two pointers low and high. Compare target with mid element and halve search space.", "hi": "Do pointers low aur high use karo. Target ko mid element se compare karo aur search space aadhi karo." },
+        "code": {
+          "cpp": "int binarySearch(int arr[], int n, int target) {\n    int low = 0, high = n - 1;\n    while(low <= high) {\n        int mid = low + (high - low) / 2;\n        if(arr[mid] == target) return mid;\n        else if(arr[mid] < target) low = mid + 1;\n        else high = mid - 1;\n    }\n    return -1;\n}",
+          "python": "def binary_search(arr, target):\n    low, high = 0, len(arr) - 1\n    while low <= high:\n        mid = low + (high - low) // 2\n        if arr[mid] == target: return mid\n        elif arr[mid] < target: low = mid + 1\n        else: high = mid - 1\n    return -1"
+        },
+        "timeComplexity": "O(log n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["searching", "binary-search", "basic"]
+    },
+    {
+      "id": "search-003",
+      "title": "First and Last Occurrence",
+      "titleHi": "Pehla aur Aakhri Occurrence Dhundho",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given a sorted array of integers and a target value, find the first and last positions of the target in the array. If the target is not found, return [-1, -1].",
+        "hi": "Ek sorted array diya hai integers ka aur ek target value, target ki pehli aur aakhri position dhundho array mein. Agar target nahi milta toh [-1, -1] return karo."
+      },
+      "examples": [
+        { "input": "arr = [5, 7, 7, 8, 8, 10], target = 8", "output": "[3, 4]", "explanation": { "en": "8 first appears at index 3 and last at index 4", "hi": "8 pehli baar index 3 pe aur aakhri baar index 4 pe hai" } },
+        { "input": "arr = [5, 7, 7, 8, 8, 10], target = 6", "output": "[-1, -1]", "explanation": { "en": "6 is not present in the array", "hi": "6 array mein nahi hai" } }
+      ],
+      "constraints": ["0 <= n <= 10^5", "-10^9 <= arr[i] <= 10^9", "Array is sorted in non-decreasing order"],
+      "hints": [
+        { "en": "Use Binary Search twice - once to find the first occurrence and once for the last", "hi": "Binary Search do baar use karo - ek baar pehli occurrence ke liye aur ek baar aakhri ke liye" },
+        { "en": "For first occurrence, when arr[mid] == target, move high = mid - 1 and store result", "hi": "Pehli occurrence ke liye, jab arr[mid] == target, toh high = mid - 1 karo aur result store karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\n\npair<int,int> findFirstLast(int arr[], int n, int target) {\n    // Write your code here\n    return {-1, -1};\n}\n\nint main() {\n    int n, target;\n    cin >> n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin >> arr[i];\n    cin >> target;\n    auto [first, last] = findFirstLast(arr, n, target);\n    cout << first << \" \" << last;\n}",
+        "python": "def find_first_last(arr, target):\n    # Write your code here\n    return [-1, -1]\n\nn = int(input())\narr = list(map(int, input().split()))\ntarget = int(input())\nresult = find_first_last(arr, target)\nprint(result[0], result[1])",
+        "java": "import java.util.*;\npublic class Main {\n    public static int[] findFirstLast(int[] arr, int target) {\n        // Write your code here\n        return new int[]{-1, -1};\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i] = sc.nextInt();\n        int target = sc.nextInt();\n        int[] res = findFirstLast(arr, target);\n        System.out.println(res[0] + \" \" + res[1]);\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);\nconst target = parseInt(lines[2]);\nfunction findFirstLast(arr, target) {\n    // Write your code here\n    return [-1, -1];\n}\nconst res = findFirstLast(arr, target);\nconsole.log(res[0] + ' ' + res[1]);",
+        "c": "#include<stdio.h>\nvoid findFirstLast(int arr[], int n, int target, int* first, int* last) {\n    *first = -1; *last = -1;\n    // Write your code here\n}\nint main() {\n    int n, target;\n    scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    scanf(\"%d\",&target);\n    int first, last;\n    findFirstLast(arr,n,target,&first,&last);\n    printf(\"%d %d\",first,last);\n}"
+      },
+      "testCases": [
+        { "input": "6\n5 7 7 8 8 10\n8", "expectedOutput": "3 4" },
+        { "input": "6\n5 7 7 8 8 10\n6", "expectedOutput": "-1 -1" },
+        { "input": "1\n5\n5", "expectedOutput": "0 0" }
+      ],
+      "solution": {
+        "approach": { "en": "Run binary search twice. For first occurrence keep going left when found. For last occurrence keep going right.", "hi": "Binary search do baar chalao. Pehli occurrence ke liye milne pe left jao. Aakhri occurrence ke liye milne pe right jao." },
+        "code": {
+          "cpp": "int findFirst(int arr[], int n, int target) {\n    int low=0, high=n-1, ans=-1;\n    while(low<=high) {\n        int mid=low+(high-low)/2;\n        if(arr[mid]==target) { ans=mid; high=mid-1; }\n        else if(arr[mid]<target) low=mid+1;\n        else high=mid-1;\n    }\n    return ans;\n}\nint findLast(int arr[], int n, int target) {\n    int low=0, high=n-1, ans=-1;\n    while(low<=high) {\n        int mid=low+(high-low)/2;\n        if(arr[mid]==target) { ans=mid; low=mid+1; }\n        else if(arr[mid]<target) low=mid+1;\n        else high=mid-1;\n    }\n    return ans;\n}",
+          "python": "def find_first_last(arr, target):\n    def find(first=True):\n        low, high, ans = 0, len(arr)-1, -1\n        while low <= high:\n            mid = low + (high-low)//2\n            if arr[mid] == target:\n                ans = mid\n                if first: high = mid-1\n                else: low = mid+1\n            elif arr[mid] < target: low = mid+1\n            else: high = mid-1\n        return ans\n    return [find(True), find(False)]"
+        },
+        "timeComplexity": "O(log n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["searching", "binary-search", "medium"]
+    },
+    {
+      "id": "search-004",
+      "title": "Search in Rotated Sorted Array",
+      "titleHi": "Rotated Sorted Array mein Search",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given a sorted array that has been rotated at some unknown pivot, search for a target value. The array has distinct values. Return the index if found, otherwise return -1.",
+        "hi": "Ek sorted array diya hai jo kisi unknown pivot pe rotate ho gaya hai, usme ek target value dhundho. Array mein sab values distinct hain. Agar milta hai toh index return karo, warna -1."
+      },
+      "examples": [
+        { "input": "arr = [4, 5, 6, 7, 0, 1, 2], target = 0", "output": "4", "explanation": { "en": "0 is found at index 4", "hi": "0 index 4 pe mila" } },
+        { "input": "arr = [4, 5, 6, 7, 0, 1, 2], target = 3", "output": "-1", "explanation": { "en": "3 is not in the array", "hi": "3 array mein nahi hai" } }
+      ],
+      "constraints": ["1 <= n <= 5000", "-10^4 <= arr[i] <= 10^4", "All values are distinct", "Array is a rotated sorted array"],
+      "hints": [
+        { "en": "At least one half of the array is always sorted", "hi": "Array ka kam se kam ek half hamesha sorted hota hai" },
+        { "en": "Use the sorted half to determine which side the target lies on", "hi": "Sorted half use karo ye decide karne ke liye target kis side pe hai" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\n\nint searchRotated(int arr[], int n, int target) {\n    // Write your code here\n    return -1;\n}\n\nint main() {\n    int n, target;\n    cin >> n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin >> arr[i];\n    cin >> target;\n    cout << searchRotated(arr, n, target);\n}",
+        "python": "def search_rotated(arr, target):\n    # Write your code here\n    return -1\n\nn = int(input())\narr = list(map(int, input().split()))\ntarget = int(input())\nprint(search_rotated(arr, target))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int searchRotated(int[] arr, int target) {\n        // Write your code here\n        return -1;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i] = sc.nextInt();\n        int target = sc.nextInt();\n        System.out.println(searchRotated(arr, target));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);\nconst target = parseInt(lines[2]);\nfunction searchRotated(arr, target) {\n    // Write your code here\n    return -1;\n}\nconsole.log(searchRotated(arr, target));",
+        "c": "#include<stdio.h>\nint searchRotated(int arr[], int n, int target) {\n    // Write your code here\n    return -1;\n}\nint main() {\n    int n, target;\n    scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    scanf(\"%d\",&target);\n    printf(\"%d\",searchRotated(arr,n,target));\n}"
+      },
+      "testCases": [
+        { "input": "7\n4 5 6 7 0 1 2\n0", "expectedOutput": "4" },
+        { "input": "7\n4 5 6 7 0 1 2\n3", "expectedOutput": "-1" },
+        { "input": "3\n3 1 2\n1", "expectedOutput": "1" }
+      ],
+      "solution": {
+        "approach": { "en": "Modified binary search: identify which half is sorted and check if target lies in that range.", "hi": "Modified binary search: pehchano konsa half sorted hai aur check karo target us range mein hai ya nahi." },
+        "code": {
+          "cpp": "int searchRotated(int arr[], int n, int target) {\n    int low=0, high=n-1;\n    while(low<=high) {\n        int mid=low+(high-low)/2;\n        if(arr[mid]==target) return mid;\n        if(arr[low]<=arr[mid]) {\n            if(target>=arr[low] && target<arr[mid]) high=mid-1;\n            else low=mid+1;\n        } else {\n            if(target>arr[mid] && target<=arr[high]) low=mid+1;\n            else high=mid-1;\n        }\n    }\n    return -1;\n}",
+          "python": "def search_rotated(arr, target):\n    low, high = 0, len(arr)-1\n    while low <= high:\n        mid = low + (high-low)//2\n        if arr[mid] == target: return mid\n        if arr[low] <= arr[mid]:\n            if arr[low] <= target < arr[mid]: high = mid-1\n            else: low = mid+1\n        else:\n            if arr[mid] < target <= arr[high]: low = mid+1\n            else: high = mid-1\n    return -1"
+        },
+        "timeComplexity": "O(log n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["searching", "binary-search", "rotated-array"]
+    },
+    {
+      "id": "search-005",
+      "title": "Square Root using Binary Search",
+      "titleHi": "Binary Search se Square Root Nikalo",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given a non-negative integer x, compute and return the integer part of the square root of x (floor value). You must not use any built-in sqrt function.",
+        "hi": "Ek non-negative integer x diya hai, uska square root ka integer part (floor value) nikalo aur return karo. Koi built-in sqrt function use nahi karna hai."
+      },
+      "examples": [
+        { "input": "x = 8", "output": "2", "explanation": { "en": "sqrt(8) = 2.828..., floor value is 2", "hi": "sqrt(8) = 2.828..., floor value 2 hai" } },
+        { "input": "x = 16", "output": "4", "explanation": { "en": "sqrt(16) = 4, exact square root", "hi": "sqrt(16) = 4, bilkul sahi square root" } }
+      ],
+      "constraints": ["0 <= x <= 2^31 - 1"],
+      "hints": [
+        { "en": "Binary search on answer: search for the largest number whose square is <= x", "hi": "Answer pe binary search karo: wo sabse bada number dhundho jiska square <= x ho" },
+        { "en": "Be careful about integer overflow when computing mid*mid", "hi": "mid*mid calculate karte time integer overflow ka dhyan rakhna" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\n\nint mySqrt(int x) {\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    int x;\n    cin >> x;\n    cout << mySqrt(x);\n}",
+        "python": "def my_sqrt(x):\n    # Write your code here\n    return 0\n\nx = int(input())\nprint(my_sqrt(x))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int mySqrt(int x) {\n        // Write your code here\n        return 0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int x = sc.nextInt();\n        System.out.println(mySqrt(x));\n    }\n}",
+        "javascript": "const x = parseInt(require('fs').readFileSync('/dev/stdin','utf8').trim());\nfunction mySqrt(x) {\n    // Write your code here\n    return 0;\n}\nconsole.log(mySqrt(x));",
+        "c": "#include<stdio.h>\nint mySqrt(int x) {\n    // Write your code here\n    return 0;\n}\nint main() {\n    int x;\n    scanf(\"%d\",&x);\n    printf(\"%d\",mySqrt(x));\n}"
+      },
+      "testCases": [
+        { "input": "8", "expectedOutput": "2" },
+        { "input": "16", "expectedOutput": "4" },
+        { "input": "0", "expectedOutput": "0" },
+        { "input": "1", "expectedOutput": "1" }
+      ],
+      "solution": {
+        "approach": { "en": "Binary search from 1 to x. For each mid, check if mid*mid <= x. Track the largest such mid.", "hi": "1 se x tak binary search karo. Har mid ke liye check karo mid*mid <= x hai ya nahi. Sabse bada aisa mid track karo." },
+        "code": {
+          "cpp": "int mySqrt(int x) {\n    if(x < 2) return x;\n    long long low=1, high=x, ans=0;\n    while(low<=high) {\n        long long mid=low+(high-low)/2;\n        if(mid*mid <= x) { ans=mid; low=mid+1; }\n        else high=mid-1;\n    }\n    return ans;\n}",
+          "python": "def my_sqrt(x):\n    if x < 2: return x\n    low, high, ans = 1, x, 0\n    while low <= high:\n        mid = low + (high - low) // 2\n        if mid * mid <= x:\n            ans = mid\n            low = mid + 1\n        else:\n            high = mid - 1\n    return ans"
+        },
+        "timeComplexity": "O(log n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["searching", "binary-search", "math"]
+    },
+    {
+      "id": "search-006",
+      "title": "Find Peak Element",
+      "titleHi": "Peak Element Dhundho",
+      "difficulty": "medium",
+      "description": {
+        "en": "A peak element is an element that is strictly greater than its neighbors. Given an integer array, find any peak element and return its index. The array may contain multiple peaks; return the index of any one. Assume arr[-1] = arr[n] = -infinity.",
+        "hi": "Peak element wo element hai jo apne dono neighbors se strictly bada hota hai. Ek integer array diya hai, koi bhi peak element dhundho aur uska index return karo. Array mein multiple peaks ho sakte hain; kisi bhi ek ka index return karo. Maan lo arr[-1] = arr[n] = -infinity."
+      },
+      "examples": [
+        { "input": "arr = [1, 2, 3, 1]", "output": "2", "explanation": { "en": "3 is a peak element at index 2 (3 > 2 and 3 > 1)", "hi": "3 peak element hai index 2 pe (3 > 2 aur 3 > 1)" } },
+        { "input": "arr = [1, 2, 1, 3, 5, 6, 4]", "output": "5", "explanation": { "en": "Either index 1 (element 2) or index 5 (element 6) is a valid answer", "hi": "Index 1 (element 2) ya index 5 (element 6) dono sahi jawab hain" } }
+      ],
+      "constraints": ["1 <= n <= 10^5", "-2^31 <= arr[i] <= 2^31 - 1", "arr[i] != arr[i+1] for all valid i"],
+      "hints": [
+        { "en": "Binary Search: if arr[mid] < arr[mid+1], peak is on the right side", "hi": "Binary Search: agar arr[mid] < arr[mid+1], toh peak right side pe hai" },
+        { "en": "Move towards the side with the larger neighbor", "hi": "Bade neighbor wali side ki taraf jao" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\n\nint findPeakElement(int arr[], int n) {\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin >> arr[i];\n    cout << findPeakElement(arr, n);\n}",
+        "python": "def find_peak_element(arr):\n    # Write your code here\n    return 0\n\nn = int(input())\narr = list(map(int, input().split()))\nprint(find_peak_element(arr))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int findPeakElement(int[] arr) {\n        // Write your code here\n        return 0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i] = sc.nextInt();\n        System.out.println(findPeakElement(arr));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);\nfunction findPeakElement(arr) {\n    // Write your code here\n    return 0;\n}\nconsole.log(findPeakElement(arr));",
+        "c": "#include<stdio.h>\nint findPeakElement(int arr[], int n) {\n    // Write your code here\n    return 0;\n}\nint main() {\n    int n;\n    scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    printf(\"%d\",findPeakElement(arr,n));\n}"
+      },
+      "testCases": [
+        { "input": "4\n1 2 3 1", "expectedOutput": "2" },
+        { "input": "1\n5", "expectedOutput": "0" },
+        { "input": "3\n3 2 1", "expectedOutput": "0" }
+      ],
+      "solution": {
+        "approach": { "en": "Binary search: move towards the larger neighbor since a peak must exist on that side.", "hi": "Binary search: bade neighbor ki taraf jao kyunki us side peak zaroor hoga." },
+        "code": {
+          "cpp": "int findPeakElement(int arr[], int n) {\n    int low=0, high=n-1;\n    while(low < high) {\n        int mid=low+(high-low)/2;\n        if(arr[mid] < arr[mid+1]) low=mid+1;\n        else high=mid;\n    }\n    return low;\n}",
+          "python": "def find_peak_element(arr):\n    low, high = 0, len(arr) - 1\n    while low < high:\n        mid = low + (high - low) // 2\n        if arr[mid] < arr[mid + 1]:\n            low = mid + 1\n        else:\n            high = mid\n    return low"
+        },
+        "timeComplexity": "O(log n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["searching", "binary-search", "peak"]
+    },
+    {
+      "id": "search-007",
+      "title": "Search a 2D Matrix",
+      "titleHi": "2D Matrix mein Search Karo",
+      "difficulty": "medium",
+      "description": {
+        "en": "Write an efficient algorithm to search for a target value in an m x n matrix. The matrix has the following properties: each row is sorted in ascending order, and the first integer of each row is greater than the last integer of the previous row.",
+        "hi": "Ek efficient algorithm likho jo m x n matrix mein target value dhundhe. Matrix ki properties: har row ascending order mein sorted hai, aur har row ka pehla integer pichli row ke aakhri integer se bada hai."
+      },
+      "examples": [
+        { "input": "matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 3", "output": "true", "explanation": { "en": "3 is present in the matrix at position (0, 1)", "hi": "3 matrix mein position (0, 1) pe hai" } },
+        { "input": "matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 13", "output": "false", "explanation": { "en": "13 is not present in the matrix", "hi": "13 matrix mein nahi hai" } }
+      ],
+      "constraints": ["1 <= m, n <= 100", "-10^4 <= matrix[i][j] <= 10^4"],
+      "hints": [
+        { "en": "Treat the 2D matrix as a flattened sorted 1D array and apply binary search", "hi": "2D matrix ko ek flat sorted 1D array ki tarah treat karo aur binary search lagao" },
+        { "en": "Map 1D index to 2D: row = mid / cols, col = mid % cols", "hi": "1D index ko 2D mein map karo: row = mid / cols, col = mid % cols" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\nusing namespace std;\n\nbool searchMatrix(vector<vector<int>>& matrix, int target) {\n    // Write your code here\n    return false;\n}\n\nint main() {\n    int m, n, target;\n    cin >> m >> n;\n    vector<vector<int>> matrix(m, vector<int>(n));\n    for(int i=0;i<m;i++)\n        for(int j=0;j<n;j++)\n            cin >> matrix[i][j];\n    cin >> target;\n    cout << (searchMatrix(matrix, target) ? \"true\" : \"false\");\n}",
+        "python": "def search_matrix(matrix, target):\n    # Write your code here\n    return False\n\nm, n = map(int, input().split())\nmatrix = []\nfor i in range(m):\n    matrix.append(list(map(int, input().split())))\ntarget = int(input())\nprint(\"true\" if search_matrix(matrix, target) else \"false\")",
+        "java": "import java.util.*;\npublic class Main {\n    public static boolean searchMatrix(int[][] matrix, int target) {\n        // Write your code here\n        return false;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int m = sc.nextInt(), n = sc.nextInt();\n        int[][] matrix = new int[m][n];\n        for(int i=0;i<m;i++)\n            for(int j=0;j<n;j++)\n                matrix[i][j] = sc.nextInt();\n        int target = sc.nextInt();\n        System.out.println(searchMatrix(matrix, target) ? \"true\" : \"false\");\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [m, n] = lines[0].split(' ').map(Number);\nconst matrix = [];\nfor(let i=0;i<m;i++) matrix.push(lines[i+1].split(' ').map(Number));\nconst target = parseInt(lines[m+1]);\nfunction searchMatrix(matrix, target) {\n    // Write your code here\n    return false;\n}\nconsole.log(searchMatrix(matrix, target) ? 'true' : 'false');",
+        "c": "#include<stdio.h>\n#include<stdbool.h>\nbool searchMatrix(int m, int n, int matrix[m][n], int target) {\n    // Write your code here\n    return false;\n}\nint main() {\n    int m, n, target;\n    scanf(\"%d %d\",&m,&n);\n    int matrix[m][n];\n    for(int i=0;i<m;i++)\n        for(int j=0;j<n;j++)\n            scanf(\"%d\",&matrix[i][j]);\n    scanf(\"%d\",&target);\n    printf(\"%s\",searchMatrix(m,n,matrix,target)?\"true\":\"false\");\n}"
+      },
+      "testCases": [
+        { "input": "3 4\n1 3 5 7\n10 11 16 20\n23 30 34 60\n3", "expectedOutput": "true" },
+        { "input": "3 4\n1 3 5 7\n10 11 16 20\n23 30 34 60\n13", "expectedOutput": "false" },
+        { "input": "1 1\n5\n5", "expectedOutput": "true" }
+      ],
+      "solution": {
+        "approach": { "en": "Treat 2D matrix as 1D sorted array. Use binary search with index mapping: row = mid/cols, col = mid%cols.", "hi": "2D matrix ko 1D sorted array samjho. Binary search use karo index mapping ke saath: row = mid/cols, col = mid%cols." },
+        "code": {
+          "cpp": "bool searchMatrix(vector<vector<int>>& matrix, int target) {\n    int m=matrix.size(), n=matrix[0].size();\n    int low=0, high=m*n-1;\n    while(low<=high) {\n        int mid=low+(high-low)/2;\n        int val=matrix[mid/n][mid%n];\n        if(val==target) return true;\n        else if(val<target) low=mid+1;\n        else high=mid-1;\n    }\n    return false;\n}",
+          "python": "def search_matrix(matrix, target):\n    m, n = len(matrix), len(matrix[0])\n    low, high = 0, m * n - 1\n    while low <= high:\n        mid = low + (high - low) // 2\n        val = matrix[mid // n][mid % n]\n        if val == target: return True\n        elif val < target: low = mid + 1\n        else: high = mid - 1\n    return False"
+        },
+        "timeComplexity": "O(log(m * n))",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["searching", "binary-search", "matrix"]
+    },
+    {
+      "id": "search-008",
+      "title": "Allocate Minimum Number of Pages",
+      "titleHi": "Minimum Pages Allocate Karo",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given an array of integers where arr[i] represents the number of pages in the i-th book, and m students, allocate books to m students such that:\n1. Each student gets at least one book\n2. Books are allocated in contiguous order\n3. The maximum number of pages allocated to a student is minimized\n\nReturn the minimum possible value of the maximum pages.",
+        "hi": "Ek array diya hai integers ka jisme arr[i] i-th book ke pages hai, aur m students hain. Books ko m students mein aise allocate karo ki:\n1. Har student ko kam se kam ek book mile\n2. Books contiguous order mein allocate ho\n3. Kisi bhi student ko milne wale maximum pages minimize ho\n\nMaximum pages ki minimum possible value return karo."
+      },
+      "examples": [
+        { "input": "arr = [12, 34, 67, 90], m = 2", "output": "113", "explanation": { "en": "Allocation: [12, 34, 67] and [90]. Max pages = max(113, 90) = 113. This is the minimum possible maximum.", "hi": "Allocation: [12, 34, 67] aur [90]. Max pages = max(113, 90) = 113. Ye minimum possible maximum hai." } }
+      ],
+      "constraints": ["1 <= n <= 10^5", "1 <= arr[i] <= 10^6", "1 <= m <= n"],
+      "hints": [
+        { "en": "Binary search on the answer: search range is [max(arr), sum(arr)]", "hi": "Answer pe binary search karo: search range hai [max(arr), sum(arr)]" },
+        { "en": "For a given max pages limit, check if we can allocate books to m students using a greedy approach", "hi": "Ek given max pages limit ke liye, greedy approach se check karo ki m students mein allocate ho sakta hai ya nahi" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\n\nint allocatePages(int arr[], int n, int m) {\n    // Write your code here\n    return -1;\n}\n\nint main() {\n    int n, m;\n    cin >> n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin >> arr[i];\n    cin >> m;\n    cout << allocatePages(arr, n, m);\n}",
+        "python": "def allocate_pages(arr, m):\n    # Write your code here\n    return -1\n\nn = int(input())\narr = list(map(int, input().split()))\nm = int(input())\nprint(allocate_pages(arr, m))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int allocatePages(int[] arr, int m) {\n        // Write your code here\n        return -1;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i] = sc.nextInt();\n        int m = sc.nextInt();\n        System.out.println(allocatePages(arr, m));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);\nconst m = parseInt(lines[2]);\nfunction allocatePages(arr, m) {\n    // Write your code here\n    return -1;\n}\nconsole.log(allocatePages(arr, m));",
+        "c": "#include<stdio.h>\nint allocatePages(int arr[], int n, int m) {\n    // Write your code here\n    return -1;\n}\nint main() {\n    int n, m;\n    scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    scanf(\"%d\",&m);\n    printf(\"%d\",allocatePages(arr,n,m));\n}"
+      },
+      "testCases": [
+        { "input": "4\n12 34 67 90\n2", "expectedOutput": "113" },
+        { "input": "4\n10 20 30 40\n2", "expectedOutput": "60" },
+        { "input": "3\n15 17 20\n3", "expectedOutput": "20" }
+      ],
+      "solution": {
+        "approach": { "en": "Binary search on answer in range [max(arr), sum(arr)]. For each mid, greedily count students needed. If students <= m, try smaller max.", "hi": "Answer pe binary search karo range [max(arr), sum(arr)] mein. Har mid ke liye greedy se students count karo. Agar students <= m, toh chhota max try karo." },
+        "code": {
+          "cpp": "bool isPossible(int arr[], int n, int m, int maxPages) {\n    int students=1, pages=0;\n    for(int i=0;i<n;i++) {\n        if(pages+arr[i] > maxPages) { students++; pages=arr[i]; }\n        else pages+=arr[i];\n    }\n    return students<=m;\n}\nint allocatePages(int arr[], int n, int m) {\n    if(m>n) return -1;\n    int low=*max_element(arr,arr+n), high=0, ans=-1;\n    for(int i=0;i<n;i++) high+=arr[i];\n    while(low<=high) {\n        int mid=low+(high-low)/2;\n        if(isPossible(arr,n,m,mid)) { ans=mid; high=mid-1; }\n        else low=mid+1;\n    }\n    return ans;\n}",
+          "python": "def allocate_pages(arr, m):\n    if m > len(arr): return -1\n    def is_possible(max_pages):\n        students, pages = 1, 0\n        for p in arr:\n            if pages + p > max_pages:\n                students += 1\n                pages = p\n            else:\n                pages += p\n        return students <= m\n    low, high, ans = max(arr), sum(arr), -1\n    while low <= high:\n        mid = low + (high - low) // 2\n        if is_possible(mid):\n            ans = mid\n            high = mid - 1\n        else:\n            low = mid + 1\n    return ans"
+        },
+        "timeComplexity": "O(n * log(sum - max))",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["searching", "binary-search-on-answer", "greedy", "hard"]
+    },
+    {
+      "id": "search-009",
+      "title": "Aggressive Cows",
+      "titleHi": "Aggressive Cows - Gaayein Lagao",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given an array of stall positions and c cows, place the cows in the stalls such that the minimum distance between any two cows is maximized. Return the largest minimum distance.",
+        "hi": "Ek array diya hai stall positions ka aur c gaayein hain. Gaayein stalls mein aise lagao ki kisi bhi do gaay ke beech ki minimum distance maximize ho. Sabse badi minimum distance return karo."
+      },
+      "examples": [
+        { "input": "stalls = [1, 2, 4, 8, 9], cows = 3", "output": "3", "explanation": { "en": "Place cows at positions 1, 4, 8. Minimum distance = min(3, 4) = 3. This is the maximum possible minimum distance.", "hi": "Gaayein positions 1, 4, 8 pe lagao. Minimum distance = min(3, 4) = 3. Ye maximum possible minimum distance hai." } }
+      ],
+      "constraints": ["2 <= n <= 10^5", "0 <= stalls[i] <= 10^9", "2 <= c <= n"],
+      "hints": [
+        { "en": "Sort the stalls first, then binary search on the minimum distance", "hi": "Pehle stalls sort karo, phir minimum distance pe binary search karo" },
+        { "en": "For a given distance d, greedily check if we can place c cows with at least d distance apart", "hi": "Ek given distance d ke liye, greedy se check karo ki c gaayein kam se kam d distance pe laga sakte hain ya nahi" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<algorithm>\nusing namespace std;\n\nint aggressiveCows(int stalls[], int n, int c) {\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    int n, c;\n    cin >> n >> c;\n    int stalls[n];\n    for(int i=0;i<n;i++) cin >> stalls[i];\n    cout << aggressiveCows(stalls, n, c);\n}",
+        "python": "def aggressive_cows(stalls, c):\n    # Write your code here\n    return 0\n\nn, c = map(int, input().split())\nstalls = list(map(int, input().split()))\nprint(aggressive_cows(stalls, c))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int aggressiveCows(int[] stalls, int c) {\n        // Write your code here\n        return 0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), c = sc.nextInt();\n        int[] stalls = new int[n];\n        for(int i=0;i<n;i++) stalls[i] = sc.nextInt();\n        System.out.println(aggressiveCows(stalls, c));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [n, c] = lines[0].split(' ').map(Number);\nconst stalls = lines[1].split(' ').map(Number);\nfunction aggressiveCows(stalls, c) {\n    // Write your code here\n    return 0;\n}\nconsole.log(aggressiveCows(stalls, c));",
+        "c": "#include<stdio.h>\n#include<stdlib.h>\nint cmp(const void*a,const void*b){return *(int*)a-*(int*)b;}\nint aggressiveCows(int stalls[], int n, int c) {\n    // Write your code here\n    return 0;\n}\nint main() {\n    int n, c;\n    scanf(\"%d %d\",&n,&c);\n    int stalls[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&stalls[i]);\n    printf(\"%d\",aggressiveCows(stalls,n,c));\n}"
+      },
+      "testCases": [
+        { "input": "5 3\n1 2 4 8 9", "expectedOutput": "3" },
+        { "input": "5 2\n1 2 4 8 9", "expectedOutput": "8" },
+        { "input": "3 3\n1 5 10", "expectedOutput": "4" }
+      ],
+      "solution": {
+        "approach": { "en": "Sort stalls. Binary search on answer (min distance). For each distance, greedily place cows and check if c cows fit.", "hi": "Stalls sort karo. Answer (min distance) pe binary search karo. Har distance ke liye greedy se gaayein lagao aur check karo c gaayein fit hoti hain ya nahi." },
+        "code": {
+          "cpp": "bool canPlace(int stalls[], int n, int c, int minDist) {\n    int count=1, lastPos=stalls[0];\n    for(int i=1;i<n;i++) {\n        if(stalls[i]-lastPos >= minDist) {\n            count++; lastPos=stalls[i];\n        }\n    }\n    return count>=c;\n}\nint aggressiveCows(int stalls[], int n, int c) {\n    sort(stalls, stalls+n);\n    int low=1, high=stalls[n-1]-stalls[0], ans=0;\n    while(low<=high) {\n        int mid=low+(high-low)/2;\n        if(canPlace(stalls,n,c,mid)) { ans=mid; low=mid+1; }\n        else high=mid-1;\n    }\n    return ans;\n}",
+          "python": "def aggressive_cows(stalls, c):\n    stalls.sort()\n    def can_place(min_dist):\n        count, last = 1, stalls[0]\n        for i in range(1, len(stalls)):\n            if stalls[i] - last >= min_dist:\n                count += 1\n                last = stalls[i]\n        return count >= c\n    low, high, ans = 1, stalls[-1] - stalls[0], 0\n    while low <= high:\n        mid = low + (high - low) // 2\n        if can_place(mid):\n            ans = mid\n            low = mid + 1\n        else:\n            high = mid - 1\n    return ans"
+        },
+        "timeComplexity": "O(n * log(max - min))",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["searching", "binary-search-on-answer", "greedy", "hard"]
+    },
+    {
+      "id": "search-010",
+      "title": "Median of Two Sorted Arrays",
+      "titleHi": "Do Sorted Arrays ka Median",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays. The overall run time complexity should be O(log(min(m, n))).",
+        "hi": "Do sorted arrays diye hain nums1 aur nums2 jinke sizes m aur n hain, dono arrays ka combined median return karo. Overall time complexity O(log(min(m, n))) honi chahiye."
+      },
+      "examples": [
+        { "input": "nums1 = [1, 3], nums2 = [2]", "output": "2.0", "explanation": { "en": "Merged array = [1, 2, 3]. Median is 2.0", "hi": "Merged array = [1, 2, 3]. Median 2.0 hai" } },
+        { "input": "nums1 = [1, 2], nums2 = [3, 4]", "output": "2.5", "explanation": { "en": "Merged array = [1, 2, 3, 4]. Median is (2 + 3) / 2 = 2.5", "hi": "Merged array = [1, 2, 3, 4]. Median (2 + 3) / 2 = 2.5 hai" } }
+      ],
+      "constraints": ["0 <= m, n <= 1000", "1 <= m + n <= 2000", "-10^6 <= nums1[i], nums2[i] <= 10^6"],
+      "hints": [
+        { "en": "Binary search on the smaller array to find the correct partition", "hi": "Chhote array pe binary search karo sahi partition dhundhne ke liye" },
+        { "en": "Partition both arrays such that left half has (m+n+1)/2 elements and all left elements <= all right elements", "hi": "Dono arrays ko aise partition karo ki left half mein (m+n+1)/2 elements ho aur saare left elements <= saare right elements" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\n#include<climits>\nusing namespace std;\n\ndouble findMedian(vector<int>& nums1, vector<int>& nums2) {\n    // Write your code here\n    return 0.0;\n}\n\nint main() {\n    int m, n;\n    cin >> m >> n;\n    vector<int> nums1(m), nums2(n);\n    for(int i=0;i<m;i++) cin >> nums1[i];\n    for(int i=0;i<n;i++) cin >> nums2[i];\n    printf(\"%.1f\", findMedian(nums1, nums2));\n}",
+        "python": "def find_median(nums1, nums2):\n    # Write your code here\n    return 0.0\n\nm, n = map(int, input().split())\nnums1 = list(map(int, input().split())) if m > 0 else []\nnums2 = list(map(int, input().split())) if n > 0 else []\nresult = find_median(nums1, nums2)\nprint(f\"{result:.1f}\")",
+        "java": "import java.util.*;\npublic class Main {\n    public static double findMedian(int[] nums1, int[] nums2) {\n        // Write your code here\n        return 0.0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int m = sc.nextInt(), n = sc.nextInt();\n        int[] nums1 = new int[m], nums2 = new int[n];\n        for(int i=0;i<m;i++) nums1[i] = sc.nextInt();\n        for(int i=0;i<n;i++) nums2[i] = sc.nextInt();\n        System.out.printf(\"%.1f\", findMedian(nums1, nums2));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [m, n] = lines[0].split(' ').map(Number);\nconst nums1 = m > 0 ? lines[1].split(' ').map(Number) : [];\nconst nums2 = n > 0 ? lines[m > 0 ? 2 : 1].split(' ').map(Number) : [];\nfunction findMedian(nums1, nums2) {\n    // Write your code here\n    return 0.0;\n}\nconsole.log(findMedian(nums1, nums2).toFixed(1));",
+        "c": "#include<stdio.h>\n#include<limits.h>\ndouble findMedian(int nums1[], int m, int nums2[], int n) {\n    // Write your code here\n    return 0.0;\n}\nint main() {\n    int m, n;\n    scanf(\"%d %d\",&m,&n);\n    int nums1[m], nums2[n];\n    for(int i=0;i<m;i++) scanf(\"%d\",&nums1[i]);\n    for(int i=0;i<n;i++) scanf(\"%d\",&nums2[i]);\n    printf(\"%.1f\",findMedian(nums1,m,nums2,n));\n}"
+      },
+      "testCases": [
+        { "input": "2 1\n1 3\n2", "expectedOutput": "2.0" },
+        { "input": "2 2\n1 2\n3 4", "expectedOutput": "2.5" },
+        { "input": "1 1\n1\n2", "expectedOutput": "1.5" }
+      ],
+      "solution": {
+        "approach": { "en": "Binary search on the smaller array. Partition both arrays so left half has correct count. Check if maxLeft <= minRight for valid partition.", "hi": "Chhote array pe binary search karo. Dono arrays ko partition karo taaki left half mein sahi count ho. Check karo maxLeft <= minRight valid partition ke liye." },
+        "code": {
+          "cpp": "double findMedian(vector<int>& nums1, vector<int>& nums2) {\n    if(nums1.size() > nums2.size()) return findMedian(nums2, nums1);\n    int m=nums1.size(), n=nums2.size();\n    int low=0, high=m;\n    while(low<=high) {\n        int cut1=low+(high-low)/2;\n        int cut2=(m+n+1)/2-cut1;\n        int l1=cut1==0?INT_MIN:nums1[cut1-1];\n        int l2=cut2==0?INT_MIN:nums2[cut2-1];\n        int r1=cut1==m?INT_MAX:nums1[cut1];\n        int r2=cut2==n?INT_MAX:nums2[cut2];\n        if(l1<=r2 && l2<=r1) {\n            if((m+n)%2==0) return (max(l1,l2)+min(r1,r2))/2.0;\n            else return max(l1,l2);\n        }\n        else if(l1>r2) high=cut1-1;\n        else low=cut1+1;\n    }\n    return 0.0;\n}",
+          "python": "def find_median(nums1, nums2):\n    if len(nums1) > len(nums2):\n        return find_median(nums2, nums1)\n    m, n = len(nums1), len(nums2)\n    low, high = 0, m\n    while low <= high:\n        cut1 = low + (high - low) // 2\n        cut2 = (m + n + 1) // 2 - cut1\n        l1 = float('-inf') if cut1 == 0 else nums1[cut1-1]\n        l2 = float('-inf') if cut2 == 0 else nums2[cut2-1]\n        r1 = float('inf') if cut1 == m else nums1[cut1]\n        r2 = float('inf') if cut2 == n else nums2[cut2]\n        if l1 <= r2 and l2 <= r1:\n            if (m + n) % 2 == 0:\n                return (max(l1, l2) + min(r1, r2)) / 2.0\n            else:\n                return float(max(l1, l2))\n        elif l1 > r2: high = cut1 - 1\n        else: low = cut1 + 1\n    return 0.0"
+        },
+        "timeComplexity": "O(log(min(m, n)))",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["searching", "binary-search", "divide-and-conquer", "hard"]
+    }
+  ]
+}

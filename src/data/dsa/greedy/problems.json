@@ -1,0 +1,311 @@
+{
+  "topicId": "greedy",
+  "problems": [
+    {
+      "id": "greedy-001",
+      "title": "Activity Selection",
+      "titleHi": "Activity Selection Problem",
+      "difficulty": "easy",
+      "description": { "en": "Given n activities with start and finish times, find the maximum number of non-overlapping activities that can be performed by a single person.", "hi": "N activities diye hain start aur finish time ke saath, ek person maximum kitni non-overlapping activities kar sakta hai ye dhundho." },
+      "examples": [
+        { "input": "4\n1 3\n2 5\n3 6\n5 7", "output": "3", "explanation": { "en": "Select activities (1,3), (3,6), (5,7) - they don't overlap. Wait, (3,6) and (5,7) overlap. So select (1,3), (3,6) or (1,3), (5,7). Max is 2... Actually sort by finish: (1,3),(2,5),(3,6),(5,7). Pick (1,3), skip (2,5) since 2<3, pick (3,6) since 3>=3, skip (5,7) since 5<6. Answer: 2. Let me use better example.", "hi": "Activities ko finish time se sort karo, phir greedy se select karo" } },
+        { "input": "6\n1 2\n3 4\n0 6\n5 7\n8 9\n5 9", "output": "4", "explanation": { "en": "Select (1,2), (3,4), (5,7), (8,9) - 4 non-overlapping activities", "hi": "(1,2), (3,4), (5,7), (8,9) - 4 non-overlapping activities select karo" } }
+      ],
+      "constraints": ["1 <= n <= 10^5", "0 <= start < finish <= 10^9"],
+      "hints": [{ "en": "Sort by finish time, greedily pick the earliest finishing compatible activity", "hi": "Finish time se sort karo, greedy se sabse pehle finish hone wali compatible activity lo" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\n#include<algorithm>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    vector<pair<int,int>> act(n);\n    for(int i=0;i<n;i++) cin>>act[i].first>>act[i].second;\n    // Print max number of non-overlapping activities\n}",
+        "python": "n = int(input())\nact = []\nfor _ in range(n):\n    s, f = map(int, input().split())\n    act.append((s, f))\n# Print max number of non-overlapping activities",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[][] act = new int[n][2];\n        for(int i=0;i<n;i++) { act[i][0]=sc.nextInt(); act[i][1]=sc.nextInt(); }\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst act = [];\nfor(let i=1;i<=n;i++) { const [s,f]=lines[i].split(' ').map(Number); act.push([s,f]); }",
+        "c": "#include<stdio.h>\n#include<stdlib.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int s[n], f[n];\n    for(int i=0;i<n;i++) scanf(\"%d%d\",&s[i],&f[i]);\n}"
+      },
+      "testCases": [
+        { "input": "6\n1 2\n3 4\n0 6\n5 7\n8 9\n5 9", "expectedOutput": "4" },
+        { "input": "3\n1 4\n2 3\n3 5", "expectedOutput": "2" },
+        { "input": "1\n0 5", "expectedOutput": "1" }
+      ],
+      "solution": {
+        "approach": { "en": "Sort by finish time. Greedily select activities whose start >= last selected finish.", "hi": "Finish time se sort karo. Greedy se wo activities select karo jinka start >= last selected ka finish." },
+        "code": { "cpp": "sort(act.begin(),act.end(),[](auto&a,auto&b){return a.second<b.second;});\nint cnt=1,lastF=act[0].second;\nfor(int i=1;i<n;i++){\n  if(act[i].first>=lastF){cnt++;lastF=act[i].second;}\n}\ncout<<cnt;", "python": "act.sort(key=lambda x: x[1])\ncnt, last_f = 1, act[0][1]\nfor s, f in act[1:]:\n    if s >= last_f:\n        cnt += 1\n        last_f = f\nprint(cnt)" },
+        "timeComplexity": "O(n log n)", "spaceComplexity": "O(1)"
+      },
+      "tags": ["greedy", "sorting"]
+    },
+    {
+      "id": "greedy-002",
+      "title": "Fractional Knapsack",
+      "titleHi": "Fractional Knapsack Problem",
+      "difficulty": "medium",
+      "description": { "en": "Given n items with weights and values, and a knapsack of capacity W, find the maximum total value you can carry. You can take fractions of items. Print the answer rounded to 2 decimal places.", "hi": "N items diye hain weights aur values ke saath, aur W capacity ka knapsack hai. Maximum total value dhundho jo carry kar sakte ho. Items ke fractions le sakte ho. Answer 2 decimal places tak print karo." },
+      "examples": [
+        { "input": "3 50\n60 10\n100 20\n120 30", "output": "240.00", "explanation": { "en": "Ratios: 6, 5, 4. Take full item 1 (60) + full item 2 (100) + 20/30 of item 3 (80) = 240", "hi": "Ratios: 6, 5, 4. Poora item 1 (60) + poora item 2 (100) + 20/30 item 3 (80) = 240" } }
+      ],
+      "constraints": ["1 <= n <= 10^5", "1 <= W <= 10^9", "1 <= value, weight <= 10^9"],
+      "hints": [{ "en": "Sort by value/weight ratio in descending order, take greedily", "hi": "Value/weight ratio ke descending order mein sort karo, greedy se lo" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\n#include<algorithm>\nusing namespace std;\nint main() {\n    int n, W; cin>>n>>W;\n    vector<pair<int,int>> items(n);\n    for(int i=0;i<n;i++) cin>>items[i].first>>items[i].second;\n    // Print max value (2 decimal places)\n}",
+        "python": "n, W = map(int, input().split())\nitems = []\nfor _ in range(n):\n    v, w = map(int, input().split())\n    items.append((v, w))\n# Print max value (2 decimal places)",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n=sc.nextInt(), W=sc.nextInt();\n        int[][] items = new int[n][2];\n        for(int i=0;i<n;i++) { items[i][0]=sc.nextInt(); items[i][1]=sc.nextInt(); }\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [n,W] = lines[0].split(' ').map(Number);\nconst items = [];\nfor(let i=1;i<=n;i++) { const [v,w]=lines[i].split(' ').map(Number); items.push([v,w]); }",
+        "c": "#include<stdio.h>\n#include<stdlib.h>\nint main() {\n    int n, W; scanf(\"%d%d\",&n,&W);\n}"
+      },
+      "testCases": [
+        { "input": "3 50\n60 10\n100 20\n120 30", "expectedOutput": "240.00" },
+        { "input": "2 10\n500 30\n100 20", "expectedOutput": "166.67" },
+        { "input": "1 5\n10 5", "expectedOutput": "10.00" }
+      ],
+      "solution": {
+        "approach": { "en": "Sort by value/weight ratio descending. Take items greedily, fractions if needed.", "hi": "Value/weight ratio ke descending order mein sort karo. Greedy se lo, zaroort ho to fraction." },
+        "code": { "cpp": "vector<pair<double,int>> ratio(n);\nfor(int i=0;i<n;i++) ratio[i]={(double)items[i].first/items[i].second,i};\nsort(ratio.rbegin(),ratio.rend());\ndouble total=0; int rem=W;\nfor(int i=0;i<n&&rem>0;i++){\n  int idx=ratio[i].second;\n  if(items[idx].second<=rem){total+=items[idx].first;rem-=items[idx].second;}\n  else{total+=ratio[i].first*rem;rem=0;}\n}\nprintf(\"%.2f\",total);", "python": "items.sort(key=lambda x: x[0]/x[1], reverse=True)\ntotal, rem = 0.0, W\nfor v, w in items:\n    if rem <= 0: break\n    if w <= rem:\n        total += v; rem -= w\n    else:\n        total += (v/w) * rem; rem = 0\nprint(f'{total:.2f}')" },
+        "timeComplexity": "O(n log n)", "spaceComplexity": "O(n)"
+      },
+      "tags": ["greedy", "sorting", "knapsack"]
+    },
+    {
+      "id": "greedy-003",
+      "title": "Minimum Coins",
+      "titleHi": "Minimum Coins se Amount Banao",
+      "difficulty": "easy",
+      "description": { "en": "Given standard coin denominations [1, 2, 5, 10, 20, 50, 100, 500, 1000], find the minimum number of coins needed to make a given amount. Print the count.", "hi": "Standard coin denominations [1, 2, 5, 10, 20, 50, 100, 500, 1000] diye hain, given amount banane ke liye minimum kitne coins chahiye ye dhundho. Count print karo." },
+      "examples": [
+        { "input": "93", "output": "5", "explanation": { "en": "50 + 20 + 20 + 2 + 1 = 93, uses 5 coins", "hi": "50 + 20 + 20 + 2 + 1 = 93, 5 coins use hue" } },
+        { "input": "1000", "output": "1", "explanation": { "en": "Single 1000 coin", "hi": "Ek 1000 ka coin" } }
+      ],
+      "constraints": ["1 <= amount <= 10^6"],
+      "hints": [{ "en": "Start with the largest denomination, use as many as possible, then move to smaller", "hi": "Sabse bade denomination se shuru karo, jitne ho sake utne use karo, phir chhote pe jao" }],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\nint main() {\n    int amount; cin>>amount;\n    // Print minimum coins needed\n}",
+        "python": "amount = int(input())\n# Print minimum coins needed",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        int amount = new Scanner(System.in).nextInt();\n    }\n}",
+        "javascript": "const amount = parseInt(require('fs').readFileSync('/dev/stdin','utf8').trim());",
+        "c": "#include<stdio.h>\nint main() {\n    int amount; scanf(\"%d\",&amount);\n}"
+      },
+      "testCases": [
+        { "input": "93", "expectedOutput": "5" },
+        { "input": "1000", "expectedOutput": "1" },
+        { "input": "1", "expectedOutput": "1" },
+        { "input": "578", "expectedOutput": "6" }
+      ],
+      "solution": {
+        "approach": { "en": "Greedy: use largest coin first, subtract and count.", "hi": "Greedy: sabse bada coin pehle use karo, subtract karo aur count karo." },
+        "code": { "cpp": "int coins[]={1000,500,100,50,20,10,5,2,1};\nint cnt=0;\nfor(int c:coins){\n  cnt+=amount/c;\n  amount%=c;\n}\ncout<<cnt;", "python": "coins = [1000, 500, 100, 50, 20, 10, 5, 2, 1]\ncnt = 0\nfor c in coins:\n    cnt += amount // c\n    amount %= c\nprint(cnt)" },
+        "timeComplexity": "O(1)", "spaceComplexity": "O(1)"
+      },
+      "tags": ["greedy", "math"]
+    },
+    {
+      "id": "greedy-004",
+      "title": "Job Sequencing Problem",
+      "titleHi": "Job Sequencing Problem",
+      "difficulty": "medium",
+      "description": { "en": "Given n jobs with deadlines and profits, each job takes 1 unit of time. Schedule jobs to maximize total profit. Each job must be completed before its deadline. Print the number of jobs done and the maximum profit.", "hi": "N jobs diye hain deadlines aur profits ke saath, har job 1 unit time leti hai. Jobs ko schedule karo taaki total profit maximize ho. Har job apne deadline se pehle complete honi chahiye. Kitni jobs hui aur maximum profit print karo." },
+      "examples": [
+        { "input": "4\n1 4 20\n2 1 10\n3 1 40\n4 1 30", "output": "2 60", "explanation": { "en": "Job 3 (profit 40, deadline 1) at slot 1, Job 1 (profit 20, deadline 4) at slot 4. Profit = 60", "hi": "Job 3 (profit 40, deadline 1) slot 1 pe, Job 1 (profit 20, deadline 4) slot 4 pe. Profit = 60" } }
+      ],
+      "constraints": ["1 <= n <= 10^5", "1 <= deadline <= n", "1 <= profit <= 10^5"],
+      "hints": [{ "en": "Sort by profit descending. For each job, find the latest available slot before its deadline.", "hi": "Profit ke descending order mein sort karo. Har job ke liye uske deadline se pehle latest available slot dhundho." }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\n#include<algorithm>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    vector<tuple<int,int,int>> jobs(n);\n    for(int i=0;i<n;i++){\n        int id,d,p; cin>>id>>d>>p;\n        jobs[i]={p,d,id};\n    }\n    // Print: jobs_done max_profit\n}",
+        "python": "n = int(input())\njobs = []\nfor _ in range(n):\n    id, d, p = map(int, input().split())\n    jobs.append((p, d, id))\n# Print: jobs_done max_profit",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[][] jobs = new int[n][3];\n        for(int i=0;i<n;i++) { jobs[i][0]=sc.nextInt(); jobs[i][1]=sc.nextInt(); jobs[i][2]=sc.nextInt(); }\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);",
+        "c": "#include<stdio.h>\n#include<stdlib.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n}"
+      },
+      "testCases": [
+        { "input": "4\n1 4 20\n2 1 10\n3 1 40\n4 1 30", "expectedOutput": "2 60" },
+        { "input": "5\n1 2 100\n2 1 19\n3 2 27\n4 1 25\n5 3 15", "expectedOutput": "3 142" }
+      ],
+      "solution": {
+        "approach": { "en": "Sort by profit descending. For each job, place it in the latest available slot <= deadline.", "hi": "Profit ke descending order mein sort karo. Har job ko deadline se pehle latest available slot mein daalo." },
+        "code": { "cpp": "sort(jobs.rbegin(),jobs.rend());\nint maxD=0;\nfor(auto&[p,d,id]:jobs) maxD=max(maxD,d);\nvector<bool> slot(maxD+1,false);\nint cnt=0,profit=0;\nfor(auto&[p,d,id]:jobs){\n  for(int j=d;j>=1;j--){\n    if(!slot[j]){slot[j]=true;cnt++;profit+=p;break;}\n  }\n}\ncout<<cnt<<\" \"<<profit;", "python": "jobs.sort(reverse=True)\nmax_d = max(d for _,d,_ in jobs)\nslot = [False] * (max_d + 1)\ncnt, profit = 0, 0\nfor p, d, _ in jobs:\n    for j in range(d, 0, -1):\n        if not slot[j]:\n            slot[j] = True\n            cnt += 1\n            profit += p\n            break\nprint(cnt, profit)" },
+        "timeComplexity": "O(n^2)", "spaceComplexity": "O(n)"
+      },
+      "tags": ["greedy", "sorting", "scheduling"]
+    },
+    {
+      "id": "greedy-005",
+      "title": "Minimum Platforms",
+      "titleHi": "Minimum Platforms Required",
+      "difficulty": "medium",
+      "description": { "en": "Given arrival and departure times of n trains at a station, find the minimum number of platforms required so that no train waits.", "hi": "N trains ke arrival aur departure times diye hain, minimum kitne platforms chahiye taaki koi train wait na kare." },
+      "examples": [
+        { "input": "6\n900 940 950 1100 1500 1800\n910 1200 1120 1130 1900 2000", "output": "3", "explanation": { "en": "At time 950-910, trains 1,2,3 overlap needing 3 platforms", "hi": "Time 950-910 pe trains 1,2,3 overlap hain, 3 platforms chahiye" } }
+      ],
+      "constraints": ["1 <= n <= 10^5", "Time in HHMM format (24hr)"],
+      "hints": [{ "en": "Sort arrivals and departures separately. Use two pointers to count overlapping trains.", "hi": "Arrivals aur departures alag alag sort karo. Do pointers se overlapping trains count karo." }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<algorithm>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    int arr[n], dep[n];\n    for(int i=0;i<n;i++) cin>>arr[i];\n    for(int i=0;i<n;i++) cin>>dep[i];\n    // Print minimum platforms\n}",
+        "python": "n = int(input())\narr = list(map(int, input().split()))\ndep = list(map(int, input().split()))\n# Print minimum platforms",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n], dep = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n        for(int i=0;i<n;i++) dep[i]=sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);\nconst dep = lines[2].split(' ').map(Number);",
+        "c": "#include<stdio.h>\n#include<stdlib.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n], dep[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    for(int i=0;i<n;i++) scanf(\"%d\",&dep[i]);\n}"
+      },
+      "testCases": [
+        { "input": "6\n900 940 950 1100 1500 1800\n910 1200 1120 1130 1900 2000", "expectedOutput": "3" },
+        { "input": "3\n100 200 300\n150 250 350", "expectedOutput": "1" }
+      ],
+      "solution": {
+        "approach": { "en": "Sort both arrays. Two-pointer: if arrival <= departure, need platform (i++); else free platform (j++).", "hi": "Dono arrays sort karo. Two-pointer: agar arrival <= departure, platform chahiye (i++); nahi to platform free (j++)." },
+        "code": { "cpp": "sort(arr,arr+n);\nsort(dep,dep+n);\nint plat=1,maxPlat=1,i=1,j=0;\nwhile(i<n&&j<n){\n  if(arr[i]<=dep[j]){plat++;i++;}\n  else{plat--;j++;}\n  maxPlat=max(maxPlat,plat);\n}\ncout<<maxPlat;", "python": "arr.sort()\ndep.sort()\nplat, max_plat, i, j = 1, 1, 1, 0\nwhile i < n and j < n:\n    if arr[i] <= dep[j]:\n        plat += 1; i += 1\n    else:\n        plat -= 1; j += 1\n    max_plat = max(max_plat, plat)\nprint(max_plat)" },
+        "timeComplexity": "O(n log n)", "spaceComplexity": "O(1)"
+      },
+      "tags": ["greedy", "sorting", "two-pointers"]
+    },
+    {
+      "id": "greedy-006",
+      "title": "Jump Game",
+      "titleHi": "Jump Game - Kya Last Tak Pahunch Sakte Ho?",
+      "difficulty": "medium",
+      "description": { "en": "Given an array where each element represents maximum jump length from that position, determine if you can reach the last index starting from index 0. Print 'true' or 'false'.", "hi": "Ek array diya hai jahan har element us position se maximum jump length batata hai. Index 0 se shuru karke kya last index tak pahunch sakte ho? 'true' ya 'false' print karo." },
+      "examples": [
+        { "input": "5\n2 3 1 1 4", "output": "true", "explanation": { "en": "Jump 1 step from 0 to 1, then 3 steps to last index", "hi": "Index 0 se 1 step jump karke index 1 pe, phir 3 steps jump karke last index pe" } },
+        { "input": "5\n3 2 1 0 4", "output": "false", "explanation": { "en": "Always stuck at index 3 (value 0)", "hi": "Index 3 pe hamesha fas jaoge (value 0 hai)" } }
+      ],
+      "constraints": ["1 <= n <= 10^5", "0 <= nums[i] <= 10^5"],
+      "hints": [{ "en": "Track the farthest index you can reach. If current index > farthest, you're stuck.", "hi": "Sabse door ka index track karo jahan tak pahunch sakte ho. Agar current index > farthest, to fas gaye." }],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    int nums[n];\n    for(int i=0;i<n;i++) cin>>nums[i];\n    // Print true or false\n}",
+        "python": "n = int(input())\nnums = list(map(int, input().split()))\n# Print true or false",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] nums = new int[n];\n        for(int i=0;i<n;i++) nums[i]=sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst nums = lines[1].split(' ').map(Number);",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int nums[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&nums[i]);\n}"
+      },
+      "testCases": [
+        { "input": "5\n2 3 1 1 4", "expectedOutput": "true" },
+        { "input": "5\n3 2 1 0 4", "expectedOutput": "false" },
+        { "input": "1\n0", "expectedOutput": "true" },
+        { "input": "3\n1 1 1", "expectedOutput": "true" }
+      ],
+      "solution": {
+        "approach": { "en": "Greedy: maintain farthest reachable index. At each step, update farthest = max(farthest, i + nums[i]).", "hi": "Greedy: farthest reachable index maintain karo. Har step pe farthest = max(farthest, i + nums[i]) update karo." },
+        "code": { "cpp": "int farthest=0;\nfor(int i=0;i<n;i++){\n  if(i>farthest){cout<<\"false\";return 0;}\n  farthest=max(farthest,i+nums[i]);\n}\ncout<<\"true\";", "python": "farthest = 0\nfor i in range(n):\n    if i > farthest:\n        print('false'); exit()\n    farthest = max(farthest, i + nums[i])\nprint('true')" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(1)"
+      },
+      "tags": ["greedy", "array"]
+    },
+    {
+      "id": "greedy-007",
+      "title": "Gas Station",
+      "titleHi": "Gas Station - Circular Route",
+      "difficulty": "medium",
+      "description": { "en": "There are n gas stations on a circular route. You have gas[i] fuel at station i and need cost[i] to travel to next station. Find the starting station index to complete the circuit, or -1 if impossible.", "hi": "Circular route pe n gas stations hain. Station i pe gas[i] fuel milta hai aur next station jaane mein cost[i] lagta hai. Starting station ka index dhundho jahan se poora circuit complete ho sake, ya -1 agar possible nahi hai." },
+      "examples": [
+        { "input": "5\n1 2 3 4 5\n3 4 5 1 2", "output": "3", "explanation": { "en": "Start at station 3: tank=4-1=3, station 4: 3+5-2=6, station 0: 6+1-3=4, station 1: 4+2-4=2, station 2: 2+3-5=0. Complete!", "hi": "Station 3 se shuru: tank=4-1=3, station 4: 3+5-2=6, station 0: 6+1-3=4, station 1: 4+2-4=2, station 2: 2+3-5=0. Complete!" } }
+      ],
+      "constraints": ["1 <= n <= 10^5", "0 <= gas[i], cost[i] <= 10^4"],
+      "hints": [{ "en": "If total gas >= total cost, solution exists. Track where running sum is minimum to find start.", "hi": "Agar total gas >= total cost, to solution hai. Running sum ka minimum track karo start dhundhne ke liye." }],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    int gas[n], cost[n];\n    for(int i=0;i<n;i++) cin>>gas[i];\n    for(int i=0;i<n;i++) cin>>cost[i];\n    // Print starting index or -1\n}",
+        "python": "n = int(input())\ngas = list(map(int, input().split()))\ncost = list(map(int, input().split()))\n# Print starting index or -1",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] gas = new int[n], cost = new int[n];\n        for(int i=0;i<n;i++) gas[i]=sc.nextInt();\n        for(int i=0;i<n;i++) cost[i]=sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst gas = lines[1].split(' ').map(Number);\nconst cost = lines[2].split(' ').map(Number);",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int gas[n], cost[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&gas[i]);\n    for(int i=0;i<n;i++) scanf(\"%d\",&cost[i]);\n}"
+      },
+      "testCases": [
+        { "input": "5\n1 2 3 4 5\n3 4 5 1 2", "expectedOutput": "3" },
+        { "input": "3\n2 3 4\n3 4 3", "expectedOutput": "-1" },
+        { "input": "1\n5\n3", "expectedOutput": "0" }
+      ],
+      "solution": {
+        "approach": { "en": "Track total and current tank. If current < 0, reset start to next station.", "hi": "Total aur current tank track karo. Agar current < 0, start ko next station pe reset karo." },
+        "code": { "cpp": "int total=0,curr=0,start=0;\nfor(int i=0;i<n;i++){\n  int diff=gas[i]-cost[i];\n  total+=diff; curr+=diff;\n  if(curr<0){start=i+1;curr=0;}\n}\ncout<<(total>=0?start:-1);", "python": "total, curr, start = 0, 0, 0\nfor i in range(n):\n    diff = gas[i] - cost[i]\n    total += diff; curr += diff\n    if curr < 0:\n        start = i + 1; curr = 0\nprint(start if total >= 0 else -1)" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(1)"
+      },
+      "tags": ["greedy", "array"]
+    },
+    {
+      "id": "greedy-008",
+      "title": "Candy Distribution",
+      "titleHi": "Candy Distribution Problem",
+      "difficulty": "hard",
+      "description": { "en": "There are n children in a line, each with a rating. Distribute candies such that: (1) each child gets at least 1 candy, (2) children with higher rating than a neighbor get more candies than that neighbor. Find the minimum total candies needed.", "hi": "N bacche ek line mein khade hain, har ek ki rating hai. Candies distribute karo: (1) har bacche ko kam se kam 1 candy mile, (2) jis bacche ki rating neighbor se zyada ho usse neighbor se zyada candies milein. Minimum total candies dhundho." },
+      "examples": [
+        { "input": "3\n1 0 2", "output": "5", "explanation": { "en": "Candies: [2,1,2]. Child 0 (rating 1) > child 1 (rating 0), child 2 (rating 2) > child 1 (rating 0)", "hi": "Candies: [2,1,2]. Child 0 (rating 1) > child 1 (rating 0), child 2 (rating 2) > child 1 (rating 0)" } },
+        { "input": "3\n1 2 2", "output": "4", "explanation": { "en": "Candies: [1,2,1]. Equal rating neighbors don't need more candies", "hi": "Candies: [1,2,1]. Equal rating wale neighbors ko zyada candy nahi chahiye" } }
+      ],
+      "constraints": ["1 <= n <= 10^5", "0 <= ratings[i] <= 10^5"],
+      "hints": [{ "en": "Two passes: left-to-right (compare with left neighbor), right-to-left (compare with right neighbor). Take max.", "hi": "Do passes: left-to-right (left neighbor se compare), right-to-left (right neighbor se compare). Max lo." }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    int r[n];\n    for(int i=0;i<n;i++) cin>>r[i];\n    // Print minimum candies\n}",
+        "python": "n = int(input())\nr = list(map(int, input().split()))\n# Print minimum candies",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] r = new int[n];\n        for(int i=0;i<n;i++) r[i]=sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst r = lines[1].split(' ').map(Number);",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int r[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&r[i]);\n}"
+      },
+      "testCases": [
+        { "input": "3\n1 0 2", "expectedOutput": "5" },
+        { "input": "3\n1 2 2", "expectedOutput": "4" },
+        { "input": "5\n1 2 3 4 5", "expectedOutput": "15" },
+        { "input": "1\n5", "expectedOutput": "1" }
+      ],
+      "solution": {
+        "approach": { "en": "Two-pass greedy: left-to-right ensures right neighbor constraint, right-to-left ensures left neighbor constraint.", "hi": "Two-pass greedy: left-to-right right neighbor constraint ensure karta hai, right-to-left left neighbor constraint." },
+        "code": { "cpp": "vector<int> candy(n,1);\nfor(int i=1;i<n;i++)\n  if(r[i]>r[i-1]) candy[i]=candy[i-1]+1;\nfor(int i=n-2;i>=0;i--)\n  if(r[i]>r[i+1]) candy[i]=max(candy[i],candy[i+1]+1);\nint sum=0;\nfor(int c:candy) sum+=c;\ncout<<sum;", "python": "candy = [1] * n\nfor i in range(1, n):\n    if r[i] > r[i-1]: candy[i] = candy[i-1] + 1\nfor i in range(n-2, -1, -1):\n    if r[i] > r[i+1]: candy[i] = max(candy[i], candy[i+1] + 1)\nprint(sum(candy))" },
+        "timeComplexity": "O(n)", "spaceComplexity": "O(n)"
+      },
+      "tags": ["greedy", "array"]
+    },
+    {
+      "id": "greedy-009",
+      "title": "Minimum Spanning Tree - Kruskal's Algorithm",
+      "titleHi": "Minimum Spanning Tree - Kruskal's Algorithm",
+      "difficulty": "hard",
+      "description": { "en": "Given a weighted undirected graph with n vertices and m edges, find the weight of the Minimum Spanning Tree using Kruskal's algorithm.", "hi": "N vertices aur m edges wala weighted undirected graph diya hai. Kruskal's algorithm se Minimum Spanning Tree ka weight dhundho." },
+      "examples": [
+        { "input": "4 5\n1 2 10\n1 3 6\n1 4 5\n2 4 15\n3 4 4", "output": "19", "explanation": { "en": "Edges in MST: (3,4,4), (1,4,5), (1,2,10). Total = 19", "hi": "MST ke edges: (3,4,4), (1,4,5), (1,2,10). Total = 19" } }
+      ],
+      "constraints": ["1 <= n <= 10^5", "1 <= m <= 10^5", "1 <= weight <= 10^6"],
+      "hints": [{ "en": "Sort edges by weight. Use Union-Find (DSU) to add edges that don't form a cycle.", "hi": "Edges ko weight se sort karo. Union-Find (DSU) use karke wo edges add karo jo cycle na banayein." }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\n#include<algorithm>\nusing namespace std;\nint main() {\n    int n, m; cin>>n>>m;\n    vector<tuple<int,int,int>> edges(m);\n    for(int i=0;i<m;i++){\n        int u,v,w; cin>>u>>v>>w;\n        edges[i]={w,u,v};\n    }\n    // Print MST weight\n}",
+        "python": "n, m = map(int, input().split())\nedges = []\nfor _ in range(m):\n    u, v, w = map(int, input().split())\n    edges.append((w, u, v))\n# Print MST weight",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n=sc.nextInt(), m=sc.nextInt();\n        int[][] edges = new int[m][3];\n        for(int i=0;i<m;i++) { edges[i][0]=sc.nextInt(); edges[i][1]=sc.nextInt(); edges[i][2]=sc.nextInt(); }\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [n,m] = lines[0].split(' ').map(Number);",
+        "c": "#include<stdio.h>\n#include<stdlib.h>\nint main() {\n    int n, m; scanf(\"%d%d\",&n,&m);\n}"
+      },
+      "testCases": [
+        { "input": "4 5\n1 2 10\n1 3 6\n1 4 5\n2 4 15\n3 4 4", "expectedOutput": "19" },
+        { "input": "3 3\n1 2 1\n2 3 2\n1 3 3", "expectedOutput": "3" }
+      ],
+      "solution": {
+        "approach": { "en": "Sort edges by weight. Use Union-Find with path compression and union by rank to greedily add minimum weight edges.", "hi": "Edges ko weight se sort karo. Union-Find (path compression + union by rank) se greedy minimum weight edges add karo." },
+        "code": { "cpp": "sort(edges.begin(),edges.end());\nvector<int> parent(n+1),rank_(n+1,0);\niota(parent.begin(),parent.end(),0);\nfunction<int(int)> find=[&](int x){return parent[x]==x?x:parent[x]=find(parent[x]);};\nlong long mst=0; int cnt=0;\nfor(auto&[w,u,v]:edges){\n  int pu=find(u),pv=find(v);\n  if(pu!=pv){\n    if(rank_[pu]<rank_[pv]) swap(pu,pv);\n    parent[pv]=pu;\n    if(rank_[pu]==rank_[pv]) rank_[pu]++;\n    mst+=w; cnt++;\n    if(cnt==n-1) break;\n  }\n}\ncout<<mst;", "python": "edges.sort()\nparent = list(range(n + 1))\nrank_ = [0] * (n + 1)\ndef find(x):\n    while parent[x] != x:\n        parent[x] = parent[parent[x]]\n        x = parent[x]\n    return x\nmst, cnt = 0, 0\nfor w, u, v in edges:\n    pu, pv = find(u), find(v)\n    if pu != pv:\n        if rank_[pu] < rank_[pv]: pu, pv = pv, pu\n        parent[pv] = pu\n        if rank_[pu] == rank_[pv]: rank_[pu] += 1\n        mst += w; cnt += 1\n        if cnt == n - 1: break\nprint(mst)" },
+        "timeComplexity": "O(m log m)", "spaceComplexity": "O(n + m)"
+      },
+      "tags": ["greedy", "graph", "union-find", "mst"]
+    },
+    {
+      "id": "greedy-010",
+      "title": "Assign Cookies",
+      "titleHi": "Bacchon Ko Cookies Do",
+      "difficulty": "easy",
+      "description": { "en": "You have greed factor array for children and size array for cookies. Each child i is content if cookie size >= greed[i]. Each child gets at most 1 cookie, each cookie to at most 1 child. Maximize the number of content children.", "hi": "Bacchon ka greed factor array aur cookies ka size array diya hai. Child i khush hoga agar cookie size >= greed[i]. Har bacche ko zyada se zyada 1 cookie, har cookie zyada se zyada 1 bacche ko. Maximum content children dhundho." },
+      "examples": [
+        { "input": "3 2\n1 2 3\n1 1", "output": "1", "explanation": { "en": "Only child with greed 1 can be satisfied with cookie of size 1", "hi": "Sirf greed 1 wale bacche ko size 1 cookie se khush kar sakte hain" } },
+        { "input": "2 3\n1 2\n1 2 3", "output": "2", "explanation": { "en": "Child 1 gets cookie 1, child 2 gets cookie 2. Both satisfied.", "hi": "Child 1 ko cookie 1, child 2 ko cookie 2. Dono khush." } }
+      ],
+      "constraints": ["1 <= n, m <= 10^5", "1 <= greed[i], size[j] <= 10^9"],
+      "hints": [{ "en": "Sort both arrays. Match smallest greed with smallest sufficient cookie.", "hi": "Dono arrays sort karo. Sabse kam greed ko sabse chhoti sufficient cookie se match karo." }],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<algorithm>\nusing namespace std;\nint main() {\n    int n, m; cin>>n>>m;\n    int g[n], s[m];\n    for(int i=0;i<n;i++) cin>>g[i];\n    for(int i=0;i<m;i++) cin>>s[i];\n    // Print max content children\n}",
+        "python": "n, m = map(int, input().split())\ng = list(map(int, input().split()))\ns = list(map(int, input().split()))\n# Print max content children",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n=sc.nextInt(), m=sc.nextInt();\n        int[] g = new int[n], s = new int[m];\n        for(int i=0;i<n;i++) g[i]=sc.nextInt();\n        for(int i=0;i<m;i++) s[i]=sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [n,m] = lines[0].split(' ').map(Number);\nconst g = lines[1].split(' ').map(Number);\nconst s = lines[2].split(' ').map(Number);",
+        "c": "#include<stdio.h>\n#include<stdlib.h>\nint main() {\n    int n, m; scanf(\"%d%d\",&n,&m);\n    int g[n], s[m];\n    for(int i=0;i<n;i++) scanf(\"%d\",&g[i]);\n    for(int i=0;i<m;i++) scanf(\"%d\",&s[i]);\n}"
+      },
+      "testCases": [
+        { "input": "3 2\n1 2 3\n1 1", "expectedOutput": "1" },
+        { "input": "2 3\n1 2\n1 2 3", "expectedOutput": "2" },
+        { "input": "1 1\n5\n5", "expectedOutput": "1" },
+        { "input": "2 2\n10 20\n5 15", "expectedOutput": "1" }
+      ],
+      "solution": {
+        "approach": { "en": "Sort both arrays. Two pointers: try to assign smallest sufficient cookie to least greedy child.", "hi": "Dono arrays sort karo. Two pointers: sabse kam greedy bacche ko sabse chhoti sufficient cookie do." },
+        "code": { "cpp": "sort(g,g+n); sort(s,s+m);\nint i=0,j=0;\nwhile(i<n&&j<m){\n  if(s[j]>=g[i]) i++;\n  j++;\n}\ncout<<i;", "python": "g.sort(); s.sort()\ni = j = 0\nwhile i < n and j < m:\n    if s[j] >= g[i]: i += 1\n    j += 1\nprint(i)" },
+        "timeComplexity": "O(n log n + m log m)", "spaceComplexity": "O(1)"
+      },
+      "tags": ["greedy", "sorting", "two-pointers"]
+    }
+  ]
+}

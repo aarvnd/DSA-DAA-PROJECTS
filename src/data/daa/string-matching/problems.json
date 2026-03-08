@@ -1,0 +1,546 @@
+{
+  "topicId": "string-matching",
+  "problems": [
+    {
+      "id": "sm-001",
+      "title": "Naive Pattern Search",
+      "titleHi": "Naive Pattern Search",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given a text string and a pattern string, find all occurrences of the pattern in the text using the naive (brute force) approach. Print the starting index of each occurrence.",
+        "hi": "Ek text string aur ek pattern string diya hai, naive (brute force) approach use karke text mein pattern ke saare occurrences dhundho. Har occurrence ka starting index print karo."
+      },
+      "examples": [
+        {
+          "input": "text = \"AABAACAADAABAABA\", pattern = \"AABA\"",
+          "output": "0 9 12",
+          "explanation": {
+            "en": "Pattern 'AABA' is found at indices 0, 9, and 12 in the text",
+            "hi": "Pattern 'AABA' text mein indices 0, 9, aur 12 pe mila"
+          }
+        },
+        {
+          "input": "text = \"ABCDEF\", pattern = \"XYZ\"",
+          "output": "-1",
+          "explanation": {
+            "en": "Pattern 'XYZ' is not found anywhere in the text, so print -1",
+            "hi": "Pattern 'XYZ' text mein kahin nahi mila, isliye -1 print karo"
+          }
+        }
+      ],
+      "constraints": [
+        "1 <= |text| <= 10^5",
+        "1 <= |pattern| <= |text|",
+        "Both strings contain only uppercase English letters"
+      ],
+      "hints": [
+        {
+          "en": "Slide the pattern over the text one position at a time and check for a match",
+          "hi": "Pattern ko text pe ek position shift karo aur match check karo"
+        },
+        {
+          "en": "For each position i in text, compare pattern[0..m-1] with text[i..i+m-1]",
+          "hi": "Text ki har position i ke liye, pattern[0..m-1] ko text[i..i+m-1] se compare karo"
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nvoid naiveSearch(string text, string pattern) {\n    // Write your code here\n}\n\nint main() {\n    string text, pattern;\n    cin >> text >> pattern;\n    naiveSearch(text, pattern);\n    return 0;\n}",
+        "python": "def naive_search(text, pattern):\n    # Write your code here\n    pass\n\ntext = input()\npattern = input()\nnaive_search(text, pattern)",
+        "java": "import java.util.*;\npublic class Main {\n    public static void naiveSearch(String text, String pattern) {\n        // Write your code here\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String text = sc.next();\n        String pattern = sc.next();\n        naiveSearch(text, pattern);\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst text = lines[0];\nconst pattern = lines[1];\nfunction naiveSearch(text, pattern) {\n    // Write your code here\n}\nnaiveSearch(text, pattern);",
+        "c": "#include <stdio.h>\n#include <string.h>\n\nvoid naiveSearch(char text[], char pattern[]) {\n    // Write your code here\n}\n\nint main() {\n    char text[100001], pattern[100001];\n    scanf(\"%s %s\", text, pattern);\n    naiveSearch(text, pattern);\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "AABAACAADAABAABA\nAABA", "expectedOutput": "0 9 12" },
+        { "input": "ABCDEF\nXYZ", "expectedOutput": "-1" },
+        { "input": "AAAAAA\nAA", "expectedOutput": "0 1 2 3 4" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Slide pattern over text from index 0 to n-m. At each position, compare characters one by one. If all match, record the index.",
+          "hi": "Pattern ko text pe index 0 se n-m tak slide karo. Har position pe characters ek ek karke compare karo. Agar saare match hon, to index record karo."
+        },
+        "code": {
+          "cpp": "void naiveSearch(string text, string pattern) {\n    int n = text.length(), m = pattern.length();\n    bool found = false;\n    for (int i = 0; i <= n - m; i++) {\n        int j;\n        for (j = 0; j < m; j++)\n            if (text[i+j] != pattern[j]) break;\n        if (j == m) {\n            if (found) cout << \" \";\n            cout << i;\n            found = true;\n        }\n    }\n    if (!found) cout << -1;\n    cout << endl;\n}",
+          "python": "def naive_search(text, pattern):\n    n, m = len(text), len(pattern)\n    result = []\n    for i in range(n - m + 1):\n        if text[i:i+m] == pattern:\n            result.append(str(i))\n    print(' '.join(result) if result else -1)"
+        },
+        "timeComplexity": "O(m * n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["string", "brute-force", "pattern-matching"]
+    },
+    {
+      "id": "sm-002",
+      "title": "KMP Pattern Matching",
+      "titleHi": "KMP Pattern Matching",
+      "difficulty": "medium",
+      "description": {
+        "en": "Implement the KMP (Knuth-Morris-Pratt) algorithm to find all occurrences of a pattern in a given text. Build the LPS (Longest Proper Prefix which is also Suffix) array and use it for efficient matching.",
+        "hi": "KMP (Knuth-Morris-Pratt) algorithm implement karo text mein pattern ke saare occurrences dhundhne ke liye. LPS (Longest Proper Prefix which is also Suffix) array banao aur efficient matching ke liye use karo."
+      },
+      "examples": [
+        {
+          "input": "text = \"ABABDABACDABABCABAB\", pattern = \"ABABCABAB\"",
+          "output": "9",
+          "explanation": {
+            "en": "Pattern 'ABABCABAB' is found starting at index 9 in the text",
+            "hi": "Pattern 'ABABCABAB' text mein index 9 se start hota hai"
+          }
+        },
+        {
+          "input": "text = \"AAAAABAAABA\", pattern = \"AAAB\"",
+          "output": "1 6",
+          "explanation": {
+            "en": "Pattern 'AAAB' is found at indices 1 and 6. KMP handles repeating characters efficiently using the LPS array.",
+            "hi": "Pattern 'AAAB' indices 1 aur 6 pe mila. KMP repeating characters ko LPS array use karke efficiently handle karta hai."
+          }
+        }
+      ],
+      "constraints": [
+        "1 <= |text| <= 10^6",
+        "1 <= |pattern| <= |text|",
+        "Both strings contain only uppercase English letters"
+      ],
+      "hints": [
+        {
+          "en": "First build the LPS array for the pattern. LPS[i] stores the length of the longest proper prefix of pattern[0..i] that is also a suffix.",
+          "hi": "Pehle pattern ke liye LPS array banao. LPS[i] pattern[0..i] ke longest proper prefix ki length store karta hai jo suffix bhi ho."
+        },
+        {
+          "en": "When a mismatch occurs at pattern[j], use LPS[j-1] to determine the next position to compare instead of starting from the beginning.",
+          "hi": "Jab pattern[j] pe mismatch ho, to LPS[j-1] use karo next comparison position determine karne ke liye instead of shuru se start karna."
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvector<int> buildLPS(string pattern) {\n    // Build LPS array\n}\n\nvoid kmpSearch(string text, string pattern) {\n    // Implement KMP search\n}\n\nint main() {\n    string text, pattern;\n    cin >> text >> pattern;\n    kmpSearch(text, pattern);\n    return 0;\n}",
+        "python": "def build_lps(pattern):\n    # Build LPS array\n    pass\n\ndef kmp_search(text, pattern):\n    # Implement KMP search\n    pass\n\ntext = input()\npattern = input()\nkmp_search(text, pattern)",
+        "java": "import java.util.*;\npublic class Main {\n    static int[] buildLPS(String pattern) {\n        // Build LPS array\n        return null;\n    }\n    static void kmpSearch(String text, String pattern) {\n        // Implement KMP search\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String text = sc.next();\n        String pattern = sc.next();\n        kmpSearch(text, pattern);\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst text = lines[0], pattern = lines[1];\nfunction buildLPS(pattern) {\n    // Build LPS array\n}\nfunction kmpSearch(text, pattern) {\n    // Implement KMP search\n}\nkmpSearch(text, pattern);",
+        "c": "#include <stdio.h>\n#include <string.h>\n\nvoid buildLPS(char pattern[], int m, int lps[]) {\n    // Build LPS array\n}\n\nvoid kmpSearch(char text[], char pattern[]) {\n    // Implement KMP search\n}\n\nint main() {\n    char text[1000001], pattern[1000001];\n    scanf(\"%s %s\", text, pattern);\n    kmpSearch(text, pattern);\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "ABABDABACDABABCABAB\nABABCABAB", "expectedOutput": "9" },
+        { "input": "AAAAABAAABA\nAAAB", "expectedOutput": "1 6" },
+        { "input": "ABCABCABC\nABCABC", "expectedOutput": "0 3" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Build the LPS array by comparing prefixes and suffixes. Use two pointers i (for text) and j (for pattern). On mismatch, use LPS to skip characters instead of resetting.",
+          "hi": "Prefixes aur suffixes compare karke LPS array banao. Do pointers i (text ke liye) aur j (pattern ke liye) use karo. Mismatch pe LPS se characters skip karo reset karne ki jagah."
+        },
+        "code": {
+          "cpp": "vector<int> buildLPS(string pattern) {\n    int m = pattern.length();\n    vector<int> lps(m, 0);\n    int len = 0, i = 1;\n    while (i < m) {\n        if (pattern[i] == pattern[len]) { lps[i++] = ++len; }\n        else { if (len) len = lps[len-1]; else lps[i++] = 0; }\n    }\n    return lps;\n}\nvoid kmpSearch(string text, string pattern) {\n    int n = text.length(), m = pattern.length();\n    vector<int> lps = buildLPS(pattern);\n    int i = 0, j = 0; bool found = false;\n    while (i < n) {\n        if (text[i] == pattern[j]) { i++; j++; }\n        if (j == m) { if(found) cout<<\" \"; cout<<i-j; found=true; j=lps[j-1]; }\n        else if (i < n && text[i] != pattern[j]) { if(j) j=lps[j-1]; else i++; }\n    }\n    if(!found) cout<<-1;\n    cout<<endl;\n}",
+          "python": "def build_lps(pattern):\n    m = len(pattern)\n    lps = [0] * m\n    length, i = 0, 1\n    while i < m:\n        if pattern[i] == pattern[length]:\n            length += 1; lps[i] = length; i += 1\n        else:\n            if length: length = lps[length-1]\n            else: lps[i] = 0; i += 1\n    return lps\n\ndef kmp_search(text, pattern):\n    n, m = len(text), len(pattern)\n    lps = build_lps(pattern)\n    i = j = 0; result = []\n    while i < n:\n        if text[i] == pattern[j]: i += 1; j += 1\n        if j == m: result.append(str(i-j)); j = lps[j-1]\n        elif i < n and text[i] != pattern[j]:\n            if j: j = lps[j-1]\n            else: i += 1\n    print(' '.join(result) if result else -1)"
+        },
+        "timeComplexity": "O(m + n)",
+        "spaceComplexity": "O(m)"
+      },
+      "tags": ["string", "kmp", "pattern-matching", "lps"]
+    },
+    {
+      "id": "sm-003",
+      "title": "Rabin-Karp Search",
+      "titleHi": "Rabin-Karp Search",
+      "difficulty": "medium",
+      "description": {
+        "en": "Implement the Rabin-Karp algorithm to find all occurrences of a pattern in a given text. Use a rolling hash function with a prime modulus to efficiently compute hash values for sliding windows.",
+        "hi": "Rabin-Karp algorithm implement karo text mein pattern ke saare occurrences dhundhne ke liye. Sliding windows ke liye efficiently hash values compute karne ke liye rolling hash function aur prime modulus use karo."
+      },
+      "examples": [
+        {
+          "input": "text = \"GEEKS FOR GEEKS\", pattern = \"GEEK\"",
+          "output": "0 10",
+          "explanation": {
+            "en": "Pattern 'GEEK' is found at indices 0 and 10. The rolling hash allows O(1) hash update per window slide.",
+            "hi": "Pattern 'GEEK' indices 0 aur 10 pe mila. Rolling hash har window slide ke liye O(1) hash update allow karta hai."
+          }
+        },
+        {
+          "input": "text = \"AAAA\", pattern = \"AA\"",
+          "output": "0 1 2",
+          "explanation": {
+            "en": "Overlapping matches at positions 0, 1, and 2",
+            "hi": "Overlapping matches positions 0, 1, aur 2 pe"
+          }
+        }
+      ],
+      "constraints": [
+        "1 <= |text| <= 10^6",
+        "1 <= |pattern| <= |text|",
+        "Both strings contain only printable ASCII characters"
+      ],
+      "hints": [
+        {
+          "en": "Use d=256 (alphabet size) and a prime q for modular hashing. Compute h = d^(m-1) % q for the rolling hash.",
+          "hi": "d=256 (alphabet size) aur ek prime q modular hashing ke liye use karo. Rolling hash ke liye h = d^(m-1) % q compute karo."
+        },
+        {
+          "en": "When hashes match, always verify by comparing characters to handle spurious hits (hash collisions).",
+          "hi": "Jab hashes match hon, hamesha characters compare karke verify karo spurious hits (hash collisions) handle karne ke liye."
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nvoid rabinKarp(string text, string pattern) {\n    // Write your code here\n}\n\nint main() {\n    string text, pattern;\n    getline(cin, text);\n    getline(cin, pattern);\n    rabinKarp(text, pattern);\n    return 0;\n}",
+        "python": "def rabin_karp(text, pattern):\n    # Write your code here\n    pass\n\ntext = input()\npattern = input()\nrabin_karp(text, pattern)",
+        "java": "import java.util.*;\npublic class Main {\n    static void rabinKarp(String text, String pattern) {\n        // Write your code here\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String text = sc.nextLine();\n        String pattern = sc.nextLine();\n        rabinKarp(text, pattern);\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst text = lines[0], pattern = lines[1];\nfunction rabinKarp(text, pattern) {\n    // Write your code here\n}\nrabinKarp(text, pattern);",
+        "c": "#include <stdio.h>\n#include <string.h>\n\nvoid rabinKarp(char text[], char pattern[]) {\n    // Write your code here\n}\n\nint main() {\n    char text[1000001], pattern[1000001];\n    fgets(text, 1000001, stdin);\n    fgets(pattern, 1000001, stdin);\n    text[strcspn(text, \"\\n\")] = 0;\n    pattern[strcspn(pattern, \"\\n\")] = 0;\n    rabinKarp(text, pattern);\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "GEEKS FOR GEEKS\nGEEK", "expectedOutput": "0 10" },
+        { "input": "AAAA\nAA", "expectedOutput": "0 1 2" },
+        { "input": "ABCDEF\nGHI", "expectedOutput": "-1" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Compute hash for pattern and first window. Slide the window using rolling hash formula. On hash match, verify character by character to avoid spurious hits.",
+          "hi": "Pattern aur pehle window ka hash compute karo. Rolling hash formula use karke window slide karo. Hash match pe character by character verify karo spurious hits avoid karne ke liye."
+        },
+        "code": {
+          "cpp": "void rabinKarp(string text, string pattern) {\n    int d=256, q=101;\n    int n=text.length(), m=pattern.length();\n    int h=1, p=0, t=0;\n    bool found=false;\n    for(int i=0;i<m-1;i++) h=(h*d)%q;\n    for(int i=0;i<m;i++) { p=(d*p+pattern[i])%q; t=(d*t+text[i])%q; }\n    for(int i=0;i<=n-m;i++) {\n        if(p==t && text.substr(i,m)==pattern) {\n            if(found) cout<<\" \"; cout<<i; found=true;\n        }\n        if(i<n-m) { t=(d*(t-text[i]*h)+text[i+m])%q; if(t<0) t+=q; }\n    }\n    if(!found) cout<<-1;\n    cout<<endl;\n}",
+          "python": "def rabin_karp(text, pattern):\n    d, q = 256, 101\n    n, m = len(text), len(pattern)\n    h = pow(d, m-1) % q\n    p = t = 0\n    result = []\n    for i in range(m):\n        p = (d*p + ord(pattern[i])) % q\n        t = (d*t + ord(text[i])) % q\n    for i in range(n-m+1):\n        if p == t and text[i:i+m] == pattern:\n            result.append(str(i))\n        if i < n-m:\n            t = (d*(t - ord(text[i])*h) + ord(text[i+m])) % q\n            if t < 0: t += q\n    print(' '.join(result) if result else -1)"
+        },
+        "timeComplexity": "O(m + n) average, O(m * n) worst",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["string", "hashing", "rabin-karp", "rolling-hash"]
+    },
+    {
+      "id": "sm-004",
+      "title": "Z Algorithm",
+      "titleHi": "Z Algorithm",
+      "difficulty": "medium",
+      "description": {
+        "en": "Implement the Z Algorithm to find all occurrences of a pattern in a given text. Build the Z-array for the concatenated string (pattern + '$' + text) and use it to determine match positions.",
+        "hi": "Z Algorithm implement karo text mein pattern ke saare occurrences dhundhne ke liye. Concatenated string (pattern + '$' + text) ke liye Z-array banao aur match positions determine karne ke liye use karo."
+      },
+      "examples": [
+        {
+          "input": "text = \"GEEKS FOR GEEKS\", pattern = \"GEEK\"",
+          "output": "0 10",
+          "explanation": {
+            "en": "Z-array for 'GEEK$GEEKS FOR GEEKS' gives Z[i]=4 at positions corresponding to text indices 0 and 10",
+            "hi": "'GEEK$GEEKS FOR GEEKS' ka Z-array Z[i]=4 deta hai un positions pe jo text indices 0 aur 10 se correspond karti hain"
+          }
+        },
+        {
+          "input": "text = \"ABABAB\", pattern = \"ABA\"",
+          "output": "0 2",
+          "explanation": {
+            "en": "Pattern 'ABA' found at indices 0 and 2 in text",
+            "hi": "Pattern 'ABA' text mein indices 0 aur 2 pe mila"
+          }
+        }
+      ],
+      "constraints": [
+        "1 <= |text| <= 10^6",
+        "1 <= |pattern| <= |text|",
+        "Both strings contain only uppercase English letters"
+      ],
+      "hints": [
+        {
+          "en": "Concatenate pattern + '$' + text and build the Z-array. Z[i] == pattern length means pattern found at that position.",
+          "hi": "pattern + '$' + text concatenate karo aur Z-array banao. Z[i] == pattern length matlab pattern us position pe mila."
+        },
+        {
+          "en": "Use the Z-box [L, R] to optimize: if i < R, initialize Z[i] = min(R-i, Z[i-L]) before extending.",
+          "hi": "Z-box [L, R] use karo optimize karne ke liye: agar i < R, to extend karne se pehle Z[i] = min(R-i, Z[i-L]) initialize karo."
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvector<int> buildZArray(string s) {\n    // Build Z array\n}\n\nvoid zSearch(string text, string pattern) {\n    // Implement Z algorithm search\n}\n\nint main() {\n    string text, pattern;\n    cin >> text >> pattern;\n    zSearch(text, pattern);\n    return 0;\n}",
+        "python": "def build_z_array(s):\n    # Build Z array\n    pass\n\ndef z_search(text, pattern):\n    # Implement Z algorithm search\n    pass\n\ntext = input()\npattern = input()\nz_search(text, pattern)",
+        "java": "import java.util.*;\npublic class Main {\n    static int[] buildZArray(String s) {\n        // Build Z array\n        return null;\n    }\n    static void zSearch(String text, String pattern) {\n        // Implement Z algorithm search\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String text = sc.next();\n        String pattern = sc.next();\n        zSearch(text, pattern);\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst text = lines[0], pattern = lines[1];\nfunction buildZArray(s) {\n    // Build Z array\n}\nfunction zSearch(text, pattern) {\n    // Implement Z algorithm search\n}\nzSearch(text, pattern);",
+        "c": "#include <stdio.h>\n#include <string.h>\n\nvoid buildZArray(char s[], int z[], int n) {\n    // Build Z array\n}\n\nvoid zSearch(char text[], char pattern[]) {\n    // Implement Z algorithm search\n}\n\nint main() {\n    char text[1000001], pattern[1000001];\n    scanf(\"%s %s\", text, pattern);\n    zSearch(text, pattern);\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "GEEKS FOR GEEKS\nGEEK", "expectedOutput": "0 10" },
+        { "input": "ABABAB\nABA", "expectedOutput": "0 2" },
+        { "input": "HELLO\nWORLD", "expectedOutput": "-1" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Concatenate pattern+'$'+text. Build Z-array using Z-box optimization. Where Z[i] equals pattern length, pattern is found at index i-m-1 in text.",
+          "hi": "pattern+'$'+text concatenate karo. Z-box optimization se Z-array banao. Jahan Z[i] pattern length ke barabar ho, wahan pattern text mein index i-m-1 pe mila."
+        },
+        "code": {
+          "cpp": "vector<int> buildZArray(string s) {\n    int n=s.length();\n    vector<int> z(n,0);\n    int l=0,r=0;\n    for(int i=1;i<n;i++) {\n        if(i<r) z[i]=min(r-i,z[i-l]);\n        while(i+z[i]<n && s[z[i]]==s[i+z[i]]) z[i]++;\n        if(i+z[i]>r) { l=i; r=i+z[i]; }\n    }\n    return z;\n}\nvoid zSearch(string text, string pattern) {\n    string s=pattern+\"$\"+text;\n    int m=pattern.length();\n    vector<int> z=buildZArray(s);\n    bool found=false;\n    for(int i=0;i<(int)s.length();i++) {\n        if(z[i]==m) { if(found) cout<<\" \"; cout<<i-m-1; found=true; }\n    }\n    if(!found) cout<<-1;\n    cout<<endl;\n}",
+          "python": "def build_z_array(s):\n    n=len(s); z=[0]*n; l=r=0\n    for i in range(1,n):\n        if i<r: z[i]=min(r-i,z[i-l])\n        while i+z[i]<n and s[z[i]]==s[i+z[i]]: z[i]+=1\n        if i+z[i]>r: l,r=i,i+z[i]\n    return z\n\ndef z_search(text, pattern):\n    s=pattern+'$'+text\n    m=len(pattern); z=build_z_array(s)\n    result=[str(i-m-1) for i in range(len(s)) if z[i]==m]\n    print(' '.join(result) if result else -1)"
+        },
+        "timeComplexity": "O(m + n)",
+        "spaceComplexity": "O(m + n)"
+      },
+      "tags": ["string", "z-algorithm", "pattern-matching"]
+    },
+    {
+      "id": "sm-005",
+      "title": "Count Pattern Occurrences",
+      "titleHi": "Pattern ke Occurrences Gino",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given a text string and a pattern string, count the total number of times the pattern occurs in the text (including overlapping occurrences). Use any string matching algorithm.",
+        "hi": "Ek text string aur ek pattern string diya hai, text mein pattern kitni baar aata hai wo count karo (overlapping occurrences bhi include karo). Koi bhi string matching algorithm use kar sakte ho."
+      },
+      "examples": [
+        {
+          "input": "text = \"AAAA\", pattern = \"AA\"",
+          "output": "3",
+          "explanation": {
+            "en": "Pattern 'AA' occurs at positions 0, 1, 2 - total 3 overlapping occurrences",
+            "hi": "Pattern 'AA' positions 0, 1, 2 pe aata hai - total 3 overlapping occurrences"
+          }
+        },
+        {
+          "input": "text = \"ABABABAB\", pattern = \"ABA\"",
+          "output": "3",
+          "explanation": {
+            "en": "Pattern 'ABA' found at indices 0, 2, and 4",
+            "hi": "Pattern 'ABA' indices 0, 2, aur 4 pe mila"
+          }
+        }
+      ],
+      "constraints": [
+        "1 <= |text| <= 10^6",
+        "1 <= |pattern| <= |text|",
+        "Both strings contain only uppercase English letters"
+      ],
+      "hints": [
+        {
+          "en": "You can use Naive, KMP, or any string matching algorithm - just count matches instead of printing positions",
+          "hi": "Naive, KMP, ya koi bhi string matching algorithm use kar sakte ho - positions print karne ki jagah matches count karo"
+        },
+        {
+          "en": "For overlapping matches, after finding a match at position i, continue searching from position i+1 (not i+m)",
+          "hi": "Overlapping matches ke liye, position i pe match milne ke baad i+1 se search continue karo (i+m se nahi)"
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint countOccurrences(string text, string pattern) {\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    string text, pattern;\n    cin >> text >> pattern;\n    cout << countOccurrences(text, pattern) << endl;\n    return 0;\n}",
+        "python": "def count_occurrences(text, pattern):\n    # Write your code here\n    return 0\n\ntext = input()\npattern = input()\nprint(count_occurrences(text, pattern))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int countOccurrences(String text, String pattern) {\n        // Write your code here\n        return 0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String text = sc.next();\n        String pattern = sc.next();\n        System.out.println(countOccurrences(text, pattern));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst text = lines[0], pattern = lines[1];\nfunction countOccurrences(text, pattern) {\n    // Write your code here\n    return 0;\n}\nconsole.log(countOccurrences(text, pattern));",
+        "c": "#include <stdio.h>\n#include <string.h>\n\nint countOccurrences(char text[], char pattern[]) {\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    char text[1000001], pattern[1000001];\n    scanf(\"%s %s\", text, pattern);\n    printf(\"%d\\n\", countOccurrences(text, pattern));\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "AAAA\nAA", "expectedOutput": "3" },
+        { "input": "ABABABAB\nABA", "expectedOutput": "3" },
+        { "input": "ABCDEF\nGHI", "expectedOutput": "0" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use KMP algorithm for efficiency. After each match, use LPS array to continue searching for overlapping occurrences. Count matches instead of printing positions.",
+          "hi": "Efficiency ke liye KMP algorithm use karo. Har match ke baad LPS array se overlapping occurrences ke liye search continue karo. Positions print karne ki jagah matches count karo."
+        },
+        "code": {
+          "cpp": "int countOccurrences(string text, string pattern) {\n    int n=text.length(), m=pattern.length(), count=0;\n    vector<int> lps(m,0);\n    int len=0, i=1;\n    while(i<m) {\n        if(pattern[i]==pattern[len]) lps[i++]=++len;\n        else { if(len) len=lps[len-1]; else lps[i++]=0; }\n    }\n    i=0; int j=0;\n    while(i<n) {\n        if(text[i]==pattern[j]) { i++; j++; }\n        if(j==m) { count++; j=lps[j-1]; }\n        else if(i<n && text[i]!=pattern[j]) { if(j) j=lps[j-1]; else i++; }\n    }\n    return count;\n}",
+          "python": "def count_occurrences(text, pattern):\n    n, m = len(text), len(pattern)\n    lps = [0]*m; length=0; i=1\n    while i<m:\n        if pattern[i]==pattern[length]: length+=1; lps[i]=length; i+=1\n        else:\n            if length: length=lps[length-1]\n            else: lps[i]=0; i+=1\n    i=j=count=0\n    while i<n:\n        if text[i]==pattern[j]: i+=1; j+=1\n        if j==m: count+=1; j=lps[j-1]\n        elif i<n and text[i]!=pattern[j]:\n            if j: j=lps[j-1]\n            else: i+=1\n    return count"
+        },
+        "timeComplexity": "O(m + n)",
+        "spaceComplexity": "O(m)"
+      },
+      "tags": ["string", "kmp", "counting", "pattern-matching"]
+    },
+    {
+      "id": "sm-006",
+      "title": "Shortest Palindrome",
+      "titleHi": "Sabse Chhota Palindrome",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given a string s, you can add characters in front of it to make it a palindrome. Find the shortest palindrome you can create by adding characters only to the front of the string.",
+        "hi": "Ek string s diya hai, tum uske aage characters add karke isse palindrome bana sakte ho. String ke sirf aage characters add karke sabse chhota palindrome banao jo bana sakte ho."
+      },
+      "examples": [
+        {
+          "input": "s = \"aacecaaa\"",
+          "output": "aaacecaaa",
+          "explanation": {
+            "en": "Add 'a' to the front to make it a palindrome. The longest palindromic prefix is 'aacecaa', so we only need to add the reverse of remaining 'a' at the front.",
+            "hi": "Aage 'a' add karo palindrome banane ke liye. Longest palindromic prefix 'aacecaa' hai, isliye sirf bache hue 'a' ka reverse aage add karna hai."
+          }
+        },
+        {
+          "input": "s = \"abcd\"",
+          "output": "dcbabcd",
+          "explanation": {
+            "en": "The longest palindromic prefix is just 'a'. Reverse of 'bcd' ('dcb') is added to the front.",
+            "hi": "Longest palindromic prefix sirf 'a' hai. 'bcd' ka reverse ('dcb') aage add hota hai."
+          }
+        }
+      ],
+      "constraints": [
+        "0 <= s.length <= 5 * 10^4",
+        "s consists of only lowercase English letters"
+      ],
+      "hints": [
+        {
+          "en": "The key insight is finding the longest palindromic prefix of the string. Characters after this prefix need to be reversed and prepended.",
+          "hi": "Key insight hai string ka longest palindromic prefix dhundhna. Is prefix ke baad ke characters ko reverse karke prepend karna hai."
+        },
+        {
+          "en": "Use KMP: Create string = s + '#' + reverse(s), build LPS array. The last value of LPS gives the longest palindromic prefix length.",
+          "hi": "KMP use karo: string = s + '#' + reverse(s) banao, LPS array banao. LPS ki last value longest palindromic prefix ki length deti hai."
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nstring shortestPalindrome(string s) {\n    // Write your code here\n    return \"\";\n}\n\nint main() {\n    string s;\n    cin >> s;\n    cout << shortestPalindrome(s) << endl;\n    return 0;\n}",
+        "python": "def shortest_palindrome(s):\n    # Write your code here\n    return \"\"\n\ns = input()\nprint(shortest_palindrome(s))",
+        "java": "import java.util.*;\npublic class Main {\n    public static String shortestPalindrome(String s) {\n        // Write your code here\n        return \"\";\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        System.out.println(shortestPalindrome(s));\n    }\n}",
+        "javascript": "const s = require('fs').readFileSync('/dev/stdin','utf8').trim();\nfunction shortestPalindrome(s) {\n    // Write your code here\n    return '';\n}\nconsole.log(shortestPalindrome(s));",
+        "c": "#include <stdio.h>\n#include <string.h>\n\nvoid shortestPalindrome(char s[], char result[]) {\n    // Write your code here\n}\n\nint main() {\n    char s[50001], result[100002];\n    scanf(\"%s\", s);\n    shortestPalindrome(s, result);\n    printf(\"%s\\n\", result);\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "aacecaaa", "expectedOutput": "aaacecaaa" },
+        { "input": "abcd", "expectedOutput": "dcbabcd" },
+        { "input": "a", "expectedOutput": "a" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use KMP's LPS array on s + '#' + reverse(s). The last LPS value gives the longest palindromic prefix. Reverse the remaining suffix and prepend it to s.",
+          "hi": "s + '#' + reverse(s) pe KMP ka LPS array use karo. Last LPS value longest palindromic prefix deta hai. Bache hue suffix ko reverse karke s ke aage lagao."
+        },
+        "code": {
+          "cpp": "string shortestPalindrome(string s) {\n    string rev = s;\n    reverse(rev.begin(), rev.end());\n    string concat = s + \"#\" + rev;\n    int n = concat.length();\n    vector<int> lps(n, 0);\n    int len = 0, i = 1;\n    while (i < n) {\n        if (concat[i] == concat[len]) lps[i++] = ++len;\n        else { if (len) len = lps[len-1]; else lps[i++] = 0; }\n    }\n    string prefix = rev.substr(0, s.length() - lps[n-1]);\n    return prefix + s;\n}",
+          "python": "def shortest_palindrome(s):\n    if not s: return s\n    rev = s[::-1]\n    concat = s + '#' + rev\n    n = len(concat)\n    lps = [0] * n\n    length = 0; i = 1\n    while i < n:\n        if concat[i] == concat[length]:\n            length += 1; lps[i] = length; i += 1\n        else:\n            if length: length = lps[length-1]\n            else: lps[i] = 0; i += 1\n    return rev[:len(s) - lps[-1]] + s"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["string", "kmp", "palindrome", "lps"]
+    },
+    {
+      "id": "sm-007",
+      "title": "Repeated String Match",
+      "titleHi": "Repeated String Match",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given two strings a and b, return the minimum number of times string a must be repeated such that string b is a substring of the repeated string. If b can never be a substring of a repeated a, return -1.",
+        "hi": "Do strings a aur b diye hain, string a ko minimum kitni baar repeat karna padega taaki string b repeated string ka substring ban jaaye wo return karo. Agar b kabhi bhi repeated a ka substring nahi ban sakta, to -1 return karo."
+      },
+      "examples": [
+        {
+          "input": "a = \"abcd\", b = \"cdabcdab\"",
+          "output": "3",
+          "explanation": {
+            "en": "Repeat a 3 times: 'abcdabcdabcd'. Now b = 'cdabcdab' is a substring of this repeated string.",
+            "hi": "a ko 3 baar repeat karo: 'abcdabcdabcd'. Ab b = 'cdabcdab' is repeated string ka substring hai."
+          }
+        },
+        {
+          "input": "a = \"abc\", b = \"cabcabca\"",
+          "output": "4",
+          "explanation": {
+            "en": "Repeat a 4 times: 'abcabcabcabc'. Now b = 'cabcabca' is found as a substring.",
+            "hi": "a ko 4 baar repeat karo: 'abcabcabcabc'. Ab b = 'cabcabca' substring ke roop mein mil gaya."
+          }
+        }
+      ],
+      "constraints": [
+        "1 <= a.length, b.length <= 10^4",
+        "a and b consist of lowercase English letters"
+      ],
+      "hints": [
+        {
+          "en": "The maximum number of repetitions needed is ceil(len(b)/len(a)) + 1. If b is not found by then, it will never be found.",
+          "hi": "Maximum repetitions jo chahiye hain wo ceil(len(b)/len(a)) + 1 hain. Agar tab tak b na mile, to kabhi nahi milega."
+        },
+        {
+          "en": "Repeat a enough times so the repeated string is at least as long as b, then check once more. Use KMP or Rabin-Karp for efficient substring check.",
+          "hi": "a ko itni baar repeat karo ki repeated string kam se kam b jitni lambi ho, phir ek baar aur check karo. Efficient substring check ke liye KMP ya Rabin-Karp use karo."
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint repeatedStringMatch(string a, string b) {\n    // Write your code here\n    return -1;\n}\n\nint main() {\n    string a, b;\n    cin >> a >> b;\n    cout << repeatedStringMatch(a, b) << endl;\n    return 0;\n}",
+        "python": "def repeated_string_match(a, b):\n    # Write your code here\n    return -1\n\na = input()\nb = input()\nprint(repeated_string_match(a, b))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int repeatedStringMatch(String a, String b) {\n        // Write your code here\n        return -1;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String a = sc.next();\n        String b = sc.next();\n        System.out.println(repeatedStringMatch(a, b));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst a = lines[0], b = lines[1];\nfunction repeatedStringMatch(a, b) {\n    // Write your code here\n    return -1;\n}\nconsole.log(repeatedStringMatch(a, b));",
+        "c": "#include <stdio.h>\n#include <string.h>\n\nint repeatedStringMatch(char a[], char b[]) {\n    // Write your code here\n    return -1;\n}\n\nint main() {\n    char a[10001], b[10001];\n    scanf(\"%s %s\", a, b);\n    printf(\"%d\\n\", repeatedStringMatch(a, b));\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "abcd\ncdabcdab", "expectedOutput": "3" },
+        { "input": "abc\ncabcabca", "expectedOutput": "4" },
+        { "input": "abc\nxyz", "expectedOutput": "-1" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Repeat string a until its length >= b's length. Check if b is a substring. If not, try one more repetition. If still not found, return -1. Use KMP for substring check.",
+          "hi": "String a ko repeat karo jab tak uski length >= b ki length na ho. Check karo b substring hai ya nahi. Agar nahi, to ek aur repetition try karo. Phir bhi na mile to -1 return karo. Substring check ke liye KMP use karo."
+        },
+        "code": {
+          "cpp": "int repeatedStringMatch(string a, string b) {\n    string repeated = a;\n    int count = 1;\n    while (repeated.length() < b.length()) {\n        repeated += a;\n        count++;\n    }\n    if (repeated.find(b) != string::npos) return count;\n    repeated += a;\n    count++;\n    if (repeated.find(b) != string::npos) return count;\n    return -1;\n}",
+          "python": "def repeated_string_match(a, b):\n    count = 1\n    repeated = a\n    while len(repeated) < len(b):\n        repeated += a\n        count += 1\n    if b in repeated:\n        return count\n    repeated += a\n    count += 1\n    if b in repeated:\n        return count\n    return -1"
+        },
+        "timeComplexity": "O(m + n)",
+        "spaceComplexity": "O(m + n)"
+      },
+      "tags": ["string", "pattern-matching", "repetition"]
+    },
+    {
+      "id": "sm-008",
+      "title": "Longest Happy Prefix",
+      "titleHi": "Longest Happy Prefix",
+      "difficulty": "hard",
+      "description": {
+        "en": "A string is called a happy prefix if it is a non-empty prefix which is also a suffix (excluding the entire string itself). Given a string s, find the longest happy prefix of s. Return an empty string if no such prefix exists.",
+        "hi": "Ek string ko happy prefix tab kehte hain jab wo ek non-empty prefix ho jo suffix bhi ho (poori string ko chhodke). Ek string s diya hai, s ka longest happy prefix dhundho. Agar aisa koi prefix na ho to empty string return karo."
+      },
+      "examples": [
+        {
+          "input": "s = \"level\"",
+          "output": "l",
+          "explanation": {
+            "en": "The prefixes that are also suffixes are: 'l'. So 'l' is the longest happy prefix with length 1.",
+            "hi": "Jo prefixes suffix bhi hain wo hain: 'l'. Isliye 'l' longest happy prefix hai length 1 ke saath."
+          }
+        },
+        {
+          "input": "s = \"ababab\"",
+          "output": "abab",
+          "explanation": {
+            "en": "'ab' and 'abab' are both prefixes that are also suffixes. 'abab' is the longest with length 4.",
+            "hi": "'ab' aur 'abab' dono prefixes hain jo suffix bhi hain. 'abab' longest hai length 4 ke saath."
+          }
+        }
+      ],
+      "constraints": [
+        "1 <= s.length <= 10^5",
+        "s contains only lowercase English letters"
+      ],
+      "hints": [
+        {
+          "en": "This is exactly what the KMP's LPS (Failure Function) array computes! The last value of the LPS array gives the answer.",
+          "hi": "Yehi to KMP ka LPS (Failure Function) array compute karta hai! LPS array ki last value answer deti hai."
+        },
+        {
+          "en": "You can also use the Z-algorithm: check Z[i] values where i + Z[i] == n (the match extends to the end).",
+          "hi": "Z-algorithm bhi use kar sakte ho: Z[i] values check karo jahan i + Z[i] == n (match end tak extend hota hai)."
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nstring longestHappyPrefix(string s) {\n    // Write your code here\n    return \"\";\n}\n\nint main() {\n    string s;\n    cin >> s;\n    cout << longestHappyPrefix(s) << endl;\n    return 0;\n}",
+        "python": "def longest_happy_prefix(s):\n    # Write your code here\n    return \"\"\n\ns = input()\nprint(longest_happy_prefix(s))",
+        "java": "import java.util.*;\npublic class Main {\n    public static String longestHappyPrefix(String s) {\n        // Write your code here\n        return \"\";\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        System.out.println(longestHappyPrefix(s));\n    }\n}",
+        "javascript": "const s = require('fs').readFileSync('/dev/stdin','utf8').trim();\nfunction longestHappyPrefix(s) {\n    // Write your code here\n    return '';\n}\nconsole.log(longestHappyPrefix(s));",
+        "c": "#include <stdio.h>\n#include <string.h>\n\nvoid longestHappyPrefix(char s[], char result[]) {\n    // Write your code here\n    result[0] = '\\0';\n}\n\nint main() {\n    char s[100001], result[100001];\n    scanf(\"%s\", s);\n    longestHappyPrefix(s, result);\n    printf(\"%s\\n\", result);\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "level", "expectedOutput": "l" },
+        { "input": "ababab", "expectedOutput": "abab" },
+        { "input": "a", "expectedOutput": "" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Build the KMP LPS array for the string. The last value lps[n-1] gives the length of the longest proper prefix that is also a suffix. Return s[0..lps[n-1]-1].",
+          "hi": "String ke liye KMP LPS array banao. Last value lps[n-1] longest proper prefix ki length deta hai jo suffix bhi ho. s[0..lps[n-1]-1] return karo."
+        },
+        "code": {
+          "cpp": "string longestHappyPrefix(string s) {\n    int n = s.length();\n    vector<int> lps(n, 0);\n    int len = 0, i = 1;\n    while (i < n) {\n        if (s[i] == s[len]) { lps[i++] = ++len; }\n        else { if (len) len = lps[len-1]; else lps[i++] = 0; }\n    }\n    return s.substr(0, lps[n-1]);\n}",
+          "python": "def longest_happy_prefix(s):\n    n = len(s)\n    lps = [0] * n\n    length = 0; i = 1\n    while i < n:\n        if s[i] == s[length]:\n            length += 1; lps[i] = length; i += 1\n        else:\n            if length: length = lps[length-1]\n            else: lps[i] = 0; i += 1\n    return s[:lps[-1]]"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["string", "kmp", "lps", "prefix-suffix"]
+    }
+  ]
+}

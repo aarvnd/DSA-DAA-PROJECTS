@@ -14,7 +14,7 @@ import NotFound from "./pages/NotFound";
 export default function App() {
   return (
     <LanguageProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/DSA-DAA-PROJECTS">
         <Routes>
           {/* Playground and ProblemPage are full-screen, no layout */}
           <Route path="/playground" element={<Playground />} />

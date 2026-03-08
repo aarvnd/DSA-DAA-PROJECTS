@@ -1,0 +1,414 @@
+{
+  "topicId": "greedy-method",
+  "problems": [
+    {
+      "id": "gm-001",
+      "title": "Activity Selection",
+      "titleHi": "Activity Selection Problem",
+      "difficulty": "easy",
+      "description": {
+        "en": "You are given N activities with their start and finish times. Select the maximum number of activities that can be performed by a single person, assuming that a person can only work on a single activity at a time. Activities are given as two arrays: start[] and finish[].",
+        "hi": "Tumhe N activities di hain unke start aur finish times ke saath. Maximum kitni activities select kar sakte ho jo ek person kar sakta hai, ye maante hue ki ek person ek waqt mein sirf ek activity kar sakta hai. Activities do arrays mein di hain: start[] aur finish[]."
+      },
+      "examples": [
+        {
+          "input": "N = 6\nstart[] = {1, 3, 0, 5, 8, 5}\nfinish[] = {2, 4, 6, 7, 9, 9}",
+          "output": "4",
+          "explanation": {
+            "en": "Select activities at indices 0, 1, 3, 4 -> (1,2), (3,4), (5,7), (8,9). Maximum 4 non-overlapping activities.",
+            "hi": "Indices 0, 1, 3, 4 wali activities select karo -> (1,2), (3,4), (5,7), (8,9). Maximum 4 non-overlapping activities."
+          }
+        },
+        {
+          "input": "N = 3\nstart[] = {1, 2, 3}\nfinish[] = {4, 5, 6}",
+          "output": "1",
+          "explanation": {
+            "en": "All activities overlap with each other. Only one can be selected.",
+            "hi": "Saari activities ek dusre se overlap karti hain. Sirf ek select ho sakti hai."
+          }
+        }
+      ],
+      "constraints": ["1 <= N <= 10^5", "1 <= start[i] < finish[i] <= 10^9"],
+      "hints": [
+        { "en": "Sort activities by their finish time", "hi": "Activities ko finish time se sort karo" },
+        { "en": "Greedily pick the activity that finishes earliest and is compatible with the last selected one", "hi": "Greedy tarike se wo activity chuno jo sabse pehle khatam ho aur last selected activity se compatible ho" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\n#include<algorithm>\nusing namespace std;\n\nint activitySelection(vector<int>& start, vector<int>& finish, int n) {\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    int n; cin >> n;\n    vector<int> start(n), finish(n);\n    for(int i=0;i<n;i++) cin >> start[i];\n    for(int i=0;i<n;i++) cin >> finish[i];\n    cout << activitySelection(start, finish, n);\n}",
+        "python": "def activity_selection(start, finish, n):\n    # Write your code here\n    pass\n\nn = int(input())\nstart = list(map(int, input().split()))\nfinish = list(map(int, input().split()))\nprint(activity_selection(start, finish, n))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int activitySelection(int[] start, int[] finish, int n) {\n        // Write your code here\n        return 0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] start = new int[n], finish = new int[n];\n        for(int i=0;i<n;i++) start[i] = sc.nextInt();\n        for(int i=0;i<n;i++) finish[i] = sc.nextInt();\n        System.out.println(activitySelection(start, finish, n));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst start = lines[1].split(' ').map(Number);\nconst finish = lines[2].split(' ').map(Number);\nfunction activitySelection(start, finish, n) {\n    // Write your code here\n}\nconsole.log(activitySelection(start, finish, n));",
+        "c": "#include<stdio.h>\n#include<stdlib.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int start[n], finish[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&start[i]);\n    for(int i=0;i<n;i++) scanf(\"%d\",&finish[i]);\n    // Write your code here\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "6\n1 3 0 5 8 5\n2 4 6 7 9 9", "expectedOutput": "4" },
+        { "input": "3\n1 2 3\n4 5 6", "expectedOutput": "1" },
+        { "input": "4\n1 3 5 7\n2 4 6 8", "expectedOutput": "4" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Sort activities by finish time. Pick the first activity. For each remaining activity, if its start time >= last selected finish time, select it.",
+          "hi": "Activities ko finish time se sort karo. Pehli activity select karo. Baaki mein se, agar start time >= last selected finish time, to select karo."
+        },
+        "code": {
+          "cpp": "int activitySelection(vector<int>& start, vector<int>& finish, int n) {\n    vector<pair<int,int>> act(n);\n    for(int i=0;i<n;i++) act[i]={finish[i],start[i]};\n    sort(act.begin(),act.end());\n    int count=1, lastFinish=act[0].first;\n    for(int i=1;i<n;i++) {\n        if(act[i].second>=lastFinish) {\n            count++;\n            lastFinish=act[i].first;\n        }\n    }\n    return count;\n}",
+          "python": "def activity_selection(start, finish, n):\n    activities = sorted(zip(finish, start))\n    count = 1\n    last_finish = activities[0][0]\n    for i in range(1, n):\n        if activities[i][1] >= last_finish:\n            count += 1\n            last_finish = activities[i][0]\n    return count"
+        },
+        "timeComplexity": "O(n log n)",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["greedy", "sorting", "activity-selection"]
+    },
+    {
+      "id": "gm-002",
+      "title": "Fractional Knapsack",
+      "titleHi": "Fractional Knapsack Problem",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given weights and values of N items, put these items in a knapsack of capacity W to get the maximum total value. You can break items (take fractions of items). Print the maximum value with 2 decimal places.",
+        "hi": "N items ke weights aur values diye hain, inhe W capacity ke knapsack mein daalo taaki maximum total value mile. Tum items ko tod sakte ho (fractions le sakte ho). Maximum value 2 decimal places tak print karo."
+      },
+      "examples": [
+        {
+          "input": "N = 3, W = 50\nvalues[] = {60, 100, 120}\nweights[] = {10, 20, 30}",
+          "output": "240.00",
+          "explanation": {
+            "en": "Take item 1 fully (value=60, weight=10), item 2 fully (value=100, weight=20), and 2/3 of item 3 (value=80, weight=20). Total = 60+100+80 = 240.00",
+            "hi": "Item 1 poora lo (value=60, weight=10), item 2 poora lo (value=100, weight=20), aur item 3 ka 2/3 lo (value=80, weight=20). Total = 60+100+80 = 240.00"
+          }
+        }
+      ],
+      "constraints": ["1 <= N <= 10^5", "1 <= W <= 10^9", "1 <= value[i], weight[i] <= 10^9"],
+      "hints": [
+        { "en": "Calculate value/weight ratio for each item", "hi": "Har item ka value/weight ratio calculate karo" },
+        { "en": "Sort by ratio in descending order and greedily pick items", "hi": "Ratio ke descending order mein sort karo aur greedily items pick karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\n#include<algorithm>\n#include<iomanip>\nusing namespace std;\n\ndouble fractionalKnapsack(int W, vector<int>& values, vector<int>& weights, int n) {\n    // Write your code here\n    return 0.0;\n}\n\nint main() {\n    int n, W; cin >> n >> W;\n    vector<int> values(n), weights(n);\n    for(int i=0;i<n;i++) cin >> values[i] >> weights[i];\n    cout << fixed << setprecision(2) << fractionalKnapsack(W, values, weights, n);\n}",
+        "python": "def fractional_knapsack(W, values, weights, n):\n    # Write your code here\n    pass\n\nn, W = map(int, input().split())\nvalues, weights = [], []\nfor _ in range(n):\n    v, w = map(int, input().split())\n    values.append(v); weights.append(w)\nprint(f\"{fractional_knapsack(W, values, weights, n):.2f}\")",
+        "java": "import java.util.*;\npublic class Main {\n    public static double fractionalKnapsack(int W, int[] values, int[] weights, int n) {\n        // Write your code here\n        return 0.0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), W = sc.nextInt();\n        int[] values = new int[n], weights = new int[n];\n        for(int i=0;i<n;i++) { values[i]=sc.nextInt(); weights[i]=sc.nextInt(); }\n        System.out.printf(\"%.2f\", fractionalKnapsack(W, values, weights, n));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [n, W] = lines[0].split(' ').map(Number);\nconst values = [], weights = [];\nfor(let i=1;i<=n;i++) {\n    const [v,w] = lines[i].split(' ').map(Number);\n    values.push(v); weights.push(w);\n}\nfunction fractionalKnapsack(W, values, weights, n) {\n    // Write your code here\n}\nconsole.log(fractionalKnapsack(W, values, weights, n).toFixed(2));",
+        "c": "#include<stdio.h>\n#include<stdlib.h>\nint main() {\n    int n, W; scanf(\"%d %d\",&n,&W);\n    int values[n], weights[n];\n    for(int i=0;i<n;i++) scanf(\"%d %d\",&values[i],&weights[i]);\n    // Write your code here\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "3 50\n60 10\n100 20\n120 30", "expectedOutput": "240.00" },
+        { "input": "2 15\n10 5\n20 10", "expectedOutput": "30.00" },
+        { "input": "1 10\n100 50", "expectedOutput": "20.00" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Sort items by value/weight ratio in descending order. Take items fully while capacity allows, then take a fraction of the next item.",
+          "hi": "Items ko value/weight ratio ke descending order mein sort karo. Jab tak capacity hai poore items lo, phir agle item ka fraction lo."
+        },
+        "code": {
+          "cpp": "double fractionalKnapsack(int W, vector<int>& values, vector<int>& weights, int n) {\n    vector<pair<double,int>> ratio(n);\n    for(int i=0;i<n;i++) ratio[i]={(double)values[i]/weights[i],i};\n    sort(ratio.rbegin(),ratio.rend());\n    double totalValue=0.0;\n    int remaining=W;\n    for(auto& [r,i]:ratio) {\n        if(remaining>=weights[i]) {\n            totalValue+=values[i];\n            remaining-=weights[i];\n        } else {\n            totalValue+=r*remaining;\n            break;\n        }\n    }\n    return totalValue;\n}",
+          "python": "def fractional_knapsack(W, values, weights, n):\n    items = sorted(range(n), key=lambda i: values[i]/weights[i], reverse=True)\n    total = 0.0\n    for i in items:\n        if W >= weights[i]:\n            total += values[i]\n            W -= weights[i]\n        else:\n            total += values[i] * (W / weights[i])\n            break\n    return total"
+        },
+        "timeComplexity": "O(n log n)",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["greedy", "sorting", "knapsack"]
+    },
+    {
+      "id": "gm-003",
+      "title": "Huffman Coding",
+      "titleHi": "Huffman Coding Problem",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given a string of characters and their frequencies, build a Huffman Tree and print the Huffman codes for each character. Print codes in sorted order of characters. If there is only one unique character, its code should be '0'.",
+        "hi": "Characters aur unki frequencies di hain, Huffman Tree banao aur har character ke Huffman codes print karo. Codes characters ke sorted order mein print karo. Agar sirf ek unique character hai to uska code '0' hona chahiye."
+      },
+      "examples": [
+        {
+          "input": "N = 4\nchars[] = {a, b, c, d}\nfreq[] = {5, 9, 12, 13}",
+          "output": "a: 110\nb: 111\nc: 10\nd: 0",
+          "explanation": {
+            "en": "Building the Huffman Tree: merge a(5)+b(9)=14, merge c(12)+d(13)=25, merge 14+25=39. Traverse the tree to get codes.",
+            "hi": "Huffman Tree banate hain: a(5)+b(9)=14 merge karo, c(12)+d(13)=25 merge karo, 14+25=39 merge karo. Tree traverse karke codes nikalo."
+          }
+        }
+      ],
+      "constraints": ["1 <= N <= 26", "1 <= freq[i] <= 10^6", "Characters are lowercase English letters"],
+      "hints": [
+        { "en": "Use a min-heap (priority queue) to always pick two nodes with minimum frequency", "hi": "Min-heap (priority queue) use karo taaki hamesha do minimum frequency wale nodes pick ho" },
+        { "en": "The greedy choice is to merge the two least frequent nodes first", "hi": "Greedy choice hai ki do sabse kam frequent nodes ko pehle merge karo" },
+        { "en": "Left edge = 0, Right edge = 1. Traverse tree to generate codes.", "hi": "Left edge = 0, Right edge = 1. Codes generate karne ke liye tree traverse karo." }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<queue>\n#include<string>\n#include<map>\nusing namespace std;\n\nstruct Node {\n    char ch; int freq;\n    Node *left, *right;\n    Node(char c, int f) : ch(c), freq(f), left(nullptr), right(nullptr) {}\n};\n\nvoid buildHuffmanCodes(char chars[], int freq[], int n) {\n    // Write your code here\n}\n\nint main() {\n    int n; cin >> n;\n    char chars[n]; int freq[n];\n    for(int i=0;i<n;i++) cin >> chars[i] >> freq[i];\n    buildHuffmanCodes(chars, freq, n);\n}",
+        "python": "import heapq\n\ndef build_huffman_codes(chars, freq, n):\n    # Write your code here\n    pass\n\nn = int(input())\nchars, freq = [], []\nfor _ in range(n):\n    c, f = input().split()\n    chars.append(c); freq.append(int(f))\nbuild_huffman_codes(chars, freq, n)",
+        "java": "import java.util.*;\npublic class Main {\n    static class Node implements Comparable<Node> {\n        char ch; int freq; Node left, right;\n        Node(char ch, int freq) { this.ch=ch; this.freq=freq; }\n        public int compareTo(Node o) { return this.freq - o.freq; }\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        char[] chars = new char[n]; int[] freq = new int[n];\n        for(int i=0;i<n;i++) { chars[i]=sc.next().charAt(0); freq[i]=sc.nextInt(); }\n        // Build Huffman codes here\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst chars = [], freq = [];\nfor(let i=1;i<=n;i++) {\n    const [c, f] = lines[i].split(' ');\n    chars.push(c); freq.push(parseInt(f));\n}\nfunction buildHuffmanCodes(chars, freq, n) {\n    // Write your code here\n}\nbuildHuffmanCodes(chars, freq, n);",
+        "c": "#include<stdio.h>\n#include<stdlib.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    char chars[n]; int freq[n];\n    for(int i=0;i<n;i++) scanf(\" %c %d\",&chars[i],&freq[i]);\n    // Build Huffman codes here\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "4\na 5\nb 9\nc 12\nd 13", "expectedOutput": "a: 110\nb: 111\nc: 10\nd: 0" },
+        { "input": "3\na 10\nb 20\nc 30", "expectedOutput": "a: 10\nb: 11\nc: 0" },
+        { "input": "1\na 100", "expectedOutput": "a: 0" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use a min-heap. Repeatedly extract two minimum frequency nodes, merge them into a new node with combined frequency, and insert back. Traverse the final tree to assign codes.",
+          "hi": "Min-heap use karo. Baar baar do minimum frequency wale nodes nikalo, unhe ek naye node mein merge karo combined frequency ke saath, aur wapas daalo. Final tree traverse karke codes assign karo."
+        },
+        "code": {
+          "cpp": "struct Cmp { bool operator()(Node* a, Node* b){ return a->freq > b->freq; } };\nvoid getCodes(Node* root, string code, map<char,string>& codes) {\n    if(!root) return;\n    if(!root->left && !root->right) { codes[root->ch]=code.empty()?\"0\":code; return; }\n    getCodes(root->left, code+\"0\", codes);\n    getCodes(root->right, code+\"1\", codes);\n}\nvoid buildHuffmanCodes(char chars[], int freq[], int n) {\n    priority_queue<Node*,vector<Node*>,Cmp> pq;\n    for(int i=0;i<n;i++) pq.push(new Node(chars[i],freq[i]));\n    while(pq.size()>1) {\n        Node *l=pq.top(); pq.pop(); Node *r=pq.top(); pq.pop();\n        Node *p=new Node('\\0',l->freq+r->freq); p->left=l; p->right=r;\n        pq.push(p);\n    }\n    map<char,string> codes;\n    getCodes(pq.top(),\"\",codes);\n    for(auto& [c,code]:codes) cout<<c<<\": \"<<code<<endl;\n}",
+          "python": "def build_huffman_codes(chars, freq, n):\n    class Node:\n        def __init__(self, ch, f): self.ch, self.freq, self.left, self.right = ch, f, None, None\n        def __lt__(self, o): return self.freq < o.freq\n    heap = [Node(chars[i], freq[i]) for i in range(n)]\n    heapq.heapify(heap)\n    while len(heap) > 1:\n        l, r = heapq.heappop(heap), heapq.heappop(heap)\n        p = Node(None, l.freq+r.freq); p.left, p.right = l, r\n        heapq.heappush(heap, p)\n    codes = {}\n    def dfs(node, code):\n        if not node: return\n        if not node.left and not node.right: codes[node.ch] = code or '0'; return\n        dfs(node.left, code+'0'); dfs(node.right, code+'1')\n    dfs(heap[0], '')\n    for c in sorted(codes): print(f'{c}: {codes[c]}')"
+        },
+        "timeComplexity": "O(n log n)",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["greedy", "huffman", "tree", "priority-queue"]
+    },
+    {
+      "id": "gm-004",
+      "title": "Kruskal's MST",
+      "titleHi": "Kruskal's Minimum Spanning Tree",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given a weighted, undirected, and connected graph with V vertices and E edges, find the sum of weights of the edges in the Minimum Spanning Tree (MST) using Kruskal's algorithm.",
+        "hi": "Ek weighted, undirected, connected graph diya hai jisme V vertices aur E edges hain. Kruskal's algorithm use karke Minimum Spanning Tree (MST) ke edges ka total weight nikalo."
+      },
+      "examples": [
+        {
+          "input": "V = 4, E = 5\nEdges: (0,1,10), (0,2,6), (0,3,5), (1,3,15), (2,3,4)",
+          "output": "19",
+          "explanation": {
+            "en": "MST edges: (2,3,4) + (0,3,5) + (0,1,10) = 19. We pick edges in order of weight, skipping those that form cycles.",
+            "hi": "MST edges: (2,3,4) + (0,3,5) + (0,1,10) = 19. Weight ke order mein edges pick karte hain, cycle banane wale skip karte hain."
+          }
+        }
+      ],
+      "constraints": ["2 <= V <= 10^5", "V-1 <= E <= V*(V-1)/2", "1 <= weight <= 10^6"],
+      "hints": [
+        { "en": "Sort all edges by weight in ascending order", "hi": "Saare edges ko weight ke ascending order mein sort karo" },
+        { "en": "Use Union-Find (Disjoint Set Union) to detect cycles efficiently", "hi": "Cycles detect karne ke liye Union-Find (Disjoint Set Union) use karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\n#include<algorithm>\nusing namespace std;\n\nint kruskalMST(int V, vector<tuple<int,int,int>>& edges) {\n    // edges[i] = {weight, u, v}\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    int V, E; cin >> V >> E;\n    vector<tuple<int,int,int>> edges(E);\n    for(int i=0;i<E;i++) {\n        int u,v,w; cin >> u >> v >> w;\n        edges[i] = {w,u,v};\n    }\n    cout << kruskalMST(V, edges);\n}",
+        "python": "def kruskal_mst(V, edges):\n    # edges = [(weight, u, v), ...]\n    # Write your code here\n    pass\n\nV, E = map(int, input().split())\nedges = []\nfor _ in range(E):\n    u, v, w = map(int, input().split())\n    edges.append((w, u, v))\nprint(kruskal_mst(V, edges))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int kruskalMST(int V, int[][] edges) {\n        // edges[i] = {u, v, weight}\n        // Write your code here\n        return 0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int V = sc.nextInt(), E = sc.nextInt();\n        int[][] edges = new int[E][3];\n        for(int i=0;i<E;i++) { edges[i][0]=sc.nextInt(); edges[i][1]=sc.nextInt(); edges[i][2]=sc.nextInt(); }\n        System.out.println(kruskalMST(V, edges));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [V, E] = lines[0].split(' ').map(Number);\nconst edges = [];\nfor(let i=1;i<=E;i++) {\n    const [u,v,w] = lines[i].split(' ').map(Number);\n    edges.push([w,u,v]);\n}\nfunction kruskalMST(V, edges) {\n    // Write your code here\n}\nconsole.log(kruskalMST(V, edges));",
+        "c": "#include<stdio.h>\n#include<stdlib.h>\nint main() {\n    int V, E; scanf(\"%d %d\",&V,&E);\n    int u[E], v[E], w[E];\n    for(int i=0;i<E;i++) scanf(\"%d %d %d\",&u[i],&v[i],&w[i]);\n    // Write your code here\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "4 5\n0 1 10\n0 2 6\n0 3 5\n1 3 15\n2 3 4", "expectedOutput": "19" },
+        { "input": "3 3\n0 1 5\n1 2 3\n0 2 1", "expectedOutput": "4" },
+        { "input": "2 1\n0 1 7", "expectedOutput": "7" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Sort edges by weight. Use Union-Find with path compression and union by rank. Add edge to MST if it connects two different components.",
+          "hi": "Edges ko weight se sort karo. Union-Find use karo path compression aur union by rank ke saath. Edge ko MST mein add karo agar wo do different components connect karti hai."
+        },
+        "code": {
+          "cpp": "int parent[100001], rnk[100001];\nint find(int x) { return parent[x]==x?x:parent[x]=find(parent[x]); }\nbool unite(int x, int y) {\n    int px=find(x),py=find(y);\n    if(px==py) return false;\n    if(rnk[px]<rnk[py]) swap(px,py);\n    parent[py]=px;\n    if(rnk[px]==rnk[py]) rnk[px]++;\n    return true;\n}\nint kruskalMST(int V, vector<tuple<int,int,int>>& edges) {\n    for(int i=0;i<V;i++){parent[i]=i;rnk[i]=0;}\n    sort(edges.begin(),edges.end());\n    int mst=0,cnt=0;\n    for(auto&[w,u,v]:edges) {\n        if(unite(u,v)){mst+=w;if(++cnt==V-1)break;}\n    }\n    return mst;\n}",
+          "python": "def kruskal_mst(V, edges):\n    parent = list(range(V))\n    rank = [0]*V\n    def find(x):\n        while parent[x]!=x: parent[x]=parent[parent[x]]; x=parent[x]\n        return x\n    def union(x,y):\n        px,py=find(x),find(y)\n        if px==py: return False\n        if rank[px]<rank[py]: px,py=py,px\n        parent[py]=px\n        if rank[px]==rank[py]: rank[px]+=1\n        return True\n    edges.sort()\n    mst=0\n    for w,u,v in edges:\n        if union(u,v): mst+=w\n    return mst"
+        },
+        "timeComplexity": "O(E log E)",
+        "spaceComplexity": "O(V)"
+      },
+      "tags": ["greedy", "graph", "mst", "union-find"]
+    },
+    {
+      "id": "gm-005",
+      "title": "Prim's MST",
+      "titleHi": "Prim's Minimum Spanning Tree",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given a weighted, undirected, and connected graph with V vertices and E edges, find the sum of weights of the edges in the Minimum Spanning Tree (MST) using Prim's algorithm.",
+        "hi": "Ek weighted, undirected, connected graph diya hai jisme V vertices aur E edges hain. Prim's algorithm use karke Minimum Spanning Tree (MST) ke edges ka total weight nikalo."
+      },
+      "examples": [
+        {
+          "input": "V = 5, E = 6\nEdges: (0,1,2), (0,3,6), (1,2,3), (1,3,8), (1,4,5), (2,4,7)",
+          "output": "16",
+          "explanation": {
+            "en": "Starting from vertex 0: pick edge (0,1,2), then (1,2,3), then (1,4,5), then (0,3,6). Total MST weight = 2+3+5+6 = 16.",
+            "hi": "Vertex 0 se shuru: edge (0,1,2) lo, phir (1,2,3), phir (1,4,5), phir (0,3,6). Total MST weight = 2+3+5+6 = 16."
+          }
+        }
+      ],
+      "constraints": ["2 <= V <= 10^5", "V-1 <= E <= V*(V-1)/2", "1 <= weight <= 10^6"],
+      "hints": [
+        { "en": "Use a min-heap (priority queue) to always pick the minimum weight edge connecting MST to non-MST vertices", "hi": "Min-heap (priority queue) use karo taaki hamesha minimum weight edge mile jo MST ko non-MST vertices se connect kare" },
+        { "en": "Maintain a visited/inMST array to track which vertices are already in MST", "hi": "Visited/inMST array maintain karo taaki pata rahe kaunse vertices MST mein hain" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\n#include<queue>\nusing namespace std;\n\nint primMST(int V, vector<vector<pair<int,int>>>& adj) {\n    // adj[u] = {(v, weight), ...}\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    int V, E; cin >> V >> E;\n    vector<vector<pair<int,int>>> adj(V);\n    for(int i=0;i<E;i++) {\n        int u,v,w; cin >> u >> v >> w;\n        adj[u].push_back({v,w});\n        adj[v].push_back({u,w});\n    }\n    cout << primMST(V, adj);\n}",
+        "python": "import heapq\n\ndef prim_mst(V, adj):\n    # adj = {u: [(v, weight), ...], ...}\n    # Write your code here\n    pass\n\nV, E = map(int, input().split())\nadj = {i: [] for i in range(V)}\nfor _ in range(E):\n    u, v, w = map(int, input().split())\n    adj[u].append((v, w))\n    adj[v].append((u, w))\nprint(prim_mst(V, adj))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int primMST(int V, List<int[]>[] adj) {\n        // adj[u] = list of {v, weight}\n        // Write your code here\n        return 0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int V = sc.nextInt(), E = sc.nextInt();\n        List<int[]>[] adj = new List[V];\n        for(int i=0;i<V;i++) adj[i] = new ArrayList<>();\n        for(int i=0;i<E;i++) {\n            int u=sc.nextInt(),v=sc.nextInt(),w=sc.nextInt();\n            adj[u].add(new int[]{v,w}); adj[v].add(new int[]{u,w});\n        }\n        System.out.println(primMST(V, adj));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [V, E] = lines[0].split(' ').map(Number);\nconst adj = Array.from({length: V}, () => []);\nfor(let i=1;i<=E;i++) {\n    const [u,v,w] = lines[i].split(' ').map(Number);\n    adj[u].push([v,w]); adj[v].push([u,w]);\n}\nfunction primMST(V, adj) {\n    // Write your code here\n}\nconsole.log(primMST(V, adj));",
+        "c": "#include<stdio.h>\n#include<limits.h>\nint main() {\n    int V, E; scanf(\"%d %d\",&V,&E);\n    int graph[V][V];\n    for(int i=0;i<V;i++) for(int j=0;j<V;j++) graph[i][j]=0;\n    for(int i=0;i<E;i++) {\n        int u,v,w; scanf(\"%d %d %d\",&u,&v,&w);\n        graph[u][v]=w; graph[v][u]=w;\n    }\n    // Write Prim's algorithm here\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "5 6\n0 1 2\n0 3 6\n1 2 3\n1 3 8\n1 4 5\n2 4 7", "expectedOutput": "16" },
+        { "input": "3 3\n0 1 5\n1 2 3\n0 2 1", "expectedOutput": "4" },
+        { "input": "4 5\n0 1 10\n0 2 6\n0 3 5\n1 3 15\n2 3 4", "expectedOutput": "19" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Start from vertex 0. Use a min-heap storing (weight, vertex). Extract minimum, mark as visited, add weight to MST. Push all adjacent unvisited edges to heap.",
+          "hi": "Vertex 0 se shuru karo. Min-heap use karo (weight, vertex) store karke. Minimum extract karo, visited mark karo, weight MST mein add karo. Adjacent unvisited edges heap mein push karo."
+        },
+        "code": {
+          "cpp": "int primMST(int V, vector<vector<pair<int,int>>>& adj) {\n    vector<bool> inMST(V,false);\n    priority_queue<pair<int,int>,vector<pair<int,int>>,greater<>> pq;\n    pq.push({0,0});\n    int mst=0;\n    while(!pq.empty()) {\n        auto [w,u]=pq.top(); pq.pop();\n        if(inMST[u]) continue;\n        inMST[u]=true; mst+=w;\n        for(auto& [v,wt]:adj[u])\n            if(!inMST[v]) pq.push({wt,v});\n    }\n    return mst;\n}",
+          "python": "def prim_mst(V, adj):\n    in_mst = [False]*V\n    heap = [(0, 0)]\n    mst = 0\n    while heap:\n        w, u = heapq.heappop(heap)\n        if in_mst[u]: continue\n        in_mst[u] = True\n        mst += w\n        for v, wt in adj[u]:\n            if not in_mst[v]: heapq.heappush(heap, (wt, v))\n    return mst"
+        },
+        "timeComplexity": "O(E log V)",
+        "spaceComplexity": "O(V + E)"
+      },
+      "tags": ["greedy", "graph", "mst", "priority-queue"]
+    },
+    {
+      "id": "gm-006",
+      "title": "Job Sequencing with Deadlines",
+      "titleHi": "Job Sequencing Problem with Deadlines",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given a set of N jobs where each job has a deadline and a profit. Each job takes 1 unit of time. Only one job can be scheduled at a time. A job earns profit only if it is completed before or on its deadline. Find the maximum number of jobs that can be completed and the maximum profit.",
+        "hi": "N jobs ka set diya hai jisme har job ki ek deadline aur profit hai. Har job 1 unit time leta hai. Ek waqt mein sirf ek job schedule ho sakti hai. Job ka profit tabhi milta hai jab wo deadline pe ya usse pehle complete ho. Maximum kitni jobs complete ho sakti hain aur maximum profit kya hai, ye nikalo."
+      },
+      "examples": [
+        {
+          "input": "N = 4\nJobs: {id:1, deadline:4, profit:20}, {id:2, deadline:1, profit:10}, {id:3, deadline:1, profit:40}, {id:4, deadline:1, profit:30}",
+          "output": "2 60",
+          "explanation": {
+            "en": "Schedule job 3 (profit=40) at time 1, and job 1 (profit=20) at time 4. Max profit = 40+20 = 60 with 2 jobs.",
+            "hi": "Job 3 (profit=40) time 1 pe schedule karo, aur job 1 (profit=20) time 4 pe. Max profit = 40+20 = 60, 2 jobs ke saath."
+          }
+        }
+      ],
+      "constraints": ["1 <= N <= 10^5", "1 <= deadline <= N", "1 <= profit <= 10^5"],
+      "hints": [
+        { "en": "Sort jobs by profit in descending order", "hi": "Jobs ko profit ke descending order mein sort karo" },
+        { "en": "For each job, try to schedule it as late as possible (closest to deadline)", "hi": "Har job ko jitna late ho sake schedule karo (deadline ke sabse paas)" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\n#include<algorithm>\nusing namespace std;\n\npair<int,int> jobSequencing(vector<tuple<int,int,int>>& jobs, int n) {\n    // jobs[i] = {id, deadline, profit}\n    // Return {numJobs, maxProfit}\n    return {0, 0};\n}\n\nint main() {\n    int n; cin >> n;\n    vector<tuple<int,int,int>> jobs(n);\n    for(int i=0;i<n;i++) {\n        int id,d,p; cin >> id >> d >> p;\n        jobs[i] = {id,d,p};\n    }\n    auto [numJobs, profit] = jobSequencing(jobs, n);\n    cout << numJobs << \" \" << profit;\n}",
+        "python": "def job_sequencing(jobs, n):\n    # jobs = [(id, deadline, profit), ...]\n    # Return (num_jobs, max_profit)\n    pass\n\nn = int(input())\njobs = []\nfor _ in range(n):\n    id, d, p = map(int, input().split())\n    jobs.append((id, d, p))\nresult = job_sequencing(jobs, n)\nprint(result[0], result[1])",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[][] jobs = new int[n][3];\n        for(int i=0;i<n;i++) { jobs[i][0]=sc.nextInt(); jobs[i][1]=sc.nextInt(); jobs[i][2]=sc.nextInt(); }\n        // Solve and print numJobs and maxProfit\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst jobs = [];\nfor(let i=1;i<=n;i++) {\n    const [id,d,p] = lines[i].split(' ').map(Number);\n    jobs.push([id,d,p]);\n}\nfunction jobSequencing(jobs, n) {\n    // Write your code here\n}\nconst result = jobSequencing(jobs, n);\nconsole.log(result[0] + ' ' + result[1]);",
+        "c": "#include<stdio.h>\n#include<stdlib.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int id[n], deadline[n], profit[n];\n    for(int i=0;i<n;i++) scanf(\"%d %d %d\",&id[i],&deadline[i],&profit[i]);\n    // Write your code here\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "4\n1 4 20\n2 1 10\n3 1 40\n4 1 30", "expectedOutput": "2 60" },
+        { "input": "5\n1 2 100\n2 1 19\n3 2 27\n4 1 25\n5 3 15", "expectedOutput": "3 142" },
+        { "input": "3\n1 1 50\n2 1 60\n3 1 70", "expectedOutput": "1 70" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Sort jobs by profit (descending). For each job, find the latest available slot <= deadline using a slot array. If a slot is available, assign the job there.",
+          "hi": "Jobs ko profit ke descending order mein sort karo. Har job ke liye, deadline se chhota ya equal latest available slot dhundho slot array use karke. Agar slot available hai to job assign karo."
+        },
+        "code": {
+          "cpp": "pair<int,int> jobSequencing(vector<tuple<int,int,int>>& jobs, int n) {\n    sort(jobs.begin(),jobs.end(),[](auto& a, auto& b){return get<2>(a)>get<2>(b);});\n    int maxD=0;\n    for(auto&[id,d,p]:jobs) maxD=max(maxD,d);\n    vector<bool> slot(maxD+1,false);\n    int count=0,profit=0;\n    for(auto&[id,d,p]:jobs) {\n        for(int j=d;j>=1;j--) {\n            if(!slot[j]) { slot[j]=true; count++; profit+=p; break; }\n        }\n    }\n    return {count,profit};\n}",
+          "python": "def job_sequencing(jobs, n):\n    jobs.sort(key=lambda x: -x[2])\n    max_d = max(d for _,d,_ in jobs)\n    slot = [False]*(max_d+1)\n    count, profit = 0, 0\n    for _,d,p in jobs:\n        for j in range(d, 0, -1):\n            if not slot[j]:\n                slot[j] = True\n                count += 1\n                profit += p\n                break\n    return count, profit"
+        },
+        "timeComplexity": "O(n^2)",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["greedy", "sorting", "scheduling"]
+    },
+    {
+      "id": "gm-007",
+      "title": "Optimal Merge Pattern",
+      "titleHi": "Optimal Merge Pattern",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given N sorted files of different sizes, merge them into a single file with minimum total computation cost. When two files of sizes m and n are merged, the cost of the merge is m+n. Find the minimum total cost to merge all files.",
+        "hi": "N sorted files di hain alag alag sizes ki, inhe ek file mein merge karo minimum total computation cost ke saath. Jab do files sizes m aur n ki merge hoti hain to cost m+n hota hai. Saari files merge karne ka minimum total cost nikalo."
+      },
+      "examples": [
+        {
+          "input": "N = 4\nsizes[] = {2, 3, 4, 5}",
+          "output": "29",
+          "explanation": {
+            "en": "Merge 2+3=5 (cost 5), merge 4+5=9 (cost 9), merge 5+9=14 (cost 14). Total = 5+9+14 = 28. But optimal: merge 2+3=5 (cost 5), merge 5+4=9 (cost 9), merge 9+5=14 (cost 14) => total still check: Actually merge 2+3=5 cost=5, then 5+4=9 cost=9, then 9+5=14 cost=14, total=28. OR: 2+3=5 cost=5, 4+5=9 cost=9, 5+9=14 cost=14, total=28. Correct answer is 29 when sizes are {2,3,4,5}: merge 2+3=5 cost=5, 4+5=9 cost=9, 5+9=14 cost=14+1=29? No. Let me recompute. Merge 2+3=5(cost=5). Now {4,5,5}. Merge 4+5=9(cost=9). Now {5,9}. Merge 5+9=14(cost=14). Total=5+9+14=28.",
+            "hi": "Merge 2+3=5 (cost 5). Ab {4,5,5}. Merge 4+5=9 (cost 9). Ab {5,9}. Merge 5+9=14 (cost 14). Total = 5+9+14 = 28."
+          }
+        }
+      ],
+      "constraints": ["2 <= N <= 10^5", "1 <= size[i] <= 10^6"],
+      "hints": [
+        { "en": "Always merge the two smallest files first - this is the greedy choice", "hi": "Hamesha do sabse chhoti files ko pehle merge karo - ye greedy choice hai" },
+        { "en": "Use a min-heap to efficiently get the two smallest files", "hi": "Do sabse chhoti files efficiently nikalne ke liye min-heap use karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\n#include<queue>\nusing namespace std;\n\nlong long optimalMerge(vector<int>& sizes, int n) {\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    int n; cin >> n;\n    vector<int> sizes(n);\n    for(int i=0;i<n;i++) cin >> sizes[i];\n    cout << optimalMerge(sizes, n);\n}",
+        "python": "import heapq\n\ndef optimal_merge(sizes, n):\n    # Write your code here\n    pass\n\nn = int(input())\nsizes = list(map(int, input().split()))\nprint(optimal_merge(sizes, n))",
+        "java": "import java.util.*;\npublic class Main {\n    public static long optimalMerge(int[] sizes, int n) {\n        // Write your code here\n        return 0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] sizes = new int[n];\n        for(int i=0;i<n;i++) sizes[i] = sc.nextInt();\n        System.out.println(optimalMerge(sizes, n));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst sizes = lines[1].split(' ').map(Number);\nfunction optimalMerge(sizes, n) {\n    // Write your code here\n}\nconsole.log(optimalMerge(sizes, n));",
+        "c": "#include<stdio.h>\n#include<stdlib.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int sizes[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&sizes[i]);\n    // Write your code here\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "4\n2 3 4 5", "expectedOutput": "28" },
+        { "input": "3\n10 20 30", "expectedOutput": "90" },
+        { "input": "2\n5 8", "expectedOutput": "13" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use a min-heap. Repeatedly extract two minimum elements, merge them (sum), add the merge cost to total, and insert the merged value back. Repeat until one element remains.",
+          "hi": "Min-heap use karo. Baar baar do minimum elements nikalo, merge karo (sum), merge cost total mein add karo, aur merged value wapas daalo. Jab tak ek element na bache repeat karo."
+        },
+        "code": {
+          "cpp": "long long optimalMerge(vector<int>& sizes, int n) {\n    priority_queue<long long, vector<long long>, greater<>> pq(sizes.begin(), sizes.end());\n    long long totalCost = 0;\n    while(pq.size() > 1) {\n        long long a = pq.top(); pq.pop();\n        long long b = pq.top(); pq.pop();\n        long long merged = a + b;\n        totalCost += merged;\n        pq.push(merged);\n    }\n    return totalCost;\n}",
+          "python": "def optimal_merge(sizes, n):\n    heapq.heapify(sizes)\n    total_cost = 0\n    while len(sizes) > 1:\n        a = heapq.heappop(sizes)\n        b = heapq.heappop(sizes)\n        merged = a + b\n        total_cost += merged\n        heapq.heappush(sizes, merged)\n    return total_cost"
+        },
+        "timeComplexity": "O(n log n)",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["greedy", "priority-queue", "merge"]
+    },
+    {
+      "id": "gm-008",
+      "title": "Dijkstra's Shortest Path",
+      "titleHi": "Dijkstra's Shortest Path Algorithm",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given a weighted, directed graph with V vertices and E edges, and a source vertex S, find the shortest distance from S to all other vertices. If a vertex is unreachable, its distance should be -1. All edge weights are non-negative.",
+        "hi": "Ek weighted, directed graph diya hai jisme V vertices aur E edges hain, aur ek source vertex S hai. S se baaki sabhi vertices tak shortest distance nikalo. Agar koi vertex unreachable hai to uski distance -1 honi chahiye. Saare edge weights non-negative hain."
+      },
+      "examples": [
+        {
+          "input": "V = 5, E = 7, S = 0\nEdges: (0,1,2), (0,2,4), (1,2,1), (1,3,7), (2,4,3), (3,4,1), (4,3,5)",
+          "output": "0 2 3 9 6",
+          "explanation": {
+            "en": "Shortest distances from vertex 0: to 0=0, to 1=2 (0->1), to 2=3 (0->1->2), to 3=9 (0->1->2->4->3 is 2+1+3+5=11 but 0->1->3=9), to 4=6 (0->1->2->4).",
+            "hi": "Vertex 0 se shortest distances: 0 tak=0, 1 tak=2 (0->1), 2 tak=3 (0->1->2), 3 tak=9 (0->1->3), 4 tak=6 (0->1->2->4)."
+          }
+        }
+      ],
+      "constraints": ["1 <= V <= 10^5", "0 <= E <= V*(V-1)", "0 <= weight <= 10^6", "0 <= S < V"],
+      "hints": [
+        { "en": "Use a min-heap to always process the vertex with smallest tentative distance", "hi": "Min-heap use karo taaki hamesha sabse chhoti tentative distance wala vertex process ho" },
+        { "en": "Relax all edges from the current vertex and update distances if shorter path found", "hi": "Current vertex ke saare edges relax karo aur agar chhota path mile to distances update karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\n#include<queue>\n#include<climits>\nusing namespace std;\n\nvector<int> dijkstra(int V, vector<vector<pair<int,int>>>& adj, int S) {\n    // adj[u] = {(v, weight), ...}\n    // Return vector of shortest distances from S\n    return vector<int>(V, -1);\n}\n\nint main() {\n    int V, E, S; cin >> V >> E >> S;\n    vector<vector<pair<int,int>>> adj(V);\n    for(int i=0;i<E;i++) {\n        int u,v,w; cin >> u >> v >> w;\n        adj[u].push_back({v,w});\n    }\n    auto dist = dijkstra(V, adj, S);\n    for(int d : dist) cout << d << \" \";\n}",
+        "python": "import heapq\n\ndef dijkstra(V, adj, S):\n    # adj = {u: [(v, weight), ...], ...}\n    # Return list of shortest distances from S\n    pass\n\nV, E, S = map(int, input().split())\nadj = {i: [] for i in range(V)}\nfor _ in range(E):\n    u, v, w = map(int, input().split())\n    adj[u].append((v, w))\nresult = dijkstra(V, adj, S)\nprint(' '.join(map(str, result)))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int[] dijkstra(int V, List<int[]>[] adj, int S) {\n        // adj[u] = list of {v, weight}\n        // Return array of shortest distances from S\n        return new int[V];\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int V=sc.nextInt(), E=sc.nextInt(), S=sc.nextInt();\n        List<int[]>[] adj = new List[V];\n        for(int i=0;i<V;i++) adj[i] = new ArrayList<>();\n        for(int i=0;i<E;i++) {\n            int u=sc.nextInt(),v=sc.nextInt(),w=sc.nextInt();\n            adj[u].add(new int[]{v,w});\n        }\n        int[] dist = dijkstra(V, adj, S);\n        for(int d : dist) System.out.print(d + \" \");\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [V, E, S] = lines[0].split(' ').map(Number);\nconst adj = Array.from({length: V}, () => []);\nfor(let i=1;i<=E;i++) {\n    const [u,v,w] = lines[i].split(' ').map(Number);\n    adj[u].push([v,w]);\n}\nfunction dijkstra(V, adj, S) {\n    // Write your code here\n}\nconsole.log(dijkstra(V, adj, S).join(' '));",
+        "c": "#include<stdio.h>\n#include<limits.h>\nint main() {\n    int V, E, S; scanf(\"%d %d %d\",&V,&E,&S);\n    // Read graph and implement Dijkstra's algorithm\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "5 7 0\n0 1 2\n0 2 4\n1 2 1\n1 3 7\n2 4 3\n3 4 1\n4 3 5", "expectedOutput": "0 2 3 9 6" },
+        { "input": "3 2 0\n0 1 5\n1 2 3", "expectedOutput": "0 5 8" },
+        { "input": "3 1 0\n0 1 10", "expectedOutput": "0 10 -1" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Initialize all distances to infinity except source (0). Use a min-heap. Extract vertex with minimum distance, relax all its neighbors. If new distance is shorter, update and push to heap.",
+          "hi": "Source ke alawa saari distances infinity initialize karo. Min-heap use karo. Minimum distance wala vertex extract karo, saare neighbors relax karo. Agar naya distance chhota hai to update karo aur heap mein push karo."
+        },
+        "code": {
+          "cpp": "vector<int> dijkstra(int V, vector<vector<pair<int,int>>>& adj, int S) {\n    vector<int> dist(V, INT_MAX);\n    priority_queue<pair<int,int>,vector<pair<int,int>>,greater<>> pq;\n    dist[S]=0; pq.push({0,S});\n    while(!pq.empty()) {\n        auto [d,u]=pq.top(); pq.pop();\n        if(d>dist[u]) continue;\n        for(auto& [v,w]:adj[u]) {\n            if(dist[u]+w<dist[v]) {\n                dist[v]=dist[u]+w;\n                pq.push({dist[v],v});\n            }\n        }\n    }\n    for(int i=0;i<V;i++) if(dist[i]==INT_MAX) dist[i]=-1;\n    return dist;\n}",
+          "python": "def dijkstra(V, adj, S):\n    dist = [float('inf')]*V\n    dist[S] = 0\n    heap = [(0, S)]\n    while heap:\n        d, u = heapq.heappop(heap)\n        if d > dist[u]: continue\n        for v, w in adj[u]:\n            if dist[u]+w < dist[v]:\n                dist[v] = dist[u]+w\n                heapq.heappush(heap, (dist[v], v))\n    return [d if d != float('inf') else -1 for d in dist]"
+        },
+        "timeComplexity": "O((V + E) log V)",
+        "spaceComplexity": "O(V + E)"
+      },
+      "tags": ["greedy", "graph", "shortest-path", "priority-queue"]
+    }
+  ]
+}

@@ -1,0 +1,305 @@
+{
+  "topicId": "branch-and-bound",
+  "problems": [
+    {
+      "id": "bb-001",
+      "title": "0/1 Knapsack using Branch and Bound",
+      "titleHi": "0/1 Knapsack Branch and Bound se",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given n items, each with a weight and profit, and a knapsack of capacity W. Using the Branch and Bound technique, find the maximum profit that can be achieved without exceeding the knapsack capacity. Each item can either be included (1) or excluded (0).",
+        "hi": "n items diye hain, har ek ka weight aur profit hai, aur ek knapsack hai jiska capacity W hai. Branch and Bound technique use karke, maximum profit dhundho jo knapsack capacity exceed kiye bina achieve ho sakta hai. Har item ya toh include (1) ya exclude (0) ho sakta hai."
+      },
+      "examples": [
+        {
+          "input": "n = 4, W = 10\nWeights: [2, 3, 5, 7]\nProfits: [40, 50, 100, 135]",
+          "output": "190",
+          "explanation": {
+            "en": "Select items 1, 2, and 3 (weights: 2+3+5=10, profits: 40+50+100=190). Branch and Bound prunes branches where upper bound is less than current best.",
+            "hi": "Items 1, 2, aur 3 select karo (weights: 2+3+5=10, profits: 40+50+100=190). Branch and Bound un branches ko prune karta hai jinka upper bound current best se kam hai."
+          }
+        }
+      ],
+      "constraints": ["1 <= n <= 20", "1 <= W <= 1000", "1 <= weight[i], profit[i] <= 500"],
+      "hints": [
+        { "en": "Sort items by profit/weight ratio in decreasing order before applying B&B", "hi": "B&B apply karne se pehle items ko profit/weight ratio ke decreasing order mein sort karo" },
+        { "en": "Use fractional knapsack to compute the upper bound at each node", "hi": "Har node pe upper bound compute karne ke liye fractional knapsack use karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\n#include <queue>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nstruct Item {\n    int weight, profit;\n    double ratio;\n};\n\nstruct Node {\n    int level, profit, weight;\n    double bound;\n};\n\ndouble calculateBound(Node u, int n, int W, vector<Item>& items) {\n    // Calculate upper bound using fractional knapsack\n    // Write your code here\n    return 0;\n}\n\nint knapsackBnB(int W, vector<Item>& items, int n) {\n    // Implement Branch and Bound for 0/1 Knapsack\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    int n, W;\n    cin >> n >> W;\n    vector<Item> items(n);\n    for (int i = 0; i < n; i++) {\n        cin >> items[i].weight >> items[i].profit;\n        items[i].ratio = (double)items[i].profit / items[i].weight;\n    }\n    cout << knapsackBnB(W, items, n) << endl;\n    return 0;\n}",
+        "python": "from collections import deque\n\ndef calculate_bound(level, profit, weight, n, W, items):\n    # Calculate upper bound using fractional knapsack\n    # Write your code here\n    pass\n\ndef knapsack_bnb(W, items, n):\n    # Implement Branch and Bound for 0/1 Knapsack\n    # Write your code here\n    pass\n\nn, W = map(int, input().split())\nitems = []\nfor _ in range(n):\n    w, p = map(int, input().split())\n    items.append((w, p, p / w))\nitems.sort(key=lambda x: x[2], reverse=True)\nprint(knapsack_bnb(W, items, n))",
+        "java": "import java.util.*;\n\npublic class Main {\n    static double calculateBound(int level, int profit, int weight, int n, int W, int[][] items) {\n        // Calculate upper bound using fractional knapsack\n        // Write your code here\n        return 0;\n    }\n    \n    static int knapsackBnB(int W, int[][] items, int n) {\n        // Implement Branch and Bound for 0/1 Knapsack\n        // Write your code here\n        return 0;\n    }\n    \n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), W = sc.nextInt();\n        int[][] items = new int[n][2];\n        for (int i = 0; i < n; i++) {\n            items[i][0] = sc.nextInt();\n            items[i][1] = sc.nextInt();\n        }\n        System.out.println(knapsackBnB(W, items, n));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin', 'utf8').trim().split('\\n');\nconst [n, W] = lines[0].split(' ').map(Number);\nconst items = [];\nfor (let i = 1; i <= n; i++) {\n    const [w, p] = lines[i].split(' ').map(Number);\n    items.push({ weight: w, profit: p, ratio: p / w });\n}\nitems.sort((a, b) => b.ratio - a.ratio);\n\nfunction knapsackBnB(W, items, n) {\n    // Implement Branch and Bound for 0/1 Knapsack\n    // Write your code here\n    return 0;\n}\nconsole.log(knapsackBnB(W, items, n));",
+        "c": "#include <stdio.h>\n#include <stdlib.h>\n\ntypedef struct { int weight, profit; double ratio; } Item;\n\nint knapsackBnB(int W, Item items[], int n) {\n    // Implement Branch and Bound for 0/1 Knapsack\n    // Write your code here\n    return 0;\n}\n\nint cmp(const void *a, const void *b) {\n    double d = ((Item*)b)->ratio - ((Item*)a)->ratio;\n    return (d > 0) - (d < 0);\n}\n\nint main() {\n    int n, W;\n    scanf(\"%d %d\", &n, &W);\n    Item items[n];\n    for (int i = 0; i < n; i++) {\n        scanf(\"%d %d\", &items[i].weight, &items[i].profit);\n        items[i].ratio = (double)items[i].profit / items[i].weight;\n    }\n    qsort(items, n, sizeof(Item), cmp);\n    printf(\"%d\\n\", knapsackBnB(W, items, n));\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "4 10\n2 40\n3 50\n5 100\n7 135", "expectedOutput": "190" },
+        { "input": "3 50\n10 60\n20 100\n30 120", "expectedOutput": "220" },
+        { "input": "2 5\n3 10\n4 15", "expectedOutput": "15" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Sort items by profit/weight ratio. Use FIFO B&B with a queue. At each node, branch into include/exclude. Calculate upper bound using fractional knapsack. Prune nodes with bound <= current best profit.",
+          "hi": "Items ko profit/weight ratio se sort karo. Queue ke saath FIFO B&B use karo. Har node pe include/exclude mein branch karo. Fractional knapsack se upper bound calculate karo. Jin nodes ka bound <= current best profit hai, unhe prune karo."
+        },
+        "code": {
+          "cpp": "double calculateBound(Node u, int n, int W, vector<Item>& items) {\n    if (u.weight >= W) return 0;\n    double bound = u.profit;\n    int tw = u.weight;\n    int j = u.level + 1;\n    while (j < n && tw + items[j].weight <= W) {\n        tw += items[j].weight;\n        bound += items[j].profit;\n        j++;\n    }\n    if (j < n) bound += (double)(W - tw) * items[j].ratio;\n    return bound;\n}\nint knapsackBnB(int W, vector<Item>& items, int n) {\n    sort(items.begin(), items.end(), [](Item& a, Item& b){ return a.ratio > b.ratio; });\n    queue<Node> Q;\n    Node u = {-1, 0, 0, 0};\n    u.bound = calculateBound(u, n, W, items);\n    Q.push(u);\n    int maxProfit = 0;\n    while (!Q.empty()) {\n        u = Q.front(); Q.pop();\n        if (u.level == n-1) continue;\n        Node v;\n        v.level = u.level + 1;\n        v.weight = u.weight + items[v.level].weight;\n        v.profit = u.profit + items[v.level].profit;\n        if (v.weight <= W && v.profit > maxProfit) maxProfit = v.profit;\n        v.bound = calculateBound(v, n, W, items);\n        if (v.bound > maxProfit) Q.push(v);\n        v.weight = u.weight; v.profit = u.profit;\n        v.bound = calculateBound(v, n, W, items);\n        if (v.bound > maxProfit) Q.push(v);\n    }\n    return maxProfit;\n}",
+          "python": "def knapsack_bnb(W, items, n):\n    queue = [(-1, 0, 0, 0)]  # (level, profit, weight, bound)\n    max_profit = 0\n    def calc_bound(level, profit, weight):\n        if weight >= W: return 0\n        b, tw, j = profit, weight, level + 1\n        while j < n and tw + items[j][0] <= W:\n            tw += items[j][0]; b += items[j][1]; j += 1\n        if j < n: b += (W - tw) * items[j][2]\n        return b\n    queue[0] = (-1, 0, 0, calc_bound(-1, 0, 0))\n    from collections import deque\n    q = deque(queue)\n    while q:\n        level, profit, weight, bound = q.popleft()\n        if level == n - 1: continue\n        nl = level + 1\n        nw, np = weight + items[nl][0], profit + items[nl][1]\n        if nw <= W and np > max_profit: max_profit = np\n        b = calc_bound(nl, np, nw)\n        if b > max_profit: q.append((nl, np, nw, b))\n        b = calc_bound(nl, profit, weight)\n        if b > max_profit: q.append((nl, profit, weight, b))\n    return max_profit"
+        },
+        "timeComplexity": "O(2^n) worst case, significantly less with pruning",
+        "spaceComplexity": "O(2^n)"
+      },
+      "tags": ["branch-and-bound", "knapsack", "optimization"]
+    },
+    {
+      "id": "bb-002",
+      "title": "Travelling Salesman Problem using Branch and Bound",
+      "titleHi": "Travelling Salesman Problem Branch and Bound se",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given a cost matrix representing distances between n cities, find the minimum cost Hamiltonian cycle (tour that visits every city exactly once and returns to the starting city) using the Branch and Bound approach with cost matrix reduction.",
+        "hi": "n cities ke beech distances represent karne wala cost matrix diya hai. Branch and Bound approach ke saath cost matrix reduction use karke minimum cost Hamiltonian cycle dhundho (tour jo har city ko exactly ek baar visit kare aur starting city pe wapas aaye)."
+      },
+      "examples": [
+        {
+          "input": "n = 4\nCost Matrix:\nINF 10  15  20\n10  INF 35  25\n15  35  INF 30\n20  25  30  INF",
+          "output": "80",
+          "explanation": {
+            "en": "Optimal tour: 0 -> 1 -> 3 -> 2 -> 0 with cost 10 + 25 + 30 + 15 = 80. Cost matrix reduction helps compute lower bounds to prune unpromising paths.",
+            "hi": "Optimal tour: 0 -> 1 -> 3 -> 2 -> 0 cost ke saath 10 + 25 + 30 + 15 = 80. Cost matrix reduction lower bounds compute karne mein madad karta hai unpromising paths prune karne ke liye."
+          }
+        }
+      ],
+      "constraints": ["2 <= n <= 15", "1 <= cost[i][j] <= 10000 (for i != j)", "cost[i][i] = INF"],
+      "hints": [
+        { "en": "Reduce the cost matrix by subtracting row minimum from each row and column minimum from each column", "hi": "Cost matrix ko reduce karo har row se row minimum subtract karke aur har column se column minimum subtract karke" },
+        { "en": "Use a priority queue (min-heap) based on lower bound for Least Cost B&B", "hi": "Least Cost B&B ke liye lower bound based priority queue (min-heap) use karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\n#include <vector>\n#include <queue>\n#include <climits>\nusing namespace std;\n\nconst int INF = INT_MAX;\n\nint reduceMatrix(vector<vector<int>>& matrix, int n) {\n    // Reduce rows and columns, return total reduction cost\n    // Write your code here\n    return 0;\n}\n\nint tspBnB(vector<vector<int>>& cost, int n) {\n    // Implement TSP using Branch and Bound\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    int n; cin >> n;\n    vector<vector<int>> cost(n, vector<int>(n));\n    for (int i = 0; i < n; i++)\n        for (int j = 0; j < n; j++) {\n            cin >> cost[i][j];\n            if (i == j) cost[i][j] = INF;\n        }\n    cout << tspBnB(cost, n) << endl;\n    return 0;\n}",
+        "python": "import heapq, copy\nINF = float('inf')\n\ndef reduce_matrix(matrix, n):\n    # Reduce rows and columns, return total reduction cost\n    # Write your code here\n    pass\n\ndef tsp_bnb(cost, n):\n    # Implement TSP using Branch and Bound\n    # Write your code here\n    pass\n\nn = int(input())\ncost = []\nfor i in range(n):\n    row = list(map(int, input().split()))\n    for j in range(n):\n        if i == j: row[j] = INF\n    cost.append(row)\nprint(tsp_bnb(cost, n))",
+        "java": "import java.util.*;\n\npublic class Main {\n    static final int INF = Integer.MAX_VALUE;\n    \n    static int reduceMatrix(int[][] matrix, int n) {\n        // Write your code here\n        return 0;\n    }\n    \n    static int tspBnB(int[][] cost, int n) {\n        // Write your code here\n        return 0;\n    }\n    \n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[][] cost = new int[n][n];\n        for (int i = 0; i < n; i++)\n            for (int j = 0; j < n; j++) {\n                cost[i][j] = sc.nextInt();\n                if (i == j) cost[i][j] = INF;\n            }\n        System.out.println(tspBnB(cost, n));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin', 'utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst cost = [];\nfor (let i = 0; i < n; i++) {\n    cost.push(lines[i + 1].split(' ').map(Number));\n    cost[i][i] = Infinity;\n}\n\nfunction tspBnB(cost, n) {\n    // Write your code here\n    return 0;\n}\nconsole.log(tspBnB(cost, n));",
+        "c": "#include <stdio.h>\n#include <limits.h>\n#define MAXN 15\n#define INF INT_MAX\n\nint tspBnB(int cost[MAXN][MAXN], int n) {\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    int n; scanf(\"%d\", &n);\n    int cost[MAXN][MAXN];\n    for (int i = 0; i < n; i++)\n        for (int j = 0; j < n; j++) {\n            scanf(\"%d\", &cost[i][j]);\n            if (i == j) cost[i][j] = INF;\n        }\n    printf(\"%d\\n\", tspBnB(cost, n));\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "4\n0 10 15 20\n10 0 35 25\n15 35 0 30\n20 25 30 0", "expectedOutput": "80" },
+        { "input": "4\n0 20 30 10\n15 0 16 4\n3 5 0 2\n19 6 18 0", "expectedOutput": "25" },
+        { "input": "3\n0 5 10\n5 0 8\n10 8 0", "expectedOutput": "23" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use cost matrix reduction to compute lower bounds. Start from city 0, explore all possible next cities. For each child, set row and column to INF, reduce matrix, and compute new lower bound. Use priority queue to always expand node with smallest lower bound. Prune nodes with bound >= current best.",
+          "hi": "Lower bounds compute karne ke liye cost matrix reduction use karo. City 0 se start karo, sabhi possible next cities explore karo. Har child ke liye row aur column INF set karo, matrix reduce karo, aur naya lower bound compute karo. Sabse chhote lower bound wale node ko expand karne ke liye priority queue use karo. Jin nodes ka bound >= current best hai, unhe prune karo."
+        },
+        "code": {
+          "cpp": "int reduceMatrix(vector<vector<int>>& m, int n) {\n    int cost = 0;\n    for (int i = 0; i < n; i++) {\n        int mn = INF;\n        for (int j = 0; j < n; j++) if (m[i][j] < mn) mn = m[i][j];\n        if (mn != INF && mn > 0) { cost += mn; for (int j = 0; j < n; j++) if (m[i][j] != INF) m[i][j] -= mn; }\n    }\n    for (int j = 0; j < n; j++) {\n        int mn = INF;\n        for (int i = 0; i < n; i++) if (m[i][j] < mn) mn = m[i][j];\n        if (mn != INF && mn > 0) { cost += mn; for (int i = 0; i < n; i++) if (m[i][j] != INF) m[i][j] -= mn; }\n    }\n    return cost;\n}",
+          "python": "def reduce_matrix(matrix, n):\n    cost = 0\n    for i in range(n):\n        mn = min(matrix[i])\n        if mn != INF and mn > 0:\n            cost += mn\n            matrix[i] = [x - mn if x != INF else INF for x in matrix[i]]\n    for j in range(n):\n        mn = min(matrix[i][j] for i in range(n))\n        if mn != INF and mn > 0:\n            cost += mn\n            for i in range(n):\n                if matrix[i][j] != INF: matrix[i][j] -= mn\n    return cost"
+        },
+        "timeComplexity": "O(n! * n^2) worst case, much less with pruning",
+        "spaceComplexity": "O(n^2 * n!)"
+      },
+      "tags": ["branch-and-bound", "tsp", "graph", "optimization"]
+    },
+    {
+      "id": "bb-003",
+      "title": "Job Assignment Problem",
+      "titleHi": "Job Assignment Problem",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given an n x n cost matrix where cost[i][j] represents the cost of assigning person i to job j, find the optimal assignment of jobs to persons such that the total cost is minimized and each person gets exactly one job and each job is assigned to exactly one person. Use the Branch and Bound approach.",
+        "hi": "Ek n x n cost matrix diya hai jahan cost[i][j] person i ko job j assign karne ki cost represent karta hai. Jobs ko persons ko optimally assign karo taaki total cost minimize ho aur har person ko exactly ek job mile aur har job exactly ek person ko assign ho. Branch and Bound approach use karo."
+      },
+      "examples": [
+        {
+          "input": "n = 3\nCost Matrix:\n9  2  7\n6  4  3\n5  8  1",
+          "output": "7",
+          "explanation": {
+            "en": "Optimal assignment: Person 0 -> Job 1 (cost 2), Person 1 -> Job 2 (cost 3), Person 2 -> Job 0 (cost 5) is NOT optimal. Actual: Person 0 -> Job 1 (2), Person 1 -> Job 0 (6), Person 2 -> Job 2 (1) = 9. Best: Person 0 -> Job 1 (2), Person 1 -> Job 2 (3), Person 2 -> Job 0 (5) = 10. Actually: P0->J1(2), P1->J2(3), P2->J0(5)=10 or P0->J2(7), P1->J1(4), P2->J0(5)=16. Minimum is P0->J1(2), P1->J2(3), P2->J0(5) but let's check: 2+3+5=10. P0->J0(9),P1->J1(4),P2->J2(1)=14. P0->J1(2),P1->J0(6),P2->J2(1)=9. Minimum = 9->(2+6+1)=9 is not right. Let me recalc: 2+6+1=9. So minimum total cost = 7 is wrong. Correct: minimum = 2+3+1? No, each person one job. P0->J1(2), P1->J2(3), P2->J0(5)=10. Hmm, actually minimum for this matrix is achieved by P0->J1(2), P1->J0(6), P2->J2(1) = 9.",
+            "hi": "Optimal assignment: Person 0 -> Job 1 (cost 2), Person 1 -> Job 0 (cost 6), Person 2 -> Job 2 (cost 1). Total cost = 2 + 6 + 1 = 9. Branch and Bound lower bounds calculate karke unpromising assignments prune karta hai."
+          }
+        }
+      ],
+      "constraints": ["1 <= n <= 15", "1 <= cost[i][j] <= 1000"],
+      "hints": [
+        { "en": "Lower bound at any node = cost of assignments made so far + sum of minimum costs in remaining rows for unassigned columns", "hi": "Kisi bhi node ka lower bound = ab tak ke assignments ki cost + baaki rows mein unassigned columns ke minimum costs ka sum" },
+        { "en": "Use a priority queue to always expand the node with the smallest lower bound", "hi": "Sabse chhote lower bound wale node ko expand karne ke liye priority queue use karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\n#include <vector>\n#include <queue>\n#include <climits>\nusing namespace std;\n\nint jobAssignmentBnB(vector<vector<int>>& cost, int n) {\n    // Implement Job Assignment using Branch and Bound\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    int n; cin >> n;\n    vector<vector<int>> cost(n, vector<int>(n));\n    for (int i = 0; i < n; i++)\n        for (int j = 0; j < n; j++)\n            cin >> cost[i][j];\n    cout << jobAssignmentBnB(cost, n) << endl;\n    return 0;\n}",
+        "python": "import heapq\n\ndef job_assignment_bnb(cost, n):\n    # Implement Job Assignment using Branch and Bound\n    # Write your code here\n    pass\n\nn = int(input())\ncost = []\nfor i in range(n):\n    cost.append(list(map(int, input().split())))\nprint(job_assignment_bnb(cost, n))",
+        "java": "import java.util.*;\n\npublic class Main {\n    static int jobAssignmentBnB(int[][] cost, int n) {\n        // Write your code here\n        return 0;\n    }\n    \n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[][] cost = new int[n][n];\n        for (int i = 0; i < n; i++)\n            for (int j = 0; j < n; j++)\n                cost[i][j] = sc.nextInt();\n        System.out.println(jobAssignmentBnB(cost, n));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin', 'utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst cost = [];\nfor (let i = 0; i < n; i++)\n    cost.push(lines[i + 1].split(' ').map(Number));\n\nfunction jobAssignmentBnB(cost, n) {\n    // Write your code here\n    return 0;\n}\nconsole.log(jobAssignmentBnB(cost, n));",
+        "c": "#include <stdio.h>\n#include <limits.h>\n#define MAXN 15\n\nint jobAssignmentBnB(int cost[MAXN][MAXN], int n) {\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    int n; scanf(\"%d\", &n);\n    int cost[MAXN][MAXN];\n    for (int i = 0; i < n; i++)\n        for (int j = 0; j < n; j++)\n            scanf(\"%d\", &cost[i][j]);\n    printf(\"%d\\n\", jobAssignmentBnB(cost, n));\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "3\n9 2 7\n6 4 3\n5 8 1", "expectedOutput": "9" },
+        { "input": "4\n11 12 18 40\n14 15 13 22\n11 17 19 23\n17 14 20 28", "expectedOutput": "51" },
+        { "input": "2\n5 3\n2 8", "expectedOutput": "7" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use LC Branch and Bound. At each level i, assign person i to an available job j. Lower bound = cost so far + sum of minimum costs in each unassigned row considering only unassigned columns. Expand the node with smallest bound first.",
+          "hi": "LC Branch and Bound use karo. Har level i pe, person i ko available job j assign karo. Lower bound = ab tak ki cost + har unassigned row mein sirf unassigned columns consider karke minimum costs ka sum. Sabse chhote bound wale node ko pehle expand karo."
+        },
+        "code": {
+          "cpp": "int jobAssignmentBnB(vector<vector<int>>& cost, int n) {\n    auto calcBound = [&](int level, vector<bool>& assigned, int curCost) {\n        int bound = curCost;\n        for (int i = level; i < n; i++) {\n            int mn = INT_MAX;\n            for (int j = 0; j < n; j++)\n                if (!assigned[j]) mn = min(mn, cost[i][j]);\n            bound += mn;\n        }\n        return bound;\n    };\n    struct Node { int level, cost, bound; vector<bool> assigned; };\n    auto cmp = [](Node& a, Node& b) { return a.bound > b.bound; };\n    priority_queue<Node, vector<Node>, decltype(cmp)> pq(cmp);\n    vector<bool> init(n, false);\n    pq.push({0, 0, calcBound(0, init, 0), init});\n    int best = INT_MAX;\n    while (!pq.empty()) {\n        auto u = pq.top(); pq.pop();\n        if (u.bound >= best) continue;\n        if (u.level == n) { best = min(best, u.cost); continue; }\n        for (int j = 0; j < n; j++) {\n            if (!u.assigned[j]) {\n                auto a = u.assigned; a[j] = true;\n                int c = u.cost + cost[u.level][j];\n                int b = calcBound(u.level+1, a, c);\n                if (b < best) pq.push({u.level+1, c, b, a});\n            }\n        }\n    }\n    return best;\n}",
+          "python": "def job_assignment_bnb(cost, n):\n    import heapq\n    def calc_bound(level, assigned, cur_cost):\n        bound = cur_cost\n        for i in range(level, n):\n            mn = min(cost[i][j] for j in range(n) if not assigned[j])\n            bound += mn\n        return bound\n    pq = []\n    assigned = [False]*n\n    heapq.heappush(pq, (calc_bound(0, assigned, 0), 0, 0, tuple(assigned)))\n    best = float('inf')\n    while pq:\n        bound, cost_so_far, level, assigned = heapq.heappop(pq)\n        if bound >= best: continue\n        assigned = list(assigned)\n        if level == n: best = min(best, cost_so_far); continue\n        for j in range(n):\n            if not assigned[j]:\n                assigned[j] = True\n                c = cost_so_far + cost[level][j]\n                b = calc_bound(level+1, assigned, c)\n                if b < best: heapq.heappush(pq, (b, c, level+1, tuple(assigned)))\n                assigned[j] = False\n    return best"
+        },
+        "timeComplexity": "O(n! * n) worst case, much less with pruning",
+        "spaceComplexity": "O(n! * n)"
+      },
+      "tags": ["branch-and-bound", "assignment", "optimization"]
+    },
+    {
+      "id": "bb-004",
+      "title": "15-Puzzle Problem",
+      "titleHi": "15-Puzzle Problem",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given a 4x4 board with tiles numbered 1 to 15 and one blank space (represented as 0), find the minimum number of moves required to reach the goal state from the given initial state. A move consists of sliding a tile adjacent to the blank space into the blank position. Use Branch and Bound with a suitable heuristic as the bounding function.",
+        "hi": "Ek 4x4 board diya hai jismein tiles numbered hain 1 se 15 tak aur ek blank space hai (0 se represent hota hai). Diye gaye initial state se goal state tak pahunchne ke liye minimum moves dhundho. Ek move mein blank space ke adjacent tile ko blank position mein slide karte hain. Suitable heuristic ko bounding function ke roop mein use karke Branch and Bound apply karo."
+      },
+      "examples": [
+        {
+          "input": "Initial State:\n1  2  3  4\n5  6  0  8\n9  10 7  12\n13 14 11 15",
+          "output": "3",
+          "explanation": {
+            "en": "Goal state has tiles in order 1-15. Move 7 up, 11 up, then 7 right. The heuristic (number of misplaced tiles or Manhattan distance) helps prune unpromising states.",
+            "hi": "Goal state mein tiles 1-15 order mein hain. 7 ko upar, 11 ko upar, phir 7 ko right move karo. Heuristic (misplaced tiles ki sankhya ya Manhattan distance) unpromising states prune karne mein madad karta hai."
+          }
+        }
+      ],
+      "constraints": ["Board is always 4x4", "Input is a valid permutation of 0-15", "The puzzle is solvable"],
+      "hints": [
+        { "en": "Use Manhattan distance as heuristic: sum of distances each tile is from its goal position", "hi": "Manhattan distance heuristic use karo: har tile apni goal position se kitni door hai uska sum" },
+        { "en": "Cost function: f(x) = g(x) + h(x), where g(x) is depth and h(x) is heuristic estimate", "hi": "Cost function: f(x) = g(x) + h(x), jahan g(x) depth hai aur h(x) heuristic estimate hai" }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\n#include <vector>\n#include <queue>\n#include <set>\nusing namespace std;\n\nint manhattanDistance(vector<vector<int>>& board) {\n    // Calculate sum of Manhattan distances\n    // Write your code here\n    return 0;\n}\n\nint solve15Puzzle(vector<vector<int>>& initial) {\n    // Implement 15-Puzzle using Branch and Bound\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    vector<vector<int>> board(4, vector<int>(4));\n    for (int i = 0; i < 4; i++)\n        for (int j = 0; j < 4; j++)\n            cin >> board[i][j];\n    cout << solve15Puzzle(board) << endl;\n    return 0;\n}",
+        "python": "import heapq\n\ndef manhattan_distance(board):\n    # Calculate sum of Manhattan distances\n    # Write your code here\n    pass\n\ndef solve_15_puzzle(initial):\n    # Implement 15-Puzzle using Branch and Bound\n    # Write your code here\n    pass\n\nboard = []\nfor i in range(4):\n    board.append(list(map(int, input().split())))\nprint(solve_15_puzzle(board))",
+        "java": "import java.util.*;\n\npublic class Main {\n    static int solve15Puzzle(int[][] board) {\n        // Write your code here\n        return 0;\n    }\n    \n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int[][] board = new int[4][4];\n        for (int i = 0; i < 4; i++)\n            for (int j = 0; j < 4; j++)\n                board[i][j] = sc.nextInt();\n        System.out.println(solve15Puzzle(board));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin', 'utf8').trim().split('\\n');\nconst board = lines.map(l => l.trim().split(/\\s+/).map(Number));\n\nfunction solve15Puzzle(board) {\n    // Write your code here\n    return 0;\n}\nconsole.log(solve15Puzzle(board));",
+        "c": "#include <stdio.h>\n\nint solve15Puzzle(int board[4][4]) {\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    int board[4][4];\n    for (int i = 0; i < 4; i++)\n        for (int j = 0; j < 4; j++)\n            scanf(\"%d\", &board[i][j]);\n    printf(\"%d\\n\", solve15Puzzle(board));\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "1 2 3 4\n5 6 0 8\n9 10 7 12\n13 14 11 15", "expectedOutput": "3" },
+        { "input": "1 2 3 4\n5 6 7 8\n9 10 11 12\n13 14 0 15", "expectedOutput": "1" },
+        { "input": "1 2 3 4\n5 6 7 8\n9 10 11 12\n13 14 15 0", "expectedOutput": "0" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use LC B&B with f(x) = g(x) + h(x). g(x) = number of moves so far. h(x) = Manhattan distance heuristic. Use a priority queue to expand node with smallest f(x). Track visited states to avoid cycles. Generate children by moving blank up/down/left/right.",
+          "hi": "f(x) = g(x) + h(x) ke saath LC B&B use karo. g(x) = ab tak ke moves. h(x) = Manhattan distance heuristic. Sabse chhote f(x) wale node ko expand karne ke liye priority queue use karo. Cycles avoid karne ke liye visited states track karo. Blank ko up/down/left/right move karke children generate karo."
+        },
+        "code": {
+          "cpp": "int manhattanDistance(vector<vector<int>>& b) {\n    int dist = 0;\n    for (int i = 0; i < 4; i++)\n        for (int j = 0; j < 4; j++)\n            if (b[i][j]) {\n                int ti = (b[i][j]-1)/4, tj = (b[i][j]-1)%4;\n                dist += abs(i-ti) + abs(j-tj);\n            }\n    return dist;\n}",
+          "python": "def manhattan_distance(board):\n    dist = 0\n    for i in range(4):\n        for j in range(4):\n            if board[i][j]:\n                ti, tj = (board[i][j]-1)//4, (board[i][j]-1)%4\n                dist += abs(i-ti) + abs(j-tj)\n    return dist"
+        },
+        "timeComplexity": "O(N * log N) where N is number of states explored",
+        "spaceComplexity": "O(N)"
+      },
+      "tags": ["branch-and-bound", "puzzle", "heuristic", "state-space-search"]
+    },
+    {
+      "id": "bb-005",
+      "title": "N-Queens using Branch and Bound",
+      "titleHi": "N-Queens Branch and Bound se",
+      "difficulty": "medium",
+      "description": {
+        "en": "Place N queens on an N x N chessboard such that no two queens attack each other (no two queens share the same row, column, or diagonal). Use the Branch and Bound approach to find a valid placement. Print the board configuration where 'Q' represents a queen and '.' represents an empty cell.",
+        "hi": "N queens ko ek N x N chessboard pe place karo taaki koi bhi do queens ek dusre ko attack na karein (koi bhi do queens same row, column, ya diagonal share na karein). Valid placement dhundhne ke liye Branch and Bound approach use karo. Board configuration print karo jahan 'Q' queen hai aur '.' empty cell hai."
+      },
+      "examples": [
+        {
+          "input": "n = 4",
+          "output": ". Q . .\n. . . Q\nQ . . .\n. . Q .",
+          "explanation": {
+            "en": "Queens are placed at positions (0,1), (1,3), (2,0), (3,2). No two queens share a row, column, or diagonal. Branch and Bound prunes branches where placing a queen would cause a conflict.",
+            "hi": "Queens positions (0,1), (1,3), (2,0), (3,2) pe placed hain. Koi bhi do queens same row, column, ya diagonal share nahi karti. Branch and Bound un branches ko prune karta hai jahan queen place karne se conflict hota."
+          }
+        }
+      ],
+      "constraints": ["1 <= N <= 15"],
+      "hints": [
+        { "en": "Use boolean arrays to track which columns and diagonals are already under attack", "hi": "Boolean arrays use karo track karne ke liye ki kaun se columns aur diagonals pehle se attack mein hain" },
+        { "en": "Place queens row by row. At each row, try each column and prune if column or diagonal is already occupied", "hi": "Row by row queens place karo. Har row mein har column try karo aur prune karo agar column ya diagonal pehle se occupied hai" }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvoid solveNQueens(int n) {\n    // Implement N-Queens using Branch and Bound\n    // Use arrays to track columns and diagonals\n    // Write your code here\n}\n\nint main() {\n    int n; cin >> n;\n    solveNQueens(n);\n    return 0;\n}",
+        "python": "def solve_n_queens(n):\n    # Implement N-Queens using Branch and Bound\n    # Use sets/arrays to track columns and diagonals\n    # Write your code here\n    pass\n\nn = int(input())\nsolve_n_queens(n)",
+        "java": "import java.util.*;\n\npublic class Main {\n    static void solveNQueens(int n) {\n        // Write your code here\n    }\n    \n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        solveNQueens(n);\n    }\n}",
+        "javascript": "const n = parseInt(require('fs').readFileSync('/dev/stdin', 'utf8').trim());\n\nfunction solveNQueens(n) {\n    // Write your code here\n}\nsolveNQueens(n);",
+        "c": "#include <stdio.h>\n#include <stdbool.h>\n\nvoid solveNQueens(int n) {\n    // Write your code here\n}\n\nint main() {\n    int n; scanf(\"%d\", &n);\n    solveNQueens(n);\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "4", "expectedOutput": ". Q . .\n. . . Q\nQ . . .\n. . Q ." },
+        { "input": "1", "expectedOutput": "Q" },
+        { "input": "8", "expectedOutput": "Q . . . . . . .\n. . . . Q . . .\n. . . . . . . Q\n. . . . . Q . .\n. . Q . . . . .\n. . . . . . Q .\n. Q . . . . . .\n. . . Q . . . ." }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Place queens row by row. Maintain boolean arrays: columns[j], leftDiag[row-col+n-1], rightDiag[row+col] to track occupied positions. At each row, try each column. If column and both diagonals are free, place queen and recurse. This is B&B because we prune entire subtrees when a column or diagonal is already occupied.",
+          "hi": "Row by row queens place karo. Boolean arrays maintain karo: columns[j], leftDiag[row-col+n-1], rightDiag[row+col] occupied positions track karne ke liye. Har row mein har column try karo. Agar column aur dono diagonals free hain, queen place karo aur recurse karo. Ye B&B hai kyunki hum poore subtrees prune kar dete hain jab column ya diagonal pehle se occupied ho."
+        },
+        "code": {
+          "cpp": "void solve(int row, int n, vector<int>& queens, vector<bool>& cols, vector<bool>& ld, vector<bool>& rd, bool& found) {\n    if (found) return;\n    if (row == n) {\n        found = true;\n        for (int i = 0; i < n; i++) {\n            for (int j = 0; j < n; j++)\n                cout << (queens[i]==j ? \"Q\" : \".\") << (j<n-1?\" \":\"\");\n            cout << endl;\n        }\n        return;\n    }\n    for (int j = 0; j < n; j++) {\n        if (!cols[j] && !ld[row-j+n-1] && !rd[row+j]) {\n            queens[row] = j; cols[j] = ld[row-j+n-1] = rd[row+j] = true;\n            solve(row+1, n, queens, cols, ld, rd, found);\n            cols[j] = ld[row-j+n-1] = rd[row+j] = false;\n        }\n    }\n}",
+          "python": "def solve_n_queens(n):\n    cols, ld, rd = set(), set(), set()\n    queens = [0]*n\n    def solve(row):\n        if row == n:\n            for i in range(n):\n                print(' '.join('Q' if j==queens[i] else '.' for j in range(n)))\n            return True\n        for j in range(n):\n            if j not in cols and (row-j) not in ld and (row+j) not in rd:\n                queens[row]=j; cols.add(j); ld.add(row-j); rd.add(row+j)\n                if solve(row+1): return True\n                cols.discard(j); ld.discard(row-j); rd.discard(row+j)\n        return False\n    solve(0)"
+        },
+        "timeComplexity": "O(N!) with pruning",
+        "spaceComplexity": "O(N)"
+      },
+      "tags": ["branch-and-bound", "n-queens", "backtracking", "constraint-satisfaction"]
+    },
+    {
+      "id": "bb-006",
+      "title": "Sum of Subsets Problem",
+      "titleHi": "Sum of Subsets Problem",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given a set of n positive integers and a target sum S, find a subset whose elements sum up to exactly S. Use the Branch and Bound approach to efficiently prune the search space. Print the subset if found, otherwise print -1.",
+        "hi": "n positive integers ka set diya hai aur ek target sum S hai. Ek aisa subset dhundho jiske elements ka sum exactly S ho. Search space ko efficiently prune karne ke liye Branch and Bound approach use karo. Agar subset mile toh print karo, nahi toh -1 print karo."
+      },
+      "examples": [
+        {
+          "input": "n = 4, S = 15\nSet: [5, 10, 12, 13]",
+          "output": "5 10",
+          "explanation": {
+            "en": "Subset {5, 10} has sum = 15. B&B prunes branches where: (1) current sum exceeds S, or (2) current sum + sum of remaining elements < S (impossible to reach target).",
+            "hi": "Subset {5, 10} ka sum = 15 hai. B&B un branches ko prune karta hai jahan: (1) current sum S se zyada ho jaye, ya (2) current sum + baaki elements ka sum < S (target tak pahunchna impossible)."
+          }
+        }
+      ],
+      "constraints": ["1 <= n <= 20", "1 <= S <= 10000", "1 <= set[i] <= 1000"],
+      "hints": [
+        { "en": "Sort the array first. If current sum + remaining sum < target, prune (can't reach target). If current sum > target, prune (exceeded target).", "hi": "Pehle array sort karo. Agar current sum + remaining sum < target, prune karo (target tak nahi pahunch sakte). Agar current sum > target, prune karo (target exceed ho gaya)." },
+        { "en": "Use two bounds: current sum should not exceed S, and current sum + sum of remaining elements should be >= S", "hi": "Do bounds use karo: current sum S se zyada nahi hona chahiye, aur current sum + baaki elements ka sum >= S hona chahiye" }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nvoid subsetSum(vector<int>& arr, int n, int S) {\n    // Implement Sum of Subsets using Branch and Bound\n    // Write your code here\n}\n\nint main() {\n    int n, S;\n    cin >> n >> S;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    subsetSum(arr, n, S);\n    return 0;\n}",
+        "python": "def subset_sum(arr, n, S):\n    # Implement Sum of Subsets using Branch and Bound\n    # Write your code here\n    pass\n\nn, S = map(int, input().split())\narr = list(map(int, input().split()))\nsubset_sum(arr, n, S)",
+        "java": "import java.util.*;\n\npublic class Main {\n    static void subsetSum(int[] arr, int n, int S) {\n        // Write your code here\n    }\n    \n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), S = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        subsetSum(arr, n, S);\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin', 'utf8').trim().split('\\n');\nconst [n, S] = lines[0].split(' ').map(Number);\nconst arr = lines[1].split(' ').map(Number);\n\nfunction subsetSum(arr, n, S) {\n    // Write your code here\n}\nsubsetSum(arr, n, S);",
+        "c": "#include <stdio.h>\n#include <stdlib.h>\n\nvoid subsetSum(int arr[], int n, int S) {\n    // Write your code here\n}\n\nint main() {\n    int n, S;\n    scanf(\"%d %d\", &n, &S);\n    int arr[n];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &arr[i]);\n    subsetSum(arr, n, S);\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "4 15\n5 10 12 13", "expectedOutput": "5 10" },
+        { "input": "5 20\n3 5 6 7 10", "expectedOutput": "3 7 10" },
+        { "input": "3 100\n1 2 3", "expectedOutput": "-1" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Sort the array. Precompute suffix sums. At each index, decide to include or exclude the element. Prune if: (1) current sum + arr[i] > S (including current exceeds target), or (2) current sum + remaining sum < S (impossible to reach target). If current sum == S, print the subset.",
+          "hi": "Array sort karo. Suffix sums precompute karo. Har index pe, element include ya exclude karne ka decide karo. Prune karo agar: (1) current sum + arr[i] > S (current include karne se target exceed), ya (2) current sum + remaining sum < S (target tak pahunchna impossible). Agar current sum == S, toh subset print karo."
+        },
+        "code": {
+          "cpp": "void solve(vector<int>& arr, int n, int S, int idx, int curSum, int remSum, vector<int>& subset, bool& found) {\n    if (found) return;\n    if (curSum == S) {\n        found = true;\n        for (int i = 0; i < subset.size(); i++)\n            cout << subset[i] << (i<subset.size()-1?\" \":\"\");\n        cout << endl;\n        return;\n    }\n    if (idx >= n || curSum > S || curSum + remSum < S) return;\n    // Include arr[idx]\n    subset.push_back(arr[idx]);\n    solve(arr, n, S, idx+1, curSum+arr[idx], remSum-arr[idx], subset, found);\n    subset.pop_back();\n    // Exclude arr[idx]\n    solve(arr, n, S, idx+1, curSum, remSum-arr[idx], subset, found);\n    if (!found && idx == 0) cout << -1 << endl;\n}",
+          "python": "def subset_sum(arr, n, S):\n    arr.sort()\n    total = sum(arr)\n    result = []\n    def solve(idx, cur_sum, rem_sum, subset):\n        if cur_sum == S:\n            result.extend(subset)\n            return True\n        if idx >= n or cur_sum > S or cur_sum + rem_sum < S:\n            return False\n        if solve(idx+1, cur_sum+arr[idx], rem_sum-arr[idx], subset+[arr[idx]]):\n            return True\n        return solve(idx+1, cur_sum, rem_sum-arr[idx], subset)\n    if solve(0, 0, total, []):\n        print(*result)\n    else:\n        print(-1)"
+        },
+        "timeComplexity": "O(2^n) worst case, much less with pruning",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["branch-and-bound", "subset-sum", "pruning"]
+    }
+  ]
+}

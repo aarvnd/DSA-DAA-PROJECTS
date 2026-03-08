@@ -1,0 +1,512 @@
+{
+  "topicId": "queue",
+  "problems": [
+    {
+      "id": "q-001",
+      "title": "Implement Queue using Array",
+      "titleHi": "Array se Queue Banao",
+      "difficulty": "easy",
+      "description": {
+        "en": "Implement a queue using an array. Support enqueue (add to rear), dequeue (remove from front), and display operations. Process Q queries.",
+        "hi": "Array use karke queue implement karo. Enqueue (rear mein add), dequeue (front se remove), aur display operations support karo. Q queries process karo."
+      },
+      "examples": [
+        {
+          "input": "5\nenqueue 10\nenqueue 20\nenqueue 30\ndequeue\ndisplay",
+          "output": "20 30",
+          "explanation": {
+            "en": "After enqueue 10,20,30 and dequeue (removes 10), remaining queue is 20 30",
+            "hi": "Enqueue 10,20,30 ke baad dequeue (10 remove), bachi queue 20 30"
+          }
+        }
+      ],
+      "constraints": ["1 <= Q <= 10^4", "1 <= value <= 10^5"],
+      "hints": [
+        { "en": "Use front and rear pointers to track the queue boundaries", "hi": "Front aur rear pointers se queue ki boundaries track karo" },
+        { "en": "Handle underflow when dequeue is called on empty queue", "hi": "Empty queue pe dequeue call hone par underflow handle karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\n#define MAX 10000\nint queue[MAX];\nint front=-1, rear=-1;\nint main() {\n    int q; cin>>q;\n    // Process queries: enqueue x, dequeue, display\n}",
+        "python": "q = int(input())\nqueue = []\n# Process queries: enqueue x, dequeue, display",
+        "java": "import java.util.*;\npublic class Main {\n    static int[] queue = new int[10000];\n    static int front = -1, rear = -1;\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int q = sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nlet queue = [];\n// Process queries",
+        "c": "#include<stdio.h>\n#define MAX 10000\nint queue[MAX];\nint front=-1, rear=-1;\nint main() {\n    int q; scanf(\"%d\",&q);\n}"
+      },
+      "testCases": [
+        { "input": "5\nenqueue 10\nenqueue 20\nenqueue 30\ndequeue\ndisplay", "expectedOutput": "20 30" },
+        { "input": "3\nenqueue 5\ndequeue\ndequeue", "expectedOutput": "Underflow" },
+        { "input": "4\nenqueue 1\nenqueue 2\nenqueue 3\ndisplay", "expectedOutput": "1 2 3" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use an array with front and rear pointers. Enqueue increments rear and adds element. Dequeue increments front. Display prints from front to rear.",
+          "hi": "Array mein front aur rear pointers use karo. Enqueue rear increment karke element add karta hai. Dequeue front increment karta hai. Display front se rear tak print karta hai."
+        },
+        "code": {
+          "cpp": "void enqueue(int x) {\n    if(rear>=MAX-1){cout<<\"Overflow\";return;}\n    if(front==-1) front=0;\n    queue[++rear]=x;\n}\nint dequeue() {\n    if(front==-1||front>rear){cout<<\"Underflow\";return -1;}\n    return queue[front++];\n}\nvoid display() {\n    if(front==-1||front>rear){cout<<\"Empty\";return;}\n    for(int i=front;i<=rear;i++) cout<<queue[i]<<\" \";\n}",
+          "python": "queue = []\nfor _ in range(q):\n    cmd = input().split()\n    if cmd[0] == 'enqueue':\n        queue.append(int(cmd[1]))\n    elif cmd[0] == 'dequeue':\n        if not queue: print('Underflow')\n        else: queue.pop(0)\n    elif cmd[0] == 'display':\n        print(' '.join(map(str, queue)) if queue else 'Empty')"
+        },
+        "timeComplexity": "O(1) for enqueue, O(1) for dequeue (array), O(n) for display",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["queue", "array", "implementation"]
+    },
+    {
+      "id": "q-002",
+      "title": "Queue using Two Stacks",
+      "titleHi": "Do Stacks se Queue Banao",
+      "difficulty": "medium",
+      "description": {
+        "en": "Implement a queue using two stacks. Support enqueue and dequeue operations. The queue must follow FIFO order.",
+        "hi": "Do stacks use karke queue implement karo. Enqueue aur dequeue operations support karo. Queue ko FIFO order follow karna chahiye."
+      },
+      "examples": [
+        {
+          "input": "7\nenqueue 1\nenqueue 2\ndequeue\nenqueue 3\ndequeue\ndequeue\ndequeue",
+          "output": "1\n2\n3\nUnderflow",
+          "explanation": {
+            "en": "Dequeues return 1, 2, 3 in FIFO order. Last dequeue on empty queue gives Underflow.",
+            "hi": "Dequeue FIFO order mein 1, 2, 3 return karta hai. Empty queue pe last dequeue Underflow deta hai."
+          }
+        }
+      ],
+      "constraints": ["1 <= Q <= 10^5", "1 <= value <= 10^6"],
+      "hints": [
+        { "en": "Use stack1 for enqueue and stack2 for dequeue", "hi": "Stack1 enqueue ke liye aur stack2 dequeue ke liye use karo" },
+        { "en": "Transfer elements from stack1 to stack2 only when stack2 is empty", "hi": "Stack1 se stack2 mein elements tabhi transfer karo jab stack2 empty ho" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<stack>\nusing namespace std;\nint main() {\n    int q; cin>>q;\n    stack<int> s1, s2;\n    // Process enqueue x, dequeue\n}",
+        "python": "q = int(input())\ns1, s2 = [], []\n# Process enqueue x, dequeue",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int q = sc.nextInt();\n        Stack<Integer> s1 = new Stack<>(), s2 = new Stack<>();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nlet s1 = [], s2 = [];\n// Process enqueue x, dequeue",
+        "c": "#include<stdio.h>\n#define MAX 100000\nint s1[MAX], s2[MAX], top1=-1, top2=-1;\nint main() {\n    int q; scanf(\"%d\",&q);\n}"
+      },
+      "testCases": [
+        { "input": "7\nenqueue 1\nenqueue 2\ndequeue\nenqueue 3\ndequeue\ndequeue\ndequeue", "expectedOutput": "1\n2\n3\nUnderflow" },
+        { "input": "4\nenqueue 10\nenqueue 20\ndequeue\ndequeue", "expectedOutput": "10\n20" },
+        { "input": "2\ndequeue\ndequeue", "expectedOutput": "Underflow\nUnderflow" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use two stacks: s1 for enqueue (push), s2 for dequeue (pop). When dequeue is called and s2 is empty, transfer all elements from s1 to s2. This reverses the order giving FIFO behavior.",
+          "hi": "Do stacks use karo: s1 enqueue ke liye (push), s2 dequeue ke liye (pop). Jab dequeue call ho aur s2 empty ho, toh s1 ke saare elements s2 mein transfer karo. Ye order reverse karta hai jo FIFO behavior deta hai."
+        },
+        "code": {
+          "cpp": "// enqueue\nvoid enqueue(stack<int>& s1, int x) { s1.push(x); }\n// dequeue\nint dequeue(stack<int>& s1, stack<int>& s2) {\n    if(s2.empty()) {\n        if(s1.empty()) { cout<<\"Underflow\"<<endl; return -1; }\n        while(!s1.empty()) { s2.push(s1.top()); s1.pop(); }\n    }\n    int val = s2.top(); s2.pop();\n    cout << val << endl;\n    return val;\n}",
+          "python": "for _ in range(q):\n    cmd = input().split()\n    if cmd[0] == 'enqueue':\n        s1.append(int(cmd[1]))\n    else:\n        if not s2:\n            if not s1:\n                print('Underflow')\n                continue\n            while s1:\n                s2.append(s1.pop())\n        print(s2.pop())"
+        },
+        "timeComplexity": "O(1) amortized per operation",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["queue", "stack", "design"]
+    },
+    {
+      "id": "q-003",
+      "title": "Generate Binary Numbers from 1 to N",
+      "titleHi": "1 se N tak Binary Numbers Generate Karo",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given a number N, generate and print all binary numbers from 1 to N using a queue.",
+        "hi": "Ek number N diya hai, queue use karke 1 se N tak saare binary numbers generate aur print karo."
+      },
+      "examples": [
+        {
+          "input": "5",
+          "output": "1 10 11 100 101",
+          "explanation": {
+            "en": "Binary representations of 1 to 5: 1, 10, 11, 100, 101",
+            "hi": "1 se 5 ka binary representation: 1, 10, 11, 100, 101"
+          }
+        }
+      ],
+      "constraints": ["1 <= N <= 10^5"],
+      "hints": [
+        { "en": "Start with '1' in queue. For each number, enqueue it+'0' and it+'1'", "hi": "Queue mein '1' se start karo. Har number ke liye usmein '0' aur '1' jod ke enqueue karo" },
+        { "en": "Dequeue N times to get the first N binary numbers", "hi": "N baar dequeue karo toh pehle N binary numbers mil jayenge" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<queue>\n#include<string>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    // Generate binary numbers 1 to n\n}",
+        "python": "from collections import deque\nn = int(input())\n# Generate binary numbers 1 to n",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        int n = new Scanner(System.in).nextInt();\n    }\n}",
+        "javascript": "const n = parseInt(require('fs').readFileSync('/dev/stdin','utf8').trim());\n// Generate binary numbers 1 to n",
+        "c": "#include<stdio.h>\n#include<string.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n}"
+      },
+      "testCases": [
+        { "input": "5", "expectedOutput": "1 10 11 100 101" },
+        { "input": "1", "expectedOutput": "1" },
+        { "input": "10", "expectedOutput": "1 10 11 100 101 110 111 1000 1001 1010" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Start by enqueuing '1'. For each dequeue, print the string, then enqueue string+'0' and string+'1'. Repeat N times.",
+          "hi": "'1' enqueue karke start karo. Har dequeue pe string print karo, phir string+'0' aur string+'1' enqueue karo. N baar repeat karo."
+        },
+        "code": {
+          "cpp": "queue<string> q;\nq.push(\"1\");\nfor(int i=0;i<n;i++){\n    string s=q.front(); q.pop();\n    cout<<s;\n    if(i<n-1) cout<<\" \";\n    q.push(s+\"0\");\n    q.push(s+\"1\");\n}",
+          "python": "q = deque(['1'])\nresult = []\nfor i in range(n):\n    s = q.popleft()\n    result.append(s)\n    q.append(s + '0')\n    q.append(s + '1')\nprint(' '.join(result))"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["queue", "string", "binary"]
+    },
+    {
+      "id": "q-004",
+      "title": "First Non-Repeating Character in a Stream",
+      "titleHi": "Stream mein Pehla Non-Repeating Character",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given a stream of characters, find the first non-repeating character at each point in the stream. If no non-repeating character exists, print -1.",
+        "hi": "Characters ka stream diya hai, stream ke har point pe pehla non-repeating character dhundho. Agar koi non-repeating character nahi hai toh -1 print karo."
+      },
+      "examples": [
+        {
+          "input": "aabcbc",
+          "output": "a -1 b b c -1",
+          "explanation": {
+            "en": "After 'a': first non-rep='a'. After 'aa': none=-1. After 'aab': 'b'. After 'aabc': 'b'. After 'aabcb': 'c'. After 'aabcbc': none=-1.",
+            "hi": "After 'a': pehla non-rep='a'. After 'aa': koi nahi=-1. After 'aab': 'b'. After 'aabc': 'b'. After 'aabcb': 'c'. After 'aabcbc': koi nahi=-1."
+          }
+        }
+      ],
+      "constraints": ["1 <= |stream| <= 10^5", "Characters are lowercase English letters"],
+      "hints": [
+        { "en": "Use a queue to maintain order and a frequency map to track counts", "hi": "Order maintain karne ke liye queue aur counts track karne ke liye frequency map use karo" },
+        { "en": "Pop from front of queue while front character has frequency > 1", "hi": "Queue ke front se pop karte raho jab tak front character ki frequency > 1 ho" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<queue>\n#include<unordered_map>\nusing namespace std;\nint main() {\n    string s; cin>>s;\n    // Find first non-repeating at each step\n}",
+        "python": "from collections import deque\ns = input()\n# Find first non-repeating at each step",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        String s = new Scanner(System.in).next();\n    }\n}",
+        "javascript": "const s = require('fs').readFileSync('/dev/stdin','utf8').trim();\n// Find first non-repeating at each step",
+        "c": "#include<stdio.h>\n#include<string.h>\nint main() {\n    char s[100001]; scanf(\"%s\",s);\n}"
+      },
+      "testCases": [
+        { "input": "aabcbc", "expectedOutput": "a -1 b b c -1" },
+        { "input": "abcd", "expectedOutput": "a a a a" },
+        { "input": "aaa", "expectedOutput": "a -1 -1" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use a queue and frequency map. For each character: increment freq, push to queue. Then pop from front while freq[front] > 1. If queue not empty, front is the answer, else -1.",
+          "hi": "Queue aur frequency map use karo. Har character ke liye: freq increment karo, queue mein push karo. Phir front se pop karte raho jab tak freq[front] > 1. Agar queue empty nahi, front answer hai, warna -1."
+        },
+        "code": {
+          "cpp": "queue<char> q;\nunordered_map<char,int> freq;\nstring result;\nfor(char c:s){\n    freq[c]++;\n    q.push(c);\n    while(!q.empty() && freq[q.front()]>1) q.pop();\n    if(!q.empty()) result+=q.front();\n    else result+=\"-1\";\n    result+=\" \";\n}\ncout<<result;",
+          "python": "q = deque()\nfreq = {}\nresult = []\nfor c in s:\n    freq[c] = freq.get(c, 0) + 1\n    q.append(c)\n    while q and freq[q[0]] > 1:\n        q.popleft()\n    result.append(q[0] if q else '-1')\nprint(' '.join(result))"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["queue", "hash-map", "string", "stream"]
+    },
+    {
+      "id": "q-005",
+      "title": "Circular Queue Implementation",
+      "titleHi": "Circular Queue Implement Karo",
+      "difficulty": "medium",
+      "description": {
+        "en": "Design and implement a Circular Queue of fixed size k. Support enqueue, dequeue, front, rear, isEmpty, and isFull operations.",
+        "hi": "Fixed size k ka Circular Queue design aur implement karo. Enqueue, dequeue, front, rear, isEmpty, aur isFull operations support karo."
+      },
+      "examples": [
+        {
+          "input": "3\n8\nenqueue 1\nenqueue 2\nenqueue 3\nenqueue 4\nrear\nisFull\ndequeue\nenqueue 4",
+          "output": "Overflow\n3\ntrue\n1\nSuccess",
+          "explanation": {
+            "en": "Queue of size 3. After enqueue 1,2,3 it is full. enqueue 4 gives Overflow. rear=3, isFull=true. dequeue removes 1. Now enqueue 4 succeeds (circular wrap).",
+            "hi": "Size 3 ki queue. Enqueue 1,2,3 ke baad full hai. enqueue 4 Overflow deta hai. rear=3, isFull=true. dequeue 1 remove karta hai. Ab enqueue 4 successful (circular wrap)."
+          }
+        }
+      ],
+      "constraints": ["1 <= k <= 1000", "1 <= Q <= 10^4"],
+      "hints": [
+        { "en": "Use modulo operator to wrap around: (index + 1) % k", "hi": "Wrap around ke liye modulo operator use karo: (index + 1) % k" },
+        { "en": "Full condition: (rear + 1) % k == front", "hi": "Full condition: (rear + 1) % k == front" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\nint main() {\n    int k; cin>>k;\n    int q; cin>>q;\n    int* arr = new int[k];\n    int front=-1, rear=-1;\n    // Process queries\n}",
+        "python": "k = int(input())\nq = int(input())\n# Implement circular queue of size k",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int k = sc.nextInt(), q = sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst k = parseInt(lines[0]);\n// Implement circular queue",
+        "c": "#include<stdio.h>\nint main() {\n    int k; scanf(\"%d\",&k);\n    int q; scanf(\"%d\",&q);\n    int arr[k];\n    int front=-1, rear=-1;\n}"
+      },
+      "testCases": [
+        { "input": "3\n8\nenqueue 1\nenqueue 2\nenqueue 3\nenqueue 4\nrear\nisFull\ndequeue\nenqueue 4", "expectedOutput": "Overflow\n3\ntrue\n1\nSuccess" },
+        { "input": "2\n4\nenqueue 5\nenqueue 10\ndequeue\nfront", "expectedOutput": "10" },
+        { "input": "1\n3\nenqueue 42\nisFull\ndequeue", "expectedOutput": "true\n42" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use array of size k with front and rear pointers. Use modulo for wrap-around. Track full/empty using pointer positions.",
+          "hi": "Size k ka array use karo front aur rear pointers ke saath. Wrap-around ke liye modulo use karo. Pointer positions se full/empty track karo."
+        },
+        "code": {
+          "cpp": "bool enqueue(int* arr, int k, int& front, int& rear, int x) {\n    if((rear+1)%k==front){cout<<\"Overflow\"<<endl;return false;}\n    if(front==-1) front=0;\n    rear=(rear+1)%k;\n    arr[rear]=x;\n    return true;\n}\nint dequeue(int* arr, int k, int& front, int& rear) {\n    if(front==-1){cout<<\"Underflow\"<<endl;return -1;}\n    int val=arr[front];\n    if(front==rear) front=rear=-1;\n    else front=(front+1)%k;\n    return val;\n}",
+          "python": "class CircularQueue:\n    def __init__(self, k):\n        self.k = k\n        self.q = [0]*k\n        self.front = self.rear = -1\n    def enqueue(self, x):\n        if (self.rear+1)%self.k == self.front:\n            print('Overflow'); return\n        if self.front == -1: self.front = 0\n        self.rear = (self.rear+1)%self.k\n        self.q[self.rear] = x\n    def dequeue(self):\n        if self.front == -1:\n            print('Underflow'); return -1\n        val = self.q[self.front]\n        if self.front == self.rear: self.front = self.rear = -1\n        else: self.front = (self.front+1)%self.k\n        return val"
+        },
+        "timeComplexity": "O(1) for all operations",
+        "spaceComplexity": "O(k)"
+      },
+      "tags": ["queue", "circular-queue", "design", "array"]
+    },
+    {
+      "id": "q-006",
+      "title": "Sliding Window Maximum",
+      "titleHi": "Sliding Window ka Maximum",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given an array of integers and a window size k, find the maximum element in each sliding window of size k as it moves from left to right.",
+        "hi": "Integers ka array aur window size k diya hai. Jaise window left se right move karti hai, har window of size k mein maximum element dhundho."
+      },
+      "examples": [
+        {
+          "input": "8 3\n1 3 -1 -3 5 3 6 7",
+          "output": "3 3 5 5 6 7",
+          "explanation": {
+            "en": "Window [1,3,-1]=3, [3,-1,-3]=3, [-1,-3,5]=5, [-3,5,3]=5, [5,3,6]=6, [3,6,7]=7",
+            "hi": "Window [1,3,-1]=3, [3,-1,-3]=3, [-1,-3,5]=5, [-3,5,3]=5, [5,3,6]=6, [3,6,7]=7"
+          }
+        }
+      ],
+      "constraints": ["1 <= n <= 10^5", "1 <= k <= n", "-10^4 <= arr[i] <= 10^4"],
+      "hints": [
+        { "en": "Use a deque to store indices of useful elements in current window", "hi": "Current window mein useful elements ke indices store karne ke liye deque use karo" },
+        { "en": "Remove elements from back of deque that are smaller than current element", "hi": "Deque ke peeche se wo elements hatao jo current element se chhote hain" },
+        { "en": "Remove front element if it's outside the current window", "hi": "Front element hatao agar wo current window ke bahar ho" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<deque>\nusing namespace std;\nint main() {\n    int n, k; cin>>n>>k;\n    int arr[n];\n    for(int i=0;i<n;i++) cin>>arr[i];\n    // Find max in each sliding window of size k\n}",
+        "python": "from collections import deque\nn, k = map(int, input().split())\narr = list(map(int, input().split()))\n# Find max in each sliding window of size k",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), k = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i] = sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [n, k] = lines[0].split(' ').map(Number);\nconst arr = lines[1].split(' ').map(Number);\n// Find max in each sliding window",
+        "c": "#include<stdio.h>\nint main() {\n    int n, k; scanf(\"%d %d\",&n,&k);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n}"
+      },
+      "testCases": [
+        { "input": "8 3\n1 3 -1 -3 5 3 6 7", "expectedOutput": "3 3 5 5 6 7" },
+        { "input": "5 2\n1 2 3 4 5", "expectedOutput": "2 3 4 5" },
+        { "input": "4 4\n9 8 7 6", "expectedOutput": "9" },
+        { "input": "1 1\n5", "expectedOutput": "5" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use a deque to store indices in decreasing order of values. For each element: remove indices outside window from front, remove smaller elements from back, push current index. Front of deque is the max for current window.",
+          "hi": "Deque mein indices ko values ke decreasing order mein store karo. Har element ke liye: window ke bahar ke indices front se hatao, chhote elements back se hatao, current index push karo. Deque ka front current window ka max hai."
+        },
+        "code": {
+          "cpp": "deque<int> dq;\nfor(int i=0;i<n;i++){\n    while(!dq.empty()&&dq.front()<=i-k) dq.pop_front();\n    while(!dq.empty()&&arr[dq.back()]<=arr[i]) dq.pop_back();\n    dq.push_back(i);\n    if(i>=k-1) cout<<arr[dq.front()]<<\" \";\n}",
+          "python": "dq = deque()\nresult = []\nfor i in range(n):\n    while dq and dq[0] <= i - k:\n        dq.popleft()\n    while dq and arr[dq[-1]] <= arr[i]:\n        dq.pop()\n    dq.append(i)\n    if i >= k - 1:\n        result.append(str(arr[dq[0]]))\nprint(' '.join(result))"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(k)"
+      },
+      "tags": ["queue", "deque", "sliding-window", "monotonic-deque"]
+    },
+    {
+      "id": "q-007",
+      "title": "Rotting Oranges",
+      "titleHi": "Sade Hue Santre (Rotting Oranges)",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given an m x n grid where 0=empty, 1=fresh orange, 2=rotten orange. Every minute, fresh oranges adjacent (4-directional) to rotten ones become rotten. Return the minimum minutes until no fresh orange remains, or -1 if impossible.",
+        "hi": "m x n grid diya hai jisme 0=empty, 1=fresh orange, 2=rotten orange. Har minute mein, rotten oranges ke adjacent (4-direction) fresh oranges bhi rotten ho jaate hain. Minimum minutes return karo jab tak koi fresh orange na bache, ya -1 agar impossible ho."
+      },
+      "examples": [
+        {
+          "input": "3 3\n2 1 1\n1 1 0\n0 1 1",
+          "output": "4",
+          "explanation": {
+            "en": "It takes 4 minutes for all oranges to rot spreading from top-left corner.",
+            "hi": "Top-left corner se spread hote hue saare oranges ko rot hone mein 4 minutes lagte hain."
+          }
+        }
+      ],
+      "constraints": ["1 <= m, n <= 10", "grid[i][j] is 0, 1, or 2"],
+      "hints": [
+        { "en": "Use BFS starting from all rotten oranges simultaneously (multi-source BFS)", "hi": "Saare rotten oranges se ek saath BFS start karo (multi-source BFS)" },
+        { "en": "Track time as BFS levels. After BFS, check if any fresh orange remains.", "hi": "BFS levels ko time ki tarah track karo. BFS ke baad check karo koi fresh orange bacha toh nahi." }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<queue>\nusing namespace std;\nint main() {\n    int m, n; cin>>m>>n;\n    int grid[m][n];\n    for(int i=0;i<m;i++) for(int j=0;j<n;j++) cin>>grid[i][j];\n    // Find min time for all oranges to rot\n}",
+        "python": "from collections import deque\nm, n = map(int, input().split())\ngrid = []\nfor _ in range(m):\n    grid.append(list(map(int, input().split())))\n# Find min time",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int m = sc.nextInt(), n = sc.nextInt();\n        int[][] grid = new int[m][n];\n        for(int i=0;i<m;i++) for(int j=0;j<n;j++) grid[i][j]=sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [m, n] = lines[0].split(' ').map(Number);\nconst grid = [];\nfor(let i=1;i<=m;i++) grid.push(lines[i].split(' ').map(Number));",
+        "c": "#include<stdio.h>\nint main() {\n    int m, n; scanf(\"%d %d\",&m,&n);\n    int grid[m][n];\n    for(int i=0;i<m;i++) for(int j=0;j<n;j++) scanf(\"%d\",&grid[i][j]);\n}"
+      },
+      "testCases": [
+        { "input": "3 3\n2 1 1\n1 1 0\n0 1 1", "expectedOutput": "4" },
+        { "input": "3 3\n2 1 1\n0 1 1\n1 0 1", "expectedOutput": "-1" },
+        { "input": "1 2\n0 2", "expectedOutput": "0" },
+        { "input": "2 2\n2 2\n2 2", "expectedOutput": "0" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Multi-source BFS: Add all rotten oranges to queue. BFS level by level, rotting adjacent fresh oranges. Track time as levels. After BFS, if any fresh orange remains, return -1.",
+          "hi": "Multi-source BFS: Saare rotten oranges queue mein dalo. Level by level BFS karo, adjacent fresh oranges ko rot karo. Levels ko time track karo. BFS ke baad, agar koi fresh orange bacha, -1 return karo."
+        },
+        "code": {
+          "cpp": "queue<pair<int,int>> q;\nint fresh=0;\nfor(int i=0;i<m;i++) for(int j=0;j<n;j++){\n    if(grid[i][j]==2) q.push({i,j});\n    else if(grid[i][j]==1) fresh++;\n}\nint dx[]={0,0,1,-1}, dy[]={1,-1,0,0}, time=0;\nwhile(!q.empty()&&fresh>0){\n    int sz=q.size(); time++;\n    while(sz--){\n        auto[x,y]=q.front(); q.pop();\n        for(int d=0;d<4;d++){\n            int nx=x+dx[d], ny=y+dy[d];\n            if(nx>=0&&nx<m&&ny>=0&&ny<n&&grid[nx][ny]==1){\n                grid[nx][ny]=2; fresh--; q.push({nx,ny});\n            }\n        }\n    }\n}\ncout<<(fresh==0?time:-1);",
+          "python": "q = deque()\nfresh = 0\nfor i in range(m):\n    for j in range(n):\n        if grid[i][j] == 2: q.append((i,j))\n        elif grid[i][j] == 1: fresh += 1\ntime = 0\ndirs = [(0,1),(0,-1),(1,0),(-1,0)]\nwhile q and fresh > 0:\n    time += 1\n    for _ in range(len(q)):\n        x, y = q.popleft()\n        for dx, dy in dirs:\n            nx, ny = x+dx, y+dy\n            if 0<=nx<m and 0<=ny<n and grid[nx][ny]==1:\n                grid[nx][ny] = 2\n                fresh -= 1\n                q.append((nx,ny))\nprint(time if fresh == 0 else -1)"
+        },
+        "timeComplexity": "O(m * n)",
+        "spaceComplexity": "O(m * n)"
+      },
+      "tags": ["queue", "bfs", "matrix", "graph"]
+    },
+    {
+      "id": "q-008",
+      "title": "Interleave First Half with Second Half of Queue",
+      "titleHi": "Queue ki Pehli Aadhi aur Doosri Aadhi ko Interleave Karo",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given a queue of even length, interleave the first half with the second half. For example, if the queue is [1,2,3,4,5,6,7,8], the result should be [1,5,2,6,3,7,4,8].",
+        "hi": "Even length ki queue di hai, pehli half ko second half ke saath interleave karo. For example, agar queue [1,2,3,4,5,6,7,8] hai, toh result [1,5,2,6,3,7,4,8] hona chahiye."
+      },
+      "examples": [
+        {
+          "input": "8\n1 2 3 4 5 6 7 8",
+          "output": "1 5 2 6 3 7 4 8",
+          "explanation": {
+            "en": "First half [1,2,3,4], second half [5,6,7,8]. Interleaved: 1,5,2,6,3,7,4,8",
+            "hi": "Pehli half [1,2,3,4], doosri half [5,6,7,8]. Interleave: 1,5,2,6,3,7,4,8"
+          }
+        }
+      ],
+      "constraints": ["2 <= n <= 10^4", "n is even"],
+      "hints": [
+        { "en": "Dequeue first half into a temporary queue or stack", "hi": "Pehli half ko temporary queue ya stack mein dequeue karo" },
+        { "en": "Alternately dequeue from temp and original queue", "hi": "Temp aur original queue se alternate karke dequeue karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<queue>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    queue<int> q;\n    for(int i=0;i<n;i++){int x;cin>>x;q.push(x);}\n    // Interleave first and second halves\n}",
+        "python": "from collections import deque\nn = int(input())\nq = deque(map(int, input().split()))\n# Interleave first and second halves",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        Queue<Integer> q = new LinkedList<>();\n        for(int i=0;i<n;i++) q.add(sc.nextInt());\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst q = lines[1].split(' ').map(Number);\n// Interleave",
+        "c": "#include<stdio.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int q[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&q[i]);\n}"
+      },
+      "testCases": [
+        { "input": "8\n1 2 3 4 5 6 7 8", "expectedOutput": "1 5 2 6 3 7 4 8" },
+        { "input": "4\n10 20 30 40", "expectedOutput": "10 30 20 40" },
+        { "input": "2\n1 2", "expectedOutput": "1 2" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Dequeue the first half into a temporary queue. Then alternately enqueue from temp and from original queue into the result.",
+          "hi": "Pehli half ko temporary queue mein dequeue karo. Phir temp aur original queue se alternate karke result mein enqueue karo."
+        },
+        "code": {
+          "cpp": "int half = n / 2;\nqueue<int> temp;\nfor(int i = 0; i < half; i++) {\n    temp.push(q.front()); q.pop();\n}\nwhile(!temp.empty()) {\n    q.push(temp.front()); temp.pop();\n    q.push(q.front()); q.pop();\n}\nfor(int i = 0; i < n; i++) {\n    cout << q.front(); q.pop();\n    if(i < n-1) cout << \" \";\n}",
+          "python": "half = n // 2\ntemp = deque()\nfor _ in range(half):\n    temp.append(q.popleft())\nresult = []\nwhile temp:\n    result.append(str(temp.popleft()))\n    result.append(str(q.popleft()))\nprint(' '.join(result))"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["queue", "deque", "interleave"]
+    },
+    {
+      "id": "q-009",
+      "title": "LRU Cache",
+      "titleHi": "LRU Cache Design Karo",
+      "difficulty": "hard",
+      "description": {
+        "en": "Design a Least Recently Used (LRU) Cache with fixed capacity. Support get(key) and put(key, value) operations in O(1) time. When the cache is full and a new key is inserted, remove the least recently used item.",
+        "hi": "Fixed capacity ka Least Recently Used (LRU) Cache design karo. get(key) aur put(key, value) operations O(1) time mein support karo. Jab cache full ho aur naya key insert karna ho, toh sabse purana (least recently used) item hatao."
+      },
+      "examples": [
+        {
+          "input": "2\n7\nput 1 10\nput 2 20\nget 1\nput 3 30\nget 2\nput 4 40\nget 1",
+          "output": "10\n-1\n-1",
+          "explanation": {
+            "en": "Capacity=2. put(1,10), put(2,20). get(1)=10 (1 becomes most recent). put(3,30) evicts key 2 (LRU). get(2)=-1. put(4,40) evicts key 1. get(1)=-1.",
+            "hi": "Capacity=2. put(1,10), put(2,20). get(1)=10 (1 most recent ban gaya). put(3,30) key 2 ko evict karta hai (LRU). get(2)=-1. put(4,40) key 1 ko evict karta hai. get(1)=-1."
+          }
+        }
+      ],
+      "constraints": ["1 <= capacity <= 3000", "1 <= Q <= 10^5", "0 <= key, value <= 10^4"],
+      "hints": [
+        { "en": "Use a doubly linked list for order and a hash map for O(1) access", "hi": "Order ke liye doubly linked list aur O(1) access ke liye hash map use karo" },
+        { "en": "Most recently used at head, least recently used at tail", "hi": "Most recently used head pe, least recently used tail pe" },
+        { "en": "On get/put, move the node to head (most recent)", "hi": "Get/put pe node ko head (most recent) pe move karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<unordered_map>\nusing namespace std;\nint main() {\n    int capacity; cin>>capacity;\n    int q; cin>>q;\n    // Implement LRU Cache\n}",
+        "python": "from collections import OrderedDict\ncapacity = int(input())\nq = int(input())\n# Implement LRU Cache",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int capacity = sc.nextInt(), q = sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst capacity = parseInt(lines[0]);\n// Implement LRU Cache",
+        "c": "#include<stdio.h>\n#include<stdlib.h>\nint main() {\n    int capacity; scanf(\"%d\",&capacity);\n    int q; scanf(\"%d\",&q);\n}"
+      },
+      "testCases": [
+        { "input": "2\n7\nput 1 10\nput 2 20\nget 1\nput 3 30\nget 2\nput 4 40\nget 1", "expectedOutput": "10\n-1\n-1" },
+        { "input": "1\n5\nput 1 100\nget 1\nput 2 200\nget 1\nget 2", "expectedOutput": "100\n-1\n200" },
+        { "input": "3\n6\nput 1 1\nput 2 2\nput 3 3\nput 4 4\nget 1\nget 4", "expectedOutput": "-1\n4" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use a doubly linked list (DLL) + hash map. DLL maintains usage order (head=most recent, tail=LRU). Map stores key->node for O(1) lookup. On get: move to head. On put: add to head, if over capacity evict tail.",
+          "hi": "Doubly linked list (DLL) + hash map use karo. DLL usage order maintain karta hai (head=most recent, tail=LRU). Map key->node store karta hai O(1) lookup ke liye. Get pe: head pe move karo. Put pe: head pe add karo, agar capacity se zyada ho toh tail evict karo."
+        },
+        "code": {
+          "cpp": "struct Node {\n    int key, val;\n    Node *prev, *next;\n    Node(int k, int v): key(k), val(v), prev(nullptr), next(nullptr){}\n};\nclass LRUCache {\n    int cap;\n    unordered_map<int, Node*> mp;\n    Node *head, *tail;\n    void addToHead(Node* n) {\n        n->next=head->next; n->prev=head;\n        head->next->prev=n; head->next=n;\n    }\n    void removeNode(Node* n) {\n        n->prev->next=n->next; n->next->prev=n->prev;\n    }\npublic:\n    LRUCache(int c): cap(c) {\n        head=new Node(0,0); tail=new Node(0,0);\n        head->next=tail; tail->prev=head;\n    }\n    int get(int key) {\n        if(mp.find(key)==mp.end()) return -1;\n        Node* n=mp[key]; removeNode(n); addToHead(n);\n        return n->val;\n    }\n    void put(int key, int val) {\n        if(mp.find(key)!=mp.end()){\n            Node* n=mp[key]; n->val=val; removeNode(n); addToHead(n);\n        } else {\n            Node* n=new Node(key,val); mp[key]=n; addToHead(n);\n            if((int)mp.size()>cap){\n                Node* lru=tail->prev; removeNode(lru);\n                mp.erase(lru->key); delete lru;\n            }\n        }\n    }\n};",
+          "python": "class LRUCache:\n    def __init__(self, capacity):\n        self.cache = OrderedDict()\n        self.cap = capacity\n    def get(self, key):\n        if key not in self.cache: return -1\n        self.cache.move_to_end(key)\n        return self.cache[key]\n    def put(self, key, val):\n        if key in self.cache:\n            self.cache.move_to_end(key)\n        self.cache[key] = val\n        if len(self.cache) > self.cap:\n            self.cache.popitem(last=False)\n\nlru = LRUCache(capacity)\nfor _ in range(q):\n    cmd = input().split()\n    if cmd[0]=='get': print(lru.get(int(cmd[1])))\n    else: lru.put(int(cmd[1]),int(cmd[2]))"
+        },
+        "timeComplexity": "O(1) per operation",
+        "spaceComplexity": "O(capacity)"
+      },
+      "tags": ["queue", "design", "hash-map", "linked-list", "cache"]
+    },
+    {
+      "id": "q-010",
+      "title": "Task Scheduler",
+      "titleHi": "Task Scheduler",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given an array of tasks represented by characters and a cooldown period n, find the minimum number of intervals needed to execute all tasks. The same task must have at least n intervals between two executions. During cooldown, the CPU can execute a different task or remain idle.",
+        "hi": "Tasks ka array (characters se represent) aur cooldown period n diya hai. Saare tasks execute karne ke liye minimum intervals dhundho. Same task ke do executions ke beech kam se kam n intervals hone chahiye. Cooldown mein CPU doosra task execute kar sakta hai ya idle reh sakta hai."
+      },
+      "examples": [
+        {
+          "input": "6 2\nA A A B B B",
+          "output": "8",
+          "explanation": {
+            "en": "One possible order: A B idle A B idle A B. Total 8 intervals.",
+            "hi": "Ek possible order: A B idle A B idle A B. Total 8 intervals."
+          }
+        }
+      ],
+      "constraints": ["1 <= tasks.length <= 10^4", "0 <= n <= 100", "Tasks are uppercase English letters"],
+      "hints": [
+        { "en": "The task with maximum frequency determines the minimum intervals", "hi": "Maximum frequency wala task minimum intervals decide karta hai" },
+        { "en": "Formula: (maxFreq - 1) * (n + 1) + count of tasks with maxFreq", "hi": "Formula: (maxFreq - 1) * (n + 1) + maxFreq wale tasks ka count" },
+        { "en": "Answer is max of the formula result and total number of tasks", "hi": "Answer formula result aur total tasks mein jo bada ho wo hai" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\n#include<algorithm>\nusing namespace std;\nint main() {\n    int t, n; cin>>t>>n;\n    char tasks[t];\n    for(int i=0;i<t;i++) cin>>tasks[i];\n    // Find minimum intervals\n}",
+        "python": "t, n = map(int, input().split())\ntasks = input().split()\n# Find minimum intervals",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int t = sc.nextInt(), n = sc.nextInt();\n        char[] tasks = new char[t];\n        for(int i=0;i<t;i++) tasks[i] = sc.next().charAt(0);\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [t, n] = lines[0].split(' ').map(Number);\nconst tasks = lines[1].split(' ');\n// Find minimum intervals",
+        "c": "#include<stdio.h>\n#include<string.h>\nint main() {\n    int t, n; scanf(\"%d %d\",&t,&n);\n    char tasks[t];\n    for(int i=0;i<t;i++) { char c; scanf(\" %c\",&c); tasks[i]=c; }\n}"
+      },
+      "testCases": [
+        { "input": "6 2\nA A A B B B", "expectedOutput": "8" },
+        { "input": "5 1\nA A A B B", "expectedOutput": "5" },
+        { "input": "6 0\nA A A B B B", "expectedOutput": "6" },
+        { "input": "1 2\nA", "expectedOutput": "1" },
+        { "input": "12 2\nA A A A A A B C D E F G", "expectedOutput": "16" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Count frequency of each task. Find max frequency (maxFreq) and how many tasks have that frequency (maxCount). Result = max(total_tasks, (maxFreq - 1) * (n + 1) + maxCount). The formula creates slots of size (n+1) for (maxFreq-1) groups, plus the last group of maxCount tasks.",
+          "hi": "Har task ki frequency count karo. Max frequency (maxFreq) aur kitne tasks ki wo frequency hai (maxCount) dhundho. Result = max(total_tasks, (maxFreq - 1) * (n + 1) + maxCount). Formula (n+1) size ke slots banata hai (maxFreq-1) groups ke liye, plus last group mein maxCount tasks."
+        },
+        "code": {
+          "cpp": "int freq[26] = {0};\nfor(int i=0;i<t;i++) freq[tasks[i]-'A']++;\nint maxFreq = *max_element(freq, freq+26);\nint maxCount = 0;\nfor(int i=0;i<26;i++) if(freq[i]==maxFreq) maxCount++;\nint result = max(t, (maxFreq-1)*(n+1)+maxCount);\ncout << result;",
+          "python": "from collections import Counter\nfreq = Counter(tasks)\nmax_freq = max(freq.values())\nmax_count = sum(1 for v in freq.values() if v == max_freq)\nresult = max(t, (max_freq - 1) * (n + 1) + max_count)\nprint(result)"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["queue", "greedy", "priority-queue", "scheduling", "math"]
+    }
+  ]
+}

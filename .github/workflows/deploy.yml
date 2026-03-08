@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ['claude/dsa-learning-platform-W1py9']
+    branches: ['master', 'claude/complete-ish-project-ajrmc']
 
 permissions:
   contents: read

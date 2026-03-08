@@ -1,0 +1,342 @@
+{
+  "topicId": "divide-and-conquer",
+  "problems": [
+    {
+      "id": "dc-001",
+      "title": "Merge Sort",
+      "titleHi": "Merge Sort - Array ko Sort Karo",
+      "difficulty": "easy",
+      "description": {
+        "en": "Implement the Merge Sort algorithm to sort an array of integers in non-decreasing order using the Divide and Conquer approach.",
+        "hi": "Merge Sort algorithm implement karo jo Divide and Conquer approach use karke integers ke array ko non-decreasing order mein sort kare."
+      },
+      "examples": [
+        { "input": "[38, 27, 43, 3, 9, 82, 10]", "output": "3 9 10 27 38 43 82", "explanation": { "en": "Array is sorted using merge sort by dividing into halves and merging sorted halves", "hi": "Array ko halves mein divide karke aur sorted halves ko merge karke sort kiya" } },
+        { "input": "[5, 1, 4, 2, 8]", "output": "1 2 4 5 8", "explanation": { "en": "Array sorted in ascending order", "hi": "Array ascending order mein sort ho gaya" } }
+      ],
+      "constraints": ["1 <= arr.length <= 10^5", "-10^9 <= arr[i] <= 10^9"],
+      "hints": [
+        { "en": "Divide the array into two halves recursively until single elements remain", "hi": "Array ko recursively do halves mein divide karo jab tak single elements na reh jaayein" },
+        { "en": "Merge two sorted halves using two pointers technique", "hi": "Do sorted halves ko two pointers technique se merge karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\n\nvoid merge(int arr[], int left, int mid, int right) {\n    // Write merge logic here\n}\n\nvoid mergeSort(int arr[], int left, int right) {\n    // Write your code here\n}\n\nint main() {\n    int n; cin >> n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin >> arr[i];\n    mergeSort(arr, 0, n-1);\n    for(int i=0;i<n;i++) cout << arr[i] << \" \";\n}",
+        "python": "def merge(arr, left, mid, right):\n    # Write merge logic here\n    pass\n\ndef merge_sort(arr, left, right):\n    # Write your code here\n    pass\n\nn = int(input())\narr = list(map(int, input().split()))\nmerge_sort(arr, 0, n-1)\nprint(*arr)",
+        "java": "import java.util.*;\npublic class Main {\n    public static void merge(int[] arr, int left, int mid, int right) {\n        // Write merge logic here\n    }\n    public static void mergeSort(int[] arr, int left, int right) {\n        // Write your code here\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i] = sc.nextInt();\n        mergeSort(arr, 0, n-1);\n        for(int x : arr) System.out.print(x + \" \");\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);\n\nfunction merge(arr, left, mid, right) {\n    // Write merge logic here\n}\n\nfunction mergeSort(arr, left, right) {\n    // Write your code here\n}\n\nmergeSort(arr, 0, n-1);\nconsole.log(arr.join(' '));",
+        "c": "#include<stdio.h>\nvoid merge(int arr[], int left, int mid, int right) {\n    // Write merge logic here\n}\nvoid mergeSort(int arr[], int left, int right) {\n    // Write your code here\n}\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    mergeSort(arr, 0, n-1);\n    for(int i=0;i<n;i++) printf(\"%d \", arr[i]);\n}"
+      },
+      "testCases": [
+        { "input": "7\n38 27 43 3 9 82 10", "expectedOutput": "3 9 10 27 38 43 82" },
+        { "input": "5\n5 1 4 2 8", "expectedOutput": "1 2 4 5 8" },
+        { "input": "1\n42", "expectedOutput": "42" },
+        { "input": "4\n-3 -1 -7 -4", "expectedOutput": "-7 -4 -3 -1" }
+      ],
+      "solution": {
+        "approach": { "en": "Divide array into halves, recursively sort each half, then merge sorted halves using two pointers.", "hi": "Array ko halves mein divide karo, har half ko recursively sort karo, phir sorted halves ko two pointers se merge karo." },
+        "code": {
+          "cpp": "void merge(int arr[], int l, int m, int r) {\n    int n1=m-l+1, n2=r-m;\n    int L[n1], R[n2];\n    for(int i=0;i<n1;i++) L[i]=arr[l+i];\n    for(int j=0;j<n2;j++) R[j]=arr[m+1+j];\n    int i=0,j=0,k=l;\n    while(i<n1&&j<n2) arr[k++]=(L[i]<=R[j])?L[i++]:R[j++];\n    while(i<n1) arr[k++]=L[i++];\n    while(j<n2) arr[k++]=R[j++];\n}\nvoid mergeSort(int arr[], int l, int r) {\n    if(l>=r) return;\n    int m=(l+r)/2;\n    mergeSort(arr,l,m);\n    mergeSort(arr,m+1,r);\n    merge(arr,l,m,r);\n}",
+          "python": "def merge_sort(arr, l, r):\n    if l >= r: return\n    m = (l+r)//2\n    merge_sort(arr, l, m)\n    merge_sort(arr, m+1, r)\n    L, R = arr[l:m+1], arr[m+1:r+1]\n    i = j = 0; k = l\n    while i < len(L) and j < len(R):\n        if L[i] <= R[j]: arr[k] = L[i]; i += 1\n        else: arr[k] = R[j]; j += 1\n        k += 1\n    while i < len(L): arr[k] = L[i]; i += 1; k += 1\n    while j < len(R): arr[k] = R[j]; j += 1; k += 1"
+        },
+        "timeComplexity": "O(n log n)",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["divide-and-conquer", "sorting", "merge-sort"]
+    },
+    {
+      "id": "dc-002",
+      "title": "Quick Sort",
+      "titleHi": "Quick Sort - Tez Sorting Algorithm",
+      "difficulty": "medium",
+      "description": {
+        "en": "Implement the Quick Sort algorithm using the Lomuto partition scheme (last element as pivot) to sort an array of integers in non-decreasing order.",
+        "hi": "Quick Sort algorithm implement karo Lomuto partition scheme (last element as pivot) use karke, jo integers ke array ko non-decreasing order mein sort kare."
+      },
+      "examples": [
+        { "input": "[10, 7, 8, 9, 1, 5]", "output": "1 5 7 8 9 10", "explanation": { "en": "Array sorted using quick sort with partitioning around pivot", "hi": "Pivot ke around partition karke array quick sort se sort hua" } },
+        { "input": "[3, 6, 8, 10, 1, 2, 1]", "output": "1 1 2 3 6 8 10", "explanation": { "en": "Handles duplicate elements correctly", "hi": "Duplicate elements ko bhi sahi se handle karta hai" } }
+      ],
+      "constraints": ["1 <= arr.length <= 10^5", "-10^9 <= arr[i] <= 10^9"],
+      "hints": [
+        { "en": "Choose the last element as pivot and partition array such that elements <= pivot are on the left", "hi": "Last element ko pivot chuno aur array ko aise partition karo ki pivot se chhote/equal elements left mein hon" },
+        { "en": "After partition, pivot is at its correct sorted position", "hi": "Partition ke baad pivot apni correct sorted position pe hota hai" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\n\nint partition(int arr[], int low, int high) {\n    // Write partition logic here\n    return 0;\n}\n\nvoid quickSort(int arr[], int low, int high) {\n    // Write your code here\n}\n\nint main() {\n    int n; cin >> n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin >> arr[i];\n    quickSort(arr, 0, n-1);\n    for(int i=0;i<n;i++) cout << arr[i] << \" \";\n}",
+        "python": "def partition(arr, low, high):\n    # Write partition logic here\n    pass\n\ndef quick_sort(arr, low, high):\n    # Write your code here\n    pass\n\nn = int(input())\narr = list(map(int, input().split()))\nquick_sort(arr, 0, n-1)\nprint(*arr)",
+        "java": "import java.util.*;\npublic class Main {\n    public static int partition(int[] arr, int low, int high) {\n        // Write partition logic here\n        return 0;\n    }\n    public static void quickSort(int[] arr, int low, int high) {\n        // Write your code here\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i] = sc.nextInt();\n        quickSort(arr, 0, n-1);\n        for(int x : arr) System.out.print(x + \" \");\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);\n\nfunction partition(arr, low, high) {\n    // Write partition logic here\n}\n\nfunction quickSort(arr, low, high) {\n    // Write your code here\n}\n\nquickSort(arr, 0, n-1);\nconsole.log(arr.join(' '));",
+        "c": "#include<stdio.h>\nint partition(int arr[], int low, int high) {\n    // Write partition logic here\n    return 0;\n}\nvoid quickSort(int arr[], int low, int high) {\n    // Write your code here\n}\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    quickSort(arr, 0, n-1);\n    for(int i=0;i<n;i++) printf(\"%d \", arr[i]);\n}"
+      },
+      "testCases": [
+        { "input": "6\n10 7 8 9 1 5", "expectedOutput": "1 5 7 8 9 10" },
+        { "input": "7\n3 6 8 10 1 2 1", "expectedOutput": "1 1 2 3 6 8 10" },
+        { "input": "1\n5", "expectedOutput": "5" },
+        { "input": "5\n5 4 3 2 1", "expectedOutput": "1 2 3 4 5" }
+      ],
+      "solution": {
+        "approach": { "en": "Pick last element as pivot, partition array so elements <= pivot go left, recursively sort both parts.", "hi": "Last element ko pivot lo, array ko partition karo taaki elements <= pivot left jaayein, dono parts ko recursively sort karo." },
+        "code": {
+          "cpp": "int partition(int arr[], int low, int high) {\n    int pivot=arr[high], i=low-1;\n    for(int j=low;j<high;j++) {\n        if(arr[j]<=pivot) { i++; swap(arr[i],arr[j]); }\n    }\n    swap(arr[i+1],arr[high]);\n    return i+1;\n}\nvoid quickSort(int arr[], int low, int high) {\n    if(low<high) {\n        int pi=partition(arr,low,high);\n        quickSort(arr,low,pi-1);\n        quickSort(arr,pi+1,high);\n    }\n}",
+          "python": "def partition(arr, low, high):\n    pivot = arr[high]; i = low - 1\n    for j in range(low, high):\n        if arr[j] <= pivot:\n            i += 1; arr[i], arr[j] = arr[j], arr[i]\n    arr[i+1], arr[high] = arr[high], arr[i+1]\n    return i + 1\ndef quick_sort(arr, low, high):\n    if low < high:\n        pi = partition(arr, low, high)\n        quick_sort(arr, low, pi-1)\n        quick_sort(arr, pi+1, high)"
+        },
+        "timeComplexity": "O(n log n) average, O(n^2) worst",
+        "spaceComplexity": "O(log n)"
+      },
+      "tags": ["divide-and-conquer", "sorting", "quick-sort", "partitioning"]
+    },
+    {
+      "id": "dc-003",
+      "title": "Binary Search",
+      "titleHi": "Binary Search - Sorted Array Mein Dhundho",
+      "difficulty": "easy",
+      "description": {
+        "en": "Implement Binary Search using the Divide and Conquer approach. Given a sorted array and a target value, return the index of the target. If not found, return -1.",
+        "hi": "Divide and Conquer approach se Binary Search implement karo. Ek sorted array aur target value diya hai, target ka index return karo. Agar na mile to -1 return karo."
+      },
+      "examples": [
+        { "input": "arr = [1, 3, 5, 7, 9, 11], target = 7", "output": "3", "explanation": { "en": "7 is found at index 3", "hi": "7 index 3 pe mila" } },
+        { "input": "arr = [2, 4, 6, 8, 10], target = 5", "output": "-1", "explanation": { "en": "5 is not present in the array", "hi": "5 array mein nahi hai" } }
+      ],
+      "constraints": ["1 <= arr.length <= 10^5", "-10^9 <= arr[i] <= 10^9", "Array is sorted in ascending order"],
+      "hints": [
+        { "en": "Compare target with the middle element to decide which half to search", "hi": "Target ko middle element se compare karo aur decide karo kaunsa half search karna hai" },
+        { "en": "Each step eliminates half the remaining elements", "hi": "Har step mein aadhe elements eliminate ho jaate hain" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\n\nint binarySearch(int arr[], int low, int high, int target) {\n    // Write your code here\n    return -1;\n}\n\nint main() {\n    int n, target; cin >> n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin >> arr[i];\n    cin >> target;\n    cout << binarySearch(arr, 0, n-1, target);\n}",
+        "python": "def binary_search(arr, low, high, target):\n    # Write your code here\n    return -1\n\nn = int(input())\narr = list(map(int, input().split()))\ntarget = int(input())\nprint(binary_search(arr, 0, n-1, target))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int binarySearch(int[] arr, int low, int high, int target) {\n        // Write your code here\n        return -1;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i] = sc.nextInt();\n        int target = sc.nextInt();\n        System.out.println(binarySearch(arr, 0, n-1, target));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);\nconst target = parseInt(lines[2]);\n\nfunction binarySearch(arr, low, high, target) {\n    // Write your code here\n    return -1;\n}\n\nconsole.log(binarySearch(arr, 0, n-1, target));",
+        "c": "#include<stdio.h>\nint binarySearch(int arr[], int low, int high, int target) {\n    // Write your code here\n    return -1;\n}\nint main() {\n    int n, target; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    scanf(\"%d\",&target);\n    printf(\"%d\", binarySearch(arr, 0, n-1, target));\n}"
+      },
+      "testCases": [
+        { "input": "6\n1 3 5 7 9 11\n7", "expectedOutput": "3" },
+        { "input": "5\n2 4 6 8 10\n5", "expectedOutput": "-1" },
+        { "input": "1\n42\n42", "expectedOutput": "0" },
+        { "input": "4\n10 20 30 40\n10", "expectedOutput": "0" }
+      ],
+      "solution": {
+        "approach": { "en": "Compare target with mid element. If equal, return index. If target < mid, search left half. If target > mid, search right half.", "hi": "Target ko mid element se compare karo. Equal ho to index return karo. Target < mid ho to left half search karo. Target > mid ho to right half search karo." },
+        "code": {
+          "cpp": "int binarySearch(int arr[], int low, int high, int target) {\n    if(low > high) return -1;\n    int mid = low + (high-low)/2;\n    if(arr[mid] == target) return mid;\n    if(arr[mid] > target) return binarySearch(arr, low, mid-1, target);\n    return binarySearch(arr, mid+1, high, target);\n}",
+          "python": "def binary_search(arr, low, high, target):\n    if low > high: return -1\n    mid = (low + high) // 2\n    if arr[mid] == target: return mid\n    if arr[mid] > target: return binary_search(arr, low, mid-1, target)\n    return binary_search(arr, mid+1, high, target)"
+        },
+        "timeComplexity": "O(log n)",
+        "spaceComplexity": "O(log n) recursive, O(1) iterative"
+      },
+      "tags": ["divide-and-conquer", "binary-search", "searching"]
+    },
+    {
+      "id": "dc-004",
+      "title": "Count Inversions",
+      "titleHi": "Inversions Count Karo",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given an array of integers, count the number of inversions. An inversion is a pair (i, j) such that i < j and arr[i] > arr[j]. Use a modified Merge Sort to solve this in O(n log n).",
+        "hi": "Ek integers ka array diya hai, inversions ki sankhya count karo. Inversion ek pair (i, j) hai jahan i < j aur arr[i] > arr[j]. Modified Merge Sort use karke O(n log n) mein solve karo."
+      },
+      "examples": [
+        { "input": "[2, 4, 1, 3, 5]", "output": "3", "explanation": { "en": "Inversions: (2,1), (4,1), (4,3) = 3 inversions", "hi": "Inversions: (2,1), (4,1), (4,3) = 3 inversions" } },
+        { "input": "[5, 4, 3, 2, 1]", "output": "10", "explanation": { "en": "Reverse sorted array has maximum inversions: n*(n-1)/2 = 10", "hi": "Reverse sorted array mein maximum inversions hain: n*(n-1)/2 = 10" } }
+      ],
+      "constraints": ["1 <= arr.length <= 10^5", "-10^9 <= arr[i] <= 10^9"],
+      "hints": [
+        { "en": "Modify merge sort to count inversions during the merge step", "hi": "Merge sort ko modify karo taaki merge step mein inversions count ho sakein" },
+        { "en": "When an element from the right half is placed before elements from the left half, it contributes inversions", "hi": "Jab right half ka element left half ke elements se pehle place hota hai, tab inversions count hote hain" },
+        { "en": "If left[i] > right[j], then all remaining elements in left half form inversions with right[j]", "hi": "Agar left[i] > right[j], to left half ke saare remaining elements right[j] ke saath inversions banate hain" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\n\nlong long mergeCount(int arr[], int left, int mid, int right) {\n    // Count inversions during merge\n    return 0;\n}\n\nlong long countInversions(int arr[], int left, int right) {\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    int n; cin >> n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin >> arr[i];\n    cout << countInversions(arr, 0, n-1);\n}",
+        "python": "def merge_count(arr, left, mid, right):\n    # Count inversions during merge\n    pass\n\ndef count_inversions(arr, left, right):\n    # Write your code here\n    return 0\n\nn = int(input())\narr = list(map(int, input().split()))\nprint(count_inversions(arr, 0, n-1))",
+        "java": "import java.util.*;\npublic class Main {\n    public static long mergeCount(int[] arr, int left, int mid, int right) {\n        // Count inversions during merge\n        return 0;\n    }\n    public static long countInversions(int[] arr, int left, int right) {\n        // Write your code here\n        return 0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i] = sc.nextInt();\n        System.out.println(countInversions(arr, 0, n-1));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);\n\nfunction countInversions(arr, left, right) {\n    // Write your code here\n    return 0;\n}\n\nconsole.log(countInversions(arr, 0, n-1));",
+        "c": "#include<stdio.h>\nlong long mergeCount(int arr[], int left, int mid, int right) {\n    // Count inversions during merge\n    return 0;\n}\nlong long countInversions(int arr[], int left, int right) {\n    // Write your code here\n    return 0;\n}\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    printf(\"%lld\", countInversions(arr, 0, n-1));\n}"
+      },
+      "testCases": [
+        { "input": "5\n2 4 1 3 5", "expectedOutput": "3" },
+        { "input": "5\n5 4 3 2 1", "expectedOutput": "10" },
+        { "input": "4\n1 2 3 4", "expectedOutput": "0" },
+        { "input": "3\n3 1 2", "expectedOutput": "2" }
+      ],
+      "solution": {
+        "approach": { "en": "Use modified merge sort. During merge, when right element is smaller, count inversions equal to remaining elements in left half.", "hi": "Modified merge sort use karo. Merge mein jab right element chhota ho, inversions count karo jo left half mein baaki elements ke barabar hain." },
+        "code": {
+          "cpp": "long long mergeCount(int arr[], int l, int m, int r) {\n    int n1=m-l+1, n2=r-m;\n    int L[n1], R[n2];\n    for(int i=0;i<n1;i++) L[i]=arr[l+i];\n    for(int j=0;j<n2;j++) R[j]=arr[m+1+j];\n    long long inv=0; int i=0,j=0,k=l;\n    while(i<n1&&j<n2) {\n        if(L[i]<=R[j]) arr[k++]=L[i++];\n        else { arr[k++]=R[j++]; inv+=n1-i; }\n    }\n    while(i<n1) arr[k++]=L[i++];\n    while(j<n2) arr[k++]=R[j++];\n    return inv;\n}\nlong long countInversions(int arr[], int l, int r) {\n    if(l>=r) return 0;\n    int m=(l+r)/2;\n    return countInversions(arr,l,m)+countInversions(arr,m+1,r)+mergeCount(arr,l,m,r);\n}",
+          "python": "def count_inversions(arr, l, r):\n    if l >= r: return 0\n    m = (l+r)//2\n    inv = count_inversions(arr,l,m) + count_inversions(arr,m+1,r)\n    L, R = arr[l:m+1], arr[m+1:r+1]\n    i = j = 0; k = l\n    while i < len(L) and j < len(R):\n        if L[i] <= R[j]: arr[k]=L[i]; i+=1\n        else: arr[k]=R[j]; j+=1; inv+=len(L)-i\n        k+=1\n    while i<len(L): arr[k]=L[i]; i+=1; k+=1\n    while j<len(R): arr[k]=R[j]; j+=1; k+=1\n    return inv"
+        },
+        "timeComplexity": "O(n log n)",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["divide-and-conquer", "merge-sort", "inversions"]
+    },
+    {
+      "id": "dc-005",
+      "title": "Closest Pair of Points",
+      "titleHi": "Sabse Nazdeeki Points Ka Pair",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given n points in a 2D plane, find the smallest distance between any pair of points. Use the Divide and Conquer approach to achieve O(n log n) time complexity instead of the brute force O(n^2).",
+        "hi": "2D plane mein n points diye hain, kisi bhi pair of points ke beech ki sabse chhoti distance dhundho. Brute force O(n^2) ki jagah O(n log n) time complexity ke liye Divide and Conquer approach use karo."
+      },
+      "examples": [
+        { "input": "[(2,3), (12,30), (40,50), (5,1), (12,10), (3,4)]", "output": "1.41", "explanation": { "en": "Closest pair is (2,3) and (3,4) with distance sqrt(2) = 1.41", "hi": "Sabse nazdeeki pair (2,3) aur (3,4) hai jinka distance sqrt(2) = 1.41 hai" } }
+      ],
+      "constraints": ["2 <= n <= 10^5", "-10^6 <= x, y <= 10^6"],
+      "hints": [
+        { "en": "Sort points by x-coordinate and divide into two halves", "hi": "Points ko x-coordinate se sort karo aur do halves mein divide karo" },
+        { "en": "The closest pair is either in the left half, right half, or spans across the dividing line", "hi": "Sabse nazdeeki pair ya to left half mein hai, right half mein hai, ya dividing line ke across hai" },
+        { "en": "For the strip near the dividing line, only check points within distance d (minimum of left and right)", "hi": "Dividing line ke paas ke strip mein sirf d distance (left aur right ka minimum) ke andar ke points check karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<cmath>\n#include<algorithm>\nusing namespace std;\n\nstruct Point { double x, y; };\n\ndouble closestPair(Point points[], int n) {\n    // Write your code here\n    return 0.0;\n}\n\nint main() {\n    int n; cin >> n;\n    Point points[n];\n    for(int i=0;i<n;i++) cin >> points[i].x >> points[i].y;\n    printf(\"%.2f\", closestPair(points, n));\n}",
+        "python": "import math\n\ndef closest_pair(points):\n    # Write your code here\n    return 0.0\n\nn = int(input())\npoints = []\nfor _ in range(n):\n    x, y = map(float, input().split())\n    points.append((x, y))\nprint(f\"{closest_pair(points):.2f}\")",
+        "java": "import java.util.*;\npublic class Main {\n    public static double closestPair(double[][] points) {\n        // Write your code here\n        return 0.0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        double[][] points = new double[n][2];\n        for(int i=0;i<n;i++) { points[i][0]=sc.nextDouble(); points[i][1]=sc.nextDouble(); }\n        System.out.printf(\"%.2f\", closestPair(points));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst points = [];\nfor(let i=1;i<=n;i++) {\n    const [x,y] = lines[i].split(' ').map(Number);\n    points.push([x,y]);\n}\nfunction closestPair(points) {\n    // Write your code here\n    return 0.0;\n}\nconsole.log(closestPair(points).toFixed(2));",
+        "c": "#include<stdio.h>\n#include<math.h>\nstruct Point { double x, y; };\ndouble closestPair(struct Point points[], int n) {\n    // Write your code here\n    return 0.0;\n}\nint main() {\n    int n; scanf(\"%d\",&n);\n    struct Point points[n];\n    for(int i=0;i<n;i++) scanf(\"%lf %lf\",&points[i].x,&points[i].y);\n    printf(\"%.2f\", closestPair(points, n));\n}"
+      },
+      "testCases": [
+        { "input": "6\n2 3\n12 30\n40 50\n5 1\n12 10\n3 4", "expectedOutput": "1.41" },
+        { "input": "3\n0 0\n3 4\n1 1", "expectedOutput": "1.41" },
+        { "input": "2\n0 0\n5 0", "expectedOutput": "5.00" }
+      ],
+      "solution": {
+        "approach": { "en": "Sort by x-coordinate, divide into halves, find minimum distance in each half, then check strip near dividing line for cross-half pairs.", "hi": "X-coordinate se sort karo, halves mein divide karo, har half mein minimum distance dhundho, phir dividing line ke paas strip mein cross-half pairs check karo." },
+        "code": {
+          "cpp": "// Sort by x, divide, find min in each half\n// Check strip of width 2*d around midline\n// For strip points sorted by y, check only next 7 points\ndouble dist(Point a, Point b) { return sqrt((a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y)); }\n// T(n) = 2T(n/2) + O(n log n) = O(n log^2 n)\n// With optimization: O(n log n)",
+          "python": "def closest_pair(points):\n    points.sort()\n    def dist(a, b): return math.sqrt((a[0]-b[0])**2 + (a[1]-b[1])**2)\n    def solve(pts):\n        if len(pts) <= 3:\n            return min(dist(pts[i],pts[j]) for i in range(len(pts)) for j in range(i+1,len(pts)))\n        mid = len(pts)//2\n        d = min(solve(pts[:mid]), solve(pts[mid:]))\n        strip = [p for p in pts if abs(p[0]-pts[mid][0]) < d]\n        strip.sort(key=lambda p: p[1])\n        for i in range(len(strip)):\n            for j in range(i+1, min(i+7, len(strip))):\n                d = min(d, dist(strip[i], strip[j]))\n        return d\n    return solve(points)"
+        },
+        "timeComplexity": "O(n log n)",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["divide-and-conquer", "geometry", "closest-pair"]
+    },
+    {
+      "id": "dc-006",
+      "title": "Maximum Subarray Sum (Kadane's vs D&C)",
+      "titleHi": "Maximum Subarray Sum (Kadane's vs D&C)",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given an array of integers, find the contiguous subarray with the maximum sum using the Divide and Conquer approach. Return the maximum sum.",
+        "hi": "Integers ka array diya hai, Divide and Conquer approach se maximum sum wala contiguous subarray dhundho. Maximum sum return karo."
+      },
+      "examples": [
+        { "input": "[-2, 1, -3, 4, -1, 2, 1, -5, 4]", "output": "6", "explanation": { "en": "Maximum subarray is [4, -1, 2, 1] with sum 6", "hi": "Maximum subarray [4, -1, 2, 1] hai jiska sum 6 hai" } },
+        { "input": "[1, 2, 3, 4]", "output": "10", "explanation": { "en": "Entire array is the maximum subarray", "hi": "Poora array hi maximum subarray hai" } }
+      ],
+      "constraints": ["1 <= arr.length <= 10^5", "-10^4 <= arr[i] <= 10^4"],
+      "hints": [
+        { "en": "Divide array into two halves. Maximum subarray is either entirely in left half, entirely in right half, or crosses the midpoint", "hi": "Array ko do halves mein divide karo. Maximum subarray ya to poora left half mein hai, poora right half mein hai, ya midpoint cross karta hai" },
+        { "en": "For the crossing case, find max suffix sum of left half and max prefix sum of right half", "hi": "Crossing case ke liye, left half ka max suffix sum aur right half ka max prefix sum dhundho" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<climits>\nusing namespace std;\n\nint maxCrossingSum(int arr[], int low, int mid, int high) {\n    // Write crossing sum logic\n    return 0;\n}\n\nint maxSubarraySum(int arr[], int low, int high) {\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    int n; cin >> n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin >> arr[i];\n    cout << maxSubarraySum(arr, 0, n-1);\n}",
+        "python": "def max_crossing_sum(arr, low, mid, high):\n    # Write crossing sum logic\n    pass\n\ndef max_subarray_sum(arr, low, high):\n    # Write your code here\n    return 0\n\nn = int(input())\narr = list(map(int, input().split()))\nprint(max_subarray_sum(arr, 0, n-1))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int maxCrossingSum(int[] arr, int low, int mid, int high) {\n        // Write crossing sum logic\n        return 0;\n    }\n    public static int maxSubarraySum(int[] arr, int low, int high) {\n        // Write your code here\n        return 0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i] = sc.nextInt();\n        System.out.println(maxSubarraySum(arr, 0, n-1));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);\n\nfunction maxSubarraySum(arr, low, high) {\n    // Write your code here\n    return 0;\n}\n\nconsole.log(maxSubarraySum(arr, 0, n-1));",
+        "c": "#include<stdio.h>\n#include<limits.h>\nint maxCrossingSum(int arr[], int low, int mid, int high) {\n    // Write crossing sum logic\n    return 0;\n}\nint maxSubarraySum(int arr[], int low, int high) {\n    // Write your code here\n    return 0;\n}\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    printf(\"%d\", maxSubarraySum(arr, 0, n-1));\n}"
+      },
+      "testCases": [
+        { "input": "9\n-2 1 -3 4 -1 2 1 -5 4", "expectedOutput": "6" },
+        { "input": "4\n1 2 3 4", "expectedOutput": "10" },
+        { "input": "1\n-5", "expectedOutput": "-5" },
+        { "input": "5\n-1 -2 -3 -4 -5", "expectedOutput": "-1" }
+      ],
+      "solution": {
+        "approach": { "en": "Divide into halves. Max subarray is max of: left half max, right half max, or max crossing subarray (max suffix of left + max prefix of right).", "hi": "Halves mein divide karo. Max subarray ye teeno ka max hai: left half max, right half max, ya max crossing subarray (left ka max suffix + right ka max prefix)." },
+        "code": {
+          "cpp": "int maxCrossingSum(int arr[], int l, int m, int h) {\n    int leftSum=INT_MIN, sum=0;\n    for(int i=m;i>=l;i--) { sum+=arr[i]; leftSum=max(leftSum,sum); }\n    int rightSum=INT_MIN; sum=0;\n    for(int i=m+1;i<=h;i++) { sum+=arr[i]; rightSum=max(rightSum,sum); }\n    return leftSum+rightSum;\n}\nint maxSubarraySum(int arr[], int l, int h) {\n    if(l==h) return arr[l];\n    int m=(l+h)/2;\n    return max({maxSubarraySum(arr,l,m), maxSubarraySum(arr,m+1,h), maxCrossingSum(arr,l,m,h)});\n}",
+          "python": "def max_subarray_sum(arr, l, h):\n    if l == h: return arr[l]\n    m = (l+h)//2\n    left_sum = float('-inf'); s = 0\n    for i in range(m, l-1, -1): s += arr[i]; left_sum = max(left_sum, s)\n    right_sum = float('-inf'); s = 0\n    for i in range(m+1, h+1): s += arr[i]; right_sum = max(right_sum, s)\n    return max(max_subarray_sum(arr,l,m), max_subarray_sum(arr,m+1,h), left_sum+right_sum)"
+        },
+        "timeComplexity": "O(n log n)",
+        "spaceComplexity": "O(log n)"
+      },
+      "tags": ["divide-and-conquer", "maximum-subarray", "recursion"]
+    },
+    {
+      "id": "dc-007",
+      "title": "Power Function (Fast Exponentiation)",
+      "titleHi": "Power Function (Tez Exponentiation)",
+      "difficulty": "easy",
+      "description": {
+        "en": "Implement a function to calculate x^n (x raised to the power n) using the Divide and Conquer approach (also known as fast exponentiation or binary exponentiation). Handle negative exponents as well.",
+        "hi": "Divide and Conquer approach (fast exponentiation ya binary exponentiation) se x^n (x ki power n) calculate karne ka function implement karo. Negative exponents bhi handle karo."
+      },
+      "examples": [
+        { "input": "x = 2.0, n = 10", "output": "1024.00", "explanation": { "en": "2^10 = 1024", "hi": "2^10 = 1024" } },
+        { "input": "x = 2.0, n = -2", "output": "0.25", "explanation": { "en": "2^(-2) = 1/(2^2) = 0.25", "hi": "2^(-2) = 1/(2^2) = 0.25" } }
+      ],
+      "constraints": ["-100.0 < x < 100.0", "-2^31 <= n <= 2^31 - 1"],
+      "hints": [
+        { "en": "x^n = (x^(n/2))^2 if n is even, x * (x^(n/2))^2 if n is odd", "hi": "x^n = (x^(n/2))^2 agar n even hai, x * (x^(n/2))^2 agar n odd hai" },
+        { "en": "For negative n, compute x^(-n) and return 1/result", "hi": "Negative n ke liye x^(-n) compute karo aur 1/result return karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\n\ndouble myPow(double x, long long n) {\n    // Write your code here\n    return 0.0;\n}\n\nint main() {\n    double x; long long n;\n    cin >> x >> n;\n    printf(\"%.2f\", myPow(x, n));\n}",
+        "python": "def my_pow(x, n):\n    # Write your code here\n    return 0.0\n\nx = float(input())\nn = int(input())\nprint(f\"{my_pow(x, n):.2f}\")",
+        "java": "import java.util.*;\npublic class Main {\n    public static double myPow(double x, long n) {\n        // Write your code here\n        return 0.0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        double x = sc.nextDouble();\n        long n = sc.nextLong();\n        System.out.printf(\"%.2f\", myPow(x, n));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst x = parseFloat(lines[0]);\nconst n = parseInt(lines[1]);\n\nfunction myPow(x, n) {\n    // Write your code here\n    return 0.0;\n}\n\nconsole.log(myPow(x, n).toFixed(2));",
+        "c": "#include<stdio.h>\ndouble myPow(double x, long long n) {\n    // Write your code here\n    return 0.0;\n}\nint main() {\n    double x; long long n;\n    scanf(\"%lf %lld\", &x, &n);\n    printf(\"%.2f\", myPow(x, n));\n}"
+      },
+      "testCases": [
+        { "input": "2.0\n10", "expectedOutput": "1024.00" },
+        { "input": "2.0\n-2", "expectedOutput": "0.25" },
+        { "input": "3.0\n0", "expectedOutput": "1.00" },
+        { "input": "2.0\n1", "expectedOutput": "2.00" }
+      ],
+      "solution": {
+        "approach": { "en": "Use binary exponentiation: if n is even, x^n = (x^(n/2))^2. If n is odd, x^n = x * x^(n-1). Handle negative n by computing 1/x^|n|.", "hi": "Binary exponentiation use karo: agar n even hai to x^n = (x^(n/2))^2. Agar n odd hai to x^n = x * x^(n-1). Negative n ke liye 1/x^|n| compute karo." },
+        "code": {
+          "cpp": "double myPow(double x, long long n) {\n    if(n == 0) return 1.0;\n    if(n < 0) { x = 1/x; n = -n; }\n    double half = myPow(x, n/2);\n    if(n % 2 == 0) return half * half;\n    return x * half * half;\n}",
+          "python": "def my_pow(x, n):\n    if n == 0: return 1.0\n    if n < 0: x = 1/x; n = -n\n    half = my_pow(x, n//2)\n    if n % 2 == 0: return half * half\n    return x * half * half"
+        },
+        "timeComplexity": "O(log n)",
+        "spaceComplexity": "O(log n)"
+      },
+      "tags": ["divide-and-conquer", "binary-exponentiation", "math"]
+    },
+    {
+      "id": "dc-008",
+      "title": "Karatsuba Multiplication",
+      "titleHi": "Karatsuba Multiplication - Tez Gunanfal",
+      "difficulty": "hard",
+      "description": {
+        "en": "Implement the Karatsuba algorithm for multiplying two large numbers. The Karatsuba algorithm uses the Divide and Conquer approach to multiply two n-digit numbers in O(n^1.585) time, faster than the naive O(n^2) method. Given two non-negative integers represented as strings, return their product as a string.",
+        "hi": "Do bade numbers ko multiply karne ke liye Karatsuba algorithm implement karo. Karatsuba algorithm Divide and Conquer approach use karke do n-digit numbers ko O(n^1.585) time mein multiply karta hai, jo naive O(n^2) method se tez hai. Do non-negative integers strings ke roop mein diye hain, unka product string mein return karo."
+      },
+      "examples": [
+        { "input": "\"1234\" \"5678\"", "output": "7006652", "explanation": { "en": "1234 * 5678 = 7006652 computed using Karatsuba's method", "hi": "1234 * 5678 = 7006652 Karatsuba method se compute kiya" } },
+        { "input": "\"123\" \"456\"", "output": "56088", "explanation": { "en": "123 * 456 = 56088", "hi": "123 * 456 = 56088" } }
+      ],
+      "constraints": ["1 <= num1.length, num2.length <= 10^4", "num1 and num2 contain only digits", "No leading zeros except the number 0 itself"],
+      "hints": [
+        { "en": "Split each number into two halves: high and low digits", "hi": "Har number ko do halves mein split karo: high aur low digits" },
+        { "en": "For x = xH * 10^m + xL and y = yH * 10^m + yL, compute three products instead of four: z0 = xL*yL, z2 = xH*yH, z1 = (xH+xL)*(yH+yL) - z2 - z0", "hi": "x = xH * 10^m + xL aur y = yH * 10^m + yL ke liye, chaar ki jagah teen products compute karo: z0 = xL*yL, z2 = xH*yH, z1 = (xH+xL)*(yH+yL) - z2 - z0" },
+        { "en": "Result = z2 * 10^(2m) + z1 * 10^m + z0", "hi": "Result = z2 * 10^(2m) + z1 * 10^m + z0" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<string>\nusing namespace std;\n\nstring karatsuba(string num1, string num2) {\n    // Write your code here\n    return \"0\";\n}\n\nint main() {\n    string num1, num2;\n    cin >> num1 >> num2;\n    cout << karatsuba(num1, num2);\n}",
+        "python": "def karatsuba(num1, num2):\n    # Write your code here\n    return \"0\"\n\nnum1 = input().strip()\nnum2 = input().strip()\nprint(karatsuba(num1, num2))",
+        "java": "import java.util.*;\nimport java.math.*;\npublic class Main {\n    public static String karatsuba(String num1, String num2) {\n        // Write your code here\n        return \"0\";\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String num1 = sc.next();\n        String num2 = sc.next();\n        System.out.println(karatsuba(num1, num2));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst num1 = lines[0].trim();\nconst num2 = lines[1].trim();\n\nfunction karatsuba(num1, num2) {\n    // Write your code here\n    return \"0\";\n}\n\nconsole.log(karatsuba(num1, num2));",
+        "c": "#include<stdio.h>\n#include<string.h>\nchar* karatsuba(char* num1, char* num2) {\n    // Write your code here\n    static char result[] = \"0\";\n    return result;\n}\nint main() {\n    char num1[10001], num2[10001];\n    scanf(\"%s %s\", num1, num2);\n    printf(\"%s\", karatsuba(num1, num2));\n}"
+      },
+      "testCases": [
+        { "input": "1234\n5678", "expectedOutput": "7006652" },
+        { "input": "123\n456", "expectedOutput": "56088" },
+        { "input": "0\n12345", "expectedOutput": "0" },
+        { "input": "999\n999", "expectedOutput": "998001" }
+      ],
+      "solution": {
+        "approach": { "en": "Split numbers into halves. Compute 3 products instead of 4: z0=low*low, z2=high*high, z1=(high+low)*(high+low)-z2-z0. Combine: z2*10^(2m) + z1*10^m + z0.", "hi": "Numbers ko halves mein split karo. 4 ki jagah 3 products compute karo: z0=low*low, z2=high*high, z1=(high+low)*(high+low)-z2-z0. Combine: z2*10^(2m) + z1*10^m + z0." },
+        "code": {
+          "cpp": "// Karatsuba reduces 4 multiplications to 3\n// T(n) = 3T(n/2) + O(n) = O(n^log2(3)) = O(n^1.585)\n// x*y = z2*10^(2m) + z1*10^m + z0\n// where z0=xL*yL, z2=xH*yH, z1=(xH+xL)*(yH+yL)-z2-z0",
+          "python": "def karatsuba(x, y):\n    if x < 10 or y < 10: return x * y\n    n = max(len(str(x)), len(str(y)))\n    m = n // 2\n    p = 10 ** m\n    xH, xL = x // p, x % p\n    yH, yL = y // p, y % p\n    z0 = karatsuba(xL, yL)\n    z2 = karatsuba(xH, yH)\n    z1 = karatsuba(xH + xL, yH + yL) - z2 - z0\n    return z2 * (10 ** (2*m)) + z1 * (10 ** m) + z0"
+        },
+        "timeComplexity": "O(n^1.585)",
+        "spaceComplexity": "O(n log n)"
+      },
+      "tags": ["divide-and-conquer", "karatsuba", "multiplication", "math"]
+    }
+  ]
+}
