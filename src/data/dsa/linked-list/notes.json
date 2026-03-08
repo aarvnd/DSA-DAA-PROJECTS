@@ -1,0 +1,98 @@
+{
+  "topicId": "linked-list",
+  "title": { "en": "Linked List - Complete Guide", "hi": "Linked List - Poori Jaankari" },
+  "introduction": {
+    "en": "A linked list is a dynamic data structure where elements (nodes) are connected through pointers. Unlike arrays, memory is not contiguous — each node stores data and the address of the next node.",
+    "hi": "Linked list ek dynamic data structure hai jisme elements (nodes) pointers se connected hote hain. Arrays se alag, memory contiguous nahi hoti — har node apna data aur agle node ka address store karta hai."
+  },
+  "realLifeAnalogy": {
+    "en": "Think of a train — each coach (node) is connected to the next one. You can add or remove coaches easily without disturbing the others!",
+    "hi": "Train socho — har dabba (node) agle se connected hai. Aasani se dabbe jod ya hata sakte ho bina dusron ko disturb kiye!"
+  },
+  "sections": [
+    {
+      "id": "what-is-ll",
+      "title": { "en": "What is a Linked List?", "hi": "Linked List kya hoti hai?" },
+      "content": {
+        "en": "A linked list is a sequence of nodes where each node contains data and a pointer to the next node. The first node is called the **head** and the last node points to NULL.\n\n**Key Properties:**\n- Dynamic size — grows/shrinks at runtime\n- No random access — must traverse from head\n- Efficient insertion/deletion at head: O(1)\n- Extra memory for pointers",
+        "hi": "Linked list nodes ka ek sequence hai jisme har node mein data aur agle node ka pointer hota hai. Pehla node **head** kehlaata hai aur aakhri node NULL point karta hai.\n\n**Important Baatein:**\n- Dynamic size — runtime pe grow/shrink hoti hai\n- Random access nahi — head se traverse karna padta hai\n- Head pe insert/delete efficient: O(1)\n- Pointers ke liye extra memory chahiye"
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\nusing namespace std;\n\nstruct Node {\n    int data;\n    Node* next;\n    Node(int val) : data(val), next(nullptr) {}\n};\n\nint main() {\n    Node* head = new Node(10);\n    head->next = new Node(20);\n    head->next->next = new Node(30);\n    \n    Node* curr = head;\n    while (curr) {\n        cout << curr->data << \" \";\n        curr = curr->next;\n    }\n    return 0;\n}",
+        "c": "#include <stdio.h>\n#include <stdlib.h>\n\nstruct Node {\n    int data;\n    struct Node* next;\n};\n\nstruct Node* newNode(int val) {\n    struct Node* n = (struct Node*)malloc(sizeof(struct Node));\n    n->data = val; n->next = NULL;\n    return n;\n}\n\nint main() {\n    struct Node* head = newNode(10);\n    head->next = newNode(20);\n    head->next->next = newNode(30);\n    struct Node* curr = head;\n    while (curr) { printf(\"%d \", curr->data); curr = curr->next; }\n    return 0;\n}",
+        "java": "public class Main {\n    static class Node {\n        int data;\n        Node next;\n        Node(int val) { data = val; next = null; }\n    }\n    public static void main(String[] args) {\n        Node head = new Node(10);\n        head.next = new Node(20);\n        head.next.next = new Node(30);\n        Node curr = head;\n        while (curr != null) {\n            System.out.print(curr.data + \" \");\n            curr = curr.next;\n        }\n    }\n}",
+        "python": "class Node:\n    def __init__(self, val):\n        self.data = val\n        self.next = None\n\nhead = Node(10)\nhead.next = Node(20)\nhead.next.next = Node(30)\n\ncurr = head\nwhile curr:\n    print(curr.data, end=' ')\n    curr = curr.next",
+        "javascript": "class Node {\n    constructor(val) { this.data = val; this.next = null; }\n}\n\nlet head = new Node(10);\nhead.next = new Node(20);\nhead.next.next = new Node(30);\n\nlet curr = head;\nwhile (curr) {\n    process.stdout.write(curr.data + ' ');\n    curr = curr.next;\n}"
+      },
+      "keyPoints": [
+        { "en": "Head is the entry point of a linked list", "hi": "Head linked list ka entry point hota hai" },
+        { "en": "Last node's next pointer is NULL", "hi": "Aakhri node ka next pointer NULL hota hai" },
+        { "en": "No index-based access — must traverse sequentially", "hi": "Index-based access nahi hoti — sequentially traverse karna padta hai" }
+      ],
+      "timeComplexity": { "access": "O(n)", "search": "O(n)", "insert": "O(1) at head", "delete": "O(1) at head" }
+    },
+    {
+      "id": "ll-types",
+      "title": { "en": "Types of Linked Lists", "hi": "Linked List ke Prakar" },
+      "content": {
+        "en": "**1. Singly Linked List** — Each node points to the next node only.\n**2. Doubly Linked List** — Each node has pointers to both next and previous nodes.\n**3. Circular Linked List** — Last node points back to the first node.\n\nDoubly linked lists allow backward traversal but use extra memory. Circular lists are used in round-robin scheduling.",
+        "hi": "**1. Singly Linked List** — Har node sirf agle node ko point karta hai.\n**2. Doubly Linked List** — Har node ke paas next aur previous dono ke pointers hote hain.\n**3. Circular Linked List** — Aakhri node pehle node ko point karta hai.\n\nDoubly linked list mein backward traversal possible hai par extra memory lagti hai. Circular list round-robin scheduling mein use hoti hai."
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\nusing namespace std;\n\nstruct DNode {\n    int data;\n    DNode *prev, *next;\n    DNode(int val) : data(val), prev(nullptr), next(nullptr) {}\n};\n\nint main() {\n    DNode* head = new DNode(10);\n    DNode* second = new DNode(20);\n    DNode* third = new DNode(30);\n    head->next = second; second->prev = head;\n    second->next = third; third->prev = second;\n    \n    DNode* curr = head;\n    while (curr) { cout << curr->data << \" \"; curr = curr->next; }\n    cout << endl;\n    curr = third;\n    while (curr) { cout << curr->data << \" \"; curr = curr->prev; }\n    return 0;\n}",
+        "c": "#include <stdio.h>\n#include <stdlib.h>\nstruct DNode { int data; struct DNode *prev, *next; };\nstruct DNode* newNode(int v) {\n    struct DNode* n = malloc(sizeof(struct DNode));\n    n->data=v; n->prev=n->next=NULL; return n;\n}\nint main() {\n    struct DNode *h=newNode(10),*s=newNode(20),*t=newNode(30);\n    h->next=s; s->prev=h; s->next=t; t->prev=s;\n    for(struct DNode*c=h;c;c=c->next) printf(\"%d \",c->data);\n    return 0;\n}",
+        "java": "public class Main {\n    static class DNode { int data; DNode prev, next; DNode(int v){data=v;} }\n    public static void main(String[] args) {\n        DNode h=new DNode(10),s=new DNode(20),t=new DNode(30);\n        h.next=s; s.prev=h; s.next=t; t.prev=s;\n        for(DNode c=h;c!=null;c=c.next) System.out.print(c.data+\" \");\n    }\n}",
+        "python": "class DNode:\n    def __init__(self, val):\n        self.data = val\n        self.prev = self.next = None\n\nh, s, t = DNode(10), DNode(20), DNode(30)\nh.next = s; s.prev = h; s.next = t; t.prev = s\ncurr = h\nwhile curr:\n    print(curr.data, end=' ')\n    curr = curr.next",
+        "javascript": "class DNode { constructor(v){this.data=v;this.prev=this.next=null;} }\nlet h=new DNode(10),s=new DNode(20),t=new DNode(30);\nh.next=s; s.prev=h; s.next=t; t.prev=s;\nlet c=h; while(c){process.stdout.write(c.data+' ');c=c.next;}"
+      },
+      "keyPoints": [
+        { "en": "Singly LL: less memory, forward traversal only", "hi": "Singly LL: kam memory, sirf aage traverse ho sakta hai" },
+        { "en": "Doubly LL: more memory, bidirectional traversal", "hi": "Doubly LL: zyada memory, dono directions mein traverse" },
+        { "en": "Circular LL: no NULL end, useful for round-robin", "hi": "Circular LL: koi NULL end nahi, round-robin ke liye useful" }
+      ],
+      "timeComplexity": { "access": "O(n)", "search": "O(n)", "insert": "O(1)", "delete": "O(1)" }
+    },
+    {
+      "id": "ll-operations",
+      "title": { "en": "Linked List Operations", "hi": "Linked List Operations" },
+      "content": {
+        "en": "**Insert at Head:** Create new node, point it to current head, update head — O(1)\n**Insert at Tail:** Traverse to last node, link new node — O(n)\n**Delete by Value:** Find node before target, update its next pointer — O(n)\n**Reverse:** Change all next pointers to point backwards — O(n)",
+        "hi": "**Head pe Insert:** Naya node banao, use current head pe point karo, head update karo — O(1)\n**Tail pe Insert:** Last node tak traverse karo, naya node link karo — O(n)\n**Value se Delete:** Target ke pehle node dhundho, uska next pointer update karo — O(n)\n**Reverse:** Saare next pointers ko peeche ki taraf point karo — O(n)"
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\nusing namespace std;\nstruct Node { int data; Node* next; Node(int v):data(v),next(nullptr){} };\n\nNode* insertHead(Node* head, int val) {\n    Node* n = new Node(val);\n    n->next = head;\n    return n;\n}\n\nNode* reverse(Node* head) {\n    Node *prev=nullptr, *curr=head, *next=nullptr;\n    while(curr) { next=curr->next; curr->next=prev; prev=curr; curr=next; }\n    return prev;\n}\n\nint main() {\n    Node* head = nullptr;\n    for(int v : {1,2,3,4,5}) head = insertHead(head, v);\n    head = reverse(head);\n    for(Node* c=head;c;c=c->next) cout<<c->data<<\" \";\n    return 0;\n}",
+        "c": "#include <stdio.h>\n#include <stdlib.h>\nstruct Node{int data;struct Node*next;};\nstruct Node* newNode(int v){struct Node*n=malloc(sizeof(struct Node));n->data=v;n->next=NULL;return n;}\nstruct Node* reverse(struct Node* h){\n    struct Node*prev=NULL,*curr=h,*next=NULL;\n    while(curr){next=curr->next;curr->next=prev;prev=curr;curr=next;}\n    return prev;\n}\nint main(){\n    struct Node*head=NULL;\n    int arr[]={1,2,3,4,5};\n    for(int i=4;i>=0;i--){struct Node*n=newNode(arr[i]);n->next=head;head=n;}\n    head=reverse(head);\n    for(struct Node*c=head;c;c=c->next)printf(\"%d \",c->data);\n    return 0;\n}",
+        "java": "public class Main {\n    static class Node{int data;Node next;Node(int v){data=v;}}\n    static Node reverse(Node head){\n        Node prev=null,curr=head,next=null;\n        while(curr!=null){next=curr.next;curr.next=prev;prev=curr;curr=next;}\n        return prev;\n    }\n    public static void main(String[] args){\n        Node head=null;\n        for(int v:new int[]{5,4,3,2,1}){Node n=new Node(v);n.next=head;head=n;}\n        head=reverse(head);\n        for(Node c=head;c!=null;c=c.next)System.out.print(c.data+\" \");\n    }\n}",
+        "python": "class Node:\n    def __init__(self,v): self.data=v; self.next=None\n\ndef reverse(head):\n    prev,curr=None,head\n    while curr:\n        nxt=curr.next; curr.next=prev; prev=curr; curr=nxt\n    return prev\n\nhead=None\nfor v in [5,4,3,2,1]:\n    n=Node(v); n.next=head; head=n\nhead=reverse(head)\nc=head\nwhile c: print(c.data,end=' '); c=c.next",
+        "javascript": "class Node{constructor(v){this.data=v;this.next=null;}}\nfunction reverse(head){\n    let prev=null,curr=head;\n    while(curr){let nxt=curr.next;curr.next=prev;prev=curr;curr=nxt;}\n    return prev;\n}\nlet head=null;\n[5,4,3,2,1].forEach(v=>{let n=new Node(v);n.next=head;head=n;});\nhead=reverse(head);\nlet c=head; while(c){process.stdout.write(c.data+' ');c=c.next;}"
+      },
+      "keyPoints": [
+        { "en": "Inserting at head is O(1), at tail is O(n)", "hi": "Head pe insert O(1) hai, tail pe O(n)" },
+        { "en": "Reversing a linked list uses three pointers: prev, curr, next", "hi": "Linked list reverse karne ke liye teen pointers use hote hain: prev, curr, next" },
+        { "en": "Always update pointers carefully to avoid losing nodes", "hi": "Pointers carefully update karo warna nodes lost ho jaate hain" }
+      ],
+      "timeComplexity": { "access": "O(n)", "search": "O(n)", "insert": "O(1) head, O(n) tail", "delete": "O(n)" }
+    },
+    {
+      "id": "ll-techniques",
+      "title": { "en": "Floyd's Cycle Detection (Fast & Slow Pointer)", "hi": "Floyd's Cycle Detection (Fast & Slow Pointer)" },
+      "content": {
+        "en": "The fast and slow pointer technique (also called Floyd's Tortoise and Hare) uses two pointers moving at different speeds to detect cycles, find the middle, or solve other problems.\n\n**Applications:**\n- Detect cycle in a linked list\n- Find middle of linked list\n- Find starting point of cycle\n- Detect palindrome in linked list",
+        "hi": "Fast aur slow pointer technique (Floyd's Tortoise and Hare) mein do pointers alag alag speed se move karte hain. Isse cycles detect karte hain, middle dhundhte hain, ya aur bhi problems solve karte hain.\n\n**Applications:**\n- Linked list mein cycle detect karna\n- Linked list ka middle dhundhna\n- Cycle ka starting point dhundhna\n- Linked list palindrome check karna"
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\nusing namespace std;\nstruct Node{int data;Node*next;Node(int v):data(v),next(nullptr){}};\n\nbool hasCycle(Node* head) {\n    Node *slow=head, *fast=head;\n    while(fast && fast->next) {\n        slow=slow->next;\n        fast=fast->next->next;\n        if(slow==fast) return true;\n    }\n    return false;\n}\n\nNode* findMiddle(Node* head) {\n    Node *slow=head, *fast=head;\n    while(fast->next && fast->next->next) {\n        slow=slow->next;\n        fast=fast->next->next;\n    }\n    return slow;\n}\n\nint main() {\n    Node* h=new Node(1);\n    h->next=new Node(2); h->next->next=new Node(3);\n    h->next->next->next=new Node(4); h->next->next->next->next=new Node(5);\n    cout<<\"Has cycle: \"<<hasCycle(h)<<endl;\n    cout<<\"Middle: \"<<findMiddle(h)->data<<endl;\n    return 0;\n}",
+        "c": "#include <stdio.h>\n#include <stdlib.h>\nstruct Node{int data;struct Node*next;};\nstruct Node* newNode(int v){struct Node*n=malloc(sizeof(struct Node));n->data=v;n->next=NULL;return n;}\nint hasCycle(struct Node*head){\n    struct Node*slow=head,*fast=head;\n    while(fast&&fast->next){slow=slow->next;fast=fast->next->next;if(slow==fast)return 1;}\n    return 0;\n}\nint main(){\n    struct Node*h=newNode(1);h->next=newNode(2);h->next->next=newNode(3);\n    printf(\"Has cycle: %d\\n\",hasCycle(h));\n    return 0;\n}",
+        "java": "public class Main {\n    static class Node{int data;Node next;Node(int v){data=v;}}\n    static boolean hasCycle(Node head){\n        Node slow=head,fast=head;\n        while(fast!=null&&fast.next!=null){\n            slow=slow.next;fast=fast.next.next;\n            if(slow==fast)return true;\n        }\n        return false;\n    }\n    public static void main(String[] args){\n        Node h=new Node(1);h.next=new Node(2);h.next.next=new Node(3);\n        System.out.println(\"Has cycle: \"+hasCycle(h));\n    }\n}",
+        "python": "class Node:\n    def __init__(self,v): self.data=v; self.next=None\n\ndef has_cycle(head):\n    slow=fast=head\n    while fast and fast.next:\n        slow=slow.next; fast=fast.next.next\n        if slow==fast: return True\n    return False\n\nh=Node(1);h.next=Node(2);h.next.next=Node(3)\nprint('Has cycle:',has_cycle(h))",
+        "javascript": "class Node{constructor(v){this.data=v;this.next=null;}}\nfunction hasCycle(head){\n    let slow=head,fast=head;\n    while(fast&&fast.next){slow=slow.next;fast=fast.next.next;if(slow===fast)return true;}\n    return false;\n}\nlet h=new Node(1);h.next=new Node(2);h.next.next=new Node(3);\nconsole.log('Has cycle:',hasCycle(h));"
+      },
+      "keyPoints": [
+        { "en": "Slow pointer moves 1 step, fast pointer moves 2 steps", "hi": "Slow pointer 1 step chalta hai, fast pointer 2 steps" },
+        { "en": "If they meet, cycle exists; if fast reaches NULL, no cycle", "hi": "Agar mile, cycle hai; agar fast NULL pe pahunche, cycle nahi hai" },
+        { "en": "Finding middle: when fast reaches end, slow is at middle", "hi": "Middle dhundhna: jab fast end pe pahunche, slow middle pe hoga" }
+      ],
+      "timeComplexity": { "access": "O(n)", "search": "O(n)", "insert": "O(1)", "delete": "O(n)" }
+    }
+  ]
+}
