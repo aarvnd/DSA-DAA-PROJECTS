@@ -1,6 +1,6 @@
 {
   "topicId": "queue",
-  "title": { "en": "Queue", "hi": "Queue (Antaim Aane Pehle Jaao)" },
+  "title": { "en": "Queue", "hi": "Queue (Pehle Aao Pehle Jaao)" },
   "introduction": {
     "en": "A Queue is a linear data structure that follows the FIFO (First In First Out) principle — the element inserted first is removed first. It is like a real-world queue (line) at a ticket counter.",
     "hi": "Queue ek linear data structure hai jo FIFO (First In First Out) principle follow karta hai — pehle insert kiya gaya element pehle remove hota hai. Yeh ticket counter par real-world queue (line) jaisi hoti hai."
