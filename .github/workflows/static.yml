@@ -1,1 +1,10 @@
-# This workflow has been removed
+# Disabled - this workflow is not needed
+name: Disabled static workflow
+on:
+  workflow_dispatch:
+jobs:
+  disabled:
+    if: false
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo disabled
