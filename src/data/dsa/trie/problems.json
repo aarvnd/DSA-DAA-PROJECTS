@@ -1,0 +1,264 @@
+{
+  "topicId": "trie",
+  "problems": [
+    {
+      "id": "trie-001",
+      "title": "Implement Trie",
+      "titleHi": "Trie Implement Karo",
+      "difficulty": "medium",
+      "description": { "en": "Implement a Trie (Prefix Tree) that supports insert, search, and startsWith operations. Process Q queries of the form: insert word, search word, startsWith prefix.", "hi": "Ek Trie (Prefix Tree) implement karo jo insert, search, aur startsWith operations support kare. Q queries process karo: insert word, search word, startsWith prefix." },
+      "examples": [
+        { "input": "insert apple\ninsert app\nsearch apple\nsearch ap\nstartsWith ap", "output": "true\nfalse\ntrue", "explanation": { "en": "apple and app inserted. apple found, ap is not a complete word, ap is a valid prefix", "hi": "apple aur app insert hue. apple mila, ap complete word nahi hai, ap valid prefix hai" } }
+      ],
+      "constraints": ["1 <= Q <= 10^4", "1 <= word.length <= 200", "Words contain only lowercase English letters"],
+      "hints": [
+        { "en": "Each node has 26 children (one per letter) and a boolean to mark end of word", "hi": "Har node ke 26 children hain (har letter ke liye ek) aur ek boolean word ka end mark karne ke liye" },
+        { "en": "startsWith is same as search but does not check end-of-word flag", "hi": "startsWith search jaisa hai par end-of-word flag check nahi karta" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<string>\nusing namespace std;\nint main() {\n    int q; cin>>q;\n    // Process: insert word, search word, startsWith prefix\n}",
+        "python": "q = int(input())\n# Process queries: insert, search, startsWith",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int q = sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\n// Process queries",
+        "c": "#include<stdio.h>\n#include<string.h>\nint main() {\n    int q; scanf(\"%d\",&q);\n}"
+      },
+      "testCases": [
+        { "input": "5\ninsert apple\ninsert app\nsearch apple\nsearch ap\nstartsWith ap", "expectedOutput": "true\nfalse\ntrue" },
+        { "input": "4\ninsert hello\nsearch hello\nsearch hell\nstartsWith hell", "expectedOutput": "true\nfalse\ntrue" }
+      ],
+      "solution": {
+        "approach": { "en": "Create TrieNode with children array and isEnd flag. Insert traverses and creates nodes. Search checks isEnd. StartsWith just checks path exists.", "hi": "TrieNode banao children array aur isEnd flag ke saath. Insert traverse karta hai aur nodes banata hai. Search isEnd check karta hai. StartsWith sirf path exist karta hai check karta hai." },
+        "code": { "cpp": "struct TrieNode {\n    TrieNode* ch[26]={};\n    bool isEnd=false;\n};\nTrieNode* root=new TrieNode();\nvoid insert(string& w){\n  auto node=root;\n  for(char c:w){int i=c-'a';if(!node->ch[i])node->ch[i]=new TrieNode();node=node->ch[i];}\n  node->isEnd=true;\n}\nbool search(string& w){\n  auto node=root;\n  for(char c:w){int i=c-'a';if(!node->ch[i])return false;node=node->ch[i];}\n  return node->isEnd;\n}\nbool startsWith(string& p){\n  auto node=root;\n  for(char c:p){int i=c-'a';if(!node->ch[i])return false;node=node->ch[i];}\n  return true;\n}", "python": "class TrieNode:\n    def __init__(self):\n        self.ch={}\n        self.is_end=False\nroot=TrieNode()\ndef insert(w):\n    node=root\n    for c in w:\n        if c not in node.ch: node.ch[c]=TrieNode()\n        node=node.ch[c]\n    node.is_end=True\ndef search(w):\n    node=root\n    for c in w:\n        if c not in node.ch: return False\n        node=node.ch[c]\n    return node.is_end\ndef starts_with(p):\n    node=root\n    for c in p:\n        if c not in node.ch: return False\n        node=node.ch[c]\n    return True" },
+        "timeComplexity": "O(L) per operation", "spaceComplexity": "O(N * L)"
+      },
+      "tags": ["trie", "design", "string"]
+    },
+    {
+      "id": "trie-002",
+      "title": "Search Word with Wildcards",
+      "titleHi": "Wildcard se Word Search Karo",
+      "difficulty": "medium",
+      "description": { "en": "Design a data structure that supports adding words and searching for words with '.' wildcard. The '.' character can match any single letter. Given Q queries: addWord word or search pattern.", "hi": "Ek data structure design karo jo words add karna aur '.' wildcard ke saath search karna support kare. '.' character kisi bhi single letter ko match kar sakta hai. Q queries diye hain: addWord word ya search pattern." },
+      "examples": [
+        { "input": "addWord bad\naddWord dad\nsearch .ad\nsearch b..\nsearch b.d.", "output": "true\ntrue\nfalse", "explanation": { "en": ".ad matches bad and dad. b.. matches bad. b.d. has 4 chars, no match", "hi": ".ad bad aur dad se match karta hai. b.. bad se match karta hai. b.d. mein 4 chars hain, koi match nahi" } }
+      ],
+      "constraints": ["1 <= Q <= 10^4", "1 <= word.length <= 25", "Words contain lowercase letters, patterns contain lowercase letters and '.'"],
+      "hints": [
+        { "en": "For '.', recursively try all 26 children", "hi": "'.' ke liye saare 26 children ko recursively try karo" },
+        { "en": "Use DFS with backtracking for wildcard matching", "hi": "Wildcard matching ke liye DFS with backtracking use karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<string>\nusing namespace std;\nint main() {\n    int q; cin>>q;\n    // Process: addWord word, search pattern\n}",
+        "python": "q = int(input())\n# Process addWord and search queries",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int q = sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');",
+        "c": "#include<stdio.h>\n#include<string.h>\nint main() {\n    int q; scanf(\"%d\",&q);\n}"
+      },
+      "testCases": [
+        { "input": "5\naddWord bad\naddWord dad\nsearch .ad\nsearch b..\nsearch b.d.", "expectedOutput": "true\ntrue\nfalse" },
+        { "input": "4\naddWord apple\nsearch appl.\nsearch app..\nsearch ....", "expectedOutput": "true\ntrue\nfalse" }
+      ],
+      "solution": {
+        "approach": { "en": "Use Trie. For search, when '.' is encountered, try all non-null children recursively.", "hi": "Trie use karo. Search mein jab '.' mile to saare non-null children recursively try karo." },
+        "code": { "cpp": "struct Node{Node* ch[26]={};bool isEnd=false;};\nNode* root=new Node();\nvoid add(string& w){auto n=root;for(char c:w){int i=c-'a';if(!n->ch[i])n->ch[i]=new Node();n=n->ch[i];}n->isEnd=true;}\nbool dfs(Node* n,string& w,int idx){\n  if(!n)return false;\n  if(idx==w.size())return n->isEnd;\n  if(w[idx]=='.'){\n    for(int i=0;i<26;i++) if(n->ch[i]&&dfs(n->ch[i],w,idx+1))return true;\n    return false;\n  }\n  return dfs(n->ch[w[idx]-'a'],w,idx+1);\n}", "python": "class Node:\n    def __init__(self): self.ch={}; self.is_end=False\nroot=Node()\ndef add(w):\n    n=root\n    for c in w:\n        if c not in n.ch: n.ch[c]=Node()\n        n=n.ch[c]\n    n.is_end=True\ndef dfs(n,w,i):\n    if not n: return False\n    if i==len(w): return n.is_end\n    if w[i]=='.':\n        return any(dfs(ch,w,i+1) for ch in n.ch.values())\n    if w[i] not in n.ch: return False\n    return dfs(n.ch[w[i]],w,i+1)" },
+        "timeComplexity": "O(26^L) worst case for search with wildcards", "spaceComplexity": "O(N * L)"
+      },
+      "tags": ["trie", "dfs", "backtracking", "design"]
+    },
+    {
+      "id": "trie-003",
+      "title": "Longest Common Prefix",
+      "titleHi": "Sabse Lamba Common Prefix",
+      "difficulty": "easy",
+      "description": { "en": "Given N strings, find the longest common prefix among all of them using a Trie. If there is no common prefix, print empty string.", "hi": "N strings diye hain, Trie use karke sabka longest common prefix dhundho. Agar koi common prefix nahi hai to empty string print karo." },
+      "examples": [
+        { "input": "3\nflower flow flight", "output": "fl", "explanation": { "en": "All three words start with 'fl'", "hi": "Teeno words 'fl' se shuru hote hain" } },
+        { "input": "3\ndog racecar car", "output": "", "explanation": { "en": "No common prefix", "hi": "Koi common prefix nahi hai" } }
+      ],
+      "constraints": ["1 <= N <= 200", "0 <= word.length <= 200"],
+      "hints": [
+        { "en": "Insert all words into Trie, then follow the path where each node has exactly one child and is not end of word", "hi": "Saare words Trie mein insert karo, phir us path pe chalo jahan har node ka exactly ek child ho aur word ka end na ho" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<string>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    string words[n];\n    for(int i=0;i<n;i++) cin>>words[i];\n    // Find longest common prefix\n}",
+        "python": "n = int(input())\nwords = input().split()\n# Find longest common prefix using Trie",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        String[] words = new String[n];\n        for(int i=0;i<n;i++) words[i]=sc.next();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst words = lines[1].split(' ');",
+        "c": "#include<stdio.h>\n#include<string.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    char words[200][201];\n    for(int i=0;i<n;i++) scanf(\"%s\",words[i]);\n}"
+      },
+      "testCases": [
+        { "input": "3\nflower flow flight", "expectedOutput": "fl" },
+        { "input": "3\ndog racecar car", "expectedOutput": "" },
+        { "input": "2\naa aa", "expectedOutput": "aa" }
+      ],
+      "solution": {
+        "approach": { "en": "Insert all words into Trie. From root, follow the path while node has exactly one child and is not end of word.", "hi": "Saare words Trie mein insert karo. Root se, tab tak path follow karo jab tak node ka exactly ek child ho aur end of word na ho." },
+        "code": { "cpp": "struct Node{Node* ch[26]={};bool isEnd=false;int cnt=0;};\nNode* root=new Node();\nfor(int i=0;i<n;i++){\n  auto node=root;\n  for(char c:words[i]){\n    int idx=c-'a';\n    if(!node->ch[idx]){node->ch[idx]=new Node();}\n    node=node->ch[idx]; node->cnt++;\n  }\n  node->isEnd=true;\n}\nstring lcp=\"\";\nauto node=root;\nwhile(true){\n  int childIdx=-1,childCnt=0;\n  for(int i=0;i<26;i++) if(node->ch[i]){childIdx=i;childCnt++;}\n  if(childCnt!=1||node->isEnd) break;\n  lcp+=(char)('a'+childIdx);\n  node=node->ch[childIdx];\n}\ncout<<lcp;", "python": "class Node:\n    def __init__(self): self.ch={}; self.is_end=False\nroot=Node()\nfor w in words:\n    node=root\n    for c in w:\n        if c not in node.ch: node.ch[c]=Node()\n        node=node.ch[c]\n    node.is_end=True\nlcp=''\nnode=root\nwhile len(node.ch)==1 and not node.is_end:\n    ch=list(node.ch.keys())[0]\n    lcp+=ch\n    node=node.ch[ch]\nprint(lcp)" },
+        "timeComplexity": "O(N * L)", "spaceComplexity": "O(N * L)"
+      },
+      "tags": ["trie", "string"]
+    },
+    {
+      "id": "trie-004",
+      "title": "Word Break",
+      "titleHi": "Word Break Problem",
+      "difficulty": "medium",
+      "description": { "en": "Given a string s and a dictionary of words, determine if s can be segmented into a space-separated sequence of one or more dictionary words. Use Trie for efficient dictionary lookup.", "hi": "Ek string s aur words ki dictionary di hai, determine karo ki s ko space-separated sequence mein tod sakte hain jahan har part dictionary mein ho. Efficient dictionary lookup ke liye Trie use karo." },
+      "examples": [
+        { "input": "leetcode\n2\nleet code", "output": "true", "explanation": { "en": "leetcode = leet + code, both in dictionary", "hi": "leetcode = leet + code, dono dictionary mein hain" } },
+        { "input": "catsandog\n5\ncats dog sand and cat", "output": "false", "explanation": { "en": "Cannot be fully segmented", "hi": "Poori tarah se segment nahi ho sakta" } }
+      ],
+      "constraints": ["1 <= s.length <= 300", "1 <= dictionary size <= 1000"],
+      "hints": [
+        { "en": "Build a Trie from dictionary. Use DP where dp[i] = true if s[0..i-1] can be segmented", "hi": "Dictionary se Trie banao. DP use karo jahan dp[i] = true agar s[0..i-1] segment ho sakta hai" },
+        { "en": "For each position i where dp[i] is true, try to match words from position i using the Trie", "hi": "Har position i jahan dp[i] true hai, wahan se Trie use karke words match karne ki koshish karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<string>\n#include<vector>\nusing namespace std;\nint main() {\n    string s; cin>>s;\n    int n; cin>>n;\n    vector<string> dict(n);\n    for(int i=0;i<n;i++) cin>>dict[i];\n    // Check if s can be segmented\n}",
+        "python": "s = input()\nn = int(input())\ndict_words = input().split()\n# Check if s can be segmented",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        int n = sc.nextInt();\n        String[] dict = new String[n];\n        for(int i=0;i<n;i++) dict[i]=sc.next();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst s = lines[0];\nconst dict = lines[2].split(' ');",
+        "c": "#include<stdio.h>\n#include<string.h>\nint main() {\n    char s[301]; scanf(\"%s\",s);\n    int n; scanf(\"%d\",&n);\n    char dict[1000][301];\n    for(int i=0;i<n;i++) scanf(\"%s\",dict[i]);\n}"
+      },
+      "testCases": [
+        { "input": "leetcode\n2\nleet code", "expectedOutput": "true" },
+        { "input": "applepenapple\n2\napple pen", "expectedOutput": "true" },
+        { "input": "catsandog\n5\ncats dog sand and cat", "expectedOutput": "false" }
+      ],
+      "solution": {
+        "approach": { "en": "Build Trie from dictionary. DP array dp[i] = can s[0..i-1] be segmented. For each true dp[i], traverse Trie from s[i] to mark further reachable positions.", "hi": "Dictionary se Trie banao. DP array dp[i] = kya s[0..i-1] segment ho sakta hai. Har true dp[i] ke liye, s[i] se Trie traverse karke aage reachable positions mark karo." },
+        "code": { "cpp": "struct Node{Node* ch[26]={};bool isEnd=false;};\nNode* root=new Node();\nfor(auto& w:dict){auto n=root;for(char c:w){int i=c-'a';if(!n->ch[i])n->ch[i]=new Node();n=n->ch[i];}n->isEnd=true;}\nint len=s.size();\nvector<bool> dp(len+1,false);\ndp[0]=true;\nfor(int i=0;i<len;i++){\n  if(!dp[i])continue;\n  auto node=root;\n  for(int j=i;j<len;j++){\n    int idx=s[j]-'a';\n    if(!node->ch[idx])break;\n    node=node->ch[idx];\n    if(node->isEnd) dp[j+1]=true;\n  }\n}\ncout<<(dp[len]?\"true\":\"false\");", "python": "class Node:\n    def __init__(self): self.ch={}; self.is_end=False\nroot=Node()\nfor w in dict_words:\n    n=root\n    for c in w:\n        if c not in n.ch: n.ch[c]=Node()\n        n=n.ch[c]\n    n.is_end=True\nL=len(s)\ndp=[False]*(L+1)\ndp[0]=True\nfor i in range(L):\n    if not dp[i]: continue\n    node=root\n    for j in range(i,L):\n        if s[j] not in node.ch: break\n        node=node.ch[s[j]]\n        if node.is_end: dp[j+1]=True\nprint('true' if dp[L] else 'false')" },
+        "timeComplexity": "O(N * L + S^2)", "spaceComplexity": "O(N * L + S)"
+      },
+      "tags": ["trie", "dp", "string"]
+    },
+    {
+      "id": "trie-005",
+      "title": "Auto-Complete System",
+      "titleHi": "Auto-Complete System Design Karo",
+      "difficulty": "hard",
+      "description": { "en": "Design an auto-complete system. Given a list of sentences with their frequencies, implement: input(char c) - if c is '#', save the current sentence and reset. Otherwise, return top 3 sentences that have the current input as prefix, sorted by frequency (descending), then lexicographically.", "hi": "Ek auto-complete system design karo. Sentences ki list unki frequencies ke saath di hai, implement karo: input(char c) - agar c '#' hai to current sentence save karo aur reset karo. Nahi to top 3 sentences return karo jo current input ko prefix ke roop mein rakhte hain, frequency (descending) se sort, phir lexicographically." },
+      "examples": [
+        { "input": "sentences: [\"i love you\", \"island\", \"iroman\", \"i love leetcode\"]\nfrequencies: [5, 3, 2, 2]\ninput: i, ' ', a, '#'", "output": "['i love you','island','i love leetcode']\n['i love you','i love leetcode']\n[]\n[]", "explanation": { "en": "After typing 'i', top 3 by frequency. After 'i ', matches narrow down. 'i a' has no match. '#' saves 'i a'.", "hi": "'i' type karne ke baad, frequency ke hisaab se top 3. 'i ' ke baad matches kam ho jaate hain. 'i a' ka koi match nahi. '#' 'i a' ko save karta hai." } }
+      ],
+      "constraints": ["1 <= sentences.length <= 1000", "1 <= sentence.length <= 200", "1 <= frequency <= 1000"],
+      "hints": [
+        { "en": "Store frequency at each end-of-sentence node in the Trie", "hi": "Trie mein har sentence-end node pe frequency store karo" },
+        { "en": "Maintain a current prefix string. On each input, extend prefix and search Trie for top 3 matches", "hi": "Current prefix string maintain karo. Har input pe prefix extend karo aur Trie mein top 3 matches search karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<string>\n#include<vector>\n#include<map>\nusing namespace std;\nint main() {\n    // Design auto-complete system\n}",
+        "python": "# Design auto-complete system\n# Read sentences, frequencies, and process input chars",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        // Design auto-complete system\n    }\n}",
+        "javascript": "// Design auto-complete system",
+        "c": "#include<stdio.h>\n#include<string.h>\nint main() {\n    // Design auto-complete system\n}"
+      },
+      "testCases": [
+        { "input": "4\ni love you 5\nisland 3\niroman 2\ni love leetcode 2\n4\ni\n \na\n#", "expectedOutput": "i love you,island,i love leetcode\ni love you,i love leetcode\n\n" }
+      ],
+      "solution": {
+        "approach": { "en": "Build a Trie with frequency counts. On each input char, traverse Trie and collect all sentences using DFS. Sort by frequency desc, then lexicographically. Return top 3.", "hi": "Frequency counts ke saath Trie banao. Har input char pe Trie traverse karo aur DFS se saare sentences collect karo. Frequency desc, phir lexicographically sort karo. Top 3 return karo." },
+        "code": { "cpp": "struct Node{\n  map<char,Node*> ch;\n  int freq=0;\n  bool isEnd=false;\n};\nNode* root=new Node();\nvoid insert(string& s,int f){\n  auto n=root;\n  for(char c:s){if(!n->ch[c])n->ch[c]=new Node();n=n->ch[c];}\n  n->isEnd=true; n->freq+=f;\n}\nvoid dfs(Node* n,string& cur,vector<pair<int,string>>& res){\n  if(n->isEnd) res.push_back({-n->freq,cur});\n  for(auto&[c,child]:n->ch){cur+=c;dfs(child,cur,res);cur.pop_back();}\n}\n// On input char, extend prefix, find node, DFS for top 3", "python": "class Node:\n    def __init__(self): self.ch={}; self.freq=0; self.is_end=False\nroot=Node()\ndef insert(s,f):\n    n=root\n    for c in s:\n        if c not in n.ch: n.ch[c]=Node()\n        n=n.ch[c]\n    n.is_end=True; n.freq+=f\ndef get_top3(prefix):\n    n=root\n    for c in prefix:\n        if c not in n.ch: return []\n        n=n.ch[c]\n    results=[]\n    def dfs(node,path):\n        if node.is_end: results.append((-node.freq,path))\n        for c in sorted(node.ch): dfs(node.ch[c],path+c)\n    dfs(n,prefix)\n    results.sort()\n    return [r[1] for r in results[:3]]" },
+        "timeComplexity": "O(N * L) for building, O(total chars) per query", "spaceComplexity": "O(N * L)"
+      },
+      "tags": ["trie", "design", "sorting", "dfs"]
+    },
+    {
+      "id": "trie-006",
+      "title": "Count Distinct Substrings",
+      "titleHi": "Distinct Substrings Count Karo",
+      "difficulty": "hard",
+      "description": { "en": "Given a string, count the number of distinct substrings using a Trie. Include the empty string in the count.", "hi": "Ek string di hai, Trie use karke distinct substrings ki count dhundho. Empty string ko count mein include karo." },
+      "examples": [
+        { "input": "abab", "output": "8", "explanation": { "en": "Distinct substrings: '', a, ab, aba, abab, b, ba, bab = 8", "hi": "Distinct substrings: '', a, ab, aba, abab, b, ba, bab = 8" } }
+      ],
+      "constraints": ["1 <= s.length <= 1000", "s contains only lowercase English letters"],
+      "hints": [
+        { "en": "Insert all suffixes of the string into a Trie", "hi": "String ke saare suffixes Trie mein insert karo" },
+        { "en": "Count of distinct substrings = number of nodes in the Trie + 1 (for empty string)", "hi": "Distinct substrings ki count = Trie mein nodes ki count + 1 (empty string ke liye)" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<string>\nusing namespace std;\nint main() {\n    string s; cin>>s;\n    // Count distinct substrings\n}",
+        "python": "s = input()\n# Count distinct substrings using Trie",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        String s = new Scanner(System.in).next();\n    }\n}",
+        "javascript": "const s = require('fs').readFileSync('/dev/stdin','utf8').trim();",
+        "c": "#include<stdio.h>\n#include<string.h>\nint main() {\n    char s[1001]; scanf(\"%s\",s);\n}"
+      },
+      "testCases": [
+        { "input": "abab", "expectedOutput": "8" },
+        { "input": "abc", "expectedOutput": "7" },
+        { "input": "aaa", "expectedOutput": "4" }
+      ],
+      "solution": {
+        "approach": { "en": "Insert all suffixes into Trie. Each new node created represents a distinct substring. Total nodes + 1 (empty string) = answer.", "hi": "Saare suffixes Trie mein insert karo. Har naya node ek distinct substring represent karta hai. Total nodes + 1 (empty string) = answer." },
+        "code": { "cpp": "struct Node{Node* ch[26]={};int cnt=0;};\nNode* root=new Node();\nint totalNodes=0;\nvoid insert(string& s,int start){\n  auto n=root;\n  for(int i=start;i<s.size();i++){\n    int idx=s[i]-'a';\n    if(!n->ch[idx]){n->ch[idx]=new Node();totalNodes++;}\n    n=n->ch[idx];\n  }\n}\nfor(int i=0;i<s.size();i++) insert(s,i);\ncout<<totalNodes+1;", "python": "class Node:\n    def __init__(self): self.ch={}\nroot=Node()\ncount=0\nfor i in range(len(s)):\n    node=root\n    for j in range(i,len(s)):\n        if s[j] not in node.ch:\n            node.ch[s[j]]=Node()\n            count+=1\n        node=node.ch[s[j]]\nprint(count+1)" },
+        "timeComplexity": "O(N^2)", "spaceComplexity": "O(N^2)"
+      },
+      "tags": ["trie", "string", "suffix"]
+    },
+    {
+      "id": "trie-007",
+      "title": "Replace Words",
+      "titleHi": "Words ko Roots se Replace Karo",
+      "difficulty": "medium",
+      "description": { "en": "Given a dictionary of root words and a sentence, replace each word in the sentence with its shortest root from the dictionary. If a word has no root in the dictionary, keep it unchanged.", "hi": "Root words ki dictionary aur ek sentence diya hai, sentence mein har word ko uske shortest root se replace karo jo dictionary mein hai. Agar word ka koi root dictionary mein nahi hai to use waise hi rakhho." },
+      "examples": [
+        { "input": "3\ncat bat rat\nthe cattle was rattled by the battery", "output": "the cat was rat by the bat", "explanation": { "en": "cattle->cat, rattled->rat, battery->bat", "hi": "cattle->cat, rattled->rat, battery->bat" } }
+      ],
+      "constraints": ["1 <= dictionary.length <= 1000", "1 <= sentence words <= 1000", "1 <= word.length <= 100"],
+      "hints": [
+        { "en": "Insert all roots into a Trie. For each word in sentence, find the shortest matching prefix in the Trie", "hi": "Saare roots Trie mein insert karo. Sentence ke har word ke liye, Trie mein shortest matching prefix dhundho" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<string>\n#include<sstream>\n#include<vector>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    vector<string> roots(n);\n    for(int i=0;i<n;i++) cin>>roots[i];\n    cin.ignore();\n    string sentence;\n    getline(cin,sentence);\n    // Replace words with roots\n}",
+        "python": "n = int(input())\nroots = input().split()\nsentence = input()\n# Replace words with shortest roots",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        String[] roots = new String[n];\n        for(int i=0;i<n;i++) roots[i]=sc.next();\n        sc.nextLine();\n        String sentence = sc.nextLine();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst roots = lines[1].split(' ');\nconst sentence = lines[2];",
+        "c": "#include<stdio.h>\n#include<string.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    char roots[1000][101];\n    for(int i=0;i<n;i++) scanf(\"%s\",roots[i]);\n    char sentence[10001];\n    scanf(\" %[^\\n]\",sentence);\n}"
+      },
+      "testCases": [
+        { "input": "3\ncat bat rat\nthe cattle was rattled by the battery", "expectedOutput": "the cat was rat by the bat" },
+        { "input": "2\na aa\na aa aaa aaaa", "expectedOutput": "a a a a" }
+      ],
+      "solution": {
+        "approach": { "en": "Build Trie from roots. For each word, traverse Trie char by char. If end-of-word found, use that root. Otherwise keep original.", "hi": "Roots se Trie banao. Har word ke liye, char by char Trie traverse karo. Agar end-of-word mile to wo root use karo. Nahi to original rakhho." },
+        "code": { "cpp": "struct Node{Node* ch[26]={};bool isEnd=false;};\nNode* root=new Node();\nfor(auto& r:roots){auto n=root;for(char c:r){int i=c-'a';if(!n->ch[i])n->ch[i]=new Node();n=n->ch[i];}n->isEnd=true;}\nstringstream ss(sentence);\nstring word; bool first=true;\nwhile(ss>>word){\n  if(!first)cout<<' '; first=false;\n  auto n=root; string rep=\"\";\n  bool found=false;\n  for(char c:word){\n    int i=c-'a';\n    if(!n->ch[i])break;\n    n=n->ch[i]; rep+=c;\n    if(n->isEnd){found=true;break;}\n  }\n  cout<<(found?rep:word);\n}", "python": "class Node:\n    def __init__(self): self.ch={}; self.is_end=False\nroot=Node()\nfor r in roots:\n    n=root\n    for c in r:\n        if c not in n.ch: n.ch[c]=Node()\n        n=n.ch[c]\n    n.is_end=True\nresult=[]\nfor word in sentence.split():\n    n=root; prefix=''\n    found=False\n    for c in word:\n        if c not in n.ch: break\n        n=n.ch[c]; prefix+=c\n        if n.is_end: found=True; break\n    result.append(prefix if found else word)\nprint(' '.join(result))" },
+        "timeComplexity": "O(D * L + S * W) where D=dict size, S=sentence words, L,W=word lengths", "spaceComplexity": "O(D * L)"
+      },
+      "tags": ["trie", "string", "hash-map"]
+    },
+    {
+      "id": "trie-008",
+      "title": "Maximum XOR of Two Numbers",
+      "titleHi": "Do Numbers ka Maximum XOR",
+      "difficulty": "hard",
+      "description": { "en": "Given an array of N non-negative integers, find the maximum XOR of any two numbers in the array using a Trie of binary representations.", "hi": "N non-negative integers ka array diya hai, binary representations ka Trie use karke kisi bhi do numbers ka maximum XOR dhundho." },
+      "examples": [
+        { "input": "6\n3 10 5 25 2 8", "output": "28", "explanation": { "en": "Maximum XOR is 5 XOR 25 = 28", "hi": "Maximum XOR hai 5 XOR 25 = 28" } }
+      ],
+      "constraints": ["1 <= N <= 2 * 10^5", "0 <= nums[i] <= 2^31 - 1"],
+      "hints": [
+        { "en": "Build a binary Trie (each node has children[0] and children[1]) storing 32-bit representations", "hi": "Binary Trie banao (har node ke children[0] aur children[1] hain) jo 32-bit representations store kare" },
+        { "en": "For each number, try to go to the opposite bit at each level to maximize XOR", "hi": "Har number ke liye, XOR maximize karne ke liye har level pe opposite bit ki taraf jaane ki koshish karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\nusing namespace std;\nint main() {\n    int n; cin>>n;\n    vector<int> nums(n);\n    for(int i=0;i<n;i++) cin>>nums[i];\n    // Find maximum XOR of two numbers\n}",
+        "python": "n = int(input())\nnums = list(map(int, input().split()))\n# Find maximum XOR using binary Trie",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] nums = new int[n];\n        for(int i=0;i<n;i++) nums[i]=sc.nextInt();\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst nums = lines[1].split(' ').map(Number);",
+        "c": "#include<stdio.h>\n#include<stdlib.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int nums[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&nums[i]);\n}"
+      },
+      "testCases": [
+        { "input": "6\n3 10 5 25 2 8", "expectedOutput": "28" },
+        { "input": "4\n14 70 53 83", "expectedOutput": "87" },
+        { "input": "2\n0 0", "expectedOutput": "0" }
+      ],
+      "solution": {
+        "approach": { "en": "Build binary Trie with 32 bits per number (MSB first). For each number, traverse Trie trying opposite bit at each level. This greedily maximizes XOR.", "hi": "32 bits per number (MSB pehle) ke saath binary Trie banao. Har number ke liye, har level pe opposite bit try karte hue Trie traverse karo. Ye greedily XOR maximize karta hai." },
+        "code": { "cpp": "struct Node{Node* ch[2]={};}\n*root=new Node();\nvoid insert(int num){\n  auto n=root;\n  for(int i=31;i>=0;i--){\n    int bit=(num>>i)&1;\n    if(!n->ch[bit]) n->ch[bit]=new Node();\n    n=n->ch[bit];\n  }\n}\nint maxXor(int num){\n  auto n=root;\n  int res=0;\n  for(int i=31;i>=0;i--){\n    int bit=(num>>i)&1;\n    int want=1-bit;\n    if(n->ch[want]){res|=(1<<i);n=n->ch[want];}\n    else n=n->ch[bit];\n  }\n  return res;\n}\nfor(int x:nums) insert(x);\nint ans=0;\nfor(int x:nums) ans=max(ans,maxXor(x));\ncout<<ans;", "python": "class Node:\n    def __init__(self): self.ch=[None,None]\nroot=Node()\ndef insert(num):\n    n=root\n    for i in range(31,-1,-1):\n        bit=(num>>i)&1\n        if not n.ch[bit]: n.ch[bit]=Node()\n        n=n.ch[bit]\ndef max_xor(num):\n    n=root\n    res=0\n    for i in range(31,-1,-1):\n        bit=(num>>i)&1\n        want=1-bit\n        if n.ch[want]: res|=(1<<i); n=n.ch[want]\n        else: n=n.ch[bit]\n    return res\nfor x in nums: insert(x)\nans=max(max_xor(x) for x in nums)\nprint(ans)" },
+        "timeComplexity": "O(N * 32)", "spaceComplexity": "O(N * 32)"
+      },
+      "tags": ["trie", "bit-manipulation", "greedy"]
+    }
+  ]
+}

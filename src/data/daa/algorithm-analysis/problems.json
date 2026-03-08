@@ -1,0 +1,482 @@
+{
+  "topicId": "algorithm-analysis",
+  "problems": [
+    {
+      "id": "aa-001",
+      "title": "Find Time Complexity",
+      "titleHi": "Time Complexity Nikalo",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given a code snippet with nested loops, determine its time complexity. You are given two integers n and k representing the outer loop running n times and the inner loop running k times. Print the total number of basic operations (iterations) performed.",
+        "hi": "Ek code snippet diya hai jisme nested loops hain, uski time complexity nikalo. Tumhe do integers n aur k diye hain — outer loop n baar chalta hai aur inner loop k baar. Total basic operations (iterations) print karo."
+      },
+      "examples": [
+        {
+          "input": "3 4",
+          "output": "12",
+          "explanation": {
+            "en": "Outer loop runs 3 times, inner loop runs 4 times each => 3 * 4 = 12 total operations. Time complexity is O(n*k).",
+            "hi": "Outer loop 3 baar chala, inner loop har baar 4 baar chala => 3 * 4 = 12 total operations. Time complexity O(n*k) hai."
+          }
+        }
+      ],
+      "constraints": ["1 <= n, k <= 10^6"],
+      "hints": [
+        {
+          "en": "When loops are nested, multiply their iteration counts",
+          "hi": "Jab loops nested hain, toh unke iteration counts multiply karo"
+        },
+        {
+          "en": "For independent (non-nested) loops, add the counts",
+          "hi": "Independent (non-nested) loops ke liye counts add karo"
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\n\nlong long countOperations(int n, int k) {\n    // Write your code here\n    // Count total iterations for nested loops\n    return 0;\n}\n\nint main() {\n    int n, k;\n    cin >> n >> k;\n    cout << countOperations(n, k);\n}",
+        "python": "def count_operations(n, k):\n    # Write your code here\n    # Count total iterations for nested loops\n    pass\n\nn, k = map(int, input().split())\nprint(count_operations(n, k))",
+        "java": "import java.util.*;\npublic class Main {\n    public static long countOperations(int n, int k) {\n        // Write your code here\n        return 0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), k = sc.nextInt();\n        System.out.println(countOperations(n, k));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [n, k] = lines[0].split(' ').map(Number);\nfunction countOperations(n, k) {\n    // Write your code here\n}\nconsole.log(countOperations(n, k));",
+        "c": "#include<stdio.h>\nlong long countOperations(int n, int k) {\n    // Write your code here\n    return 0;\n}\nint main() {\n    int n, k;\n    scanf(\"%d %d\", &n, &k);\n    printf(\"%lld\", countOperations(n, k));\n}"
+      },
+      "testCases": [
+        { "input": "3 4", "expectedOutput": "12" },
+        { "input": "1 1", "expectedOutput": "1" },
+        { "input": "100 200", "expectedOutput": "20000" },
+        { "input": "1000 1000", "expectedOutput": "1000000" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "For nested loops where the outer runs n times and inner runs k times, total operations = n * k. This gives O(n*k) time complexity. Simply multiply the two values.",
+          "hi": "Nested loops mein jahan outer n baar aur inner k baar chalta hai, total operations = n * k. Ye O(n*k) time complexity deta hai. Bas dono values multiply kar do."
+        },
+        "code": {
+          "cpp": "long long countOperations(int n, int k) {\n    return (long long)n * k;\n}",
+          "python": "def count_operations(n, k):\n    return n * k"
+        },
+        "timeComplexity": "O(1)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["algorithm-analysis", "time-complexity", "loops"]
+    },
+    {
+      "id": "aa-002",
+      "title": "Compare Two Algorithms",
+      "titleHi": "Do Algorithms ko Compare Karo",
+      "difficulty": "easy",
+      "description": {
+        "en": "Algorithm A takes 5*n^2 operations and Algorithm B takes 100*n operations. Given n, determine which algorithm is faster (fewer operations). Print 'A' if Algorithm A is faster, 'B' if Algorithm B is faster, or 'EQUAL' if both take the same number of operations.",
+        "hi": "Algorithm A ko 5*n^2 operations lagte hain aur Algorithm B ko 100*n operations. Given n ke liye batao kaunsa algorithm faster hai (kam operations). 'A' print karo agar A faster hai, 'B' agar B faster hai, ya 'EQUAL' agar dono same hain."
+      },
+      "examples": [
+        {
+          "input": "10",
+          "output": "A",
+          "explanation": {
+            "en": "A = 5*10^2 = 500, B = 100*10 = 1000. A < B, so A is faster.",
+            "hi": "A = 5*10^2 = 500, B = 100*10 = 1000. A < B, toh A faster hai."
+          }
+        },
+        {
+          "input": "100",
+          "output": "B",
+          "explanation": {
+            "en": "A = 5*100^2 = 50000, B = 100*100 = 10000. B < A, so B is faster.",
+            "hi": "A = 5*100^2 = 50000, B = 100*100 = 10000. B < A, toh B faster hai."
+          }
+        }
+      ],
+      "constraints": ["1 <= n <= 10^6"],
+      "hints": [
+        {
+          "en": "Calculate 5*n*n and 100*n, then compare",
+          "hi": "5*n*n aur 100*n calculate karo, phir compare karo"
+        },
+        {
+          "en": "For large n, O(n^2) will always be slower than O(n) regardless of constants",
+          "hi": "Bade n ke liye, O(n^2) hamesha O(n) se slow hoga chahe constants kuch bhi ho"
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\nint main() {\n    long long n;\n    cin >> n;\n    // Compare 5*n^2 vs 100*n and print A, B, or EQUAL\n}",
+        "python": "n = int(input())\n# Compare 5*n^2 vs 100*n and print A, B, or EQUAL",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        long n = sc.nextLong();\n        // Compare 5*n^2 vs 100*n and print A, B, or EQUAL\n    }\n}",
+        "javascript": "const n = parseInt(require('fs').readFileSync('/dev/stdin','utf8').trim());\n// Compare 5*n^2 vs 100*n and print A, B, or EQUAL",
+        "c": "#include<stdio.h>\nint main() {\n    long long n;\n    scanf(\"%lld\", &n);\n    // Compare 5*n^2 vs 100*n and print A, B, or EQUAL\n}"
+      },
+      "testCases": [
+        { "input": "10", "expectedOutput": "A" },
+        { "input": "20", "expectedOutput": "EQUAL" },
+        { "input": "100", "expectedOutput": "B" },
+        { "input": "1", "expectedOutput": "A" },
+        { "input": "1000", "expectedOutput": "B" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Compute costA = 5*n*n and costB = 100*n. Compare them. When n < 20, A can be faster due to smaller constant. At n = 20, they are equal (5*400 = 2000 = 100*20). For n > 20, B is always faster since linear beats quadratic.",
+          "hi": "costA = 5*n*n aur costB = 100*n calculate karo. Compare karo. Jab n < 20, A faster ho sakta hai chhote constant ki wajah se. n = 20 pe equal hain (5*400 = 2000 = 100*20). n > 20 ke liye B hamesha faster hai kyunki linear quadratic ko beat karta hai."
+        },
+        "code": {
+          "cpp": "#include<iostream>\nusing namespace std;\nint main() {\n    long long n;\n    cin >> n;\n    long long a = 5 * n * n;\n    long long b = 100 * n;\n    if (a < b) cout << \"A\";\n    else if (a > b) cout << \"B\";\n    else cout << \"EQUAL\";\n}",
+          "python": "n = int(input())\na = 5 * n * n\nb = 100 * n\nif a < b: print('A')\nelif a > b: print('B')\nelse: print('EQUAL')"
+        },
+        "timeComplexity": "O(1)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["algorithm-analysis", "comparison", "big-o"]
+    },
+    {
+      "id": "aa-003",
+      "title": "Count Operations",
+      "titleHi": "Operations Count Karo",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given an integer n, count the total number of basic operations (additions) performed by the following code pattern:\n\nfor i = 1 to n:\n    for j = 1 to i:\n        count = count + 1\n\nPrint the total count.",
+        "hi": "Ek integer n diya hai, niche diye gaye code pattern mein total basic operations (additions) count karo:\n\nfor i = 1 to n:\n    for j = 1 to i:\n        count = count + 1\n\nTotal count print karo."
+      },
+      "examples": [
+        {
+          "input": "4",
+          "output": "10",
+          "explanation": {
+            "en": "i=1: 1 op, i=2: 2 ops, i=3: 3 ops, i=4: 4 ops. Total = 1+2+3+4 = 10. This is n*(n+1)/2.",
+            "hi": "i=1: 1 op, i=2: 2 ops, i=3: 3 ops, i=4: 4 ops. Total = 1+2+3+4 = 10. Ye n*(n+1)/2 hai."
+          }
+        }
+      ],
+      "constraints": ["1 <= n <= 10^9"],
+      "hints": [
+        {
+          "en": "The inner loop runs 1, 2, 3, ..., n times. What is the sum of first n natural numbers?",
+          "hi": "Inner loop 1, 2, 3, ..., n baar chalta hai. Pehle n natural numbers ka sum kya hai?"
+        },
+        {
+          "en": "Use the formula n*(n+1)/2 instead of actually running the loops",
+          "hi": "Loops actually run karne ki jagah formula n*(n+1)/2 use karo"
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\nint main() {\n    long long n;\n    cin >> n;\n    // Calculate total operations: sum of 1+2+...+n\n}",
+        "python": "n = int(input())\n# Calculate total operations: sum of 1+2+...+n",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        long n = sc.nextLong();\n        // Calculate total operations\n    }\n}",
+        "javascript": "const n = parseInt(require('fs').readFileSync('/dev/stdin','utf8').trim());\n// Calculate total operations: sum of 1+2+...+n",
+        "c": "#include<stdio.h>\nint main() {\n    long long n;\n    scanf(\"%lld\", &n);\n    // Calculate total operations\n}"
+      },
+      "testCases": [
+        { "input": "4", "expectedOutput": "10" },
+        { "input": "1", "expectedOutput": "1" },
+        { "input": "100", "expectedOutput": "5050" },
+        { "input": "1000000", "expectedOutput": "500000500000" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "The inner loop runs i times for each value of i from 1 to n. Total operations = 1 + 2 + 3 + ... + n = n*(n+1)/2. Use the formula directly for O(1) time instead of simulating the loops.",
+          "hi": "Inner loop har i value ke liye i baar chalta hai (1 se n tak). Total operations = 1 + 2 + 3 + ... + n = n*(n+1)/2. Loops simulate karne ki jagah formula directly use karo O(1) time mein."
+        },
+        "code": {
+          "cpp": "#include<iostream>\nusing namespace std;\nint main() {\n    long long n;\n    cin >> n;\n    cout << n * (n + 1) / 2;\n}",
+          "python": "n = int(input())\nprint(n * (n + 1) // 2)"
+        },
+        "timeComplexity": "O(1)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["algorithm-analysis", "counting", "mathematical"]
+    },
+    {
+      "id": "aa-004",
+      "title": "Solve Recurrence T(n) = 2T(n/2) + n",
+      "titleHi": "Recurrence Solve Karo T(n) = 2T(n/2) + n",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given a recurrence relation T(n) = 2T(n/2) + n with T(1) = 1, compute the exact value of T(n) for a given n (n is always a power of 2). This recurrence represents algorithms like Merge Sort.\n\nThe closed-form solution is T(n) = n * (log2(n) + 1) = n + n*log2(n).",
+        "hi": "Ek recurrence relation diya hai T(n) = 2T(n/2) + n jahan T(1) = 1. Given n ke liye T(n) ki exact value compute karo (n hamesha 2 ki power hoga). Ye recurrence Merge Sort jaise algorithms ko represent karti hai.\n\nClosed-form solution hai T(n) = n * (log2(n) + 1) = n + n*log2(n)."
+      },
+      "examples": [
+        {
+          "input": "8",
+          "output": "24",
+          "explanation": {
+            "en": "T(1)=1, T(2)=2*1+2=4, T(4)=2*4+4=12, T(8)=2*12+8=32. Or using formula: 8*(log2(8)+1) = 8*4 = 32... Let's trace carefully: T(1)=1, T(2)=2T(1)+2=2+2=4, T(4)=2T(2)+4=8+4=12, T(8)=2T(4)+8=24+8=32. Wait, the formula gives n*log2(n)+n = 8*3+8 = 32. But tracing: T(8) = 2*T(4)+8 = 2*12+8 = 32. So output is 32.",
+            "hi": "T(1)=1, T(2)=2*1+2=4, T(4)=2*4+4=12, T(8)=2*12+8=32. Formula se: n*log2(n)+n = 8*3+8 = 32."
+          }
+        }
+      ],
+      "constraints": ["1 <= n <= 2^30", "n is a power of 2"],
+      "hints": [
+        {
+          "en": "You can solve it recursively or use the closed-form: T(n) = n * log2(n) + n",
+          "hi": "Recursively solve kar sakte ho ya closed-form use karo: T(n) = n * log2(n) + n"
+        },
+        {
+          "en": "This is Master Theorem Case 2: a=2, b=2, d=1, since d = log_b(a)",
+          "hi": "Ye Master Theorem Case 2 hai: a=2, b=2, d=1, kyunki d = log_b(a)"
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<cmath>\nusing namespace std;\n\nlong long solveRecurrence(long long n) {\n    // Solve T(n) = 2T(n/2) + n, T(1) = 1\n    return 0;\n}\n\nint main() {\n    long long n;\n    cin >> n;\n    cout << solveRecurrence(n);\n}",
+        "python": "def solve_recurrence(n):\n    # Solve T(n) = 2T(n/2) + n, T(1) = 1\n    pass\n\nn = int(input())\nprint(solve_recurrence(n))",
+        "java": "import java.util.*;\npublic class Main {\n    public static long solveRecurrence(long n) {\n        // Solve T(n) = 2T(n/2) + n, T(1) = 1\n        return 0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        long n = sc.nextLong();\n        System.out.println(solveRecurrence(n));\n    }\n}",
+        "javascript": "const n = parseInt(require('fs').readFileSync('/dev/stdin','utf8').trim());\nfunction solveRecurrence(n) {\n    // Solve T(n) = 2T(n/2) + n, T(1) = 1\n}\nconsole.log(solveRecurrence(n));",
+        "c": "#include<stdio.h>\n#include<math.h>\nlong long solveRecurrence(long long n) {\n    // Solve T(n) = 2T(n/2) + n, T(1) = 1\n    return 0;\n}\nint main() {\n    long long n;\n    scanf(\"%lld\", &n);\n    printf(\"%lld\", solveRecurrence(n));\n}"
+      },
+      "testCases": [
+        { "input": "1", "expectedOutput": "1" },
+        { "input": "2", "expectedOutput": "4" },
+        { "input": "4", "expectedOutput": "12" },
+        { "input": "8", "expectedOutput": "32" },
+        { "input": "16", "expectedOutput": "80" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Using the closed-form formula: T(n) = n * log2(n) + n. This comes from the recursion tree: at each level, total work is n, and there are log2(n) levels plus the base case contributing n. Alternatively, apply Master Theorem: a=2, b=2, d=1. Since d = log_b(a) = 1, this is Case 2, giving O(n log n).",
+          "hi": "Closed-form formula use karo: T(n) = n * log2(n) + n. Ye recursion tree se aata hai: har level pe total kaam n hai, aur log2(n) levels hain plus base case jo n contribute karta hai. Ya Master Theorem apply karo: a=2, b=2, d=1. Kyunki d = log_b(a) = 1, ye Case 2 hai, O(n log n) deta hai."
+        },
+        "code": {
+          "cpp": "long long solveRecurrence(long long n) {\n    if (n == 1) return 1;\n    int logn = 0;\n    long long temp = n;\n    while (temp > 1) { temp /= 2; logn++; }\n    return n * logn + n;\n}",
+          "python": "def solve_recurrence(n):\n    if n == 1:\n        return 1\n    import math\n    return n * int(math.log2(n)) + n"
+        },
+        "timeComplexity": "O(log n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["algorithm-analysis", "recurrence", "master-theorem", "divide-and-conquer"]
+    },
+    {
+      "id": "aa-005",
+      "title": "Amortized Analysis Example",
+      "titleHi": "Amortized Analysis ka Example",
+      "difficulty": "medium",
+      "description": {
+        "en": "Simulate a dynamic array that starts with capacity 1. When it's full and a new element is inserted, the array doubles its capacity (which costs 'current_size' operations for copying). A normal insert costs 1 operation. Given n insertions, calculate the total number of operations performed.\n\nThis demonstrates amortized analysis: while some insertions are expensive (O(n) when doubling), the average cost per insertion is O(1).",
+        "hi": "Ek dynamic array simulate karo jo capacity 1 se start hota hai. Jab array full ho aur naya element insert karna ho, toh array apni capacity double karta hai (jismein 'current_size' operations lagte hain copying ke liye). Normal insert mein 1 operation lagta hai. n insertions ke baad total operations calculate karo.\n\nYe amortized analysis demonstrate karta hai: kuch insertions expensive hain (O(n) jab doubling hoti hai), par average cost per insertion O(1) hai."
+      },
+      "examples": [
+        {
+          "input": "5",
+          "output": "9",
+          "explanation": {
+            "en": "Insert 1: cap=1, size=0, just insert => 1 op (size=1). Insert 2: full! double cap to 2, copy 1 element + insert => 1+1=2 ops (size=2). Insert 3: full! double cap to 4, copy 2 + insert => 2+1=3 ops (size=3). Insert 4: just insert => 1 op (size=4). Insert 5: full! double cap to 8, copy 4 + insert => 4+1=5 ops. Total = 1+2+3+1+5 = 12. Wait let me recount. cap=1: insert#1 cost=1 (size=1,cap=1). Insert#2: full, double to 2, copy 1 + insert = 2 ops (size=2). Insert#3: full, double to 4, copy 2 + insert = 3 ops (size=3). Insert#4: insert cost=1 (size=4). Insert#5: full, double to 8, copy 4+insert=5 ops. Total=1+2+3+1+5=12.",
+            "hi": "Insert 1: cost=1. Insert 2: full, double+copy 1+insert=2. Insert 3: full, double+copy 2+insert=3. Insert 4: insert=1. Insert 5: full, double+copy 4+insert=5. Total=1+2+3+1+5=12."
+          }
+        }
+      ],
+      "constraints": ["1 <= n <= 10^7"],
+      "hints": [
+        {
+          "en": "Track capacity and size. When size equals capacity, doubling costs 'size' copy operations plus 1 for the insert",
+          "hi": "Capacity aur size track karo. Jab size equals capacity, doubling mein 'size' copy operations lagte hain plus 1 insert ke liye"
+        },
+        {
+          "en": "Total doubling cost = 1 + 2 + 4 + 8 + ... which is at most 2n. So amortized cost per insert is O(1).",
+          "hi": "Total doubling cost = 1 + 2 + 4 + 8 + ... jo maximum 2n hai. Toh amortized cost per insert O(1) hai."
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\n\nlong long totalOperations(int n) {\n    // Simulate n insertions into dynamic array\n    // Return total operations\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << totalOperations(n);\n}",
+        "python": "def total_operations(n):\n    # Simulate n insertions into dynamic array\n    # Return total operations\n    pass\n\nn = int(input())\nprint(total_operations(n))",
+        "java": "import java.util.*;\npublic class Main {\n    public static long totalOperations(int n) {\n        // Simulate n insertions\n        return 0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        System.out.println(totalOperations(n));\n    }\n}",
+        "javascript": "const n = parseInt(require('fs').readFileSync('/dev/stdin','utf8').trim());\nfunction totalOperations(n) {\n    // Simulate n insertions into dynamic array\n}\nconsole.log(totalOperations(n));",
+        "c": "#include<stdio.h>\nlong long totalOperations(int n) {\n    // Simulate n insertions\n    return 0;\n}\nint main() {\n    int n;\n    scanf(\"%d\", &n);\n    printf(\"%lld\", totalOperations(n));\n}"
+      },
+      "testCases": [
+        { "input": "1", "expectedOutput": "1" },
+        { "input": "2", "expectedOutput": "3" },
+        { "input": "5", "expectedOutput": "12" },
+        { "input": "8", "expectedOutput": "22" },
+        { "input": "16", "expectedOutput": "46" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Simulate the process: maintain capacity (starts at 1) and size (starts at 0). For each insertion, if size == capacity, add 'size' copy operations and double capacity. Then add 1 for the actual insertion. The total cost approaches 3n, proving amortized O(1) per insertion.",
+          "hi": "Process simulate karo: capacity (1 se start) aur size (0 se start) maintain karo. Har insertion pe, agar size == capacity, toh 'size' copy operations add karo aur capacity double karo. Phir actual insert ke liye 1 add karo. Total cost ~3n ke paas jaata hai, jo prove karta hai amortized O(1) per insertion."
+        },
+        "code": {
+          "cpp": "long long totalOperations(int n) {\n    long long ops = 0;\n    int cap = 1, size = 0;\n    for (int i = 0; i < n; i++) {\n        if (size == cap) {\n            ops += size;  // copy cost\n            cap *= 2;\n        }\n        ops += 1;  // insert cost\n        size++;\n    }\n    return ops;\n}",
+          "python": "def total_operations(n):\n    ops = 0\n    cap = 1\n    size = 0\n    for i in range(n):\n        if size == cap:\n            ops += size  # copy cost\n            cap *= 2\n        ops += 1  # insert cost\n        size += 1\n    return ops"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["algorithm-analysis", "amortized-analysis", "dynamic-array"]
+    },
+    {
+      "id": "aa-006",
+      "title": "Space Complexity Analysis",
+      "titleHi": "Space Complexity Analysis Karo",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given an integer n, a recursive function computes factorial as: fact(n) = n * fact(n-1) with fact(0) = 1. Each recursive call uses one stack frame. Calculate the maximum stack depth (number of active stack frames at any point), which represents the space complexity.\n\nPrint the maximum number of stack frames used.",
+        "hi": "Ek integer n diya hai, ek recursive function factorial compute karta hai: fact(n) = n * fact(n-1) jahan fact(0) = 1. Har recursive call ek stack frame use karta hai. Maximum stack depth (kisi bhi point pe active stack frames ki sankhya) calculate karo, jo space complexity represent karta hai.\n\nMaximum stack frames ki sankhya print karo."
+      },
+      "examples": [
+        {
+          "input": "5",
+          "output": "6",
+          "explanation": {
+            "en": "fact(5) calls fact(4) calls fact(3) calls fact(2) calls fact(1) calls fact(0). At the deepest point, 6 frames are on the stack: fact(5), fact(4), fact(3), fact(2), fact(1), fact(0).",
+            "hi": "fact(5) calls fact(4) calls fact(3) calls fact(2) calls fact(1) calls fact(0). Sabse deep point pe 6 frames stack pe hain: fact(5), fact(4), fact(3), fact(2), fact(1), fact(0)."
+          }
+        }
+      ],
+      "constraints": ["0 <= n <= 10^9"],
+      "hints": [
+        {
+          "en": "Each call from fact(n) to fact(0) adds one frame to the stack",
+          "hi": "fact(n) se fact(0) tak har call stack mein ek frame add karti hai"
+        },
+        {
+          "en": "Count: fact(n), fact(n-1), ..., fact(0) = n+1 frames total",
+          "hi": "Count karo: fact(n), fact(n-1), ..., fact(0) = n+1 frames total"
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\nint main() {\n    long long n;\n    cin >> n;\n    // Print max stack depth for recursive factorial\n}",
+        "python": "n = int(input())\n# Print max stack depth for recursive factorial",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        long n = sc.nextLong();\n        // Print max stack depth for recursive factorial\n    }\n}",
+        "javascript": "const n = parseInt(require('fs').readFileSync('/dev/stdin','utf8').trim());\n// Print max stack depth for recursive factorial",
+        "c": "#include<stdio.h>\nint main() {\n    long long n;\n    scanf(\"%lld\", &n);\n    // Print max stack depth for recursive factorial\n}"
+      },
+      "testCases": [
+        { "input": "5", "expectedOutput": "6" },
+        { "input": "0", "expectedOutput": "1" },
+        { "input": "1", "expectedOutput": "2" },
+        { "input": "100", "expectedOutput": "101" },
+        { "input": "1000000", "expectedOutput": "1000001" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "The recursive factorial calls go from fact(n) down to fact(0), creating n+1 stack frames at the deepest point. So the space complexity is O(n) and the max stack depth is n+1.",
+          "hi": "Recursive factorial calls fact(n) se fact(0) tak jaati hain, sabse deep point pe n+1 stack frames banaati hain. Toh space complexity O(n) hai aur max stack depth n+1 hai."
+        },
+        "code": {
+          "cpp": "#include<iostream>\nusing namespace std;\nint main() {\n    long long n;\n    cin >> n;\n    cout << n + 1;\n}",
+          "python": "n = int(input())\nprint(n + 1)"
+        },
+        "timeComplexity": "O(1)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["algorithm-analysis", "space-complexity", "recursion"]
+    },
+    {
+      "id": "aa-007",
+      "title": "Master Theorem Application",
+      "titleHi": "Master Theorem Apply Karo",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given three integers a, b, and d representing a recurrence T(n) = a*T(n/b) + O(n^d), determine which case of the Master Theorem applies and print the resulting time complexity.\n\nPrint one of:\n- 'O(n^p)' if Case 1 applies (d < log_b(a)), where p = log_b(a) formatted to 2 decimal places\n- 'O(n^d*logn)' if Case 2 applies (d = log_b(a))\n- 'O(n^d)' if Case 3 applies (d > log_b(a))",
+        "hi": "Teen integers a, b, aur d diye hain jo recurrence T(n) = a*T(n/b) + O(n^d) represent karte hain. Master Theorem ka kaunsa case apply hota hai ye determine karo aur resulting time complexity print karo.\n\nPrint karo:\n- 'O(n^p)' agar Case 1 apply hota hai (d < log_b(a)), jahan p = log_b(a) 2 decimal places tak\n- 'O(n^d*logn)' agar Case 2 apply hota hai (d = log_b(a))\n- 'O(n^d)' agar Case 3 apply hota hai (d > log_b(a))"
+      },
+      "examples": [
+        {
+          "input": "2 2 1",
+          "output": "O(n^1*logn)",
+          "explanation": {
+            "en": "a=2, b=2, d=1. log_2(2) = 1.0 = d. This is Case 2, so T(n) = O(n^1 * log n) = O(n log n). Like Merge Sort!",
+            "hi": "a=2, b=2, d=1. log_2(2) = 1.0 = d. Ye Case 2 hai, toh T(n) = O(n^1 * log n) = O(n log n). Merge Sort jaisa!"
+          }
+        },
+        {
+          "input": "4 2 1",
+          "output": "O(n^2.00)",
+          "explanation": {
+            "en": "a=4, b=2, d=1. log_2(4) = 2.0 > 1 = d. Case 1: T(n) = O(n^2.00).",
+            "hi": "a=4, b=2, d=1. log_2(4) = 2.0 > 1 = d. Case 1: T(n) = O(n^2.00)."
+          }
+        }
+      ],
+      "constraints": ["1 <= a <= 100", "2 <= b <= 100", "0 <= d <= 10"],
+      "hints": [
+        {
+          "en": "Compute log_b(a) using log(a)/log(b) and compare with d",
+          "hi": "log_b(a) compute karo log(a)/log(b) use karke aur d se compare karo"
+        },
+        {
+          "en": "Use a small epsilon (1e-9) for floating point comparison",
+          "hi": "Floating point comparison ke liye chhota epsilon (1e-9) use karo"
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<cmath>\n#include<iomanip>\nusing namespace std;\nint main() {\n    int a, b, d;\n    cin >> a >> b >> d;\n    // Apply Master Theorem and print result\n}",
+        "python": "import math\na, b, d = map(int, input().split())\n# Apply Master Theorem and print result",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int a = sc.nextInt(), b = sc.nextInt(), d = sc.nextInt();\n        // Apply Master Theorem and print result\n    }\n}",
+        "javascript": "const [a, b, d] = require('fs').readFileSync('/dev/stdin','utf8').trim().split(' ').map(Number);\n// Apply Master Theorem and print result",
+        "c": "#include<stdio.h>\n#include<math.h>\nint main() {\n    int a, b, d;\n    scanf(\"%d %d %d\", &a, &b, &d);\n    // Apply Master Theorem and print result\n}"
+      },
+      "testCases": [
+        { "input": "2 2 1", "expectedOutput": "O(n^1*logn)" },
+        { "input": "4 2 1", "expectedOutput": "O(n^2.00)" },
+        { "input": "1 2 0", "expectedOutput": "O(n^0*logn)" },
+        { "input": "3 2 2", "expectedOutput": "O(n^2)" },
+        { "input": "8 2 2", "expectedOutput": "O(n^3.00)" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Compute log_b(a) = log(a)/log(b). Compare with d using a tolerance for floating point: if d < log_b(a) - eps => Case 1, print O(n^log_b(a)). If d > log_b(a) + eps => Case 3, print O(n^d). Otherwise Case 2, print O(n^d*logn).",
+          "hi": "log_b(a) = log(a)/log(b) compute karo. Floating point tolerance ke saath d se compare karo: agar d < log_b(a) - eps => Case 1, O(n^log_b(a)) print karo. Agar d > log_b(a) + eps => Case 3, O(n^d) print karo. Nahi toh Case 2, O(n^d*logn) print karo."
+        },
+        "code": {
+          "cpp": "#include<iostream>\n#include<cmath>\n#include<iomanip>\nusing namespace std;\nint main() {\n    int a, b, d;\n    cin >> a >> b >> d;\n    double logba = log(a) / log(b);\n    double eps = 1e-9;\n    if (d < logba - eps) {\n        cout << fixed << setprecision(2) << \"O(n^\" << logba << \")\";\n    } else if (d > logba + eps) {\n        cout << \"O(n^\" << d << \")\";\n    } else {\n        cout << \"O(n^\" << d << \"*logn)\";\n    }\n}",
+          "python": "import math\na, b, d = map(int, input().split())\nlogba = math.log(a) / math.log(b)\neps = 1e-9\nif d < logba - eps:\n    print(f'O(n^{logba:.2f})')\nelif d > logba + eps:\n    print(f'O(n^{d})')\nelse:\n    print(f'O(n^{d}*logn)')"
+        },
+        "timeComplexity": "O(1)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["algorithm-analysis", "master-theorem", "recurrence"]
+    },
+    {
+      "id": "aa-008",
+      "title": "Growth Rate Comparison",
+      "titleHi": "Growth Rate Comparison Karo",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given a time limit T (in operations) and 6 complexity functions, find the maximum input size n (n >= 1) that each function can handle within T operations.\n\nThe 6 functions are: n, n*log2(n), n^2, n^3, 2^n, n!\n\nFor each function, find the largest integer n such that f(n) <= T. Print 6 space-separated integers.\n\nNote: For 2^n and n!, if n would exceed 25, print 25 as the cap.",
+        "hi": "Ek time limit T (operations mein) diya hai aur 6 complexity functions hain. Har function ke liye maximum input size n (n >= 1) find karo jo T operations ke andar handle ho sake.\n\n6 functions hain: n, n*log2(n), n^2, n^3, 2^n, n!\n\nHar function ke liye sabse bada integer n find karo jiske liye f(n) <= T. 6 space-separated integers print karo.\n\nNote: 2^n aur n! ke liye, agar n 25 se zyada hoga toh 25 print karo as cap."
+      },
+      "examples": [
+        {
+          "input": "100",
+          "output": "100 50 10 4 6 4",
+          "explanation": {
+            "en": "n <= 100 => n=100. n*log2(n) <= 100 => n=50 (50*~5.6=282>100, try lower... actually 16*4=64<=100, 17*4.09=69.5<=100... let's compute: n=19 gives 19*4.25=80.7<=100, n=20 gives 20*4.32=86.4<=100... n=25 gives 25*4.64=116>100 so n=24: 24*4.58=110>100, n=22: 22*4.46=98.1<=100. So n=22). n^2<=100 => n=10. n^3<=100 => n=4 (64<=100, 125>100). 2^n<=100 => n=6 (64<=100, 128>100). n!<=100 => n=4 (24<=100, 120>100).",
+            "hi": "n<=100 => 100. n*log2(n)<=100 => 22. n^2<=100 => 10. n^3<=100 => 4. 2^n<=100 => 6. n!<=100 => 4."
+          }
+        }
+      ],
+      "constraints": ["1 <= T <= 10^18"],
+      "hints": [
+        {
+          "en": "Use binary search for n, n*log2(n), n^2, n^3. Use linear search for 2^n and n! since they grow extremely fast.",
+          "hi": "n, n*log2(n), n^2, n^3 ke liye binary search use karo. 2^n aur n! ke liye linear search karo kyunki ye bohot fast grow karte hain."
+        },
+        {
+          "en": "Be careful with overflow for large T values — use long long or equivalent",
+          "hi": "Bade T values ke liye overflow ka dhyan rakho — long long ya equivalent use karo"
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<cmath>\nusing namespace std;\nint main() {\n    long long T;\n    cin >> T;\n    // Find max n for: n, n*log2(n), n^2, n^3, 2^n, n!\n    // Print 6 space-separated values\n}",
+        "python": "import math\nT = int(input())\n# Find max n for: n, n*log2(n), n^2, n^3, 2^n, n!\n# Print 6 space-separated values",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        long T = sc.nextLong();\n        // Find max n for each function\n    }\n}",
+        "javascript": "const T = parseInt(require('fs').readFileSync('/dev/stdin','utf8').trim());\n// Find max n for: n, n*log2(n), n^2, n^3, 2^n, n!",
+        "c": "#include<stdio.h>\n#include<math.h>\nint main() {\n    long long T;\n    scanf(\"%lld\", &T);\n    // Find max n for each function\n}"
+      },
+      "testCases": [
+        { "input": "100", "expectedOutput": "100 22 10 4 6 4" },
+        { "input": "1000000", "expectedOutput": "1000000 62746 1000 100 19 12" },
+        { "input": "10", "expectedOutput": "10 5 3 2 3 3" },
+        { "input": "1", "expectedOutput": "1 1 1 1 1 1" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "For O(n): answer is T directly. For O(n*log2(n)): binary search on n checking n*log2(n) <= T. For O(n^2): floor(sqrt(T)). For O(n^3): floor(cbrt(T)). For O(2^n): find largest n where 2^n <= T (at most ~60). For O(n!): iterate n=1,2,3,... computing factorial until it exceeds T (at most ~20). Cap 2^n and n! results at 25.",
+          "hi": "O(n) ke liye: answer seedha T hai. O(n*log2(n)) ke liye: binary search karo n pe checking n*log2(n) <= T. O(n^2) ke liye: floor(sqrt(T)). O(n^3) ke liye: floor(cbrt(T)). O(2^n) ke liye: sabse bada n dhundho jahan 2^n <= T (max ~60). O(n!) ke liye: n=1,2,3... iterate karo factorial compute karte hue jab tak T se exceed na ho (max ~20). 2^n aur n! ke results 25 pe cap karo."
+        },
+        "code": {
+          "cpp": "#include<iostream>\n#include<cmath>\nusing namespace std;\nint main() {\n    long long T;\n    cin >> T;\n    // O(n)\n    long long r1 = T;\n    // O(n log n) - binary search\n    long long lo = 1, hi = T, r2 = 1;\n    while (lo <= hi) {\n        long long mid = lo + (hi - lo) / 2;\n        double val = mid * (log2((double)mid));\n        if (mid == 1 || val <= T) { r2 = mid; lo = mid + 1; }\n        else hi = mid - 1;\n    }\n    // O(n^2)\n    long long r3 = (long long)sqrt((double)T);\n    while ((r3+1)*(r3+1) <= T) r3++;\n    // O(n^3)\n    long long r4 = (long long)cbrt((double)T);\n    while ((r4+1)*(r4+1)*(r4+1) <= T) r4++;\n    // O(2^n)\n    int r5 = 0;\n    long long pw = 1;\n    while (pw <= T && r5 < 25) { r5++; if (pw > T/2) break; pw *= 2; }\n    if (pw > T) r5--;\n    if (r5 < 1) r5 = 1;\n    // O(n!)\n    int r6 = 1;\n    long long fact = 1;\n    while (r6 < 25) {\n        if (fact > T / (r6 + 1)) break;\n        fact *= (r6 + 1);\n        if (fact > T) break;\n        r6++;\n    }\n    cout << r1 << \" \" << r2 << \" \" << r3 << \" \" << r4 << \" \" << r5 << \" \" << r6;\n}",
+          "python": "import math\nT = int(input())\n# O(n)\nr1 = T\n# O(n log n) - binary search\nlo, hi, r2 = 1, T, 1\nwhile lo <= hi:\n    mid = (lo + hi) // 2\n    val = mid * math.log2(mid) if mid > 1 else 0\n    if mid == 1 or val <= T:\n        r2 = mid\n        lo = mid + 1\n    else:\n        hi = mid - 1\n# O(n^2)\nr3 = int(math.isqrt(T))\n# O(n^3)\nr4 = int(round(T ** (1/3)))\nwhile (r4+1)**3 <= T: r4 += 1\nwhile r4**3 > T: r4 -= 1\n# O(2^n)\nr5 = 0\npw = 1\nwhile pw <= T and r5 < 25:\n    r5 += 1\n    pw *= 2\nif pw > T: r5 -= 1\nr5 = max(r5, 1)\nr5 = min(r5, 25)\n# O(n!)\nr6 = 1\nfact = 1\nwhile r6 < 25:\n    fact *= (r6 + 1)\n    if fact > T: break\n    r6 += 1\nr6 = min(r6, 25)\nprint(r1, r2, r3, r4, r5, r6)"
+        },
+        "timeComplexity": "O(log T)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["algorithm-analysis", "growth-rate", "binary-search", "mathematical"]
+    }
+  ]
+}

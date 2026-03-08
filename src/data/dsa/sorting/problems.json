@@ -1,0 +1,414 @@
+{
+  "topicId": "sorting",
+  "problems": [
+    {
+      "id": "sort-001",
+      "title": "Bubble Sort Implementation",
+      "titleHi": "Bubble Sort Implement Karo",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given an array of integers, sort it in ascending order using Bubble Sort algorithm. Print the sorted array.",
+        "hi": "Ek integers ka array diya hai, use Bubble Sort algorithm se ascending order mein sort karo. Sorted array print karo."
+      },
+      "examples": [
+        { "input": "[64, 34, 25, 12, 22, 11, 90]", "output": "11 12 22 25 34 64 90", "explanation": { "en": "Array sorted in ascending order using bubble sort", "hi": "Array ko bubble sort se ascending order mein sort kiya" } }
+      ],
+      "constraints": ["1 <= n <= 10^4", "-10^5 <= arr[i] <= 10^5"],
+      "hints": [
+        { "en": "Compare adjacent elements and swap if they are in wrong order", "hi": "Adjacent elements ko compare karo aur galat order mein ho toh swap karo" },
+        { "en": "After each pass, the largest element bubbles to the end", "hi": "Har pass ke baad sabse bada element end mein aa jaata hai" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\n\nvoid bubbleSort(int arr[], int n) {\n    // Write your code here\n}\n\nint main() {\n    int n; cin >> n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin >> arr[i];\n    bubbleSort(arr, n);\n    for(int i=0;i<n;i++) cout << arr[i] << (i<n-1?\" \":\"\");\n}",
+        "python": "def bubble_sort(arr):\n    # Write your code here\n    pass\n\nn = int(input())\narr = list(map(int, input().split()))\nbubble_sort(arr)\nprint(*arr)",
+        "java": "import java.util.*;\npublic class Main {\n    public static void bubbleSort(int[] arr) {\n        // Write your code here\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n        bubbleSort(arr);\n        StringBuilder sb = new StringBuilder();\n        for(int i=0;i<n;i++) { if(i>0) sb.append(\" \"); sb.append(arr[i]); }\n        System.out.println(sb);\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);\nfunction bubbleSort(arr) {\n    // Write your code here\n}\nbubbleSort(arr);\nconsole.log(arr.join(' '));",
+        "c": "#include<stdio.h>\nvoid bubbleSort(int arr[], int n) {\n    // Write your code here\n}\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    bubbleSort(arr, n);\n    for(int i=0;i<n;i++) printf(\"%d%s\",arr[i],i<n-1?\" \":\"\");\n}"
+      },
+      "testCases": [
+        { "input": "7\n64 34 25 12 22 11 90", "expectedOutput": "11 12 22 25 34 64 90" },
+        { "input": "5\n5 4 3 2 1", "expectedOutput": "1 2 3 4 5" },
+        { "input": "3\n1 2 3", "expectedOutput": "1 2 3" }
+      ],
+      "solution": {
+        "approach": { "en": "Repeatedly compare adjacent elements and swap if out of order. Use a flag to optimize for already sorted arrays.", "hi": "Baar baar adjacent elements compare karo aur galat order mein ho toh swap karo. Already sorted arrays ke liye flag use karo." },
+        "code": {
+          "cpp": "void bubbleSort(int arr[], int n) {\n    for(int i=0;i<n-1;i++) {\n        bool swapped=false;\n        for(int j=0;j<n-i-1;j++) {\n            if(arr[j]>arr[j+1]) { swap(arr[j],arr[j+1]); swapped=true; }\n        }\n        if(!swapped) break;\n    }\n}",
+          "python": "def bubble_sort(arr):\n    n = len(arr)\n    for i in range(n-1):\n        swapped = False\n        for j in range(n-i-1):\n            if arr[j] > arr[j+1]:\n                arr[j], arr[j+1] = arr[j+1], arr[j]\n                swapped = True\n        if not swapped:\n            break"
+        },
+        "timeComplexity": "O(n^2)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["sorting", "bubble-sort", "basic"]
+    },
+    {
+      "id": "sort-002",
+      "title": "Selection Sort Implementation",
+      "titleHi": "Selection Sort Implement Karo",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given an array of integers, sort it in ascending order using Selection Sort algorithm. In each iteration, find the minimum element from the unsorted part and place it at the beginning.",
+        "hi": "Ek integers ka array diya hai, use Selection Sort algorithm se ascending order mein sort karo. Har iteration mein unsorted part se minimum element dhundho aur beginning mein rakho."
+      },
+      "examples": [
+        { "input": "[29, 10, 14, 37, 13]", "output": "10 13 14 29 37", "explanation": { "en": "Array sorted by repeatedly selecting the minimum", "hi": "Baar baar minimum select karke array sort kiya" } }
+      ],
+      "constraints": ["1 <= n <= 10^4", "-10^5 <= arr[i] <= 10^5"],
+      "hints": [
+        { "en": "Find the minimum element in the unsorted portion each time", "hi": "Har baar unsorted portion mein minimum element dhundho" },
+        { "en": "Swap the minimum with the first unsorted element", "hi": "Minimum ko pehle unsorted element ke saath swap karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\n\nvoid selectionSort(int arr[], int n) {\n    // Write your code here\n}\n\nint main() {\n    int n; cin >> n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin >> arr[i];\n    selectionSort(arr, n);\n    for(int i=0;i<n;i++) cout << arr[i] << (i<n-1?\" \":\"\");\n}",
+        "python": "def selection_sort(arr):\n    # Write your code here\n    pass\n\nn = int(input())\narr = list(map(int, input().split()))\nselection_sort(arr)\nprint(*arr)",
+        "java": "import java.util.*;\npublic class Main {\n    public static void selectionSort(int[] arr) {\n        // Write your code here\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n        selectionSort(arr);\n        StringBuilder sb = new StringBuilder();\n        for(int i=0;i<n;i++) { if(i>0) sb.append(\" \"); sb.append(arr[i]); }\n        System.out.println(sb);\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);\nfunction selectionSort(arr) {\n    // Write your code here\n}\nselectionSort(arr);\nconsole.log(arr.join(' '));",
+        "c": "#include<stdio.h>\nvoid selectionSort(int arr[], int n) {\n    // Write your code here\n}\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    selectionSort(arr, n);\n    for(int i=0;i<n;i++) printf(\"%d%s\",arr[i],i<n-1?\" \":\"\");\n}"
+      },
+      "testCases": [
+        { "input": "5\n29 10 14 37 13", "expectedOutput": "10 13 14 29 37" },
+        { "input": "4\n4 3 2 1", "expectedOutput": "1 2 3 4" },
+        { "input": "3\n1 1 1", "expectedOutput": "1 1 1" }
+      ],
+      "solution": {
+        "approach": { "en": "Find minimum in unsorted part and swap with the first unsorted position.", "hi": "Unsorted part mein minimum dhundho aur pehli unsorted position ke saath swap karo." },
+        "code": {
+          "cpp": "void selectionSort(int arr[], int n) {\n    for(int i=0;i<n-1;i++) {\n        int minIdx=i;\n        for(int j=i+1;j<n;j++) if(arr[j]<arr[minIdx]) minIdx=j;\n        swap(arr[i],arr[minIdx]);\n    }\n}",
+          "python": "def selection_sort(arr):\n    n = len(arr)\n    for i in range(n-1):\n        min_idx = i\n        for j in range(i+1, n):\n            if arr[j] < arr[min_idx]:\n                min_idx = j\n        arr[i], arr[min_idx] = arr[min_idx], arr[i]"
+        },
+        "timeComplexity": "O(n^2)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["sorting", "selection-sort", "basic"]
+    },
+    {
+      "id": "sort-003",
+      "title": "Insertion Sort Implementation",
+      "titleHi": "Insertion Sort Implement Karo",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given an array of integers, sort it in ascending order using Insertion Sort algorithm. Build the sorted array one element at a time by inserting each element at its correct position.",
+        "hi": "Ek integers ka array diya hai, use Insertion Sort algorithm se ascending order mein sort karo. Ek ek element ko uski sahi jagah pe insert karke sorted array build karo."
+      },
+      "examples": [
+        { "input": "[12, 11, 13, 5, 6]", "output": "5 6 11 12 13", "explanation": { "en": "Each element is inserted at its correct position in the sorted portion", "hi": "Har element ko sorted portion mein uski sahi jagah pe insert kiya" } }
+      ],
+      "constraints": ["1 <= n <= 10^4", "-10^5 <= arr[i] <= 10^5"],
+      "hints": [
+        { "en": "Start from the second element, compare with elements on the left", "hi": "Dusre element se start karo, left ke elements se compare karo" },
+        { "en": "Shift larger elements to the right to make space", "hi": "Bade elements ko right mein shift karo jagah banane ke liye" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\n\nvoid insertionSort(int arr[], int n) {\n    // Write your code here\n}\n\nint main() {\n    int n; cin >> n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin >> arr[i];\n    insertionSort(arr, n);\n    for(int i=0;i<n;i++) cout << arr[i] << (i<n-1?\" \":\"\");\n}",
+        "python": "def insertion_sort(arr):\n    # Write your code here\n    pass\n\nn = int(input())\narr = list(map(int, input().split()))\ninsertion_sort(arr)\nprint(*arr)",
+        "java": "import java.util.*;\npublic class Main {\n    public static void insertionSort(int[] arr) {\n        // Write your code here\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n        insertionSort(arr);\n        StringBuilder sb = new StringBuilder();\n        for(int i=0;i<n;i++) { if(i>0) sb.append(\" \"); sb.append(arr[i]); }\n        System.out.println(sb);\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);\nfunction insertionSort(arr) {\n    // Write your code here\n}\ninsertionSort(arr);\nconsole.log(arr.join(' '));",
+        "c": "#include<stdio.h>\nvoid insertionSort(int arr[], int n) {\n    // Write your code here\n}\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    insertionSort(arr, n);\n    for(int i=0;i<n;i++) printf(\"%d%s\",arr[i],i<n-1?\" \":\"\");\n}"
+      },
+      "testCases": [
+        { "input": "5\n12 11 13 5 6", "expectedOutput": "5 6 11 12 13" },
+        { "input": "4\n1 2 3 4", "expectedOutput": "1 2 3 4" },
+        { "input": "6\n6 5 4 3 2 1", "expectedOutput": "1 2 3 4 5 6" }
+      ],
+      "solution": {
+        "approach": { "en": "Pick each element and insert it at the correct position in the sorted portion by shifting larger elements right.", "hi": "Har element pick karo aur bade elements ko right shift karke sahi jagah pe insert karo." },
+        "code": {
+          "cpp": "void insertionSort(int arr[], int n) {\n    for(int i=1;i<n;i++) {\n        int key=arr[i], j=i-1;\n        while(j>=0 && arr[j]>key) { arr[j+1]=arr[j]; j--; }\n        arr[j+1]=key;\n    }\n}",
+          "python": "def insertion_sort(arr):\n    for i in range(1, len(arr)):\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j+1] = arr[j]\n            j -= 1\n        arr[j+1] = key"
+        },
+        "timeComplexity": "O(n^2)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["sorting", "insertion-sort", "basic"]
+    },
+    {
+      "id": "sort-004",
+      "title": "Merge Sort Implementation",
+      "titleHi": "Merge Sort Implement Karo",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given an array of integers, sort it in ascending order using Merge Sort algorithm. Use the divide and conquer approach - split the array, sort both halves recursively, and merge them.",
+        "hi": "Ek integers ka array diya hai, use Merge Sort algorithm se ascending order mein sort karo. Divide and conquer approach use karo - array split karo, dono halves ko recursively sort karo, aur merge karo."
+      },
+      "examples": [
+        { "input": "[38, 27, 43, 3, 9, 82, 10]", "output": "3 9 10 27 38 43 82", "explanation": { "en": "Array divided into halves, sorted recursively, and merged back", "hi": "Array ko halves mein divide kiya, recursively sort kiya, aur wapas merge kiya" } }
+      ],
+      "constraints": ["1 <= n <= 10^5", "-10^9 <= arr[i] <= 10^9"],
+      "hints": [
+        { "en": "Split the array at the midpoint and sort each half", "hi": "Array ko midpoint pe split karo aur har half ko sort karo" },
+        { "en": "The merge step uses two pointers to combine sorted halves", "hi": "Merge step mein do pointers use hote hain sorted halves ko combine karne ke liye" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\n\nvoid merge(int arr[], int left, int mid, int right) {\n    // Write merge logic here\n}\n\nvoid mergeSort(int arr[], int left, int right) {\n    // Write your code here\n}\n\nint main() {\n    int n; cin >> n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin >> arr[i];\n    mergeSort(arr, 0, n-1);\n    for(int i=0;i<n;i++) cout << arr[i] << (i<n-1?\" \":\"\");\n}",
+        "python": "def merge(arr, left, mid, right):\n    # Write merge logic here\n    pass\n\ndef merge_sort(arr, left, right):\n    # Write your code here\n    pass\n\nn = int(input())\narr = list(map(int, input().split()))\nmerge_sort(arr, 0, n-1)\nprint(*arr)",
+        "java": "import java.util.*;\npublic class Main {\n    public static void merge(int[] arr, int left, int mid, int right) {\n        // Write merge logic here\n    }\n    public static void mergeSort(int[] arr, int left, int right) {\n        // Write your code here\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n        mergeSort(arr, 0, n-1);\n        StringBuilder sb = new StringBuilder();\n        for(int i=0;i<n;i++) { if(i>0) sb.append(\" \"); sb.append(arr[i]); }\n        System.out.println(sb);\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);\nfunction merge(arr, left, mid, right) {\n    // Write merge logic here\n}\nfunction mergeSort(arr, left, right) {\n    // Write your code here\n}\nmergeSort(arr, 0, n-1);\nconsole.log(arr.join(' '));",
+        "c": "#include<stdio.h>\nvoid merge(int arr[], int left, int mid, int right) {\n    // Write merge logic here\n}\nvoid mergeSort(int arr[], int left, int right) {\n    // Write your code here\n}\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    mergeSort(arr, 0, n-1);\n    for(int i=0;i<n;i++) printf(\"%d%s\",arr[i],i<n-1?\" \":\"\");\n}"
+      },
+      "testCases": [
+        { "input": "7\n38 27 43 3 9 82 10", "expectedOutput": "3 9 10 27 38 43 82" },
+        { "input": "5\n5 4 3 2 1", "expectedOutput": "1 2 3 4 5" },
+        { "input": "1\n42", "expectedOutput": "42" }
+      ],
+      "solution": {
+        "approach": { "en": "Divide array at midpoint, recursively sort halves, merge using two pointers comparing elements.", "hi": "Array ko midpoint pe divide karo, halves ko recursively sort karo, do pointers se elements compare karke merge karo." },
+        "code": {
+          "cpp": "void merge(int arr[], int l, int m, int r) {\n    int n1=m-l+1, n2=r-m;\n    int L[n1], R[n2];\n    for(int i=0;i<n1;i++) L[i]=arr[l+i];\n    for(int j=0;j<n2;j++) R[j]=arr[m+1+j];\n    int i=0,j=0,k=l;\n    while(i<n1&&j<n2) arr[k++]=(L[i]<=R[j])?L[i++]:R[j++];\n    while(i<n1) arr[k++]=L[i++];\n    while(j<n2) arr[k++]=R[j++];\n}\nvoid mergeSort(int arr[], int l, int r) {\n    if(l>=r) return;\n    int m=l+(r-l)/2;\n    mergeSort(arr,l,m);\n    mergeSort(arr,m+1,r);\n    merge(arr,l,m,r);\n}",
+          "python": "def merge(arr, l, m, r):\n    L, R = arr[l:m+1], arr[m+1:r+1]\n    i = j = 0; k = l\n    while i < len(L) and j < len(R):\n        if L[i] <= R[j]: arr[k] = L[i]; i += 1\n        else: arr[k] = R[j]; j += 1\n        k += 1\n    while i < len(L): arr[k] = L[i]; i += 1; k += 1\n    while j < len(R): arr[k] = R[j]; j += 1; k += 1\n\ndef merge_sort(arr, l, r):\n    if l >= r: return\n    m = (l + r) // 2\n    merge_sort(arr, l, m)\n    merge_sort(arr, m+1, r)\n    merge(arr, l, m, r)"
+        },
+        "timeComplexity": "O(n log n)",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["sorting", "merge-sort", "divide-and-conquer"]
+    },
+    {
+      "id": "sort-005",
+      "title": "Quick Sort Implementation",
+      "titleHi": "Quick Sort Implement Karo",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given an array of integers, sort it in ascending order using Quick Sort algorithm. Choose the last element as pivot, partition the array, and recursively sort the subarrays.",
+        "hi": "Ek integers ka array diya hai, use Quick Sort algorithm se ascending order mein sort karo. Last element ko pivot choose karo, array ko partition karo, aur recursively subarrays ko sort karo."
+      },
+      "examples": [
+        { "input": "[10, 7, 8, 9, 1, 5]", "output": "1 5 7 8 9 10", "explanation": { "en": "Array partitioned around pivot and sorted recursively", "hi": "Array ko pivot ke around partition kiya aur recursively sort kiya" } }
+      ],
+      "constraints": ["1 <= n <= 10^5", "-10^9 <= arr[i] <= 10^9"],
+      "hints": [
+        { "en": "Use last element as pivot, partition elements smaller to left and larger to right", "hi": "Last element ko pivot banao, chhote elements left mein aur bade right mein partition karo" },
+        { "en": "The partition function returns the correct position of pivot", "hi": "Partition function pivot ki sahi position return karta hai" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\n\nint partition(int arr[], int low, int high) {\n    // Write partition logic here\n    return 0;\n}\n\nvoid quickSort(int arr[], int low, int high) {\n    // Write your code here\n}\n\nint main() {\n    int n; cin >> n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin >> arr[i];\n    quickSort(arr, 0, n-1);\n    for(int i=0;i<n;i++) cout << arr[i] << (i<n-1?\" \":\"\");\n}",
+        "python": "def partition(arr, low, high):\n    # Write partition logic here\n    return 0\n\ndef quick_sort(arr, low, high):\n    # Write your code here\n    pass\n\nn = int(input())\narr = list(map(int, input().split()))\nquick_sort(arr, 0, n-1)\nprint(*arr)",
+        "java": "import java.util.*;\npublic class Main {\n    public static int partition(int[] arr, int low, int high) {\n        // Write partition logic here\n        return 0;\n    }\n    public static void quickSort(int[] arr, int low, int high) {\n        // Write your code here\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n        quickSort(arr, 0, n-1);\n        StringBuilder sb = new StringBuilder();\n        for(int i=0;i<n;i++) { if(i>0) sb.append(\" \"); sb.append(arr[i]); }\n        System.out.println(sb);\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);\nfunction partition(arr, low, high) {\n    // Write partition logic here\n    return 0;\n}\nfunction quickSort(arr, low, high) {\n    // Write your code here\n}\nquickSort(arr, 0, n-1);\nconsole.log(arr.join(' '));",
+        "c": "#include<stdio.h>\nvoid swap(int* a, int* b) { int t=*a; *a=*b; *b=t; }\nint partition(int arr[], int low, int high) {\n    // Write partition logic here\n    return 0;\n}\nvoid quickSort(int arr[], int low, int high) {\n    // Write your code here\n}\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    quickSort(arr, 0, n-1);\n    for(int i=0;i<n;i++) printf(\"%d%s\",arr[i],i<n-1?\" \":\"\");\n}"
+      },
+      "testCases": [
+        { "input": "6\n10 7 8 9 1 5", "expectedOutput": "1 5 7 8 9 10" },
+        { "input": "5\n1 2 3 4 5", "expectedOutput": "1 2 3 4 5" },
+        { "input": "4\n4 4 4 4", "expectedOutput": "4 4 4 4" }
+      ],
+      "solution": {
+        "approach": { "en": "Use Lomuto partition with last element as pivot. Place smaller elements left, larger right, then recurse.", "hi": "Lomuto partition use karo last element ko pivot banaake. Chhote elements left, bade right, phir recurse karo." },
+        "code": {
+          "cpp": "int partition(int arr[], int low, int high) {\n    int pivot=arr[high], i=low-1;\n    for(int j=low;j<high;j++)\n        if(arr[j]<pivot) { i++; swap(arr[i],arr[j]); }\n    swap(arr[i+1],arr[high]);\n    return i+1;\n}\nvoid quickSort(int arr[], int low, int high) {\n    if(low>=high) return;\n    int pi=partition(arr,low,high);\n    quickSort(arr,low,pi-1);\n    quickSort(arr,pi+1,high);\n}",
+          "python": "def partition(arr, low, high):\n    pivot = arr[high]\n    i = low - 1\n    for j in range(low, high):\n        if arr[j] < pivot:\n            i += 1\n            arr[i], arr[j] = arr[j], arr[i]\n    arr[i+1], arr[high] = arr[high], arr[i+1]\n    return i + 1\n\ndef quick_sort(arr, low, high):\n    if low >= high: return\n    pi = partition(arr, low, high)\n    quick_sort(arr, low, pi-1)\n    quick_sort(arr, pi+1, high)"
+        },
+        "timeComplexity": "O(n log n) average, O(n^2) worst",
+        "spaceComplexity": "O(log n)"
+      },
+      "tags": ["sorting", "quick-sort", "divide-and-conquer"]
+    },
+    {
+      "id": "sort-006",
+      "title": "Sort an Array of 0s, 1s, and 2s",
+      "titleHi": "0, 1 aur 2 Wala Array Sort Karo",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given an array containing only 0s, 1s, and 2s, sort the array in-place in a single pass without using any sorting algorithm. This is also known as the Dutch National Flag problem.",
+        "hi": "Ek array diya hai jisme sirf 0, 1 aur 2 hain, use in-place ek hi pass mein sort karo bina kisi sorting algorithm ke. Ise Dutch National Flag problem bhi kehte hain."
+      },
+      "examples": [
+        { "input": "[0, 1, 2, 0, 1, 2]", "output": "0 0 1 1 2 2", "explanation": { "en": "All 0s come first, then 1s, then 2s", "hi": "Pehle saare 0, phir saare 1, phir saare 2" } },
+        { "input": "[2, 0, 1]", "output": "0 1 2", "explanation": { "en": "Sorted in single pass using three pointers", "hi": "Teen pointers use karke ek pass mein sort kiya" } }
+      ],
+      "constraints": ["1 <= n <= 10^5", "arr[i] is either 0, 1, or 2"],
+      "hints": [
+        { "en": "Use three pointers: low, mid, and high", "hi": "Teen pointers use karo: low, mid, aur high" },
+        { "en": "0s go before low, 2s go after high, 1s stay in middle", "hi": "0 low ke pehle, 2 high ke baad, 1 beech mein rehte hain" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\n\nvoid sort012(int arr[], int n) {\n    // Write your code here\n}\n\nint main() {\n    int n; cin >> n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin >> arr[i];\n    sort012(arr, n);\n    for(int i=0;i<n;i++) cout << arr[i] << (i<n-1?\" \":\"\");\n}",
+        "python": "def sort_012(arr):\n    # Write your code here\n    pass\n\nn = int(input())\narr = list(map(int, input().split()))\nsort_012(arr)\nprint(*arr)",
+        "java": "import java.util.*;\npublic class Main {\n    public static void sort012(int[] arr) {\n        // Write your code here\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n        sort012(arr);\n        StringBuilder sb = new StringBuilder();\n        for(int i=0;i<n;i++) { if(i>0) sb.append(\" \"); sb.append(arr[i]); }\n        System.out.println(sb);\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);\nfunction sort012(arr) {\n    // Write your code here\n}\nsort012(arr);\nconsole.log(arr.join(' '));",
+        "c": "#include<stdio.h>\nvoid sort012(int arr[], int n) {\n    // Write your code here\n}\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    sort012(arr, n);\n    for(int i=0;i<n;i++) printf(\"%d%s\",arr[i],i<n-1?\" \":\"\");\n}"
+      },
+      "testCases": [
+        { "input": "6\n0 1 2 0 1 2", "expectedOutput": "0 0 1 1 2 2" },
+        { "input": "3\n2 0 1", "expectedOutput": "0 1 2" },
+        { "input": "5\n0 0 0 0 0", "expectedOutput": "0 0 0 0 0" },
+        { "input": "7\n2 2 1 1 0 0 2", "expectedOutput": "0 0 1 1 2 2 2" }
+      ],
+      "solution": {
+        "approach": { "en": "Dutch National Flag: Use low, mid, high pointers. If mid is 0 swap with low; if 2 swap with high; if 1 move mid forward.", "hi": "Dutch National Flag: low, mid, high pointers use karo. Mid 0 hai toh low se swap; 2 hai toh high se swap; 1 hai toh mid aage badhao." },
+        "code": {
+          "cpp": "void sort012(int arr[], int n) {\n    int low=0, mid=0, high=n-1;\n    while(mid<=high) {\n        if(arr[mid]==0) swap(arr[low++],arr[mid++]);\n        else if(arr[mid]==1) mid++;\n        else swap(arr[mid],arr[high--]);\n    }\n}",
+          "python": "def sort_012(arr):\n    low, mid, high = 0, 0, len(arr)-1\n    while mid <= high:\n        if arr[mid] == 0:\n            arr[low], arr[mid] = arr[mid], arr[low]\n            low += 1; mid += 1\n        elif arr[mid] == 1:\n            mid += 1\n        else:\n            arr[mid], arr[high] = arr[high], arr[mid]\n            high -= 1"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["sorting", "dutch-national-flag", "two-pointer"]
+    },
+    {
+      "id": "sort-007",
+      "title": "Count Inversions in an Array",
+      "titleHi": "Array Mein Inversions Count Karo",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given an array of integers, count the number of inversions. An inversion is a pair (i, j) where i < j but arr[i] > arr[j]. Use a modified merge sort for an efficient O(n log n) solution.",
+        "hi": "Ek integers ka array diya hai, inversions ki count nikalo. Inversion ek pair (i, j) hai jahan i < j par arr[i] > arr[j]. Efficient O(n log n) solution ke liye modified merge sort use karo."
+      },
+      "examples": [
+        { "input": "[2, 4, 1, 3, 5]", "output": "3", "explanation": { "en": "Inversions are (2,1), (4,1), (4,3) = 3 pairs", "hi": "Inversions hain (2,1), (4,1), (4,3) = 3 pairs" } },
+        { "input": "[5, 4, 3, 2, 1]", "output": "10", "explanation": { "en": "Reverse sorted array has maximum inversions: n*(n-1)/2 = 10", "hi": "Ulta sorted array mein maximum inversions hain: n*(n-1)/2 = 10" } }
+      ],
+      "constraints": ["1 <= n <= 10^5", "-10^9 <= arr[i] <= 10^9"],
+      "hints": [
+        { "en": "Think of how merge sort can count inversions during the merge step", "hi": "Socho merge sort merge step mein inversions kaise count kar sakta hai" },
+        { "en": "When an element from right half is smaller, all remaining elements in left half form inversions with it", "hi": "Jab right half ka element chhota ho, toh left half ke baaki saare elements uske saath inversion banate hain" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\n\nlong long countInversions(int arr[], int n) {\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    int n; cin >> n;\n    int arr[n];\n    for(int i=0;i<n;i++) cin >> arr[i];\n    cout << countInversions(arr, n);\n}",
+        "python": "def count_inversions(arr):\n    # Write your code here\n    return 0\n\nn = int(input())\narr = list(map(int, input().split()))\nprint(count_inversions(arr))",
+        "java": "import java.util.*;\npublic class Main {\n    public static long countInversions(int[] arr) {\n        // Write your code here\n        return 0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n        System.out.println(countInversions(arr));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);\nfunction countInversions(arr) {\n    // Write your code here\n    return 0;\n}\nconsole.log(countInversions(arr));",
+        "c": "#include<stdio.h>\nlong long countInversions(int arr[], int n) {\n    // Write your code here\n    return 0;\n}\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    printf(\"%lld\",countInversions(arr,n));\n}"
+      },
+      "testCases": [
+        { "input": "5\n2 4 1 3 5", "expectedOutput": "3" },
+        { "input": "5\n5 4 3 2 1", "expectedOutput": "10" },
+        { "input": "3\n1 2 3", "expectedOutput": "0" },
+        { "input": "4\n3 1 2 4", "expectedOutput": "2" }
+      ],
+      "solution": {
+        "approach": { "en": "Modified merge sort: during merge, when right element is placed before left elements, add (mid - i + 1) inversions.", "hi": "Modified merge sort: merge ke dauran jab right element left elements se pehle place ho, toh (mid - i + 1) inversions add karo." },
+        "code": {
+          "cpp": "long long mergeCount(int arr[], int temp[], int left, int right) {\n    if(left>=right) return 0;\n    long long inv=0;\n    int mid=(left+right)/2;\n    inv+=mergeCount(arr,temp,left,mid);\n    inv+=mergeCount(arr,temp,mid+1,right);\n    int i=left,j=mid+1,k=left;\n    while(i<=mid&&j<=right) {\n        if(arr[i]<=arr[j]) temp[k++]=arr[i++];\n        else { temp[k++]=arr[j++]; inv+=(mid-i+1); }\n    }\n    while(i<=mid) temp[k++]=arr[i++];\n    while(j<=right) temp[k++]=arr[j++];\n    for(int i=left;i<=right;i++) arr[i]=temp[i];\n    return inv;\n}\nlong long countInversions(int arr[], int n) {\n    int temp[n];\n    return mergeCount(arr,temp,0,n-1);\n}",
+          "python": "def merge_count(arr, left, right):\n    if left >= right: return 0\n    mid = (left + right) // 2\n    inv = merge_count(arr, left, mid) + merge_count(arr, mid+1, right)\n    L, R = arr[left:mid+1], arr[mid+1:right+1]\n    i = j = 0; k = left\n    while i < len(L) and j < len(R):\n        if L[i] <= R[j]: arr[k] = L[i]; i += 1\n        else: arr[k] = R[j]; j += 1; inv += len(L) - i\n        k += 1\n    while i < len(L): arr[k] = L[i]; i += 1; k += 1\n    while j < len(R): arr[k] = R[j]; j += 1; k += 1\n    return inv\n\ndef count_inversions(arr):\n    return merge_count(arr, 0, len(arr)-1)"
+        },
+        "timeComplexity": "O(n log n)",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["sorting", "merge-sort", "divide-and-conquer", "inversions"]
+    },
+    {
+      "id": "sort-008",
+      "title": "Kth Smallest Element",
+      "titleHi": "Kth Sabse Chhota Element",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given an array of integers and a number K, find the Kth smallest element in the array. Use an efficient approach (QuickSelect or sorting).",
+        "hi": "Ek integers ka array aur ek number K diya hai, array mein Kth sabse chhota element dhundho. Efficient approach use karo (QuickSelect ya sorting)."
+      },
+      "examples": [
+        { "input": "[7, 10, 4, 3, 20, 15]\nK = 3", "output": "7", "explanation": { "en": "Sorted array: [3, 4, 7, 10, 15, 20]. 3rd smallest is 7", "hi": "Sorted array: [3, 4, 7, 10, 15, 20]. 3rd sabse chhota 7 hai" } },
+        { "input": "[7, 10, 4, 3, 20, 15]\nK = 1", "output": "3", "explanation": { "en": "Smallest element is 3", "hi": "Sabse chhota element 3 hai" } }
+      ],
+      "constraints": ["1 <= n <= 10^5", "1 <= K <= n", "-10^9 <= arr[i] <= 10^9"],
+      "hints": [
+        { "en": "Sort and return arr[k-1], or use QuickSelect for O(n) average", "hi": "Sort karke arr[k-1] return karo, ya O(n) average ke liye QuickSelect use karo" },
+        { "en": "QuickSelect is like QuickSort but only recurses on one side", "hi": "QuickSelect QuickSort jaisa hai par sirf ek side pe recurse karta hai" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\n\nint kthSmallest(int arr[], int n, int k) {\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    int n, k; cin >> n >> k;\n    int arr[n];\n    for(int i=0;i<n;i++) cin >> arr[i];\n    cout << kthSmallest(arr, n, k);\n}",
+        "python": "def kth_smallest(arr, k):\n    # Write your code here\n    return 0\n\nn, k = map(int, input().split())\narr = list(map(int, input().split()))\nprint(kth_smallest(arr, k))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int kthSmallest(int[] arr, int k) {\n        // Write your code here\n        return 0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), k = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n        System.out.println(kthSmallest(arr, k));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [n, k] = lines[0].split(' ').map(Number);\nconst arr = lines[1].split(' ').map(Number);\nfunction kthSmallest(arr, k) {\n    // Write your code here\n    return 0;\n}\nconsole.log(kthSmallest(arr, k));",
+        "c": "#include<stdio.h>\nint kthSmallest(int arr[], int n, int k) {\n    // Write your code here\n    return 0;\n}\nint main() {\n    int n, k; scanf(\"%d %d\",&n,&k);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    printf(\"%d\",kthSmallest(arr,n,k));\n}"
+      },
+      "testCases": [
+        { "input": "6 3\n7 10 4 3 20 15", "expectedOutput": "7" },
+        { "input": "6 1\n7 10 4 3 20 15", "expectedOutput": "3" },
+        { "input": "5 5\n1 2 3 4 5", "expectedOutput": "5" },
+        { "input": "3 2\n5 5 5", "expectedOutput": "5" }
+      ],
+      "solution": {
+        "approach": { "en": "Sort the array and return arr[k-1]. For O(n) average, use QuickSelect (partition-based).", "hi": "Array sort karo aur arr[k-1] return karo. O(n) average ke liye QuickSelect (partition-based) use karo." },
+        "code": {
+          "cpp": "int kthSmallest(int arr[], int n, int k) {\n    sort(arr, arr+n);\n    return arr[k-1];\n}",
+          "python": "def kth_smallest(arr, k):\n    arr.sort()\n    return arr[k-1]"
+        },
+        "timeComplexity": "O(n log n) sort, O(n) avg QuickSelect",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["sorting", "quick-select", "order-statistics"]
+    },
+    {
+      "id": "sort-009",
+      "title": "Merge Two Sorted Arrays",
+      "titleHi": "Do Sorted Arrays Ko Merge Karo",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given two sorted arrays, merge them into a single sorted array without using any extra space for the result (or using O(n+m) space). Print the merged sorted array.",
+        "hi": "Do sorted arrays diye hain, unhe ek sorted array mein merge karo. Merged sorted array print karo."
+      },
+      "examples": [
+        { "input": "[1, 3, 5, 7]\n[2, 4, 6, 8]", "output": "1 2 3 4 5 6 7 8", "explanation": { "en": "Both sorted arrays merged into one sorted array", "hi": "Dono sorted arrays ko ek sorted array mein merge kiya" } }
+      ],
+      "constraints": ["1 <= n, m <= 10^5", "-10^9 <= arr[i] <= 10^9", "Both arrays are sorted in ascending order"],
+      "hints": [
+        { "en": "Use two pointers, one for each array", "hi": "Do pointers use karo, ek har array ke liye" },
+        { "en": "Compare elements at both pointers and pick the smaller one", "hi": "Dono pointers ke elements compare karo aur chhota wala pick karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\n\nint main() {\n    int n, m;\n    cin >> n >> m;\n    int a[n], b[m];\n    for(int i=0;i<n;i++) cin >> a[i];\n    for(int i=0;i<m;i++) cin >> b[i];\n    // Merge and print sorted array\n}",
+        "python": "n, m = map(int, input().split())\na = list(map(int, input().split()))\nb = list(map(int, input().split()))\n# Merge and print sorted array",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), m = sc.nextInt();\n        int[] a = new int[n], b = new int[m];\n        for(int i=0;i<n;i++) a[i]=sc.nextInt();\n        for(int i=0;i<m;i++) b[i]=sc.nextInt();\n        // Merge and print sorted array\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [n, m] = lines[0].split(' ').map(Number);\nconst a = lines[1].split(' ').map(Number);\nconst b = lines[2].split(' ').map(Number);\n// Merge and print sorted array",
+        "c": "#include<stdio.h>\nint main() {\n    int n, m;\n    scanf(\"%d %d\",&n,&m);\n    int a[n], b[m];\n    for(int i=0;i<n;i++) scanf(\"%d\",&a[i]);\n    for(int i=0;i<m;i++) scanf(\"%d\",&b[i]);\n    // Merge and print sorted array\n}"
+      },
+      "testCases": [
+        { "input": "4 4\n1 3 5 7\n2 4 6 8", "expectedOutput": "1 2 3 4 5 6 7 8" },
+        { "input": "3 2\n1 2 3\n4 5", "expectedOutput": "1 2 3 4 5" },
+        { "input": "2 3\n5 10\n1 2 3", "expectedOutput": "1 2 3 5 10" },
+        { "input": "1 1\n1\n2", "expectedOutput": "1 2" }
+      ],
+      "solution": {
+        "approach": { "en": "Use two pointers to compare elements from both arrays, picking the smaller one each time.", "hi": "Do pointers se dono arrays ke elements compare karo, har baar chhota wala pick karo." },
+        "code": {
+          "cpp": "int i=0, j=0;\nwhile(i<n && j<m) {\n    if(a[i]<=b[j]) cout<<a[i++];\n    else cout<<b[j++];\n    cout<<\" \";\n}\nwhile(i<n) cout<<a[i++]<<\" \";\nwhile(j<m) cout<<b[j++]<<\" \";",
+          "python": "result = []\ni = j = 0\nwhile i < n and j < m:\n    if a[i] <= b[j]: result.append(a[i]); i += 1\n    else: result.append(b[j]); j += 1\nresult.extend(a[i:])\nresult.extend(b[j:])\nprint(*result)"
+        },
+        "timeComplexity": "O(n + m)",
+        "spaceComplexity": "O(n + m)"
+      },
+      "tags": ["sorting", "merge", "two-pointer"]
+    },
+    {
+      "id": "sort-010",
+      "title": "Sort Elements by Frequency",
+      "titleHi": "Elements Ko Frequency Ke Hisaab Se Sort Karo",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given an array of integers, sort the elements by their frequency in descending order. If two elements have the same frequency, sort them by their value in ascending order.",
+        "hi": "Ek integers ka array diya hai, elements ko unki frequency ke hisaab se descending order mein sort karo. Agar do elements ki same frequency hai, toh unhe value ke hisaab se ascending order mein sort karo."
+      },
+      "examples": [
+        { "input": "[1, 1, 2, 2, 2, 3]", "output": "2 2 2 1 1 3", "explanation": { "en": "2 appears 3 times, 1 appears 2 times, 3 appears 1 time", "hi": "2 teen baar aata hai, 1 do baar aata hai, 3 ek baar aata hai" } },
+        { "input": "[4, 4, 5, 5, 6]", "output": "4 4 5 5 6", "explanation": { "en": "4 and 5 both appear 2 times; 4 < 5 so 4 comes first. 6 appears once.", "hi": "4 aur 5 dono 2 baar aate hain; 4 < 5 toh 4 pehle aata hai. 6 ek baar aata hai." } }
+      ],
+      "constraints": ["1 <= n <= 10^5", "-10^5 <= arr[i] <= 10^5"],
+      "hints": [
+        { "en": "Count frequency of each element using a hash map", "hi": "Hash map use karke har element ki frequency count karo" },
+        { "en": "Use a custom comparator that sorts by frequency (desc) then value (asc)", "hi": "Custom comparator use karo jo frequency (desc) phir value (asc) se sort kare" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\n#include<map>\n#include<algorithm>\nusing namespace std;\n\nint main() {\n    int n; cin >> n;\n    vector<int> arr(n);\n    for(int i=0;i<n;i++) cin >> arr[i];\n    // Sort by frequency and print\n}",
+        "python": "n = int(input())\narr = list(map(int, input().split()))\n# Sort by frequency and print",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n        // Sort by frequency and print\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst arr = lines[1].split(' ').map(Number);\n// Sort by frequency and print",
+        "c": "#include<stdio.h>\n#include<stdlib.h>\nint main() {\n    int n; scanf(\"%d\",&n);\n    int arr[n];\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    // Sort by frequency and print\n}"
+      },
+      "testCases": [
+        { "input": "6\n1 1 2 2 2 3", "expectedOutput": "2 2 2 1 1 3" },
+        { "input": "5\n4 4 5 5 6", "expectedOutput": "4 4 5 5 6" },
+        { "input": "4\n9 9 9 9", "expectedOutput": "9 9 9 9" },
+        { "input": "6\n3 3 1 1 2 2", "expectedOutput": "1 1 2 2 3 3" }
+      ],
+      "solution": {
+        "approach": { "en": "Count frequencies with a map, then sort using custom comparator: higher frequency first, then smaller value first.", "hi": "Map se frequencies count karo, phir custom comparator se sort karo: zyada frequency pehle, phir chhoti value pehle." },
+        "code": {
+          "cpp": "map<int,int> freq;\nfor(int x : arr) freq[x]++;\nsort(arr.begin(), arr.end(), [&](int a, int b) {\n    if(freq[a] != freq[b]) return freq[a] > freq[b];\n    return a < b;\n});\nfor(int i=0;i<n;i++) cout << arr[i] << (i<n-1?\" \":\"\");",
+          "python": "from collections import Counter\nfreq = Counter(arr)\narr.sort(key=lambda x: (-freq[x], x))\nprint(*arr)"
+        },
+        "timeComplexity": "O(n log n)",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["sorting", "hashing", "custom-sort"]
+    }
+  ]
+}

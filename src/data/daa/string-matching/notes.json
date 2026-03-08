@@ -1,0 +1,164 @@
+{
+  "topicId": "string-matching",
+  "title": {
+    "en": "String Matching Algorithms - Complete Guide",
+    "hi": "String Matching Algorithms - Poori Jaankari"
+  },
+  "introduction": {
+    "en": "String matching is the problem of finding all occurrences of a pattern string within a larger text string. It is one of the most fundamental problems in computer science with applications in text editors, search engines, DNA sequence analysis, and plagiarism detection.",
+    "hi": "String matching ka matlab hai ek bade text string mein ek chhote pattern string ke saare occurrences dhundhna. Ye computer science ki sabse fundamental problems mein se ek hai jo text editors, search engines, DNA sequence analysis, aur plagiarism detection mein use hoti hai."
+  },
+  "realLifeAnalogy": {
+    "en": "Think of using Ctrl+F in a document to find a word. The document is the text and the word you type is the pattern. The algorithm highlights every place where that word appears. Just like how different people might search a book differently - one reads every line carefully (Naive), another uses bookmarks and shortcuts (KMP), and another uses a quick summary technique (Rabin-Karp).",
+    "hi": "Socho jaise tum document mein Ctrl+F use karke ek word dhundhte ho. Document text hai aur jo word type karte ho wo pattern hai. Algorithm har jagah highlight karta hai jahan wo word milta hai. Jaise alag alag log ek book mein alag tarike se search karte hain - koi har line dhyan se padhta hai (Naive), koi bookmarks aur shortcuts use karta hai (KMP), aur koi quick summary technique use karta hai (Rabin-Karp)."
+  },
+  "sections": [
+    {
+      "id": "naive-string-matching",
+      "title": {
+        "en": "Naive String Matching",
+        "hi": "Naive String Matching"
+      },
+      "content": {
+        "en": "The Naive (Brute Force) approach is the simplest string matching algorithm. It slides the pattern over the text one character at a time and checks for a match at each position.\n\n**How it works:**\n1. Start from the first character of text\n2. Compare pattern with text character by character\n3. If all characters match, pattern is found at that position\n4. If mismatch occurs, shift the pattern by one position and repeat\n5. Continue until the end of text is reached\n\n**Time Complexity:** O(m * n) where m = pattern length, n = text length\n**Space Complexity:** O(1)\n\n**When to use:**\n- Small texts and patterns\n- When simplicity is preferred over efficiency\n- As a baseline to understand more advanced algorithms",
+        "hi": "Naive (Brute Force) approach sabse simple string matching algorithm hai. Ye pattern ko text pe ek character shift karta hai aur har position pe match check karta hai.\n\n**Kaise kaam karta hai:**\n1. Text ke pehle character se start karo\n2. Pattern ko text se character by character compare karo\n3. Agar saare characters match ho jaayein, to pattern us position pe mil gaya\n4. Agar mismatch ho, to pattern ko ek position aage shift karo aur repeat karo\n5. Jab tak text khatam na ho tab tak continue karo\n\n**Time Complexity:** O(m * n) jahan m = pattern length, n = text length\n**Space Complexity:** O(1)\n\n**Kab use karein:**\n- Chhote texts aur patterns ke liye\n- Jab simplicity zyada zaroori ho efficiency se\n- Advanced algorithms samajhne ke liye baseline ke roop mein"
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nvoid naiveSearch(string text, string pattern) {\n    int n = text.length();\n    int m = pattern.length();\n    \n    for (int i = 0; i <= n - m; i++) {\n        int j;\n        for (j = 0; j < m; j++) {\n            if (text[i + j] != pattern[j])\n                break;\n        }\n        if (j == m)\n            cout << \"Pattern found at index \" << i << endl;\n    }\n}\n\nint main() {\n    string text = \"AABAACAADAABAABA\";\n    string pattern = \"AABA\";\n    naiveSearch(text, pattern);\n    // Output: Pattern found at index 0\n    //         Pattern found at index 9\n    //         Pattern found at index 12\n    return 0;\n}",
+        "python": "def naive_search(text, pattern):\n    n = len(text)\n    m = len(pattern)\n    \n    for i in range(n - m + 1):\n        j = 0\n        while j < m and text[i + j] == pattern[j]:\n            j += 1\n        if j == m:\n            print(f\"Pattern found at index {i}\")\n\ntext = \"AABAACAADAABAABA\"\npattern = \"AABA\"\nnaive_search(text, pattern)\n# Output: Pattern found at index 0\n#         Pattern found at index 9\n#         Pattern found at index 12",
+        "java": "public class NaiveSearch {\n    public static void naiveSearch(String text, String pattern) {\n        int n = text.length();\n        int m = pattern.length();\n        \n        for (int i = 0; i <= n - m; i++) {\n            int j;\n            for (j = 0; j < m; j++) {\n                if (text.charAt(i + j) != pattern.charAt(j))\n                    break;\n            }\n            if (j == m)\n                System.out.println(\"Pattern found at index \" + i);\n        }\n    }\n    \n    public static void main(String[] args) {\n        String text = \"AABAACAADAABAABA\";\n        String pattern = \"AABA\";\n        naiveSearch(text, pattern);\n    }\n}",
+        "javascript": "function naiveSearch(text, pattern) {\n    const n = text.length;\n    const m = pattern.length;\n    \n    for (let i = 0; i <= n - m; i++) {\n        let j = 0;\n        while (j < m && text[i + j] === pattern[j]) {\n            j++;\n        }\n        if (j === m) {\n            console.log(`Pattern found at index ${i}`);\n        }\n    }\n}\n\nconst text = \"AABAACAADAABAABA\";\nconst pattern = \"AABA\";\nnaiveSearch(text, pattern);",
+        "c": "#include <stdio.h>\n#include <string.h>\n\nvoid naiveSearch(char text[], char pattern[]) {\n    int n = strlen(text);\n    int m = strlen(pattern);\n    \n    for (int i = 0; i <= n - m; i++) {\n        int j;\n        for (j = 0; j < m; j++) {\n            if (text[i + j] != pattern[j])\n                break;\n        }\n        if (j == m)\n            printf(\"Pattern found at index %d\\n\", i);\n    }\n}\n\nint main() {\n    char text[] = \"AABAACAADAABAABA\";\n    char pattern[] = \"AABA\";\n    naiveSearch(text, pattern);\n    return 0;\n}"
+      },
+      "keyPoints": [
+        {
+          "en": "Simplest string matching algorithm - easy to understand and implement",
+          "hi": "Sabse simple string matching algorithm - samajhna aur implement karna easy hai"
+        },
+        {
+          "en": "Worst case O(m*n) when pattern has repeating characters like 'AAAA' in 'AAAAAAB'",
+          "hi": "Worst case O(m*n) jab pattern mein repeating characters hon jaise 'AAAA' in 'AAAAAAB'"
+        },
+        {
+          "en": "No preprocessing required - works directly on the input",
+          "hi": "Koi preprocessing nahi chahiye - seedha input pe kaam karta hai"
+        }
+      ],
+      "timeComplexity": {
+        "best": "O(n)",
+        "average": "O(m*n)",
+        "worst": "O(m*n)"
+      }
+    },
+    {
+      "id": "kmp-algorithm",
+      "title": {
+        "en": "KMP (Knuth-Morris-Pratt) Algorithm",
+        "hi": "KMP (Knuth-Morris-Pratt) Algorithm"
+      },
+      "content": {
+        "en": "The KMP algorithm improves upon the naive approach by using information about previously matched characters. It preprocesses the pattern to create a failure function (also called the LPS array - Longest Proper Prefix which is also Suffix), which tells us how many characters we can skip when a mismatch occurs.\n\n**Key Concepts:**\n1. **LPS Array (Failure Function):** For each position in the pattern, stores the length of the longest proper prefix that is also a suffix\n2. **Pattern Preprocessing:** Build the LPS array in O(m) time\n3. **Smart Skipping:** When a mismatch occurs, use the LPS array to skip characters instead of starting from scratch\n\n**Time Complexity:** O(m + n) where m = pattern length, n = text length\n**Space Complexity:** O(m) for the LPS array\n\n**Why it is efficient:**\n- Never re-compares a character of the text that has already been matched\n- The pattern pointer jumps back using the LPS array, but the text pointer never goes backward",
+        "hi": "KMP algorithm naive approach ko improve karta hai pehle se matched characters ki information use karke. Ye pattern ko preprocess karke ek failure function (LPS array - Longest Proper Prefix which is also Suffix) banata hai, jo batata hai ki mismatch hone pe kitne characters skip kar sakte hain.\n\n**Key Concepts:**\n1. **LPS Array (Failure Function):** Pattern ki har position ke liye, longest proper prefix ki length store karta hai jo suffix bhi ho\n2. **Pattern Preprocessing:** LPS array O(m) time mein banta hai\n3. **Smart Skipping:** Jab mismatch ho, LPS array use karke characters skip karo instead of scratch se start karna\n\n**Time Complexity:** O(m + n) jahan m = pattern length, n = text length\n**Space Complexity:** O(m) LPS array ke liye\n\n**Ye efficient kyun hai:**\n- Text ka koi bhi character jo match ho chuka hai, usse dubara compare nahi karta\n- Pattern pointer LPS array use karke jump back karta hai, par text pointer kabhi peeche nahi jaata"
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\n// Build LPS (failure function) array\nvector<int> buildLPS(string pattern) {\n    int m = pattern.length();\n    vector<int> lps(m, 0);\n    int len = 0;\n    int i = 1;\n    \n    while (i < m) {\n        if (pattern[i] == pattern[len]) {\n            len++;\n            lps[i] = len;\n            i++;\n        } else {\n            if (len != 0) {\n                len = lps[len - 1];\n            } else {\n                lps[i] = 0;\n                i++;\n            }\n        }\n    }\n    return lps;\n}\n\nvoid KMPSearch(string text, string pattern) {\n    int n = text.length();\n    int m = pattern.length();\n    vector<int> lps = buildLPS(pattern);\n    \n    int i = 0; // index for text\n    int j = 0; // index for pattern\n    \n    while (i < n) {\n        if (pattern[j] == text[i]) {\n            i++;\n            j++;\n        }\n        if (j == m) {\n            cout << \"Pattern found at index \" << i - j << endl;\n            j = lps[j - 1];\n        } else if (i < n && pattern[j] != text[i]) {\n            if (j != 0)\n                j = lps[j - 1];\n            else\n                i++;\n        }\n    }\n}\n\nint main() {\n    string text = \"ABABDABACDABABCABAB\";\n    string pattern = \"ABABCABAB\";\n    KMPSearch(text, pattern);\n    // Output: Pattern found at index 9\n    return 0;\n}",
+        "python": "def build_lps(pattern):\n    m = len(pattern)\n    lps = [0] * m\n    length = 0\n    i = 1\n    \n    while i < m:\n        if pattern[i] == pattern[length]:\n            length += 1\n            lps[i] = length\n            i += 1\n        else:\n            if length != 0:\n                length = lps[length - 1]\n            else:\n                lps[i] = 0\n                i += 1\n    return lps\n\ndef kmp_search(text, pattern):\n    n = len(text)\n    m = len(pattern)\n    lps = build_lps(pattern)\n    \n    i = 0  # index for text\n    j = 0  # index for pattern\n    \n    while i < n:\n        if pattern[j] == text[i]:\n            i += 1\n            j += 1\n        \n        if j == m:\n            print(f\"Pattern found at index {i - j}\")\n            j = lps[j - 1]\n        elif i < n and pattern[j] != text[i]:\n            if j != 0:\n                j = lps[j - 1]\n            else:\n                i += 1\n\ntext = \"ABABDABACDABABCABAB\"\npattern = \"ABABCABAB\"\nkmp_search(text, pattern)\n# Output: Pattern found at index 9",
+        "java": "public class KMP {\n    static int[] buildLPS(String pattern) {\n        int m = pattern.length();\n        int[] lps = new int[m];\n        int len = 0;\n        int i = 1;\n        \n        while (i < m) {\n            if (pattern.charAt(i) == pattern.charAt(len)) {\n                len++;\n                lps[i] = len;\n                i++;\n            } else {\n                if (len != 0) len = lps[len - 1];\n                else { lps[i] = 0; i++; }\n            }\n        }\n        return lps;\n    }\n    \n    static void KMPSearch(String text, String pattern) {\n        int n = text.length(), m = pattern.length();\n        int[] lps = buildLPS(pattern);\n        int i = 0, j = 0;\n        \n        while (i < n) {\n            if (pattern.charAt(j) == text.charAt(i)) { i++; j++; }\n            if (j == m) {\n                System.out.println(\"Pattern found at index \" + (i - j));\n                j = lps[j - 1];\n            } else if (i < n && pattern.charAt(j) != text.charAt(i)) {\n                if (j != 0) j = lps[j - 1];\n                else i++;\n            }\n        }\n    }\n    \n    public static void main(String[] args) {\n        KMPSearch(\"ABABDABACDABABCABAB\", \"ABABCABAB\");\n    }\n}",
+        "javascript": "function buildLPS(pattern) {\n    const m = pattern.length;\n    const lps = new Array(m).fill(0);\n    let len = 0;\n    let i = 1;\n    \n    while (i < m) {\n        if (pattern[i] === pattern[len]) {\n            len++;\n            lps[i] = len;\n            i++;\n        } else {\n            if (len !== 0) len = lps[len - 1];\n            else { lps[i] = 0; i++; }\n        }\n    }\n    return lps;\n}\n\nfunction kmpSearch(text, pattern) {\n    const n = text.length, m = pattern.length;\n    const lps = buildLPS(pattern);\n    let i = 0, j = 0;\n    \n    while (i < n) {\n        if (pattern[j] === text[i]) { i++; j++; }\n        if (j === m) {\n            console.log(`Pattern found at index ${i - j}`);\n            j = lps[j - 1];\n        } else if (i < n && pattern[j] !== text[i]) {\n            if (j !== 0) j = lps[j - 1];\n            else i++;\n        }\n    }\n}\n\nkmpSearch(\"ABABDABACDABABCABAB\", \"ABABCABAB\");",
+        "c": "#include <stdio.h>\n#include <string.h>\n\nvoid buildLPS(char pattern[], int m, int lps[]) {\n    int len = 0;\n    lps[0] = 0;\n    int i = 1;\n    \n    while (i < m) {\n        if (pattern[i] == pattern[len]) {\n            len++;\n            lps[i] = len;\n            i++;\n        } else {\n            if (len != 0) len = lps[len - 1];\n            else { lps[i] = 0; i++; }\n        }\n    }\n}\n\nvoid KMPSearch(char text[], char pattern[]) {\n    int n = strlen(text);\n    int m = strlen(pattern);\n    int lps[m];\n    buildLPS(pattern, m, lps);\n    \n    int i = 0, j = 0;\n    while (i < n) {\n        if (pattern[j] == text[i]) { i++; j++; }\n        if (j == m) {\n            printf(\"Pattern found at index %d\\n\", i - j);\n            j = lps[j - 1];\n        } else if (i < n && pattern[j] != text[i]) {\n            if (j != 0) j = lps[j - 1];\n            else i++;\n        }\n    }\n}\n\nint main() {\n    KMPSearch(\"ABABDABACDABABCABAB\", \"ABABCABAB\");\n    return 0;\n}"
+      },
+      "keyPoints": [
+        {
+          "en": "The LPS array is the heart of KMP - it stores the longest proper prefix which is also a suffix",
+          "hi": "LPS array KMP ka dil hai - ye longest proper prefix store karta hai jo suffix bhi ho"
+        },
+        {
+          "en": "Text pointer never moves backward, making it O(m+n) overall",
+          "hi": "Text pointer kabhi peeche nahi jaata, isliye overall O(m+n) hai"
+        },
+        {
+          "en": "Best algorithm when pattern has many repeating prefixes/suffixes",
+          "hi": "Jab pattern mein bahut saare repeating prefixes/suffixes hon tab best algorithm hai"
+        }
+      ],
+      "timeComplexity": {
+        "preprocessing": "O(m)",
+        "searching": "O(n)",
+        "overall": "O(m + n)"
+      }
+    },
+    {
+      "id": "rabin-karp-algorithm",
+      "title": {
+        "en": "Rabin-Karp Algorithm",
+        "hi": "Rabin-Karp Algorithm"
+      },
+      "content": {
+        "en": "The Rabin-Karp algorithm uses hashing to find pattern matches. Instead of comparing characters one by one, it computes a hash value for the pattern and for each window of text, then compares hashes. Only when hashes match does it verify character by character (to handle hash collisions).\n\n**Key Concepts:**\n1. **Hashing:** Convert the pattern and text windows into numeric hash values\n2. **Rolling Hash:** Efficiently compute the next window's hash from the previous one in O(1) time\n3. **Spurious Hits:** When hash values match but the actual strings don't (due to collisions)\n4. **Modular Arithmetic:** Used to keep hash values within bounds\n\n**Rolling Hash Formula:**\nhash(s[i+1..i+m]) = (d * (hash(s[i..i+m-1]) - s[i] * d^(m-1)) + s[i+m]) mod q\n\n**Time Complexity:** O(m + n) average, O(m * n) worst case (many spurious hits)\n**Space Complexity:** O(1)\n\n**When to use:**\n- Multiple pattern matching (searching for multiple patterns simultaneously)\n- Plagiarism detection systems\n- When average-case performance is acceptable",
+        "hi": "Rabin-Karp algorithm hashing use karta hai pattern matches dhundhne ke liye. Characters ko ek ek karke compare karne ki jagah, ye pattern aur text ke har window ka hash value compute karta hai, phir hashes compare karta hai. Sirf jab hashes match hon tabhi character by character verify karta hai (hash collisions handle karne ke liye).\n\n**Key Concepts:**\n1. **Hashing:** Pattern aur text windows ko numeric hash values mein convert karna\n2. **Rolling Hash:** Previous window ke hash se next window ka hash O(1) mein efficiently compute karna\n3. **Spurious Hits:** Jab hash values match hon par actual strings na match karein (collisions ki wajah se)\n4. **Modular Arithmetic:** Hash values ko bounds mein rakhne ke liye use hoti hai\n\n**Rolling Hash Formula:**\nhash(s[i+1..i+m]) = (d * (hash(s[i..i+m-1]) - s[i] * d^(m-1)) + s[i+m]) mod q\n\n**Time Complexity:** O(m + n) average, O(m * n) worst case (bahut spurious hits)\n**Space Complexity:** O(1)\n\n**Kab use karein:**\n- Multiple pattern matching (ek saath kayi patterns search karna)\n- Plagiarism detection systems\n- Jab average-case performance acceptable ho"
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nconst int d = 256;  // number of characters in alphabet\nconst int q = 101;  // a prime number for modular hashing\n\nvoid rabinKarp(string text, string pattern) {\n    int n = text.length();\n    int m = pattern.length();\n    int h = 1;  // d^(m-1) % q\n    int p = 0;  // hash for pattern\n    int t = 0;  // hash for text window\n    \n    // Compute h = d^(m-1) % q\n    for (int i = 0; i < m - 1; i++)\n        h = (h * d) % q;\n    \n    // Compute initial hash values\n    for (int i = 0; i < m; i++) {\n        p = (d * p + pattern[i]) % q;\n        t = (d * t + text[i]) % q;\n    }\n    \n    // Slide pattern over text\n    for (int i = 0; i <= n - m; i++) {\n        if (p == t) {\n            // Hash match - verify character by character\n            bool match = true;\n            for (int j = 0; j < m; j++) {\n                if (text[i + j] != pattern[j]) {\n                    match = false;\n                    break;\n                }\n            }\n            if (match)\n                cout << \"Pattern found at index \" << i << endl;\n        }\n        \n        // Compute rolling hash for next window\n        if (i < n - m) {\n            t = (d * (t - text[i] * h) + text[i + m]) % q;\n            if (t < 0) t += q;\n        }\n    }\n}\n\nint main() {\n    string text = \"GEEKS FOR GEEKS\";\n    string pattern = \"GEEK\";\n    rabinKarp(text, pattern);\n    // Output: Pattern found at index 0\n    //         Pattern found at index 10\n    return 0;\n}",
+        "python": "def rabin_karp(text, pattern):\n    d = 256   # number of characters in alphabet\n    q = 101   # a prime number\n    n = len(text)\n    m = len(pattern)\n    h = pow(d, m - 1) % q  # d^(m-1) % q\n    p = 0  # hash for pattern\n    t = 0  # hash for text window\n    \n    # Compute initial hash values\n    for i in range(m):\n        p = (d * p + ord(pattern[i])) % q\n        t = (d * t + ord(text[i])) % q\n    \n    # Slide pattern over text\n    for i in range(n - m + 1):\n        if p == t:\n            # Hash match - verify character by character\n            if text[i:i + m] == pattern:\n                print(f\"Pattern found at index {i}\")\n        \n        # Compute rolling hash for next window\n        if i < n - m:\n            t = (d * (t - ord(text[i]) * h) + ord(text[i + m])) % q\n            if t < 0:\n                t += q\n\ntext = \"GEEKS FOR GEEKS\"\npattern = \"GEEK\"\nrabin_karp(text, pattern)\n# Output: Pattern found at index 0\n#         Pattern found at index 10",
+        "java": "public class RabinKarp {\n    static final int d = 256;\n    static final int q = 101;\n    \n    static void rabinKarp(String text, String pattern) {\n        int n = text.length(), m = pattern.length();\n        int h = 1, p = 0, t = 0;\n        \n        for (int i = 0; i < m - 1; i++) h = (h * d) % q;\n        for (int i = 0; i < m; i++) {\n            p = (d * p + pattern.charAt(i)) % q;\n            t = (d * t + text.charAt(i)) % q;\n        }\n        \n        for (int i = 0; i <= n - m; i++) {\n            if (p == t) {\n                if (text.substring(i, i + m).equals(pattern))\n                    System.out.println(\"Pattern found at index \" + i);\n            }\n            if (i < n - m) {\n                t = (d * (t - text.charAt(i) * h) + text.charAt(i + m)) % q;\n                if (t < 0) t += q;\n            }\n        }\n    }\n    \n    public static void main(String[] args) {\n        rabinKarp(\"GEEKS FOR GEEKS\", \"GEEK\");\n    }\n}",
+        "javascript": "function rabinKarp(text, pattern) {\n    const d = 256;\n    const q = 101;\n    const n = text.length, m = pattern.length;\n    let h = 1, p = 0, t = 0;\n    \n    for (let i = 0; i < m - 1; i++) h = (h * d) % q;\n    for (let i = 0; i < m; i++) {\n        p = (d * p + pattern.charCodeAt(i)) % q;\n        t = (d * t + text.charCodeAt(i)) % q;\n    }\n    \n    for (let i = 0; i <= n - m; i++) {\n        if (p === t) {\n            if (text.substring(i, i + m) === pattern)\n                console.log(`Pattern found at index ${i}`);\n        }\n        if (i < n - m) {\n            t = (d * (t - text.charCodeAt(i) * h) + text.charCodeAt(i + m)) % q;\n            if (t < 0) t += q;\n        }\n    }\n}\n\nrabinKarp(\"GEEKS FOR GEEKS\", \"GEEK\");",
+        "c": "#include <stdio.h>\n#include <string.h>\n\n#define d 256\n#define q 101\n\nvoid rabinKarp(char text[], char pattern[]) {\n    int n = strlen(text), m = strlen(pattern);\n    int h = 1, p = 0, t = 0;\n    \n    for (int i = 0; i < m - 1; i++) h = (h * d) % q;\n    for (int i = 0; i < m; i++) {\n        p = (d * p + pattern[i]) % q;\n        t = (d * t + text[i]) % q;\n    }\n    \n    for (int i = 0; i <= n - m; i++) {\n        if (p == t) {\n            int match = 1;\n            for (int j = 0; j < m; j++) {\n                if (text[i + j] != pattern[j]) { match = 0; break; }\n            }\n            if (match) printf(\"Pattern found at index %d\\n\", i);\n        }\n        if (i < n - m) {\n            t = (d * (t - text[i] * h) + text[i + m]) % q;\n            if (t < 0) t += q;\n        }\n    }\n}\n\nint main() {\n    rabinKarp(\"GEEKS FOR GEEKS\", \"GEEK\");\n    return 0;\n}"
+      },
+      "keyPoints": [
+        {
+          "en": "Rolling hash makes sliding the window O(1) instead of recalculating the full hash each time",
+          "hi": "Rolling hash window sliding ko O(1) bana deta hai - har baar poora hash recalculate nahi karna padta"
+        },
+        {
+          "en": "Spurious hits occur when hashes match but strings differ - always verify on hash match",
+          "hi": "Spurious hits tab hoti hain jab hashes match hon par strings alag hon - hash match pe hamesha verify karo"
+        },
+        {
+          "en": "Excellent for multi-pattern search - can search for multiple patterns in one pass",
+          "hi": "Multi-pattern search ke liye excellent hai - ek pass mein multiple patterns search kar sakte hain"
+        }
+      ],
+      "timeComplexity": {
+        "average": "O(m + n)",
+        "worst": "O(m * n)",
+        "note": "Worst case due to spurious hits"
+      }
+    },
+    {
+      "id": "z-algorithm",
+      "title": {
+        "en": "Z Algorithm",
+        "hi": "Z Algorithm"
+      },
+      "content": {
+        "en": "The Z Algorithm constructs a Z-array for a given string, where Z[i] represents the length of the longest substring starting at position i that matches a prefix of the string. For pattern matching, we concatenate the pattern, a separator character, and the text, then build the Z-array.\n\n**Key Concepts:**\n1. **Z-array:** Z[i] = length of the longest substring starting at i which is also a prefix of the string\n2. **Z-box:** The interval [L, R] that tracks the rightmost matched segment\n3. **Pattern Matching:** Concatenate pattern + '$' + text, build Z-array, and find positions where Z[i] == pattern length\n\n**How it works:**\n1. Create string S = pattern + '$' + text\n2. Build Z-array for S\n3. For each i, if Z[i] == len(pattern), then pattern is found at position i - len(pattern) - 1 in text\n\n**Time Complexity:** O(m + n)\n**Space Complexity:** O(m + n) for the Z-array\n\n**Advantages:**\n- Linear time complexity with a simpler concept than KMP\n- Very useful for problems involving prefix matching and string periodicity\n- The Z-array itself has many applications beyond pattern matching",
+        "hi": "Z Algorithm ek given string ke liye Z-array banata hai, jahan Z[i] us longest substring ki length hai jo position i se start hoti hai aur string ke prefix se match karti hai. Pattern matching ke liye, hum pattern, ek separator character, aur text ko concatenate karte hain, phir Z-array banate hain.\n\n**Key Concepts:**\n1. **Z-array:** Z[i] = longest substring ki length jo i se start hoti hai aur string ka prefix bhi hai\n2. **Z-box:** Interval [L, R] jo rightmost matched segment track karta hai\n3. **Pattern Matching:** pattern + '$' + text concatenate karo, Z-array banao, aur positions dhundho jahan Z[i] == pattern length\n\n**Kaise kaam karta hai:**\n1. String S = pattern + '$' + text banao\n2. S ke liye Z-array build karo\n3. Har i ke liye, agar Z[i] == len(pattern), to pattern text mein position i - len(pattern) - 1 pe mila\n\n**Time Complexity:** O(m + n)\n**Space Complexity:** O(m + n) Z-array ke liye\n\n**Advantages:**\n- Linear time complexity KMP se simpler concept ke saath\n- Prefix matching aur string periodicity problems ke liye bahut useful\n- Z-array ki pattern matching ke alaawa bhi bahut applications hain"
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvector<int> buildZArray(string s) {\n    int n = s.length();\n    vector<int> z(n, 0);\n    int l = 0, r = 0;\n    \n    for (int i = 1; i < n; i++) {\n        if (i < r) {\n            z[i] = min(r - i, z[i - l]);\n        }\n        while (i + z[i] < n && s[z[i]] == s[i + z[i]]) {\n            z[i]++;\n        }\n        if (i + z[i] > r) {\n            l = i;\n            r = i + z[i];\n        }\n    }\n    return z;\n}\n\nvoid zSearch(string text, string pattern) {\n    string concat = pattern + \"$\" + text;\n    int m = pattern.length();\n    vector<int> z = buildZArray(concat);\n    \n    for (int i = 0; i < (int)concat.length(); i++) {\n        if (z[i] == m) {\n            cout << \"Pattern found at index \" << i - m - 1 << endl;\n        }\n    }\n}\n\nint main() {\n    string text = \"GEEKS FOR GEEKS\";\n    string pattern = \"GEEK\";\n    zSearch(text, pattern);\n    // Output: Pattern found at index 0\n    //         Pattern found at index 10\n    return 0;\n}",
+        "python": "def build_z_array(s):\n    n = len(s)\n    z = [0] * n\n    l, r = 0, 0\n    \n    for i in range(1, n):\n        if i < r:\n            z[i] = min(r - i, z[i - l])\n        while i + z[i] < n and s[z[i]] == s[i + z[i]]:\n            z[i] += 1\n        if i + z[i] > r:\n            l, r = i, i + z[i]\n    return z\n\ndef z_search(text, pattern):\n    concat = pattern + \"$\" + text\n    m = len(pattern)\n    z = build_z_array(concat)\n    \n    for i in range(len(concat)):\n        if z[i] == m:\n            print(f\"Pattern found at index {i - m - 1}\")\n\ntext = \"GEEKS FOR GEEKS\"\npattern = \"GEEK\"\nz_search(text, pattern)\n# Output: Pattern found at index 0\n#         Pattern found at index 10",
+        "java": "import java.util.*;\n\npublic class ZAlgorithm {\n    static int[] buildZArray(String s) {\n        int n = s.length();\n        int[] z = new int[n];\n        int l = 0, r = 0;\n        \n        for (int i = 1; i < n; i++) {\n            if (i < r) z[i] = Math.min(r - i, z[i - l]);\n            while (i + z[i] < n && s.charAt(z[i]) == s.charAt(i + z[i])) z[i]++;\n            if (i + z[i] > r) { l = i; r = i + z[i]; }\n        }\n        return z;\n    }\n    \n    static void zSearch(String text, String pattern) {\n        String concat = pattern + \"$\" + text;\n        int m = pattern.length();\n        int[] z = buildZArray(concat);\n        \n        for (int i = 0; i < concat.length(); i++) {\n            if (z[i] == m)\n                System.out.println(\"Pattern found at index \" + (i - m - 1));\n        }\n    }\n    \n    public static void main(String[] args) {\n        zSearch(\"GEEKS FOR GEEKS\", \"GEEK\");\n    }\n}",
+        "javascript": "function buildZArray(s) {\n    const n = s.length;\n    const z = new Array(n).fill(0);\n    let l = 0, r = 0;\n    \n    for (let i = 1; i < n; i++) {\n        if (i < r) z[i] = Math.min(r - i, z[i - l]);\n        while (i + z[i] < n && s[z[i]] === s[i + z[i]]) z[i]++;\n        if (i + z[i] > r) { l = i; r = i + z[i]; }\n    }\n    return z;\n}\n\nfunction zSearch(text, pattern) {\n    const concat = pattern + \"$\" + text;\n    const m = pattern.length;\n    const z = buildZArray(concat);\n    \n    for (let i = 0; i < concat.length; i++) {\n        if (z[i] === m)\n            console.log(`Pattern found at index ${i - m - 1}`);\n    }\n}\n\nzSearch(\"GEEKS FOR GEEKS\", \"GEEK\");",
+        "c": "#include <stdio.h>\n#include <string.h>\n\nvoid buildZArray(char s[], int z[], int n) {\n    int l = 0, r = 0;\n    z[0] = 0;\n    \n    for (int i = 1; i < n; i++) {\n        z[i] = 0;\n        if (i < r) z[i] = (r - i < z[i - l]) ? r - i : z[i - l];\n        while (i + z[i] < n && s[z[i]] == s[i + z[i]]) z[i]++;\n        if (i + z[i] > r) { l = i; r = i + z[i]; }\n    }\n}\n\nvoid zSearch(char text[], char pattern[]) {\n    int m = strlen(pattern), n = strlen(text);\n    int len = m + 1 + n;\n    char concat[len + 1];\n    sprintf(concat, \"%s$%s\", pattern, text);\n    \n    int z[len];\n    buildZArray(concat, z, len);\n    \n    for (int i = 0; i < len; i++) {\n        if (z[i] == m)\n            printf(\"Pattern found at index %d\\n\", i - m - 1);\n    }\n}\n\nint main() {\n    zSearch(\"GEEKS FOR GEEKS\", \"GEEK\");\n    return 0;\n}"
+      },
+      "keyPoints": [
+        {
+          "en": "Z-array is built in O(n) time using the Z-box optimization (L, R window)",
+          "hi": "Z-array O(n) time mein banta hai Z-box optimization (L, R window) use karke"
+        },
+        {
+          "en": "The separator character '$' ensures pattern matching doesn't extend beyond the pattern",
+          "hi": "Separator character '$' ensure karta hai ki pattern matching pattern ke aage na badhe"
+        },
+        {
+          "en": "Z-array has applications in finding string periodicity, longest palindromic prefix, and more",
+          "hi": "Z-array ki applications hain string periodicity, longest palindromic prefix, aur bahut kuch dhundhne mein"
+        }
+      ],
+      "timeComplexity": {
+        "building": "O(m + n)",
+        "overall": "O(m + n)"
+      }
+    }
+  ]
+}

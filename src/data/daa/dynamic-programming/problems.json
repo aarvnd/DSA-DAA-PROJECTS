@@ -1,0 +1,379 @@
+{
+  "topicId": "daa-dp",
+  "problems": [
+    {
+      "id": "daadp-001",
+      "title": "0/1 Knapsack",
+      "titleHi": "0/1 Knapsack Problem",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given N items, each with a weight and a value, and a knapsack with maximum capacity W, find the maximum total value that can be put in the knapsack. Each item can either be included completely or excluded (0 or 1), you cannot take a fraction of an item.",
+        "hi": "N items diye hain jinke weight aur value hain, aur ek knapsack hai jiska maximum capacity W hai. Maximum total value dhundho jo knapsack mein aa sake. Har item ya toh poora include hoga ya exclude hoga (0 ya 1), aap item ka fraction nahi le sakte."
+      },
+      "examples": [
+        {
+          "input": "N = 3, W = 50\nweights = [10, 20, 30]\nvalues = [60, 100, 120]",
+          "output": "220",
+          "explanation": { "en": "Take items with weights 20 and 30 (total weight 50) for values 100 + 120 = 220", "hi": "Weight 20 aur 30 wale items lo (total weight 50) values 100 + 120 = 220" }
+        },
+        {
+          "input": "N = 4, W = 7\nweights = [1, 3, 4, 5]\nvalues = [1, 4, 5, 7]",
+          "output": "9",
+          "explanation": { "en": "Take items with weights 3 and 4 (total weight 7) for values 4 + 5 = 9", "hi": "Weight 3 aur 4 wale items lo (total weight 7) values 4 + 5 = 9" }
+        }
+      ],
+      "constraints": ["1 <= N <= 1000", "1 <= W <= 1000", "1 <= weights[i] <= W", "1 <= values[i] <= 10^6"],
+      "hints": [
+        { "en": "For each item, you have two choices: include it or exclude it", "hi": "Har item ke liye do choices hain: include karo ya exclude karo" },
+        { "en": "Use a 2D DP table dp[i][w] representing max value using first i items with capacity w", "hi": "2D DP table dp[i][w] use karo jo first i items se capacity w mein max value represent kare" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\nusing namespace std;\n\nint knapsack(int W, int wt[], int val[], int n) {\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    int n, W;\n    cin >> n >> W;\n    int wt[n], val[n];\n    for(int i=0;i<n;i++) cin >> wt[i];\n    for(int i=0;i<n;i++) cin >> val[i];\n    cout << knapsack(W, wt, val, n);\n}",
+        "python": "def knapsack(W, wt, val, n):\n    # Write your code here\n    pass\n\nn, W = map(int, input().split())\nwt = list(map(int, input().split()))\nval = list(map(int, input().split()))\nprint(knapsack(W, wt, val, n))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int knapsack(int W, int[] wt, int[] val, int n) {\n        // Write your code here\n        return 0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), W = sc.nextInt();\n        int[] wt = new int[n], val = new int[n];\n        for(int i=0;i<n;i++) wt[i] = sc.nextInt();\n        for(int i=0;i<n;i++) val[i] = sc.nextInt();\n        System.out.println(knapsack(W, wt, val, n));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [n, W] = lines[0].split(' ').map(Number);\nconst wt = lines[1].split(' ').map(Number);\nconst val = lines[2].split(' ').map(Number);\nfunction knapsack(W, wt, val, n) {\n    // Write your code here\n}\nconsole.log(knapsack(W, wt, val, n));",
+        "c": "#include<stdio.h>\nint knapsack(int W, int wt[], int val[], int n) {\n    // Write your code here\n    return 0;\n}\nint main() {\n    int n, W;\n    scanf(\"%d %d\", &n, &W);\n    int wt[n], val[n];\n    for(int i=0;i<n;i++) scanf(\"%d\", &wt[i]);\n    for(int i=0;i<n;i++) scanf(\"%d\", &val[i]);\n    printf(\"%d\", knapsack(W, wt, val, n));\n}"
+      },
+      "testCases": [
+        { "input": "3 50\n10 20 30\n60 100 120", "expectedOutput": "220" },
+        { "input": "4 7\n1 3 4 5\n1 4 5 7", "expectedOutput": "9" },
+        { "input": "1 5\n10\n100", "expectedOutput": "0" }
+      ],
+      "solution": {
+        "approach": { "en": "Build a 2D DP table. dp[i][w] = max(dp[i-1][w], val[i-1] + dp[i-1][w-wt[i-1]]) if wt[i-1] <= w.", "hi": "2D DP table banao. dp[i][w] = max(dp[i-1][w], val[i-1] + dp[i-1][w-wt[i-1]]) agar wt[i-1] <= w." },
+        "code": {
+          "cpp": "int knapsack(int W, int wt[], int val[], int n) {\n    vector<vector<int>> dp(n+1, vector<int>(W+1, 0));\n    for(int i=1;i<=n;i++)\n        for(int w=0;w<=W;w++) {\n            dp[i][w] = dp[i-1][w];\n            if(wt[i-1]<=w) dp[i][w]=max(dp[i][w], val[i-1]+dp[i-1][w-wt[i-1]]);\n        }\n    return dp[n][W];\n}",
+          "python": "def knapsack(W, wt, val, n):\n    dp = [[0]*(W+1) for _ in range(n+1)]\n    for i in range(1, n+1):\n        for w in range(W+1):\n            dp[i][w] = dp[i-1][w]\n            if wt[i-1] <= w:\n                dp[i][w] = max(dp[i][w], val[i-1] + dp[i-1][w-wt[i-1]])\n    return dp[n][W]"
+        },
+        "timeComplexity": "O(N * W)",
+        "spaceComplexity": "O(N * W)"
+      },
+      "tags": ["dp", "knapsack", "optimization"]
+    },
+    {
+      "id": "daadp-002",
+      "title": "Longest Common Subsequence",
+      "titleHi": "Sabse Lambi Common Subsequence",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given two strings s1 and s2, find the length of their Longest Common Subsequence (LCS). A subsequence is a sequence that can be derived from the string by deleting some or no characters without changing the order of remaining characters.",
+        "hi": "Do strings s1 aur s2 diye hain, unki Longest Common Subsequence (LCS) ki length dhundho. Subsequence ek aisi sequence hai jo string se kuch characters delete karke banayi ja sakti hai bina remaining characters ka order badle."
+      },
+      "examples": [
+        {
+          "input": "s1 = \"ABCBDAB\"\ns2 = \"BDCAB\"",
+          "output": "4",
+          "explanation": { "en": "LCS is \"BCAB\" with length 4", "hi": "LCS hai \"BCAB\" jiski length 4 hai" }
+        },
+        {
+          "input": "s1 = \"AGGTAB\"\ns2 = \"GXTXAYB\"",
+          "output": "4",
+          "explanation": { "en": "LCS is \"GTAB\" with length 4", "hi": "LCS hai \"GTAB\" jiski length 4 hai" }
+        }
+      ],
+      "constraints": ["1 <= |s1|, |s2| <= 1000", "Strings contain only uppercase English letters"],
+      "hints": [
+        { "en": "If last characters match, LCS includes that character", "hi": "Agar last characters match karte hain, toh LCS mein wo character include hoga" },
+        { "en": "If they don't match, take max of excluding one character from either string", "hi": "Agar match nahi karte, toh kisi ek string se ek character exclude karke max lo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<string>\nusing namespace std;\n\nint lcs(string s1, string s2) {\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    string s1, s2;\n    cin >> s1 >> s2;\n    cout << lcs(s1, s2);\n}",
+        "python": "def lcs(s1, s2):\n    # Write your code here\n    pass\n\ns1 = input()\ns2 = input()\nprint(lcs(s1, s2))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int lcs(String s1, String s2) {\n        // Write your code here\n        return 0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s1 = sc.next(), s2 = sc.next();\n        System.out.println(lcs(s1, s2));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst s1 = lines[0], s2 = lines[1];\nfunction lcs(s1, s2) {\n    // Write your code here\n}\nconsole.log(lcs(s1, s2));",
+        "c": "#include<stdio.h>\n#include<string.h>\nint lcs(char s1[], char s2[]) {\n    // Write your code here\n    return 0;\n}\nint main() {\n    char s1[1001], s2[1001];\n    scanf(\"%s %s\", s1, s2);\n    printf(\"%d\", lcs(s1, s2));\n}"
+      },
+      "testCases": [
+        { "input": "ABCBDAB\nBDCAB", "expectedOutput": "4" },
+        { "input": "AGGTAB\nGXTXAYB", "expectedOutput": "4" },
+        { "input": "ABC\nDEF", "expectedOutput": "0" }
+      ],
+      "solution": {
+        "approach": { "en": "Build a 2D DP table. If characters match, dp[i][j] = 1 + dp[i-1][j-1]. Otherwise dp[i][j] = max(dp[i-1][j], dp[i][j-1]).", "hi": "2D DP table banao. Agar characters match karen, dp[i][j] = 1 + dp[i-1][j-1]. Nahi toh dp[i][j] = max(dp[i-1][j], dp[i][j-1])." },
+        "code": {
+          "cpp": "int lcs(string s1, string s2) {\n    int m=s1.size(), n=s2.size();\n    vector<vector<int>> dp(m+1, vector<int>(n+1, 0));\n    for(int i=1;i<=m;i++)\n        for(int j=1;j<=n;j++)\n            dp[i][j] = (s1[i-1]==s2[j-1]) ? 1+dp[i-1][j-1] : max(dp[i-1][j],dp[i][j-1]);\n    return dp[m][n];\n}",
+          "python": "def lcs(s1, s2):\n    m, n = len(s1), len(s2)\n    dp = [[0]*(n+1) for _ in range(m+1)]\n    for i in range(1, m+1):\n        for j in range(1, n+1):\n            if s1[i-1] == s2[j-1]:\n                dp[i][j] = 1 + dp[i-1][j-1]\n            else:\n                dp[i][j] = max(dp[i-1][j], dp[i][j-1])\n    return dp[m][n]"
+        },
+        "timeComplexity": "O(m * n)",
+        "spaceComplexity": "O(m * n)"
+      },
+      "tags": ["dp", "string", "subsequence"]
+    },
+    {
+      "id": "daadp-003",
+      "title": "Matrix Chain Multiplication",
+      "titleHi": "Matrix Chain Multiplication",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given a sequence of matrices represented by an array p[] of dimensions where matrix i has dimensions p[i-1] x p[i], find the minimum number of scalar multiplications needed to compute the product of all matrices. Print the minimum cost.",
+        "hi": "Matrices ki ek sequence di hai jo dimensions array p[] se represent hoti hai jahan matrix i ki dimensions p[i-1] x p[i] hain. Saari matrices ka product compute karne ke liye minimum scalar multiplications dhundho. Minimum cost print karo."
+      },
+      "examples": [
+        {
+          "input": "n = 4\np = [10, 20, 30, 40]",
+          "output": "18000",
+          "explanation": { "en": "3 matrices: 10x20, 20x30, 30x40. Optimal: (A1*A2)*A3 = 10*20*30 + 10*30*40 = 6000 + 12000 = 18000", "hi": "3 matrices: 10x20, 20x30, 30x40. Optimal: (A1*A2)*A3 = 10*20*30 + 10*30*40 = 6000 + 12000 = 18000" }
+        },
+        {
+          "input": "n = 5\np = [10, 20, 30, 40, 30]",
+          "output": "30000",
+          "explanation": { "en": "4 matrices with optimal parenthesization giving 30000 multiplications", "hi": "4 matrices optimal parenthesization se 30000 multiplications deti hain" }
+        }
+      ],
+      "constraints": ["2 <= n <= 100", "1 <= p[i] <= 500"],
+      "hints": [
+        { "en": "Try all possible split points k between matrices i and j", "hi": "Matrices i aur j ke beech saare possible split points k try karo" },
+        { "en": "Fill the DP table diagonally by increasing chain length", "hi": "DP table diagonally fill karo increasing chain length ke hisaab se" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<climits>\nusing namespace std;\n\nint mcm(int p[], int n) {\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    int p[n];\n    for(int i=0;i<n;i++) cin >> p[i];\n    cout << mcm(p, n);\n}",
+        "python": "def mcm(p, n):\n    # Write your code here\n    pass\n\nn = int(input())\np = list(map(int, input().split()))\nprint(mcm(p, n))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int mcm(int[] p, int n) {\n        // Write your code here\n        return 0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] p = new int[n];\n        for(int i=0;i<n;i++) p[i]=sc.nextInt();\n        System.out.println(mcm(p, n));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst p = lines[1].split(' ').map(Number);\nfunction mcm(p, n) {\n    // Write your code here\n}\nconsole.log(mcm(p, n));",
+        "c": "#include<stdio.h>\n#include<limits.h>\nint mcm(int p[], int n) {\n    // Write your code here\n    return 0;\n}\nint main() {\n    int n;\n    scanf(\"%d\", &n);\n    int p[n];\n    for(int i=0;i<n;i++) scanf(\"%d\", &p[i]);\n    printf(\"%d\", mcm(p, n));\n}"
+      },
+      "testCases": [
+        { "input": "4\n10 20 30 40", "expectedOutput": "18000" },
+        { "input": "5\n10 20 30 40 30", "expectedOutput": "30000" },
+        { "input": "3\n5 10 20", "expectedOutput": "1000" }
+      ],
+      "solution": {
+        "approach": { "en": "Use interval DP. For chain length L from 2 to n-1, try all split points k. dp[i][j] = min(dp[i][k] + dp[k+1][j] + p[i-1]*p[k]*p[j]).", "hi": "Interval DP use karo. Chain length L = 2 se n-1 tak, saare split points k try karo. dp[i][j] = min(dp[i][k] + dp[k+1][j] + p[i-1]*p[k]*p[j])." },
+        "code": {
+          "cpp": "int mcm(int p[], int n) {\n    int dp[n][n];\n    memset(dp, 0, sizeof(dp));\n    for(int L=2;L<n;L++)\n        for(int i=1;i<n-L+1;i++) {\n            int j=i+L-1; dp[i][j]=INT_MAX;\n            for(int k=i;k<j;k++)\n                dp[i][j]=min(dp[i][j], dp[i][k]+dp[k+1][j]+p[i-1]*p[k]*p[j]);\n        }\n    return dp[1][n-1];\n}",
+          "python": "def mcm(p, n):\n    dp = [[0]*n for _ in range(n)]\n    for L in range(2, n):\n        for i in range(1, n-L+1):\n            j = i+L-1\n            dp[i][j] = float('inf')\n            for k in range(i, j):\n                dp[i][j] = min(dp[i][j], dp[i][k]+dp[k+1][j]+p[i-1]*p[k]*p[j])\n    return dp[1][n-1]"
+        },
+        "timeComplexity": "O(n^3)",
+        "spaceComplexity": "O(n^2)"
+      },
+      "tags": ["dp", "interval-dp", "matrix"]
+    },
+    {
+      "id": "daadp-004",
+      "title": "Floyd-Warshall Shortest Paths",
+      "titleHi": "Floyd-Warshall Shortest Paths",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given a weighted directed graph represented as an adjacency matrix, find the shortest distances between every pair of vertices using the Floyd-Warshall algorithm. The graph may have negative edge weights but no negative weight cycles. If there is no path between two vertices, output -1.",
+        "hi": "Ek weighted directed graph diya hai adjacency matrix ke roop mein. Floyd-Warshall algorithm use karke har pair of vertices ke beech shortest distances dhundho. Graph mein negative edge weights ho sakte hain par negative weight cycles nahi hone chahiye. Agar do vertices ke beech koi path nahi hai toh -1 output karo."
+      },
+      "examples": [
+        {
+          "input": "V = 4\n0 3 -1 7\n8 0 2 -1\n5 -1 0 1\n2 -1 -1 0",
+          "output": "0 3 5 6\n5 0 2 3\n3 6 0 1\n2 5 7 0",
+          "explanation": { "en": "The output matrix shows shortest distances between all pairs. -1 in input means no direct edge.", "hi": "Output matrix saare pairs ke beech shortest distances dikhata hai. Input mein -1 ka matlab direct edge nahi hai." }
+        }
+      ],
+      "constraints": ["1 <= V <= 100", "-1000 <= edge weight <= 1000", "No negative weight cycles"],
+      "hints": [
+        { "en": "Consider each vertex k as a potential intermediate vertex in the shortest path", "hi": "Har vertex k ko shortest path mein potential intermediate vertex maano" },
+        { "en": "Update dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]) for all i, j", "hi": "Update karo dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]) saare i, j ke liye" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\nusing namespace std;\n\nvoid floydWarshall(vector<vector<int>>& dist, int V) {\n    // Write your code here\n}\n\nint main() {\n    int V;\n    cin >> V;\n    vector<vector<int>> dist(V, vector<int>(V));\n    for(int i=0;i<V;i++)\n        for(int j=0;j<V;j++) cin >> dist[i][j];\n    floydWarshall(dist, V);\n    for(int i=0;i<V;i++) {\n        for(int j=0;j<V;j++) cout << dist[i][j] << \" \";\n        cout << endl;\n    }\n}",
+        "python": "def floyd_warshall(dist, V):\n    # Write your code here\n    pass\n\nV = int(input())\ndist = []\nfor i in range(V):\n    dist.append(list(map(int, input().split())))\nfloyd_warshall(dist, V)\nfor row in dist:\n    print(' '.join(map(str, row)))",
+        "java": "import java.util.*;\npublic class Main {\n    public static void floydWarshall(int[][] dist, int V) {\n        // Write your code here\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int V = sc.nextInt();\n        int[][] dist = new int[V][V];\n        for(int i=0;i<V;i++)\n            for(int j=0;j<V;j++) dist[i][j]=sc.nextInt();\n        floydWarshall(dist, V);\n        for(int[] row : dist) {\n            for(int d : row) System.out.print(d + \" \");\n            System.out.println();\n        }\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst V = parseInt(lines[0]);\nconst dist = [];\nfor(let i=0;i<V;i++) dist.push(lines[i+1].split(' ').map(Number));\nfunction floydWarshall(dist, V) {\n    // Write your code here\n}\nfloydWarshall(dist, V);\ndist.forEach(row => console.log(row.join(' ')));",
+        "c": "#include<stdio.h>\n#define MAXV 101\nint dist[MAXV][MAXV];\nvoid floydWarshall(int V) {\n    // Write your code here\n}\nint main() {\n    int V;\n    scanf(\"%d\", &V);\n    for(int i=0;i<V;i++)\n        for(int j=0;j<V;j++) scanf(\"%d\", &dist[i][j]);\n    floydWarshall(V);\n    for(int i=0;i<V;i++) {\n        for(int j=0;j<V;j++) printf(\"%d \", dist[i][j]);\n        printf(\"\\n\");\n    }\n}"
+      },
+      "testCases": [
+        { "input": "4\n0 3 -1 7\n8 0 2 -1\n5 -1 0 1\n2 -1 -1 0", "expectedOutput": "0 3 5 6\n5 0 2 3\n3 6 0 1\n2 5 7 0" },
+        { "input": "2\n0 5\n-1 0", "expectedOutput": "0 5\n-1 0" }
+      ],
+      "solution": {
+        "approach": { "en": "Three nested loops: for each intermediate vertex k, update dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]).", "hi": "Teen nested loops: har intermediate vertex k ke liye, update karo dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])." },
+        "code": {
+          "cpp": "void floydWarshall(vector<vector<int>>& dist, int V) {\n    int INF = 1e9;\n    // Replace -1 with INF (except diagonal)\n    for(int i=0;i<V;i++)\n        for(int j=0;j<V;j++)\n            if(i!=j && dist[i][j]==-1) dist[i][j]=INF;\n    for(int k=0;k<V;k++)\n        for(int i=0;i<V;i++)\n            for(int j=0;j<V;j++)\n                if(dist[i][k]!=INF && dist[k][j]!=INF)\n                    dist[i][j]=min(dist[i][j], dist[i][k]+dist[k][j]);\n    // Replace INF back with -1\n    for(int i=0;i<V;i++)\n        for(int j=0;j<V;j++)\n            if(dist[i][j]>=INF) dist[i][j]=-1;\n}",
+          "python": "def floyd_warshall(dist, V):\n    INF = float('inf')\n    for i in range(V):\n        for j in range(V):\n            if i != j and dist[i][j] == -1:\n                dist[i][j] = INF\n    for k in range(V):\n        for i in range(V):\n            for j in range(V):\n                if dist[i][k] != INF and dist[k][j] != INF:\n                    dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])\n    for i in range(V):\n        for j in range(V):\n            if dist[i][j] >= INF:\n                dist[i][j] = -1"
+        },
+        "timeComplexity": "O(V^3)",
+        "spaceComplexity": "O(V^2)"
+      },
+      "tags": ["dp", "graph", "shortest-path", "all-pairs"]
+    },
+    {
+      "id": "daadp-005",
+      "title": "Optimal Binary Search Tree",
+      "titleHi": "Optimal Binary Search Tree",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given n sorted keys and their search frequencies (probabilities), construct a Binary Search Tree (BST) such that the total cost of all searches is minimized. The cost of searching a key at depth d is frequency * (d + 1). Find the minimum total search cost.",
+        "hi": "n sorted keys aur unki search frequencies (probabilities) di hain. Ek Binary Search Tree (BST) banao taaki saari searches ki total cost minimum ho. Depth d pe key search karne ki cost frequency * (d + 1) hoti hai. Minimum total search cost dhundho."
+      },
+      "examples": [
+        {
+          "input": "n = 3\nkeys = [10, 20, 30]\nfreq = [34, 8, 50]",
+          "output": "142",
+          "explanation": { "en": "Optimal BST has 30 as root, 10 as left child, 20 as right child of 10. Cost = 50*1 + 34*2 + 8*3 = 142", "hi": "Optimal BST mein 30 root hai, 10 left child hai, 20 node 10 ka right child hai. Cost = 50*1 + 34*2 + 8*3 = 142" }
+        }
+      ],
+      "constraints": ["1 <= n <= 100", "1 <= freq[i] <= 10^4"],
+      "hints": [
+        { "en": "Try each key as root and recursively find optimal left and right subtrees", "hi": "Har key ko root banao aur recursively optimal left aur right subtrees dhundho" },
+        { "en": "Similar to MCM pattern - interval DP with all possible roots between i and j", "hi": "MCM pattern jaisa hai - interval DP saare possible roots ke saath i aur j ke beech" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<climits>\nusing namespace std;\n\nint optimalBST(int freq[], int n) {\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    int freq[n];\n    for(int i=0;i<n;i++) cin >> freq[i];\n    cout << optimalBST(freq, n);\n}",
+        "python": "def optimal_bst(freq, n):\n    # Write your code here\n    pass\n\nn = int(input())\nfreq = list(map(int, input().split()))\nprint(optimal_bst(freq, n))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int optimalBST(int[] freq, int n) {\n        // Write your code here\n        return 0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] freq = new int[n];\n        for(int i=0;i<n;i++) freq[i]=sc.nextInt();\n        System.out.println(optimalBST(freq, n));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst freq = lines[1].split(' ').map(Number);\nfunction optimalBST(freq, n) {\n    // Write your code here\n}\nconsole.log(optimalBST(freq, n));",
+        "c": "#include<stdio.h>\n#include<limits.h>\nint optimalBST(int freq[], int n) {\n    // Write your code here\n    return 0;\n}\nint main() {\n    int n;\n    scanf(\"%d\", &n);\n    int freq[n];\n    for(int i=0;i<n;i++) scanf(\"%d\", &freq[i]);\n    printf(\"%d\", optimalBST(freq, n));\n}"
+      },
+      "testCases": [
+        { "input": "3\n34 8 50", "expectedOutput": "142" },
+        { "input": "4\n4 2 6 3", "expectedOutput": "26" }
+      ],
+      "solution": {
+        "approach": { "en": "Use interval DP. For each subrange [i..j], try every key r as root. cost[i][j] = min over r of (cost[i][r-1] + cost[r+1][j] + sum(freq[i..j])).", "hi": "Interval DP use karo. Har subrange [i..j] ke liye, har key r ko root banao. cost[i][j] = min over r of (cost[i][r-1] + cost[r+1][j] + sum(freq[i..j]))." },
+        "code": {
+          "cpp": "int optimalBST(int freq[], int n) {\n    int dp[n][n];\n    for(int i=0;i<n;i++) dp[i][i]=freq[i];\n    for(int L=2;L<=n;L++)\n        for(int i=0;i<=n-L;i++) {\n            int j=i+L-1;\n            dp[i][j]=INT_MAX;\n            int sum=0;\n            for(int s=i;s<=j;s++) sum+=freq[s];\n            for(int r=i;r<=j;r++) {\n                int c=sum+(r>i?dp[i][r-1]:0)+(r<j?dp[r+1][j]:0);\n                dp[i][j]=min(dp[i][j],c);\n            }\n        }\n    return dp[0][n-1];\n}",
+          "python": "def optimal_bst(freq, n):\n    dp = [[0]*n for _ in range(n)]\n    for i in range(n): dp[i][i] = freq[i]\n    for L in range(2, n+1):\n        for i in range(n-L+1):\n            j = i+L-1\n            dp[i][j] = float('inf')\n            s = sum(freq[i:j+1])\n            for r in range(i, j+1):\n                c = s + (dp[i][r-1] if r>i else 0) + (dp[r+1][j] if r<j else 0)\n                dp[i][j] = min(dp[i][j], c)\n    return dp[0][n-1]"
+        },
+        "timeComplexity": "O(n^3)",
+        "spaceComplexity": "O(n^2)"
+      },
+      "tags": ["dp", "bst", "interval-dp", "optimization"]
+    },
+    {
+      "id": "daadp-006",
+      "title": "Coin Change Problem",
+      "titleHi": "Coin Change Problem",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given an array of coin denominations and a target amount, find the minimum number of coins needed to make up that amount. If that amount cannot be made up by any combination of the coins, return -1. You have an infinite supply of each coin denomination.",
+        "hi": "Coin denominations ka ek array aur ek target amount diya hai. Wo amount banane ke liye minimum kitne coins chahiye ye dhundho. Agar wo amount kisi bhi combination se nahi ban sakta toh -1 return karo. Har coin denomination ka infinite supply hai."
+      },
+      "examples": [
+        {
+          "input": "coins = [1, 5, 10, 25]\namount = 30",
+          "output": "2",
+          "explanation": { "en": "Use one 5-cent and one 25-cent coin: 5 + 25 = 30", "hi": "Ek 5-cent aur ek 25-cent coin use karo: 5 + 25 = 30" }
+        },
+        {
+          "input": "coins = [2]\namount = 3",
+          "output": "-1",
+          "explanation": { "en": "Cannot make amount 3 with only 2-cent coins", "hi": "Sirf 2-cent coins se amount 3 nahi ban sakta" }
+        }
+      ],
+      "constraints": ["1 <= coins.length <= 100", "1 <= coins[i] <= 10^4", "0 <= amount <= 10^4"],
+      "hints": [
+        { "en": "dp[i] = minimum coins needed to make amount i", "hi": "dp[i] = amount i banane ke liye minimum coins" },
+        { "en": "For each amount, try all coins and take the minimum", "hi": "Har amount ke liye saare coins try karo aur minimum lo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\nusing namespace std;\n\nint coinChange(vector<int>& coins, int amount) {\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    int n, amount;\n    cin >> n >> amount;\n    vector<int> coins(n);\n    for(int i=0;i<n;i++) cin >> coins[i];\n    cout << coinChange(coins, amount);\n}",
+        "python": "def coin_change(coins, amount):\n    # Write your code here\n    pass\n\nn, amount = map(int, input().split())\ncoins = list(map(int, input().split()))\nprint(coin_change(coins, amount))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int coinChange(int[] coins, int amount) {\n        // Write your code here\n        return 0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), amount = sc.nextInt();\n        int[] coins = new int[n];\n        for(int i=0;i<n;i++) coins[i]=sc.nextInt();\n        System.out.println(coinChange(coins, amount));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [n, amount] = lines[0].split(' ').map(Number);\nconst coins = lines[1].split(' ').map(Number);\nfunction coinChange(coins, amount) {\n    // Write your code here\n}\nconsole.log(coinChange(coins, amount));",
+        "c": "#include<stdio.h>\n#include<limits.h>\nint coinChange(int coins[], int n, int amount) {\n    // Write your code here\n    return 0;\n}\nint main() {\n    int n, amount;\n    scanf(\"%d %d\", &n, &amount);\n    int coins[n];\n    for(int i=0;i<n;i++) scanf(\"%d\", &coins[i]);\n    printf(\"%d\", coinChange(coins, n, amount));\n}"
+      },
+      "testCases": [
+        { "input": "4 30\n1 5 10 25", "expectedOutput": "2" },
+        { "input": "1 3\n2", "expectedOutput": "-1" },
+        { "input": "3 11\n1 5 6", "expectedOutput": "2" }
+      ],
+      "solution": {
+        "approach": { "en": "1D DP: dp[i] = min coins for amount i. For each amount i and each coin c, dp[i] = min(dp[i], 1 + dp[i-c]).", "hi": "1D DP: dp[i] = amount i ke liye min coins. Har amount i aur har coin c ke liye, dp[i] = min(dp[i], 1 + dp[i-c])." },
+        "code": {
+          "cpp": "int coinChange(vector<int>& coins, int amount) {\n    vector<int> dp(amount+1, INT_MAX);\n    dp[0]=0;\n    for(int i=1;i<=amount;i++)\n        for(int c:coins)\n            if(c<=i && dp[i-c]!=INT_MAX)\n                dp[i]=min(dp[i], 1+dp[i-c]);\n    return dp[amount]==INT_MAX ? -1 : dp[amount];\n}",
+          "python": "def coin_change(coins, amount):\n    dp = [float('inf')] * (amount + 1)\n    dp[0] = 0\n    for i in range(1, amount + 1):\n        for c in coins:\n            if c <= i and dp[i - c] != float('inf'):\n                dp[i] = min(dp[i], 1 + dp[i - c])\n    return dp[amount] if dp[amount] != float('inf') else -1"
+        },
+        "timeComplexity": "O(amount * n)",
+        "spaceComplexity": "O(amount)"
+      },
+      "tags": ["dp", "greedy", "coin-change"]
+    },
+    {
+      "id": "daadp-007",
+      "title": "Rod Cutting Problem",
+      "titleHi": "Rod Cutting Problem",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given a rod of length n and a price array where price[i] denotes the price of a rod of length i+1, find the maximum revenue obtainable by cutting the rod into pieces and selling them. You can also choose not to cut the rod at all.",
+        "hi": "Length n ki ek rod di hai aur ek price array hai jahan price[i] length i+1 ki rod ki price batata hai. Rod ko pieces mein kaat ke bech ke maximum revenue dhundho. Aap rod ko bina kaate bhi bech sakte ho."
+      },
+      "examples": [
+        {
+          "input": "n = 8\nprice = [1, 5, 8, 9, 10, 17, 17, 20]",
+          "output": "22",
+          "explanation": { "en": "Cut into pieces of length 2 and 6: price[1] + price[5] = 5 + 17 = 22", "hi": "Length 2 aur 6 ke pieces mein kaato: price[1] + price[5] = 5 + 17 = 22" }
+        },
+        {
+          "input": "n = 4\nprice = [2, 5, 7, 8]",
+          "output": "10",
+          "explanation": { "en": "Cut into two pieces of length 2: 5 + 5 = 10", "hi": "Do pieces of length 2 mein kaato: 5 + 5 = 10" }
+        }
+      ],
+      "constraints": ["1 <= n <= 1000", "1 <= price[i] <= 10^6"],
+      "hints": [
+        { "en": "This is similar to the unbounded knapsack problem", "hi": "Ye unbounded knapsack problem jaisi hai" },
+        { "en": "dp[i] = max revenue for rod of length i. Try all first-cut lengths.", "hi": "dp[i] = length i ki rod se max revenue. Saari first-cut lengths try karo." }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\nusing namespace std;\n\nint rodCutting(int price[], int n) {\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    int price[n];\n    for(int i=0;i<n;i++) cin >> price[i];\n    cout << rodCutting(price, n);\n}",
+        "python": "def rod_cutting(price, n):\n    # Write your code here\n    pass\n\nn = int(input())\nprice = list(map(int, input().split()))\nprint(rod_cutting(price, n))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int rodCutting(int[] price, int n) {\n        // Write your code here\n        return 0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] price = new int[n];\n        for(int i=0;i<n;i++) price[i]=sc.nextInt();\n        System.out.println(rodCutting(price, n));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst price = lines[1].split(' ').map(Number);\nfunction rodCutting(price, n) {\n    // Write your code here\n}\nconsole.log(rodCutting(price, n));",
+        "c": "#include<stdio.h>\nint rodCutting(int price[], int n) {\n    // Write your code here\n    return 0;\n}\nint main() {\n    int n;\n    scanf(\"%d\", &n);\n    int price[n];\n    for(int i=0;i<n;i++) scanf(\"%d\", &price[i]);\n    printf(\"%d\", rodCutting(price, n));\n}"
+      },
+      "testCases": [
+        { "input": "8\n1 5 8 9 10 17 17 20", "expectedOutput": "22" },
+        { "input": "4\n2 5 7 8", "expectedOutput": "10" },
+        { "input": "1\n3", "expectedOutput": "3" }
+      ],
+      "solution": {
+        "approach": { "en": "1D DP: dp[i] = max revenue for rod of length i. For each length i, try cutting first piece of length j (1 to i).", "hi": "1D DP: dp[i] = length i ki rod se max revenue. Har length i ke liye, first piece length j (1 se i) try karo." },
+        "code": {
+          "cpp": "int rodCutting(int price[], int n) {\n    vector<int> dp(n+1, 0);\n    for(int i=1;i<=n;i++)\n        for(int j=1;j<=i;j++)\n            dp[i]=max(dp[i], price[j-1]+dp[i-j]);\n    return dp[n];\n}",
+          "python": "def rod_cutting(price, n):\n    dp = [0] * (n + 1)\n    for i in range(1, n + 1):\n        for j in range(1, i + 1):\n            dp[i] = max(dp[i], price[j - 1] + dp[i - j])\n    return dp[n]"
+        },
+        "timeComplexity": "O(n^2)",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["dp", "unbounded-knapsack", "optimization"]
+    },
+    {
+      "id": "daadp-008",
+      "title": "Travelling Salesman Problem (DP)",
+      "titleHi": "Travelling Salesman Problem (DP)",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given a set of n cities and the distances between every pair of cities, find the shortest possible route that visits every city exactly once and returns to the starting city (city 0). Use dynamic programming with bitmask to solve this. Print the minimum tour cost.",
+        "hi": "n cities ka ek set diya hai aur har pair of cities ke beech ki distances di hain. Sabse chhota route dhundho jo har city ko exactly ek baar visit kare aur starting city (city 0) pe wapas aaye. Isko solve karne ke liye bitmask ke saath dynamic programming use karo. Minimum tour cost print karo."
+      },
+      "examples": [
+        {
+          "input": "n = 4\n0 10 15 20\n10 0 35 25\n15 35 0 30\n20 25 30 0",
+          "output": "80",
+          "explanation": { "en": "Optimal tour: 0 -> 1 -> 3 -> 2 -> 0 with cost 10 + 25 + 30 + 15 = 80", "hi": "Optimal tour: 0 -> 1 -> 3 -> 2 -> 0 cost 10 + 25 + 30 + 15 = 80 ke saath" }
+        }
+      ],
+      "constraints": ["2 <= n <= 20", "0 <= dist[i][j] <= 10^4", "dist[i][i] = 0", "dist[i][j] may not equal dist[j][i]"],
+      "hints": [
+        { "en": "Use a bitmask to represent the set of visited cities", "hi": "Visited cities ke set ko represent karne ke liye bitmask use karo" },
+        { "en": "dp[mask][i] = min cost to visit all cities in mask, ending at city i", "hi": "dp[mask][i] = mask mein saari cities visit karne ki min cost, city i pe khatam" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\n#include<climits>\nusing namespace std;\n\nint tsp(vector<vector<int>>& dist, int n) {\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    vector<vector<int>> dist(n, vector<int>(n));\n    for(int i=0;i<n;i++)\n        for(int j=0;j<n;j++) cin >> dist[i][j];\n    cout << tsp(dist, n);\n}",
+        "python": "def tsp(dist, n):\n    # Write your code here\n    pass\n\nn = int(input())\ndist = []\nfor i in range(n):\n    dist.append(list(map(int, input().split())))\nprint(tsp(dist, n))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int tsp(int[][] dist, int n) {\n        // Write your code here\n        return 0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[][] dist = new int[n][n];\n        for(int i=0;i<n;i++)\n            for(int j=0;j<n;j++) dist[i][j]=sc.nextInt();\n        System.out.println(tsp(dist, n));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst dist = [];\nfor(let i=0;i<n;i++) dist.push(lines[i+1].split(' ').map(Number));\nfunction tsp(dist, n) {\n    // Write your code here\n}\nconsole.log(tsp(dist, n));",
+        "c": "#include<stdio.h>\n#include<limits.h>\n#define MAXN 20\nint dist[MAXN][MAXN];\nint tsp(int n) {\n    // Write your code here\n    return 0;\n}\nint main() {\n    int n;\n    scanf(\"%d\", &n);\n    for(int i=0;i<n;i++)\n        for(int j=0;j<n;j++) scanf(\"%d\", &dist[i][j]);\n    printf(\"%d\", tsp(n));\n}"
+      },
+      "testCases": [
+        { "input": "4\n0 10 15 20\n10 0 35 25\n15 35 0 30\n20 25 30 0", "expectedOutput": "80" },
+        { "input": "3\n0 5 10\n5 0 8\n10 8 0", "expectedOutput": "23" }
+      ],
+      "solution": {
+        "approach": { "en": "Bitmask DP: dp[mask][i] = min cost to visit all cities in bitmask, ending at i. Start from city 0. Try all transitions and finally add return cost to city 0.", "hi": "Bitmask DP: dp[mask][i] = bitmask mein saari cities visit karne ki min cost, i pe khatam. City 0 se shuru karo. Saare transitions try karo aur finally city 0 pe wapas aane ki cost add karo." },
+        "code": {
+          "cpp": "int tsp(vector<vector<int>>& dist, int n) {\n    int full = (1<<n)-1;\n    vector<vector<int>> dp(1<<n, vector<int>(n, INT_MAX));\n    dp[1][0] = 0; // start at city 0\n    for(int mask=1;mask<=full;mask++)\n        for(int u=0;u<n;u++) {\n            if(dp[mask][u]==INT_MAX) continue;\n            if(!(mask&(1<<u))) continue;\n            for(int v=0;v<n;v++) {\n                if(mask&(1<<v)) continue;\n                int nmask=mask|(1<<v);\n                dp[nmask][v]=min(dp[nmask][v], dp[mask][u]+dist[u][v]);\n            }\n        }\n    int ans=INT_MAX;\n    for(int u=0;u<n;u++)\n        if(dp[full][u]!=INT_MAX)\n            ans=min(ans, dp[full][u]+dist[u][0]);\n    return ans;\n}",
+          "python": "def tsp(dist, n):\n    full = (1 << n) - 1\n    dp = [[float('inf')] * n for _ in range(1 << n)]\n    dp[1][0] = 0\n    for mask in range(1, full + 1):\n        for u in range(n):\n            if dp[mask][u] == float('inf'): continue\n            if not (mask & (1 << u)): continue\n            for v in range(n):\n                if mask & (1 << v): continue\n                nmask = mask | (1 << v)\n                dp[nmask][v] = min(dp[nmask][v], dp[mask][u] + dist[u][v])\n    return min(dp[full][u] + dist[u][0] for u in range(n))"
+        },
+        "timeComplexity": "O(2^n * n^2)",
+        "spaceComplexity": "O(2^n * n)"
+      },
+      "tags": ["dp", "bitmask", "graph", "tsp", "np-hard"]
+    }
+  ]
+}

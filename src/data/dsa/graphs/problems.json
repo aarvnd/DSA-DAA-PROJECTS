@@ -1,0 +1,407 @@
+{
+  "topicId": "graphs",
+  "problems": [
+    {
+      "id": "gr-001",
+      "title": "BFS of Graph",
+      "titleHi": "Graph ka BFS Traversal",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given a directed graph with V vertices (0 to V-1) and an adjacency list, perform BFS traversal starting from vertex 0. Return the BFS traversal order.",
+        "hi": "Ek directed graph diya hai jisme V vertices (0 se V-1) hain aur adjacency list di hai. Vertex 0 se start karke BFS traversal karo. BFS traversal order return karo."
+      },
+      "examples": [
+        { "input": "V = 5, adj = [[1,2],[3],[4],[],[]]", "output": "0 1 2 3 4", "explanation": { "en": "Starting from 0: visit 0, then neighbors 1,2, then 3 (neighbor of 1), then 4 (neighbor of 2)", "hi": "0 se start: 0 visit karo, phir neighbors 1,2, phir 3 (1 ka neighbor), phir 4 (2 ka neighbor)" } }
+      ],
+      "constraints": ["1 <= V <= 10^4", "0 <= E <= V*(V-1)"],
+      "hints": [
+        { "en": "Use a queue and a visited array", "hi": "Queue aur visited array use karo" },
+        { "en": "Mark node as visited when pushing to queue, not when popping", "hi": "Node ko queue mein push karte waqt visited mark karo, pop karte waqt nahi" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\n#include<queue>\nusing namespace std;\n\nvector<int> bfs(int V, vector<vector<int>>& adj) {\n    // Write your code here\n    return {};\n}\n\nint main() {\n    int V, E; cin >> V >> E;\n    vector<vector<int>> adj(V);\n    for(int i=0;i<E;i++) {\n        int u, v; cin >> u >> v;\n        adj[u].push_back(v);\n    }\n    vector<int> result = bfs(V, adj);\n    for(int x : result) cout << x << \" \";\n}",
+        "python": "from collections import deque\n\ndef bfs(V, adj):\n    # Write your code here\n    pass\n\nV, E = map(int, input().split())\nadj = [[] for _ in range(V)]\nfor _ in range(E):\n    u, v = map(int, input().split())\n    adj[u].append(v)\nprint(*bfs(V, adj))",
+        "java": "import java.util.*;\npublic class Main {\n    public static List<Integer> bfs(int V, List<List<Integer>> adj) {\n        // Write your code here\n        return new ArrayList<>();\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int V = sc.nextInt(), E = sc.nextInt();\n        List<List<Integer>> adj = new ArrayList<>();\n        for(int i=0;i<V;i++) adj.add(new ArrayList<>());\n        for(int i=0;i<E;i++) { int u=sc.nextInt(),v=sc.nextInt(); adj.get(u).add(v); }\n        List<Integer> res = bfs(V, adj);\n        for(int x : res) System.out.print(x + \" \");\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [V, E] = lines[0].split(' ').map(Number);\nconst adj = Array.from({length: V}, () => []);\nfor(let i=1;i<=E;i++) { const [u,v]=lines[i].split(' ').map(Number); adj[u].push(v); }\nfunction bfs(V, adj) {\n    // Write your code here\n}\nconsole.log(bfs(V, adj).join(' '));",
+        "c": "#include<stdio.h>\n#include<stdbool.h>\n#define MAX 10001\nint adj[MAX][MAX], deg[MAX];\nint queue[MAX], front=0, rear=0;\nbool visited[MAX];\nint result[MAX], resSize=0;\n\nvoid bfs(int V) {\n    // Write your code here\n}\n\nint main() {\n    int V, E; scanf(\"%d %d\", &V, &E);\n    for(int i=0;i<E;i++) {\n        int u,v; scanf(\"%d %d\",&u,&v);\n        adj[u][deg[u]++]=v;\n    }\n    bfs(V);\n    for(int i=0;i<resSize;i++) printf(\"%d \",result[i]);\n}"
+      },
+      "testCases": [
+        { "input": "5 4\n0 1\n0 2\n1 3\n2 4", "expectedOutput": "0 1 2 3 4" },
+        { "input": "3 2\n0 1\n0 2", "expectedOutput": "0 1 2" },
+        { "input": "1 0", "expectedOutput": "0" }
+      ],
+      "solution": {
+        "approach": { "en": "Use queue. Start from 0, mark visited, push to queue. Process level by level.", "hi": "Queue use karo. 0 se start karo, visited mark karo, queue mein push karo. Level by level process karo." },
+        "code": {
+          "cpp": "vector<int> bfs(int V, vector<vector<int>>& adj) {\n    vector<bool> visited(V, false);\n    queue<int> q;\n    vector<int> result;\n    visited[0]=true; q.push(0);\n    while(!q.empty()) {\n        int node=q.front(); q.pop();\n        result.push_back(node);\n        for(int nb:adj[node]) if(!visited[nb]){visited[nb]=true;q.push(nb);}\n    }\n    return result;\n}",
+          "python": "def bfs(V, adj):\n    visited = [False]*V\n    queue = deque([0])\n    visited[0] = True\n    result = []\n    while queue:\n        node = queue.popleft()\n        result.append(node)\n        for nb in adj[node]:\n            if not visited[nb]:\n                visited[nb] = True\n                queue.append(nb)\n    return result"
+        },
+        "timeComplexity": "O(V + E)",
+        "spaceComplexity": "O(V)"
+      },
+      "tags": ["graph", "bfs", "traversal"]
+    },
+    {
+      "id": "gr-002",
+      "title": "DFS of Graph",
+      "titleHi": "Graph ka DFS Traversal",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given a directed graph with V vertices (0 to V-1) and an adjacency list, perform DFS traversal starting from vertex 0. Return the DFS traversal order.",
+        "hi": "Ek directed graph diya hai jisme V vertices (0 se V-1) hain aur adjacency list di hai. Vertex 0 se start karke DFS traversal karo. DFS traversal order return karo."
+      },
+      "examples": [
+        { "input": "V = 5, adj = [[1,2],[3],[4],[],[]]", "output": "0 1 3 2 4", "explanation": { "en": "Starting from 0: go deep via 0->1->3 (backtrack), then 0->2->4", "hi": "0 se start: deep jaao 0->1->3 (backtrack), phir 0->2->4" } }
+      ],
+      "constraints": ["1 <= V <= 10^4", "0 <= E <= V*(V-1)"],
+      "hints": [
+        { "en": "Use recursion with a visited array", "hi": "Recursion aur visited array use karo" },
+        { "en": "Mark node visited before exploring its neighbors", "hi": "Neighbors explore karne se pehle node ko visited mark karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\nusing namespace std;\n\nvoid dfsHelper(int node, vector<vector<int>>& adj, vector<bool>& visited, vector<int>& result) {\n    // Write your code here\n}\n\nvector<int> dfs(int V, vector<vector<int>>& adj) {\n    vector<bool> visited(V, false);\n    vector<int> result;\n    dfsHelper(0, adj, visited, result);\n    return result;\n}\n\nint main() {\n    int V, E; cin >> V >> E;\n    vector<vector<int>> adj(V);\n    for(int i=0;i<E;i++) { int u,v; cin>>u>>v; adj[u].push_back(v); }\n    vector<int> res = dfs(V, adj);\n    for(int x : res) cout << x << \" \";\n}",
+        "python": "def dfs_helper(node, adj, visited, result):\n    # Write your code here\n    pass\n\ndef dfs(V, adj):\n    visited = [False]*V\n    result = []\n    dfs_helper(0, adj, visited, result)\n    return result\n\nV, E = map(int, input().split())\nadj = [[] for _ in range(V)]\nfor _ in range(E):\n    u, v = map(int, input().split())\n    adj[u].append(v)\nprint(*dfs(V, adj))",
+        "java": "import java.util.*;\npublic class Main {\n    public static void dfsHelper(int node, List<List<Integer>> adj, boolean[] visited, List<Integer> result) {\n        // Write your code here\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int V=sc.nextInt(), E=sc.nextInt();\n        List<List<Integer>> adj = new ArrayList<>();\n        for(int i=0;i<V;i++) adj.add(new ArrayList<>());\n        for(int i=0;i<E;i++){int u=sc.nextInt(),v=sc.nextInt();adj.get(u).add(v);}\n        boolean[] visited = new boolean[V];\n        List<Integer> result = new ArrayList<>();\n        dfsHelper(0, adj, visited, result);\n        for(int x:result) System.out.print(x+\" \");\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [V,E]=lines[0].split(' ').map(Number);\nconst adj = Array.from({length:V},()=>[]);\nfor(let i=1;i<=E;i++){const[u,v]=lines[i].split(' ').map(Number);adj[u].push(v);}\nfunction dfs(node, adj, visited, result) {\n    // Write your code here\n}\nconst visited = new Array(V).fill(false);\nconst result = [];\ndfs(0, adj, visited, result);\nconsole.log(result.join(' '));",
+        "c": "#include<stdio.h>\n#include<stdbool.h>\n#define MAX 10001\nint adj[MAX][MAX], deg[MAX];\nbool visited[MAX];\nint result[MAX], resSize=0;\n\nvoid dfs(int node, int V) {\n    // Write your code here\n}\n\nint main() {\n    int V,E; scanf(\"%d %d\",&V,&E);\n    for(int i=0;i<E;i++){int u,v;scanf(\"%d %d\",&u,&v);adj[u][deg[u]++]=v;}\n    dfs(0, V);\n    for(int i=0;i<resSize;i++) printf(\"%d \",result[i]);\n}"
+      },
+      "testCases": [
+        { "input": "5 4\n0 1\n0 2\n1 3\n2 4", "expectedOutput": "0 1 3 2 4" },
+        { "input": "3 2\n0 1\n0 2", "expectedOutput": "0 1 2" },
+        { "input": "1 0", "expectedOutput": "0" }
+      ],
+      "solution": {
+        "approach": { "en": "Recursive DFS. Visit node, mark visited, recurse on unvisited neighbors.", "hi": "Recursive DFS. Node visit karo, visited mark karo, unvisited neighbors pe recurse karo." },
+        "code": {
+          "cpp": "void dfsHelper(int node, vector<vector<int>>& adj, vector<bool>& visited, vector<int>& result) {\n    visited[node]=true;\n    result.push_back(node);\n    for(int nb:adj[node]) if(!visited[nb]) dfsHelper(nb,adj,visited,result);\n}",
+          "python": "def dfs_helper(node, adj, visited, result):\n    visited[node] = True\n    result.append(node)\n    for nb in adj[node]:\n        if not visited[nb]:\n            dfs_helper(nb, adj, visited, result)"
+        },
+        "timeComplexity": "O(V + E)",
+        "spaceComplexity": "O(V)"
+      },
+      "tags": ["graph", "dfs", "traversal"]
+    },
+    {
+      "id": "gr-003",
+      "title": "Number of Islands",
+      "titleHi": "Islands Ki Sankhya",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given a 2D grid of '1's (land) and '0's (water), count the number of islands. An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically.",
+        "hi": "Ek 2D grid diya hai jisme '1' (land) aur '0' (water) hai. Islands ki sankhya count karo. Ek island paani se ghira hota hai aur adjacent lands ko horizontally ya vertically connect karke banta hai."
+      },
+      "examples": [
+        { "input": "grid = [[1,1,0,0,0],[1,1,0,0,0],[0,0,1,0,0],[0,0,0,1,1]]", "output": "3", "explanation": { "en": "Three islands: top-left 2x2 block, center single cell, bottom-right 1x2 block", "hi": "Teen islands: top-left 2x2 block, center mein ek cell, bottom-right 1x2 block" } }
+      ],
+      "constraints": ["1 <= m, n <= 300", "grid[i][j] is '0' or '1'"],
+      "hints": [
+        { "en": "Use BFS/DFS to explore each island completely when you find a '1'", "hi": "Jab '1' mile to BFS/DFS se poora island explore karo" },
+        { "en": "Mark visited cells to avoid counting them again", "hi": "Visited cells mark karo taaki dobara count na ho" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\nusing namespace std;\n\nint numIslands(vector<vector<char>>& grid) {\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    int m, n; cin >> m >> n;\n    vector<vector<char>> grid(m, vector<char>(n));\n    for(int i=0;i<m;i++) for(int j=0;j<n;j++) cin >> grid[i][j];\n    cout << numIslands(grid);\n}",
+        "python": "def numIslands(grid):\n    # Write your code here\n    pass\n\nm, n = map(int, input().split())\ngrid = []\nfor _ in range(m):\n    grid.append(list(input().split()))\nprint(numIslands(grid))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int numIslands(char[][] grid) {\n        // Write your code here\n        return 0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int m=sc.nextInt(), n=sc.nextInt();\n        char[][] grid = new char[m][n];\n        for(int i=0;i<m;i++) for(int j=0;j<n;j++) grid[i][j]=sc.next().charAt(0);\n        System.out.println(numIslands(grid));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [m,n] = lines[0].split(' ').map(Number);\nconst grid = [];\nfor(let i=1;i<=m;i++) grid.push(lines[i].split(' '));\nfunction numIslands(grid) {\n    // Write your code here\n}\nconsole.log(numIslands(grid));",
+        "c": "#include<stdio.h>\n#include<stdbool.h>\n#define MAX 301\nchar grid[MAX][MAX];\nbool visited[MAX][MAX];\nint m, n;\n\nint numIslands() {\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    scanf(\"%d %d\",&m,&n);\n    for(int i=0;i<m;i++) for(int j=0;j<n;j++) scanf(\" %c\",&grid[i][j]);\n    printf(\"%d\",numIslands());\n}"
+      },
+      "testCases": [
+        { "input": "4 5\n1 1 0 0 0\n1 1 0 0 0\n0 0 1 0 0\n0 0 0 1 1", "expectedOutput": "3" },
+        { "input": "3 3\n1 1 1\n0 1 0\n1 1 1", "expectedOutput": "1" },
+        { "input": "2 2\n0 0\n0 0", "expectedOutput": "0" }
+      ],
+      "solution": {
+        "approach": { "en": "Iterate grid. On finding '1', increment count, run DFS/BFS to mark entire island visited.", "hi": "Grid iterate karo. '1' milne pe count badhao, DFS/BFS se poora island visited mark karo." },
+        "code": {
+          "cpp": "void dfs(vector<vector<char>>& grid, int i, int j, int m, int n) {\n    if(i<0||j<0||i>=m||j>=n||grid[i][j]=='0') return;\n    grid[i][j]='0';\n    dfs(grid,i+1,j,m,n); dfs(grid,i-1,j,m,n);\n    dfs(grid,i,j+1,m,n); dfs(grid,i,j-1,m,n);\n}\nint numIslands(vector<vector<char>>& grid) {\n    int m=grid.size(), n=grid[0].size(), count=0;\n    for(int i=0;i<m;i++) for(int j=0;j<n;j++)\n        if(grid[i][j]=='1'){count++;dfs(grid,i,j,m,n);}\n    return count;\n}",
+          "python": "def numIslands(grid):\n    m, n = len(grid), len(grid[0])\n    count = 0\n    def dfs(i, j):\n        if i<0 or j<0 or i>=m or j>=n or grid[i][j]=='0': return\n        grid[i][j] = '0'\n        dfs(i+1,j); dfs(i-1,j); dfs(i,j+1); dfs(i,j-1)\n    for i in range(m):\n        for j in range(n):\n            if grid[i][j]=='1':\n                count += 1\n                dfs(i, j)\n    return count"
+        },
+        "timeComplexity": "O(m * n)",
+        "spaceComplexity": "O(m * n)"
+      },
+      "tags": ["graph", "bfs", "dfs", "matrix"]
+    },
+    {
+      "id": "gr-004",
+      "title": "Detect Cycle in Undirected Graph",
+      "titleHi": "Undirected Graph Mein Cycle Detect Karo",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given an undirected graph with V vertices and E edges, check whether the graph contains a cycle or not. Print 'true' if cycle exists, 'false' otherwise.",
+        "hi": "Ek undirected graph diya hai jisme V vertices aur E edges hain. Check karo ki graph mein cycle hai ya nahi. Agar cycle hai to 'true' print karo, nahi to 'false'."
+      },
+      "examples": [
+        { "input": "V = 4, E = 4, edges = [[0,1],[1,2],[2,3],[3,1]]", "output": "true", "explanation": { "en": "Cycle exists: 1 -> 2 -> 3 -> 1", "hi": "Cycle hai: 1 -> 2 -> 3 -> 1" } },
+        { "input": "V = 3, E = 2, edges = [[0,1],[1,2]]", "output": "false", "explanation": { "en": "No cycle in this graph", "hi": "Is graph mein koi cycle nahi hai" } }
+      ],
+      "constraints": ["1 <= V <= 10^5", "0 <= E <= V*(V-1)/2"],
+      "hints": [
+        { "en": "Use DFS/BFS. If you visit an already visited node that's not the parent, there's a cycle", "hi": "DFS/BFS use karo. Agar already visited node mile jo parent na ho, to cycle hai" },
+        { "en": "Track parent of each node to avoid false detection via the edge you came from", "hi": "Har node ka parent track karo taaki jis edge se aaye ho usse false detection na ho" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\nusing namespace std;\n\nbool hasCycle(int V, vector<vector<int>>& adj) {\n    // Write your code here\n    return false;\n}\n\nint main() {\n    int V, E; cin >> V >> E;\n    vector<vector<int>> adj(V);\n    for(int i=0;i<E;i++) { int u,v; cin>>u>>v; adj[u].push_back(v); adj[v].push_back(u); }\n    cout << (hasCycle(V, adj) ? \"true\" : \"false\");\n}",
+        "python": "def hasCycle(V, adj):\n    # Write your code here\n    pass\n\nV, E = map(int, input().split())\nadj = [[] for _ in range(V)]\nfor _ in range(E):\n    u, v = map(int, input().split())\n    adj[u].append(v)\n    adj[v].append(u)\nprint('true' if hasCycle(V, adj) else 'false')",
+        "java": "import java.util.*;\npublic class Main {\n    public static boolean hasCycle(int V, List<List<Integer>> adj) {\n        // Write your code here\n        return false;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int V=sc.nextInt(), E=sc.nextInt();\n        List<List<Integer>> adj = new ArrayList<>();\n        for(int i=0;i<V;i++) adj.add(new ArrayList<>());\n        for(int i=0;i<E;i++){int u=sc.nextInt(),v=sc.nextInt();adj.get(u).add(v);adj.get(v).add(u);}\n        System.out.println(hasCycle(V, adj) ? \"true\" : \"false\");\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [V,E]=lines[0].split(' ').map(Number);\nconst adj = Array.from({length:V},()=>[]);\nfor(let i=1;i<=E;i++){const[u,v]=lines[i].split(' ').map(Number);adj[u].push(v);adj[v].push(u);}\nfunction hasCycle(V, adj) {\n    // Write your code here\n}\nconsole.log(hasCycle(V, adj) ? 'true' : 'false');",
+        "c": "#include<stdio.h>\n#include<stdbool.h>\n#define MAX 100001\nint adj[MAX][100], deg[MAX];\nbool visited[MAX];\n\nbool hasCycle(int V) {\n    // Write your code here\n    return false;\n}\n\nint main() {\n    int V,E; scanf(\"%d %d\",&V,&E);\n    for(int i=0;i<E;i++){int u,v;scanf(\"%d %d\",&u,&v);adj[u][deg[u]++]=v;adj[v][deg[v]++]=u;}\n    printf(\"%s\", hasCycle(V) ? \"true\" : \"false\");\n}"
+      },
+      "testCases": [
+        { "input": "4 4\n0 1\n1 2\n2 3\n3 1", "expectedOutput": "true" },
+        { "input": "3 2\n0 1\n1 2", "expectedOutput": "false" },
+        { "input": "5 5\n0 1\n1 2\n2 3\n3 4\n4 2", "expectedOutput": "true" }
+      ],
+      "solution": {
+        "approach": { "en": "DFS with parent tracking. If neighbor is visited and not parent, cycle found.", "hi": "DFS parent tracking ke saath. Agar neighbor visited hai aur parent nahi hai, to cycle hai." },
+        "code": {
+          "cpp": "bool dfs(int node, int parent, vector<vector<int>>& adj, vector<bool>& visited) {\n    visited[node]=true;\n    for(int nb:adj[node]) {\n        if(!visited[nb]) { if(dfs(nb,node,adj,visited)) return true; }\n        else if(nb!=parent) return true;\n    }\n    return false;\n}\nbool hasCycle(int V, vector<vector<int>>& adj) {\n    vector<bool> visited(V, false);\n    for(int i=0;i<V;i++) if(!visited[i] && dfs(i,-1,adj,visited)) return true;\n    return false;\n}",
+          "python": "def hasCycle(V, adj):\n    visited = [False]*V\n    def dfs(node, parent):\n        visited[node] = True\n        for nb in adj[node]:\n            if not visited[nb]:\n                if dfs(nb, node): return True\n            elif nb != parent: return True\n        return False\n    for i in range(V):\n        if not visited[i] and dfs(i, -1): return True\n    return False"
+        },
+        "timeComplexity": "O(V + E)",
+        "spaceComplexity": "O(V)"
+      },
+      "tags": ["graph", "dfs", "cycle-detection"]
+    },
+    {
+      "id": "gr-005",
+      "title": "Topological Sort",
+      "titleHi": "Topological Sort",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given a Directed Acyclic Graph (DAG) with V vertices and E edges, find any topological ordering of the vertices. In topological sort, for every directed edge u -> v, vertex u comes before v in the ordering.",
+        "hi": "Ek Directed Acyclic Graph (DAG) diya hai jisme V vertices aur E edges hain. Vertices ka koi bhi topological ordering dhundho. Topological sort mein har directed edge u -> v ke liye, vertex u ordering mein v se pehle aata hai."
+      },
+      "examples": [
+        { "input": "V = 4, E = 3, edges = [[0,1],[1,2],[0,2]]", "output": "0 1 2 3", "explanation": { "en": "0 must come before 1 and 2, 1 must come before 2. 3 has no dependencies.", "hi": "0 ko 1 aur 2 se pehle aana chahiye, 1 ko 2 se pehle aana chahiye. 3 ki koi dependency nahi hai." } }
+      ],
+      "constraints": ["2 <= V <= 10^4", "1 <= E <= V*(V-1)/2", "Graph is a DAG"],
+      "hints": [
+        { "en": "Use Kahn's Algorithm (BFS with in-degree) or DFS-based approach", "hi": "Kahn's Algorithm (BFS with in-degree) ya DFS-based approach use karo" },
+        { "en": "In Kahn's: start with nodes having in-degree 0, reduce neighbors' in-degree", "hi": "Kahn's mein: in-degree 0 wale nodes se start karo, neighbors ka in-degree reduce karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\n#include<queue>\nusing namespace std;\n\nvector<int> topoSort(int V, vector<vector<int>>& adj) {\n    // Write your code here\n    return {};\n}\n\nint main() {\n    int V, E; cin >> V >> E;\n    vector<vector<int>> adj(V);\n    for(int i=0;i<E;i++) { int u,v; cin>>u>>v; adj[u].push_back(v); }\n    vector<int> res = topoSort(V, adj);\n    for(int x : res) cout << x << \" \";\n}",
+        "python": "from collections import deque\n\ndef topoSort(V, adj):\n    # Write your code here\n    pass\n\nV, E = map(int, input().split())\nadj = [[] for _ in range(V)]\nfor _ in range(E):\n    u, v = map(int, input().split())\n    adj[u].append(v)\nprint(*topoSort(V, adj))",
+        "java": "import java.util.*;\npublic class Main {\n    public static List<Integer> topoSort(int V, List<List<Integer>> adj) {\n        // Write your code here\n        return new ArrayList<>();\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int V=sc.nextInt(), E=sc.nextInt();\n        List<List<Integer>> adj = new ArrayList<>();\n        for(int i=0;i<V;i++) adj.add(new ArrayList<>());\n        for(int i=0;i<E;i++){int u=sc.nextInt(),v=sc.nextInt();adj.get(u).add(v);}\n        List<Integer> res = topoSort(V, adj);\n        for(int x:res) System.out.print(x+\" \");\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [V,E]=lines[0].split(' ').map(Number);\nconst adj = Array.from({length:V},()=>[]);\nfor(let i=1;i<=E;i++){const[u,v]=lines[i].split(' ').map(Number);adj[u].push(v);}\nfunction topoSort(V, adj) {\n    // Write your code here\n}\nconsole.log(topoSort(V, adj).join(' '));",
+        "c": "#include<stdio.h>\n#include<stdbool.h>\n#define MAX 10001\nint adj[MAX][MAX], deg[MAX], inDeg[MAX];\nint result[MAX], resSize=0;\n\nvoid topoSort(int V) {\n    // Write your code here\n}\n\nint main() {\n    int V,E; scanf(\"%d %d\",&V,&E);\n    for(int i=0;i<E;i++){int u,v;scanf(\"%d %d\",&u,&v);adj[u][deg[u]++]=v;inDeg[v]++;}\n    topoSort(V);\n    for(int i=0;i<resSize;i++) printf(\"%d \",result[i]);\n}"
+      },
+      "testCases": [
+        { "input": "4 3\n0 1\n1 2\n0 2", "expectedOutput": "0 1 2 3" },
+        { "input": "6 6\n2 3\n3 1\n4 0\n4 1\n5 0\n5 2", "expectedOutput": "4 5 2 3 1 0" },
+        { "input": "2 1\n0 1", "expectedOutput": "0 1" }
+      ],
+      "solution": {
+        "approach": { "en": "Kahn's Algorithm: compute in-degrees, BFS from in-degree 0 nodes, reduce neighbors' in-degree.", "hi": "Kahn's Algorithm: in-degrees compute karo, in-degree 0 wale nodes se BFS karo, neighbors ka in-degree reduce karo." },
+        "code": {
+          "cpp": "vector<int> topoSort(int V, vector<vector<int>>& adj) {\n    vector<int> inDeg(V,0), result;\n    for(int i=0;i<V;i++) for(int x:adj[i]) inDeg[x]++;\n    queue<int> q;\n    for(int i=0;i<V;i++) if(inDeg[i]==0) q.push(i);\n    while(!q.empty()) {\n        int node=q.front(); q.pop();\n        result.push_back(node);\n        for(int nb:adj[node]) if(--inDeg[nb]==0) q.push(nb);\n    }\n    return result;\n}",
+          "python": "def topoSort(V, adj):\n    in_deg = [0]*V\n    for u in range(V):\n        for v in adj[u]: in_deg[v] += 1\n    queue = deque([i for i in range(V) if in_deg[i]==0])\n    result = []\n    while queue:\n        node = queue.popleft()\n        result.append(node)\n        for nb in adj[node]:\n            in_deg[nb] -= 1\n            if in_deg[nb] == 0: queue.append(nb)\n    return result"
+        },
+        "timeComplexity": "O(V + E)",
+        "spaceComplexity": "O(V)"
+      },
+      "tags": ["graph", "topological-sort", "bfs", "dag"]
+    },
+    {
+      "id": "gr-006",
+      "title": "Shortest Path in Unweighted Graph",
+      "titleHi": "Unweighted Graph Mein Shortest Path",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given an unweighted undirected graph with V vertices and E edges, find the shortest distance from a source vertex S to all other vertices. If a vertex is unreachable, its distance should be -1.",
+        "hi": "Ek unweighted undirected graph diya hai jisme V vertices aur E edges hain. Source vertex S se baaki saare vertices tak ki shortest distance dhundho. Agar koi vertex reachable nahi hai to uski distance -1 honi chahiye."
+      },
+      "examples": [
+        { "input": "V=4, E=4, S=0, edges=[[0,1],[0,2],[1,2],[2,3]]", "output": "0 1 1 2", "explanation": { "en": "From 0: dist to 0=0, to 1=1, to 2=1, to 3=2 (via 2)", "hi": "0 se: 0 ki dist=0, 1 ki dist=1, 2 ki dist=1, 3 ki dist=2 (2 ke through)" } }
+      ],
+      "constraints": ["1 <= V <= 10^4", "0 <= E <= V*(V-1)/2", "0 <= S < V"],
+      "hints": [
+        { "en": "BFS naturally gives shortest path in unweighted graphs", "hi": "BFS unweighted graphs mein naturally shortest path deta hai" },
+        { "en": "Initialize distances as -1, set source distance as 0", "hi": "Distances ko -1 se initialize karo, source ki distance 0 set karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\n#include<queue>\nusing namespace std;\n\nvector<int> shortestPath(int V, vector<vector<int>>& adj, int S) {\n    // Write your code here\n    return {};\n}\n\nint main() {\n    int V, E, S; cin >> V >> E >> S;\n    vector<vector<int>> adj(V);\n    for(int i=0;i<E;i++) { int u,v; cin>>u>>v; adj[u].push_back(v); adj[v].push_back(u); }\n    vector<int> res = shortestPath(V, adj, S);\n    for(int x : res) cout << x << \" \";\n}",
+        "python": "from collections import deque\n\ndef shortestPath(V, adj, S):\n    # Write your code here\n    pass\n\nV, E, S = map(int, input().split())\nadj = [[] for _ in range(V)]\nfor _ in range(E):\n    u, v = map(int, input().split())\n    adj[u].append(v)\n    adj[v].append(u)\nprint(*shortestPath(V, adj, S))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int[] shortestPath(int V, List<List<Integer>> adj, int S) {\n        // Write your code here\n        return new int[V];\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int V=sc.nextInt(), E=sc.nextInt(), S=sc.nextInt();\n        List<List<Integer>> adj = new ArrayList<>();\n        for(int i=0;i<V;i++) adj.add(new ArrayList<>());\n        for(int i=0;i<E;i++){int u=sc.nextInt(),v=sc.nextInt();adj.get(u).add(v);adj.get(v).add(u);}\n        int[] res = shortestPath(V, adj, S);\n        for(int x:res) System.out.print(x+\" \");\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [V,E,S]=lines[0].split(' ').map(Number);\nconst adj = Array.from({length:V},()=>[]);\nfor(let i=1;i<=E;i++){const[u,v]=lines[i].split(' ').map(Number);adj[u].push(v);adj[v].push(u);}\nfunction shortestPath(V, adj, S) {\n    // Write your code here\n}\nconsole.log(shortestPath(V, adj, S).join(' '));",
+        "c": "#include<stdio.h>\n#include<stdbool.h>\n#define MAX 10001\nint adj[MAX][MAX], deg[MAX];\nint dist[MAX];\nint queue[MAX], front=0, rear=0;\n\nvoid shortestPath(int V, int S) {\n    // Write your code here\n}\n\nint main() {\n    int V,E,S; scanf(\"%d %d %d\",&V,&E,&S);\n    for(int i=0;i<E;i++){int u,v;scanf(\"%d %d\",&u,&v);adj[u][deg[u]++]=v;adj[v][deg[v]++]=u;}\n    shortestPath(V, S);\n    for(int i=0;i<V;i++) printf(\"%d \",dist[i]);\n}"
+      },
+      "testCases": [
+        { "input": "4 4 0\n0 1\n0 2\n1 2\n2 3", "expectedOutput": "0 1 1 2" },
+        { "input": "5 3 0\n0 1\n1 2\n2 3", "expectedOutput": "0 1 2 3 -1" },
+        { "input": "1 0 0", "expectedOutput": "0" }
+      ],
+      "solution": {
+        "approach": { "en": "BFS from source. Distance of neighbor = distance of current + 1.", "hi": "Source se BFS. Neighbor ki distance = current ki distance + 1." },
+        "code": {
+          "cpp": "vector<int> shortestPath(int V, vector<vector<int>>& adj, int S) {\n    vector<int> dist(V, -1);\n    queue<int> q;\n    dist[S]=0; q.push(S);\n    while(!q.empty()) {\n        int node=q.front(); q.pop();\n        for(int nb:adj[node]) if(dist[nb]==-1){dist[nb]=dist[node]+1;q.push(nb);}\n    }\n    return dist;\n}",
+          "python": "def shortestPath(V, adj, S):\n    dist = [-1]*V\n    dist[S] = 0\n    queue = deque([S])\n    while queue:\n        node = queue.popleft()\n        for nb in adj[node]:\n            if dist[nb] == -1:\n                dist[nb] = dist[node] + 1\n                queue.append(nb)\n    return dist"
+        },
+        "timeComplexity": "O(V + E)",
+        "spaceComplexity": "O(V)"
+      },
+      "tags": ["graph", "bfs", "shortest-path"]
+    },
+    {
+      "id": "gr-007",
+      "title": "Dijkstra's Algorithm",
+      "titleHi": "Dijkstra's Algorithm",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given a weighted directed graph with V vertices and E edges, find the shortest distance from a source vertex S to all other vertices using Dijkstra's algorithm. If a vertex is unreachable, its distance should be -1. All weights are non-negative.",
+        "hi": "Ek weighted directed graph diya hai jisme V vertices aur E edges hain. Dijkstra's algorithm use karke source vertex S se baaki saare vertices tak ki shortest distance dhundho. Agar koi vertex unreachable hai to uski distance -1 honi chahiye. Saare weights non-negative hain."
+      },
+      "examples": [
+        { "input": "V=3, E=3, S=0, edges=[[0,1,1],[0,2,4],[1,2,2]]", "output": "0 1 3", "explanation": { "en": "From 0: to 0=0, to 1=1 (direct), to 2=3 (via 1, cost 1+2)", "hi": "0 se: 0 tak=0, 1 tak=1 (direct), 2 tak=3 (1 ke through, cost 1+2)" } }
+      ],
+      "constraints": ["1 <= V <= 10^4", "0 <= E <= V*(V-1)", "0 <= weight <= 10^4", "0 <= S < V"],
+      "hints": [
+        { "en": "Use a min-heap (priority queue) to always process the closest vertex first", "hi": "Min-heap (priority queue) use karo taaki hamesha closest vertex pehle process ho" },
+        { "en": "Skip processing if current distance > already found distance", "hi": "Agar current distance > already found distance hai to skip karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\n#include<queue>\n#include<climits>\nusing namespace std;\n\nvector<int> dijkstra(int V, vector<vector<pair<int,int>>>& adj, int S) {\n    // Write your code here\n    return {};\n}\n\nint main() {\n    int V, E, S; cin >> V >> E >> S;\n    vector<vector<pair<int,int>>> adj(V);\n    for(int i=0;i<E;i++) { int u,v,w; cin>>u>>v>>w; adj[u].push_back({v,w}); }\n    vector<int> res = dijkstra(V, adj, S);\n    for(int x : res) cout << x << \" \";\n}",
+        "python": "import heapq\n\ndef dijkstra(V, adj, S):\n    # Write your code here\n    pass\n\nV, E, S = map(int, input().split())\nadj = [[] for _ in range(V)]\nfor _ in range(E):\n    u, v, w = map(int, input().split())\n    adj[u].append((v, w))\nprint(*dijkstra(V, adj, S))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int[] dijkstra(int V, List<List<int[]>> adj, int S) {\n        // Write your code here\n        return new int[V];\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int V=sc.nextInt(), E=sc.nextInt(), S=sc.nextInt();\n        List<List<int[]>> adj = new ArrayList<>();\n        for(int i=0;i<V;i++) adj.add(new ArrayList<>());\n        for(int i=0;i<E;i++){int u=sc.nextInt(),v=sc.nextInt(),w=sc.nextInt();adj.get(u).add(new int[]{v,w});}\n        int[] res = dijkstra(V, adj, S);\n        for(int x:res) System.out.print(x+\" \");\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [V,E,S]=lines[0].split(' ').map(Number);\nconst adj = Array.from({length:V},()=>[]);\nfor(let i=1;i<=E;i++){const[u,v,w]=lines[i].split(' ').map(Number);adj[u].push([v,w]);}\nfunction dijkstra(V, adj, S) {\n    // Write your code here\n}\nconsole.log(dijkstra(V, adj, S).join(' '));",
+        "c": "#include<stdio.h>\n#include<limits.h>\n#include<stdbool.h>\n#define MAX 10001\nint dist[MAX];\nbool visited[MAX];\n\nvoid dijkstra(int V, int S) {\n    // Write your code here (use adjacency matrix approach)\n}\n\nint main() {\n    int V,E,S; scanf(\"%d %d %d\",&V,&E,&S);\n    // Read graph and call dijkstra\n    dijkstra(V, S);\n    for(int i=0;i<V;i++) printf(\"%d \", dist[i]==-1?-1:dist[i]);\n}"
+      },
+      "testCases": [
+        { "input": "3 3 0\n0 1 1\n0 2 4\n1 2 2", "expectedOutput": "0 1 3" },
+        { "input": "4 4 0\n0 1 4\n0 2 1\n2 1 2\n1 3 1", "expectedOutput": "0 3 1 4" },
+        { "input": "2 0 0", "expectedOutput": "0 -1" }
+      ],
+      "solution": {
+        "approach": { "en": "Min-heap with (distance, vertex). Process closest vertex, relax edges.", "hi": "Min-heap (distance, vertex) ke saath. Closest vertex process karo, edges relax karo." },
+        "code": {
+          "cpp": "vector<int> dijkstra(int V, vector<vector<pair<int,int>>>& adj, int S) {\n    vector<int> dist(V, INT_MAX);\n    priority_queue<pair<int,int>, vector<pair<int,int>>, greater<>> pq;\n    dist[S]=0; pq.push({0,S});\n    while(!pq.empty()) {\n        auto [d,u]=pq.top(); pq.pop();\n        if(d>dist[u]) continue;\n        for(auto [v,w]:adj[u]) if(dist[u]+w<dist[v]){dist[v]=dist[u]+w;pq.push({dist[v],v});}\n    }\n    for(int i=0;i<V;i++) if(dist[i]==INT_MAX) dist[i]=-1;\n    return dist;\n}",
+          "python": "def dijkstra(V, adj, S):\n    dist = [float('inf')]*V\n    dist[S] = 0\n    pq = [(0, S)]\n    while pq:\n        d, u = heapq.heappop(pq)\n        if d > dist[u]: continue\n        for v, w in adj[u]:\n            if dist[u]+w < dist[v]:\n                dist[v] = dist[u]+w\n                heapq.heappush(pq, (dist[v], v))\n    return [d if d != float('inf') else -1 for d in dist]"
+        },
+        "timeComplexity": "O((V + E) log V)",
+        "spaceComplexity": "O(V + E)"
+      },
+      "tags": ["graph", "dijkstra", "shortest-path", "priority-queue"]
+    },
+    {
+      "id": "gr-008",
+      "title": "Detect Cycle in Directed Graph",
+      "titleHi": "Directed Graph Mein Cycle Detect Karo",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given a directed graph with V vertices and E edges, check whether the graph contains a cycle or not. Print 'true' if a cycle exists, 'false' otherwise.",
+        "hi": "Ek directed graph diya hai jisme V vertices aur E edges hain. Check karo ki graph mein cycle hai ya nahi. Agar cycle hai to 'true' print karo, nahi to 'false'."
+      },
+      "examples": [
+        { "input": "V=4, E=4, edges=[[0,1],[1,2],[2,3],[3,1]]", "output": "true", "explanation": { "en": "Cycle exists: 1 -> 2 -> 3 -> 1", "hi": "Cycle hai: 1 -> 2 -> 3 -> 1" } },
+        { "input": "V=3, E=2, edges=[[0,1],[1,2]]", "output": "false", "explanation": { "en": "No cycle in this directed graph", "hi": "Is directed graph mein koi cycle nahi hai" } }
+      ],
+      "constraints": ["1 <= V <= 10^5", "0 <= E <= V*(V-1)"],
+      "hints": [
+        { "en": "Use DFS with three colors: white (unvisited), gray (in current path), black (fully processed)", "hi": "DFS teen colors ke saath use karo: white (unvisited), gray (current path mein), black (fully processed)" },
+        { "en": "If you encounter a gray node during DFS, there's a cycle (back edge)", "hi": "Agar DFS ke dauraan gray node mile, to cycle hai (back edge)" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\nusing namespace std;\n\nbool hasCycle(int V, vector<vector<int>>& adj) {\n    // Write your code here\n    return false;\n}\n\nint main() {\n    int V, E; cin >> V >> E;\n    vector<vector<int>> adj(V);\n    for(int i=0;i<E;i++) { int u,v; cin>>u>>v; adj[u].push_back(v); }\n    cout << (hasCycle(V, adj) ? \"true\" : \"false\");\n}",
+        "python": "def hasCycle(V, adj):\n    # Write your code here\n    pass\n\nV, E = map(int, input().split())\nadj = [[] for _ in range(V)]\nfor _ in range(E):\n    u, v = map(int, input().split())\n    adj[u].append(v)\nprint('true' if hasCycle(V, adj) else 'false')",
+        "java": "import java.util.*;\npublic class Main {\n    public static boolean hasCycle(int V, List<List<Integer>> adj) {\n        // Write your code here\n        return false;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int V=sc.nextInt(), E=sc.nextInt();\n        List<List<Integer>> adj = new ArrayList<>();\n        for(int i=0;i<V;i++) adj.add(new ArrayList<>());\n        for(int i=0;i<E;i++){int u=sc.nextInt(),v=sc.nextInt();adj.get(u).add(v);}\n        System.out.println(hasCycle(V, adj) ? \"true\" : \"false\");\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [V,E]=lines[0].split(' ').map(Number);\nconst adj = Array.from({length:V},()=>[]);\nfor(let i=1;i<=E;i++){const[u,v]=lines[i].split(' ').map(Number);adj[u].push(v);}\nfunction hasCycle(V, adj) {\n    // Write your code here\n}\nconsole.log(hasCycle(V, adj) ? 'true' : 'false');",
+        "c": "#include<stdio.h>\n#include<stdbool.h>\n#define MAX 100001\nint adj[MAX][100], deg[MAX];\nint color[MAX]; // 0=white, 1=gray, 2=black\n\nbool hasCycle(int V) {\n    // Write your code here\n    return false;\n}\n\nint main() {\n    int V,E; scanf(\"%d %d\",&V,&E);\n    for(int i=0;i<E;i++){int u,v;scanf(\"%d %d\",&u,&v);adj[u][deg[u]++]=v;}\n    printf(\"%s\", hasCycle(V) ? \"true\" : \"false\");\n}"
+      },
+      "testCases": [
+        { "input": "4 4\n0 1\n1 2\n2 3\n3 1", "expectedOutput": "true" },
+        { "input": "3 2\n0 1\n1 2", "expectedOutput": "false" },
+        { "input": "4 4\n0 1\n0 2\n1 3\n2 3", "expectedOutput": "false" }
+      ],
+      "solution": {
+        "approach": { "en": "DFS with visited + recursion stack tracking. Back edge to node in current recursion stack means cycle.", "hi": "DFS visited + recursion stack tracking ke saath. Current recursion stack mein back edge milna matlab cycle hai." },
+        "code": {
+          "cpp": "bool dfs(int node, vector<vector<int>>& adj, vector<bool>& visited, vector<bool>& recStack) {\n    visited[node]=true; recStack[node]=true;\n    for(int nb:adj[node]) {\n        if(!visited[nb] && dfs(nb,adj,visited,recStack)) return true;\n        if(recStack[nb]) return true;\n    }\n    recStack[node]=false;\n    return false;\n}\nbool hasCycle(int V, vector<vector<int>>& adj) {\n    vector<bool> visited(V,false), recStack(V,false);\n    for(int i=0;i<V;i++) if(!visited[i] && dfs(i,adj,visited,recStack)) return true;\n    return false;\n}",
+          "python": "def hasCycle(V, adj):\n    visited = [False]*V\n    rec_stack = [False]*V\n    def dfs(node):\n        visited[node] = True\n        rec_stack[node] = True\n        for nb in adj[node]:\n            if not visited[nb] and dfs(nb): return True\n            if rec_stack[nb]: return True\n        rec_stack[node] = False\n        return False\n    for i in range(V):\n        if not visited[i] and dfs(i): return True\n    return False"
+        },
+        "timeComplexity": "O(V + E)",
+        "spaceComplexity": "O(V)"
+      },
+      "tags": ["graph", "dfs", "cycle-detection", "directed"]
+    },
+    {
+      "id": "gr-009",
+      "title": "Minimum Spanning Tree",
+      "titleHi": "Minimum Spanning Tree (MST)",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given a weighted undirected connected graph with V vertices and E edges, find the sum of weights of the edges in the Minimum Spanning Tree (MST). A spanning tree connects all vertices with minimum total edge weight and exactly V-1 edges.",
+        "hi": "Ek weighted undirected connected graph diya hai jisme V vertices aur E edges hain. Minimum Spanning Tree (MST) ke edges ki weights ka sum dhundho. Spanning tree saare vertices ko minimum total edge weight aur exactly V-1 edges se connect karta hai."
+      },
+      "examples": [
+        { "input": "V=4, E=5, edges=[[0,1,1],[0,2,4],[1,2,2],[1,3,6],[2,3,3]]", "output": "6", "explanation": { "en": "MST edges: (0,1,1), (1,2,2), (2,3,3). Total = 1+2+3 = 6", "hi": "MST edges: (0,1,1), (1,2,2), (2,3,3). Total = 1+2+3 = 6" } }
+      ],
+      "constraints": ["2 <= V <= 10^4", "V-1 <= E <= V*(V-1)/2", "1 <= weight <= 10^5", "Graph is connected"],
+      "hints": [
+        { "en": "Use Prim's (priority queue based) or Kruskal's (sort edges + Union-Find) algorithm", "hi": "Prim's (priority queue based) ya Kruskal's (edges sort karo + Union-Find) algorithm use karo" },
+        { "en": "Kruskal's: sort edges by weight, add edge if it doesn't create a cycle (use Union-Find)", "hi": "Kruskal's: edges weight se sort karo, edge add karo agar cycle na bane (Union-Find use karo)" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\n#include<algorithm>\n#include<queue>\nusing namespace std;\n\nint mstWeight(int V, vector<vector<pair<int,int>>>& adj) {\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    int V, E; cin >> V >> E;\n    vector<vector<pair<int,int>>> adj(V);\n    for(int i=0;i<E;i++) { int u,v,w; cin>>u>>v>>w; adj[u].push_back({v,w}); adj[v].push_back({u,w}); }\n    cout << mstWeight(V, adj);\n}",
+        "python": "import heapq\n\ndef mstWeight(V, adj):\n    # Write your code here\n    pass\n\nV, E = map(int, input().split())\nadj = [[] for _ in range(V)]\nfor _ in range(E):\n    u, v, w = map(int, input().split())\n    adj[u].append((v, w))\n    adj[v].append((u, w))\nprint(mstWeight(V, adj))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int mstWeight(int V, List<List<int[]>> adj) {\n        // Write your code here\n        return 0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int V=sc.nextInt(), E=sc.nextInt();\n        List<List<int[]>> adj = new ArrayList<>();\n        for(int i=0;i<V;i++) adj.add(new ArrayList<>());\n        for(int i=0;i<E;i++){int u=sc.nextInt(),v=sc.nextInt(),w=sc.nextInt();adj.get(u).add(new int[]{v,w});adj.get(v).add(new int[]{u,w});}\n        System.out.println(mstWeight(V, adj));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [V,E]=lines[0].split(' ').map(Number);\nconst adj = Array.from({length:V},()=>[]);\nfor(let i=1;i<=E;i++){const[u,v,w]=lines[i].split(' ').map(Number);adj[u].push([v,w]);adj[v].push([u,w]);}\nfunction mstWeight(V, adj) {\n    // Write your code here\n}\nconsole.log(mstWeight(V, adj));",
+        "c": "#include<stdio.h>\n#include<limits.h>\n#include<stdbool.h>\n#define MAX 10001\n\nint mstWeight(int V) {\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    int V,E; scanf(\"%d %d\",&V,&E);\n    // Read graph\n    printf(\"%d\", mstWeight(V));\n}"
+      },
+      "testCases": [
+        { "input": "4 5\n0 1 1\n0 2 4\n1 2 2\n1 3 6\n2 3 3", "expectedOutput": "6" },
+        { "input": "3 3\n0 1 5\n1 2 3\n0 2 1", "expectedOutput": "4" },
+        { "input": "2 1\n0 1 7", "expectedOutput": "7" }
+      ],
+      "solution": {
+        "approach": { "en": "Prim's Algorithm: start from vertex 0, use min-heap to always pick cheapest edge to unvisited vertex.", "hi": "Prim's Algorithm: vertex 0 se start karo, min-heap use karke hamesha unvisited vertex tak ki cheapest edge pick karo." },
+        "code": {
+          "cpp": "int mstWeight(int V, vector<vector<pair<int,int>>>& adj) {\n    vector<bool> inMST(V, false);\n    priority_queue<pair<int,int>, vector<pair<int,int>>, greater<>> pq;\n    pq.push({0, 0}); // {weight, vertex}\n    int totalWeight = 0, count = 0;\n    while(!pq.empty() && count < V) {\n        auto [w, u] = pq.top(); pq.pop();\n        if(inMST[u]) continue;\n        inMST[u] = true;\n        totalWeight += w; count++;\n        for(auto [v, wt] : adj[u]) if(!inMST[v]) pq.push({wt, v});\n    }\n    return totalWeight;\n}",
+          "python": "def mstWeight(V, adj):\n    in_mst = [False]*V\n    pq = [(0, 0)]  # (weight, vertex)\n    total = 0\n    count = 0\n    while pq and count < V:\n        w, u = heapq.heappop(pq)\n        if in_mst[u]: continue\n        in_mst[u] = True\n        total += w\n        count += 1\n        for v, wt in adj[u]:\n            if not in_mst[v]:\n                heapq.heappush(pq, (wt, v))\n    return total"
+        },
+        "timeComplexity": "O(E log V)",
+        "spaceComplexity": "O(V + E)"
+      },
+      "tags": ["graph", "mst", "prim", "greedy", "priority-queue"]
+    },
+    {
+      "id": "gr-010",
+      "title": "Strongly Connected Components",
+      "titleHi": "Strongly Connected Components (SCC)",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given a directed graph with V vertices and E edges, find the number of Strongly Connected Components (SCCs). A strongly connected component is a maximal set of vertices such that there is a path from every vertex to every other vertex in the set.",
+        "hi": "Ek directed graph diya hai jisme V vertices aur E edges hain. Strongly Connected Components (SCCs) ki sankhya dhundho. Ek strongly connected component vertices ka ek maximal set hai jisme har vertex se har doosre vertex tak path hota hai."
+      },
+      "examples": [
+        { "input": "V=5, E=5, edges=[[0,1],[1,2],[2,0],[1,3],[3,4]]", "output": "3", "explanation": { "en": "SCCs: {0,1,2}, {3}, {4}. Vertices 0,1,2 form a cycle so they are one SCC.", "hi": "SCCs: {0,1,2}, {3}, {4}. Vertices 0,1,2 ek cycle banate hain isliye wo ek SCC hain." } }
+      ],
+      "constraints": ["1 <= V <= 10^4", "0 <= E <= V*(V-1)"],
+      "hints": [
+        { "en": "Use Kosaraju's Algorithm: two DFS passes with a transposed graph", "hi": "Kosaraju's Algorithm use karo: transposed graph ke saath do DFS passes" },
+        { "en": "First DFS: get finishing order (stack). Second DFS: on transposed graph in reverse finishing order.", "hi": "Pehla DFS: finishing order lo (stack). Doosra DFS: transposed graph pe reverse finishing order mein." }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\n#include<stack>\nusing namespace std;\n\nint countSCC(int V, vector<vector<int>>& adj) {\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    int V, E; cin >> V >> E;\n    vector<vector<int>> adj(V);\n    for(int i=0;i<E;i++) { int u,v; cin>>u>>v; adj[u].push_back(v); }\n    cout << countSCC(V, adj);\n}",
+        "python": "import sys\nsys.setrecursionlimit(100000)\n\ndef countSCC(V, adj):\n    # Write your code here\n    pass\n\nV, E = map(int, input().split())\nadj = [[] for _ in range(V)]\nfor _ in range(E):\n    u, v = map(int, input().split())\n    adj[u].append(v)\nprint(countSCC(V, adj))",
+        "java": "import java.util.*;\npublic class Main {\n    public static int countSCC(int V, List<List<Integer>> adj) {\n        // Write your code here\n        return 0;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int V=sc.nextInt(), E=sc.nextInt();\n        List<List<Integer>> adj = new ArrayList<>();\n        for(int i=0;i<V;i++) adj.add(new ArrayList<>());\n        for(int i=0;i<E;i++){int u=sc.nextInt(),v=sc.nextInt();adj.get(u).add(v);}\n        System.out.println(countSCC(V, adj));\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [V,E]=lines[0].split(' ').map(Number);\nconst adj = Array.from({length:V},()=>[]);\nfor(let i=1;i<=E;i++){const[u,v]=lines[i].split(' ').map(Number);adj[u].push(v);}\nfunction countSCC(V, adj) {\n    // Write your code here\n}\nconsole.log(countSCC(V, adj));",
+        "c": "#include<stdio.h>\n#include<stdbool.h>\n#define MAX 10001\nint adj[MAX][100], deg[MAX];\nint radj[MAX][100], rdeg[MAX];\nbool visited[MAX];\nint stack[MAX], top=-1;\n\nint countSCC(int V) {\n    // Write your code here\n    return 0;\n}\n\nint main() {\n    int V,E; scanf(\"%d %d\",&V,&E);\n    for(int i=0;i<E;i++){int u,v;scanf(\"%d %d\",&u,&v);adj[u][deg[u]++]=v;radj[v][rdeg[v]++]=u;}\n    printf(\"%d\", countSCC(V));\n}"
+      },
+      "testCases": [
+        { "input": "5 5\n0 1\n1 2\n2 0\n1 3\n3 4", "expectedOutput": "3" },
+        { "input": "4 4\n0 1\n1 2\n2 3\n3 0", "expectedOutput": "1" },
+        { "input": "3 0", "expectedOutput": "3" }
+      ],
+      "solution": {
+        "approach": { "en": "Kosaraju's: 1) DFS to fill stack by finish time 2) Transpose graph 3) DFS on transposed graph in stack order, each DFS = one SCC.", "hi": "Kosaraju's: 1) DFS se stack mein finish time se bharo 2) Graph transpose karo 3) Transposed graph pe stack order mein DFS karo, har DFS = ek SCC." },
+        "code": {
+          "cpp": "void dfs1(int node, vector<vector<int>>& adj, vector<bool>& visited, stack<int>& st) {\n    visited[node]=true;\n    for(int nb:adj[node]) if(!visited[nb]) dfs1(nb,adj,visited,st);\n    st.push(node);\n}\nvoid dfs2(int node, vector<vector<int>>& radj, vector<bool>& visited) {\n    visited[node]=true;\n    for(int nb:radj[node]) if(!visited[nb]) dfs2(nb,radj,visited);\n}\nint countSCC(int V, vector<vector<int>>& adj) {\n    stack<int> st;\n    vector<bool> visited(V,false);\n    for(int i=0;i<V;i++) if(!visited[i]) dfs1(i,adj,visited,st);\n    vector<vector<int>> radj(V);\n    for(int u=0;u<V;u++) for(int v:adj[u]) radj[v].push_back(u);\n    fill(visited.begin(),visited.end(),false);\n    int count=0;\n    while(!st.empty()) {\n        int node=st.top(); st.pop();\n        if(!visited[node]){dfs2(node,radj,visited);count++;}\n    }\n    return count;\n}",
+          "python": "def countSCC(V, adj):\n    visited = [False]*V\n    order = []\n    def dfs1(node):\n        visited[node] = True\n        for nb in adj[node]:\n            if not visited[nb]: dfs1(nb)\n        order.append(node)\n    for i in range(V):\n        if not visited[i]: dfs1(i)\n    radj = [[] for _ in range(V)]\n    for u in range(V):\n        for v in adj[u]: radj[v].append(u)\n    visited = [False]*V\n    count = 0\n    def dfs2(node):\n        visited[node] = True\n        for nb in radj[node]:\n            if not visited[nb]: dfs2(nb)\n    for node in reversed(order):\n        if not visited[node]:\n            dfs2(node)\n            count += 1\n    return count"
+        },
+        "timeComplexity": "O(V + E)",
+        "spaceComplexity": "O(V + E)"
+      },
+      "tags": ["graph", "dfs", "scc", "kosaraju", "advanced"]
+    }
+  ]
+}

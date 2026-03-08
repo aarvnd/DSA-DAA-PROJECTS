@@ -1,0 +1,400 @@
+{
+  "topicId": "daa-backtracking",
+  "problems": [
+    {
+      "id": "bt-001",
+      "title": "N-Queens",
+      "titleHi": "N-Queens Problem",
+      "difficulty": "medium",
+      "description": {
+        "en": "Place N queens on an N x N chessboard such that no two queens attack each other. A queen can attack horizontally, vertically, and diagonally. Print all distinct solutions where each solution is a permutation representing the column position of the queen in each row.",
+        "hi": "N queens ko N x N chessboard pe aise place karo ki koi bhi do queens ek dusre ko attack na kar sakein. Queen horizontally, vertically, aur diagonally attack kar sakti hai. Saare distinct solutions print karo jahan har solution ek permutation hai jo har row mein queen ki column position batata hai."
+      },
+      "examples": [
+        {
+          "input": "N = 4",
+          "output": "[[2,4,1,3],[3,1,4,2]]",
+          "explanation": {
+            "en": "For a 4x4 board, there are 2 valid arrangements. In [2,4,1,3]: Queen in row 1 is at column 2, row 2 at column 4, row 3 at column 1, row 4 at column 3.",
+            "hi": "4x4 board ke liye 2 valid arrangements hain. [2,4,1,3] mein: Row 1 ki queen column 2 pe, row 2 ki column 4 pe, row 3 ki column 1 pe, row 4 ki column 3 pe hai."
+          }
+        }
+      ],
+      "constraints": ["1 <= N <= 10"],
+      "hints": [
+        { "en": "Place queens one row at a time and check column, left diagonal, and right diagonal conflicts", "hi": "Ek row at a time queen place karo aur column, left diagonal, aur right diagonal conflicts check karo" },
+        { "en": "Use three arrays/sets to track occupied columns and diagonals", "hi": "Teen arrays/sets use karo occupied columns aur diagonals track karne ke liye" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\nusing namespace std;\n\nvoid solveNQueens(int n) {\n    // Write your code here\n    // Print all valid configurations\n}\n\nint main() {\n    int n; cin >> n;\n    solveNQueens(n);\n    return 0;\n}",
+        "python": "def solve_n_queens(n):\n    # Write your code here\n    # Return list of all valid configurations\n    pass\n\nn = int(input())\nresult = solve_n_queens(n)\nfor sol in result:\n    print(sol)",
+        "java": "import java.util.*;\npublic class Main {\n    public static List<List<Integer>> solveNQueens(int n) {\n        // Write your code here\n        return new ArrayList<>();\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        List<List<Integer>> result = solveNQueens(n);\n        for (List<Integer> sol : result)\n            System.out.println(sol);\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nfunction solveNQueens(n) {\n    // Write your code here\n    return [];\n}\nsolveNQueens(n).forEach(sol => console.log(JSON.stringify(sol)));",
+        "c": "#include<stdio.h>\nvoid solveNQueens(int n) {\n    // Write your code here\n}\nint main() {\n    int n; scanf(\"%d\", &n);\n    solveNQueens(n);\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "4", "expectedOutput": "[2, 4, 1, 3]\n[3, 1, 4, 2]" },
+        { "input": "1", "expectedOutput": "[1]" },
+        { "input": "8", "expectedOutput": "92 solutions" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use backtracking placing one queen per row. Track occupied columns and diagonals using sets. For each row, try every column and recurse if safe.",
+          "hi": "Backtracking use karo har row mein ek queen place karke. Occupied columns aur diagonals ko sets se track karo. Har row ke liye har column try karo aur agar safe hai toh recurse karo."
+        },
+        "code": {
+          "cpp": "void solve(int row, int n, vector<int>& pos, vector<bool>& col, vector<bool>& d1, vector<bool>& d2, vector<vector<int>>& res) {\n    if (row == n) { res.push_back(pos); return; }\n    for (int c = 0; c < n; c++) {\n        if (!col[c] && !d1[row-c+n-1] && !d2[row+c]) {\n            pos.push_back(c+1); col[c]=d1[row-c+n-1]=d2[row+c]=true;\n            solve(row+1,n,pos,col,d1,d2,res);\n            pos.pop_back(); col[c]=d1[row-c+n-1]=d2[row+c]=false;\n        }\n    }\n}",
+          "python": "def solve_n_queens(n):\n    res, cols, d1, d2 = [], set(), set(), set()\n    def bt(row, pos):\n        if row == n: res.append(pos[:]); return\n        for c in range(n):\n            if c not in cols and row-c not in d1 and row+c not in d2:\n                cols.add(c); d1.add(row-c); d2.add(row+c); pos.append(c+1)\n                bt(row+1, pos)\n                cols.remove(c); d1.remove(row-c); d2.remove(row+c); pos.pop()\n    bt(0, [])\n    return res"
+        },
+        "timeComplexity": "O(N!)",
+        "spaceComplexity": "O(N^2)"
+      },
+      "tags": ["backtracking", "recursion", "chess"]
+    },
+    {
+      "id": "bt-002",
+      "title": "Rat in a Maze",
+      "titleHi": "Bhool Bhulaiya mein Chuha",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given an N x N maze where 1 represents an open cell and 0 represents a blocked cell, find all paths for a rat to travel from the top-left corner (0,0) to the bottom-right corner (N-1, N-1). The rat can move in four directions: Up (U), Down (D), Left (L), Right (R).",
+        "hi": "Ek N x N maze diya hai jahan 1 open cell hai aur 0 blocked cell hai. Chuhe ke liye saare paths dhundho top-left corner (0,0) se bottom-right corner (N-1, N-1) tak. Chuha chaar directions mein move kar sakta hai: Up (U), Down (D), Left (L), Right (R)."
+      },
+      "examples": [
+        {
+          "input": "N = 4\nMaze = [[1,0,0,0],[1,1,0,1],[1,1,0,0],[0,1,1,1]]",
+          "output": "DDRDRR DRDDRR",
+          "explanation": {
+            "en": "Two paths exist from (0,0) to (3,3). DDRDRR means Down, Down, Right, Down, Right, Right.",
+            "hi": "Do paths hain (0,0) se (3,3) tak. DDRDRR ka matlab Down, Down, Right, Down, Right, Right."
+          }
+        }
+      ],
+      "constraints": ["2 <= N <= 5", "maze[0][0] = 1", "maze[N-1][N-1] = 1"],
+      "hints": [
+        { "en": "Use a visited matrix to avoid revisiting cells", "hi": "Visited matrix use karo cells ko dubara visit karne se bachne ke liye" },
+        { "en": "At each cell, try all 4 directions and backtrack if it leads to a dead end", "hi": "Har cell pe chaaon directions try karo aur dead end pe backtrack karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\n#include<string>\nusing namespace std;\n\nvoid findPaths(vector<vector<int>>& maze, int n) {\n    // Write your code here\n}\n\nint main() {\n    int n; cin >> n;\n    vector<vector<int>> maze(n, vector<int>(n));\n    for(int i=0;i<n;i++) for(int j=0;j<n;j++) cin >> maze[i][j];\n    findPaths(maze, n);\n    return 0;\n}",
+        "python": "def find_paths(maze, n):\n    # Write your code here\n    pass\n\nn = int(input())\nmaze = []\nfor _ in range(n):\n    maze.append(list(map(int, input().split())))\nresult = find_paths(maze, n)\nfor path in result:\n    print(path)",
+        "java": "import java.util.*;\npublic class Main {\n    public static List<String> findPaths(int[][] maze, int n) {\n        // Write your code here\n        return new ArrayList<>();\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[][] maze = new int[n][n];\n        for(int i=0;i<n;i++) for(int j=0;j<n;j++) maze[i][j]=sc.nextInt();\n        for(String p : findPaths(maze, n)) System.out.println(p);\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst maze = [];\nfor(let i=1;i<=n;i++) maze.push(lines[i].split(' ').map(Number));\nfunction findPaths(maze, n) {\n    // Write your code here\n    return [];\n}\nfindPaths(maze, n).forEach(p => console.log(p));",
+        "c": "#include<stdio.h>\nvoid findPaths(int maze[][5], int n) {\n    // Write your code here\n}\nint main() {\n    int n; scanf(\"%d\", &n);\n    int maze[5][5];\n    for(int i=0;i<n;i++) for(int j=0;j<n;j++) scanf(\"%d\", &maze[i][j]);\n    findPaths(maze, n);\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "4\n1 0 0 0\n1 1 0 1\n1 1 0 0\n0 1 1 1", "expectedOutput": "DDRDRR\nDRDDRR" },
+        { "input": "2\n1 0\n1 1", "expectedOutput": "DR" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Recursively explore all four directions from each cell. Use a visited matrix to avoid cycles. If destination is reached, store the path string.",
+          "hi": "Har cell se recursively chaaon directions explore karo. Cycles se bachne ke liye visited matrix use karo. Agar destination pahunch gaye toh path string store karo."
+        },
+        "code": {
+          "cpp": "void solve(vector<vector<int>>& maze, int i, int j, int n, string path, vector<string>& res, vector<vector<bool>>& vis) {\n    if(i==n-1 && j==n-1){res.push_back(path);return;}\n    int dx[]={1,0,0,-1}; int dy[]={0,-1,1,0}; char dir[]={'D','L','R','U'};\n    for(int k=0;k<4;k++){\n        int ni=i+dx[k],nj=j+dy[k];\n        if(ni>=0&&nj>=0&&ni<n&&nj<n&&maze[ni][nj]&&!vis[ni][nj]){\n            vis[ni][nj]=true; solve(maze,ni,nj,n,path+dir[k],res,vis); vis[ni][nj]=false;\n        }\n    }\n}",
+          "python": "def find_paths(maze, n):\n    res, vis = [], [[False]*n for _ in range(n)]\n    dirs = [(1,0,'D'),(0,-1,'L'),(0,1,'R'),(-1,0,'U')]\n    def bt(i, j, path):\n        if i==n-1 and j==n-1: res.append(path); return\n        for di,dj,d in dirs:\n            ni,nj = i+di, j+dj\n            if 0<=ni<n and 0<=nj<n and maze[ni][nj] and not vis[ni][nj]:\n                vis[ni][nj]=True; bt(ni,nj,path+d); vis[ni][nj]=False\n    vis[0][0]=True; bt(0,0,''); return res"
+        },
+        "timeComplexity": "O(4^(N*N))",
+        "spaceComplexity": "O(N*N)"
+      },
+      "tags": ["backtracking", "maze", "recursion"]
+    },
+    {
+      "id": "bt-003",
+      "title": "Sudoku Solver",
+      "titleHi": "Sudoku Solver",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given a partially filled 9x9 Sudoku grid, fill in the empty cells (represented by 0) such that every row, every column, and every 3x3 sub-box contains the digits 1 to 9 exactly once.",
+        "hi": "Ek partially filled 9x9 Sudoku grid diya hai, empty cells (jo 0 se represent hoti hain) ko aise bharo ki har row, har column, aur har 3x3 sub-box mein digits 1 se 9 exactly ek baar aayein."
+      },
+      "examples": [
+        {
+          "input": "9x9 grid with 0s as empty cells",
+          "output": "Completed 9x9 grid",
+          "explanation": {
+            "en": "Each empty cell is filled such that no digit repeats in any row, column, or 3x3 box.",
+            "hi": "Har empty cell ko aise bhara jata hai ki koi digit kisi row, column, ya 3x3 box mein repeat na ho."
+          }
+        }
+      ],
+      "constraints": ["Grid is always 9x9", "0 represents empty cell", "Input will always have a valid solution"],
+      "hints": [
+        { "en": "Find an empty cell, try digits 1-9, check validity, and recurse", "hi": "Empty cell dhundho, digits 1-9 try karo, validity check karo, aur recurse karo" },
+        { "en": "To check validity, ensure the digit doesn't exist in the same row, column, or 3x3 box", "hi": "Validity check karne ke liye ensure karo ki digit same row, column, ya 3x3 box mein exist nahi karta" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\n\nbool solveSudoku(int grid[9][9]) {\n    // Write your code here\n    return false;\n}\n\nint main() {\n    int grid[9][9];\n    for(int i=0;i<9;i++) for(int j=0;j<9;j++) cin >> grid[i][j];\n    if(solveSudoku(grid)) {\n        for(int i=0;i<9;i++) {\n            for(int j=0;j<9;j++) cout << grid[i][j] << \" \";\n            cout << endl;\n        }\n    }\n    return 0;\n}",
+        "python": "def solve_sudoku(grid):\n    # Write your code here\n    pass\n\ngrid = []\nfor _ in range(9):\n    grid.append(list(map(int, input().split())))\nif solve_sudoku(grid):\n    for row in grid:\n        print(*row)",
+        "java": "import java.util.*;\npublic class Main {\n    public static boolean solveSudoku(int[][] grid) {\n        // Write your code here\n        return false;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int[][] grid = new int[9][9];\n        for(int i=0;i<9;i++) for(int j=0;j<9;j++) grid[i][j]=sc.nextInt();\n        if(solveSudoku(grid))\n            for(int[] row:grid) { for(int x:row) System.out.print(x+\" \"); System.out.println(); }\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst grid = lines.map(l => l.split(' ').map(Number));\nfunction solveSudoku(grid) {\n    // Write your code here\n    return false;\n}\nif (solveSudoku(grid)) grid.forEach(r => console.log(r.join(' ')));",
+        "c": "#include<stdio.h>\n#include<stdbool.h>\nbool solveSudoku(int grid[9][9]) {\n    // Write your code here\n    return false;\n}\nint main() {\n    int grid[9][9];\n    for(int i=0;i<9;i++) for(int j=0;j<9;j++) scanf(\"%d\",&grid[i][j]);\n    if(solveSudoku(grid))\n        for(int i=0;i<9;i++){for(int j=0;j<9;j++) printf(\"%d \",grid[i][j]); printf(\"\\n\");}\n    return 0;\n}"
+      },
+      "testCases": [
+        {
+          "input": "5 3 0 0 7 0 0 0 0\n6 0 0 1 9 5 0 0 0\n0 9 8 0 0 0 0 6 0\n8 0 0 0 6 0 0 0 3\n4 0 0 8 0 3 0 0 1\n7 0 0 0 2 0 0 0 6\n0 6 0 0 0 0 2 8 0\n0 0 0 4 1 9 0 0 5\n0 0 0 0 8 0 0 7 9",
+          "expectedOutput": "5 3 4 6 7 8 9 1 2\n6 7 2 1 9 5 3 4 8\n1 9 8 3 4 2 5 6 7\n8 5 9 7 6 1 4 2 3\n4 2 6 8 5 3 7 9 1\n7 1 3 9 2 4 8 5 6\n9 6 1 5 3 7 2 8 4\n2 8 7 4 1 9 6 3 5\n3 4 5 2 8 6 1 7 9"
+        }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Find next empty cell, try digits 1-9. For each digit, check if placing it is valid (no conflict in row, column, 3x3 box). If valid, place and recurse. If recursion fails, backtrack.",
+          "hi": "Next empty cell dhundho, digits 1-9 try karo. Har digit ke liye check karo ki place karna valid hai (row, column, 3x3 box mein koi conflict nahi). Agar valid hai toh place karo aur recurse karo. Agar recursion fail ho toh backtrack karo."
+        },
+        "code": {
+          "cpp": "bool isValid(int grid[9][9],int r,int c,int num){\n    for(int i=0;i<9;i++) if(grid[r][i]==num||grid[i][c]==num) return false;\n    int sr=r-r%3, sc=c-c%3;\n    for(int i=0;i<3;i++) for(int j=0;j<3;j++) if(grid[sr+i][sc+j]==num) return false;\n    return true;\n}\nbool solve(int grid[9][9]){\n    for(int i=0;i<9;i++) for(int j=0;j<9;j++) if(grid[i][j]==0){\n        for(int n=1;n<=9;n++) if(isValid(grid,i,j,n)){grid[i][j]=n;if(solve(grid)) return true;grid[i][j]=0;}\n        return false;\n    }\n    return true;\n}",
+          "python": "def solve_sudoku(grid):\n    for i in range(9):\n        for j in range(9):\n            if grid[i][j]==0:\n                for n in range(1,10):\n                    if all(grid[i][k]!=n for k in range(9)) and all(grid[k][j]!=n for k in range(9)) and all(grid[i//3*3+di][j//3*3+dj]!=n for di in range(3) for dj in range(3)):\n                        grid[i][j]=n\n                        if solve_sudoku(grid): return True\n                        grid[i][j]=0\n                return False\n    return True"
+        },
+        "timeComplexity": "O(9^(empty cells))",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["backtracking", "sudoku", "constraint-satisfaction"]
+    },
+    {
+      "id": "bt-004",
+      "title": "Graph Coloring",
+      "titleHi": "Graph Coloring",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given an undirected graph represented as an adjacency matrix and an integer M, determine if the graph can be colored with at most M colors such that no two adjacent vertices have the same color. If yes, print one valid coloring assignment.",
+        "hi": "Ek undirected graph diya hai adjacency matrix ke roop mein aur ek integer M, determine karo ki graph ko at most M colors se color kiya ja sakta hai ya nahi aise ki koi do adjacent vertices ka same color na ho. Agar haan, toh ek valid coloring assignment print karo."
+      },
+      "examples": [
+        {
+          "input": "N = 4, M = 3\nGraph: [[0,1,1,1],[1,0,1,0],[1,1,0,1],[1,0,1,0]]",
+          "output": "1 2 3 2",
+          "explanation": {
+            "en": "Vertex 0 gets color 1, vertex 1 gets color 2, vertex 2 gets color 3, vertex 3 gets color 2. No two adjacent vertices share a color.",
+            "hi": "Vertex 0 ko color 1, vertex 1 ko color 2, vertex 2 ko color 3, vertex 3 ko color 2. Koi do adjacent vertices ka same color nahi hai."
+          }
+        }
+      ],
+      "constraints": ["1 <= N <= 20", "1 <= M <= N"],
+      "hints": [
+        { "en": "Try assigning each color (1 to M) to each vertex and check if adjacent vertices have different colors", "hi": "Har vertex ko har color (1 to M) assign karne ki koshish karo aur check karo ki adjacent vertices ke colors alag hain" },
+        { "en": "Backtrack if no color can be assigned to the current vertex", "hi": "Agar current vertex ko koi color assign nahi ho pa raha toh backtrack karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\nusing namespace std;\n\nbool graphColoring(vector<vector<int>>& graph, int m, int n) {\n    // Write your code here\n    return false;\n}\n\nint main() {\n    int n, m; cin >> n >> m;\n    vector<vector<int>> graph(n, vector<int>(n));\n    for(int i=0;i<n;i++) for(int j=0;j<n;j++) cin >> graph[i][j];\n    graphColoring(graph, m, n);\n    return 0;\n}",
+        "python": "def graph_coloring(graph, m, n):\n    # Write your code here\n    pass\n\nn, m = map(int, input().split())\ngraph = []\nfor _ in range(n):\n    graph.append(list(map(int, input().split())))\ngraph_coloring(graph, m, n)",
+        "java": "import java.util.*;\npublic class Main {\n    public static boolean graphColoring(int[][] graph, int m, int n) {\n        // Write your code here\n        return false;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), m = sc.nextInt();\n        int[][] graph = new int[n][n];\n        for(int i=0;i<n;i++) for(int j=0;j<n;j++) graph[i][j]=sc.nextInt();\n        graphColoring(graph, m, n);\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [n, m] = lines[0].split(' ').map(Number);\nconst graph = [];\nfor(let i=1;i<=n;i++) graph.push(lines[i].split(' ').map(Number));\nfunction graphColoring(graph, m, n) {\n    // Write your code here\n}",
+        "c": "#include<stdio.h>\n#include<stdbool.h>\nbool graphColoring(int graph[][20], int m, int n) {\n    // Write your code here\n    return false;\n}\nint main() {\n    int n, m; scanf(\"%d %d\", &n, &m);\n    int graph[20][20];\n    for(int i=0;i<n;i++) for(int j=0;j<n;j++) scanf(\"%d\", &graph[i][j]);\n    graphColoring(graph, m, n);\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "4 3\n0 1 1 1\n1 0 1 0\n1 1 0 1\n1 0 1 0", "expectedOutput": "1 2 3 2" },
+        { "input": "3 2\n0 1 1\n1 0 1\n1 1 0", "expectedOutput": "Not possible" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "For each vertex, try colors 1 to M. Before assigning, check that no adjacent vertex has the same color. If a valid color is found, recurse for next vertex. Backtrack if needed.",
+          "hi": "Har vertex ke liye colors 1 to M try karo. Assign karne se pehle check karo ki koi adjacent vertex ka same color nahi hai. Agar valid color mila toh next vertex ke liye recurse karo. Zaroorat ho toh backtrack karo."
+        },
+        "code": {
+          "cpp": "bool safe(vector<vector<int>>& g, int c[], int v, int col, int n) {\n    for(int i=0;i<n;i++) if(g[v][i]&&c[i]==col) return false;\n    return true;\n}\nbool solve(vector<vector<int>>& g, int m, int c[], int v, int n) {\n    if(v==n) return true;\n    for(int col=1;col<=m;col++) {\n        if(safe(g,c,v,col,n)){c[v]=col;if(solve(g,m,c,v+1,n)) return true;c[v]=0;}\n    }\n    return false;\n}",
+          "python": "def graph_coloring(graph, m, n):\n    color = [0]*n\n    def safe(v, c):\n        return all(not graph[v][i] or color[i]!=c for i in range(n))\n    def bt(v):\n        if v==n: return True\n        for c in range(1,m+1):\n            if safe(v,c): color[v]=c; res=bt(v+1); color[v]=0\n            if res: return True\n        return False\n    return color if bt(0) else None"
+        },
+        "timeComplexity": "O(M^V)",
+        "spaceComplexity": "O(V)"
+      },
+      "tags": ["backtracking", "graph", "coloring"]
+    },
+    {
+      "id": "bt-005",
+      "title": "Hamiltonian Cycle",
+      "titleHi": "Hamiltonian Cycle",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given an undirected graph represented as an adjacency matrix, determine whether a Hamiltonian Cycle exists. A Hamiltonian Cycle visits every vertex exactly once and returns to the starting vertex. If it exists, print the cycle.",
+        "hi": "Ek undirected graph diya hai adjacency matrix ke roop mein, determine karo ki Hamiltonian Cycle exist karta hai ya nahi. Hamiltonian Cycle har vertex ko exactly ek baar visit karta hai aur starting vertex pe wapas aata hai. Agar exist karta hai toh cycle print karo."
+      },
+      "examples": [
+        {
+          "input": "N = 5\nGraph: [[0,1,0,1,0],[1,0,1,1,1],[0,1,0,0,1],[1,1,0,0,1],[0,1,1,1,0]]",
+          "output": "0 -> 1 -> 2 -> 4 -> 3 -> 0",
+          "explanation": {
+            "en": "Starting from vertex 0, we visit 1, 2, 4, 3 and return to 0. Every vertex is visited exactly once.",
+            "hi": "Vertex 0 se start karke hum 1, 2, 4, 3 visit karte hain aur 0 pe wapas aate hain. Har vertex exactly ek baar visit hota hai."
+          }
+        }
+      ],
+      "constraints": ["1 <= N <= 12", "Graph is undirected"],
+      "hints": [
+        { "en": "Start from vertex 0 and try to build a path that visits all vertices", "hi": "Vertex 0 se start karo aur ek path banane ki koshish karo jo saare vertices visit kare" },
+        { "en": "Before adding a vertex, check adjacency and that it's not already in the path", "hi": "Vertex add karne se pehle adjacency aur path mein already hona check karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\nusing namespace std;\n\nvoid findHamiltonianCycle(vector<vector<int>>& graph, int n) {\n    // Write your code here\n}\n\nint main() {\n    int n; cin >> n;\n    vector<vector<int>> graph(n, vector<int>(n));\n    for(int i=0;i<n;i++) for(int j=0;j<n;j++) cin >> graph[i][j];\n    findHamiltonianCycle(graph, n);\n    return 0;\n}",
+        "python": "def find_hamiltonian_cycle(graph, n):\n    # Write your code here\n    pass\n\nn = int(input())\ngraph = []\nfor _ in range(n):\n    graph.append(list(map(int, input().split())))\nfind_hamiltonian_cycle(graph, n)",
+        "java": "import java.util.*;\npublic class Main {\n    public static void findHamiltonianCycle(int[][] graph, int n) {\n        // Write your code here\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[][] graph = new int[n][n];\n        for(int i=0;i<n;i++) for(int j=0;j<n;j++) graph[i][j]=sc.nextInt();\n        findHamiltonianCycle(graph, n);\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconst graph = [];\nfor(let i=1;i<=n;i++) graph.push(lines[i].split(' ').map(Number));\nfunction findHamiltonianCycle(graph, n) {\n    // Write your code here\n}",
+        "c": "#include<stdio.h>\nvoid findHamiltonianCycle(int graph[][12], int n) {\n    // Write your code here\n}\nint main() {\n    int n; scanf(\"%d\", &n);\n    int graph[12][12];\n    for(int i=0;i<n;i++) for(int j=0;j<n;j++) scanf(\"%d\", &graph[i][j]);\n    findHamiltonianCycle(graph, n);\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "5\n0 1 0 1 0\n1 0 1 1 1\n0 1 0 0 1\n1 1 0 0 1\n0 1 1 1 0", "expectedOutput": "0 -> 1 -> 2 -> 4 -> 3 -> 0" },
+        { "input": "3\n0 1 0\n1 0 1\n0 1 0", "expectedOutput": "No Hamiltonian Cycle" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Start from vertex 0, recursively try adding adjacent unvisited vertices. If all vertices included and last connects back to start, cycle found.",
+          "hi": "Vertex 0 se start karo, recursively adjacent unvisited vertices add karne ki koshish karo. Agar saare vertices include ho gaye aur last vertex start se connected hai toh cycle mil gaya."
+        },
+        "code": {
+          "cpp": "bool safe(int v, vector<vector<int>>& g, int path[], int pos, int n) {\n    if(!g[path[pos-1]][v]) return false;\n    for(int i=0;i<pos;i++) if(path[i]==v) return false;\n    return true;\n}\nbool solve(vector<vector<int>>& g, int path[], int pos, int n) {\n    if(pos==n) return g[path[pos-1]][path[0]];\n    for(int v=1;v<n;v++){if(safe(v,g,path,pos,n)){path[pos]=v;if(solve(g,path,pos+1,n)) return true;path[pos]=-1;}}\n    return false;\n}",
+          "python": "def find_hamiltonian_cycle(graph, n):\n    path = [-1]*n; path[0] = 0\n    def safe(v, pos):\n        if not graph[path[pos-1]][v]: return False\n        return v not in path[:pos]\n    def bt(pos):\n        if pos==n: return graph[path[-1]][path[0]]\n        for v in range(1,n):\n            if safe(v,pos): path[pos]=v; r=bt(pos+1); path[pos]=-1\n            if r: return True\n        return False\n    return path if bt(1) else None"
+        },
+        "timeComplexity": "O(N!)",
+        "spaceComplexity": "O(N)"
+      },
+      "tags": ["backtracking", "graph", "hamiltonian"]
+    },
+    {
+      "id": "bt-006",
+      "title": "Subset Sum",
+      "titleHi": "Subset Sum Problem",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given a set of positive integers and a target sum, find all subsets whose elements add up to the target sum. Print all such subsets.",
+        "hi": "Positive integers ka ek set aur ek target sum diya hai. Wo saare subsets dhundho jinke elements ka sum target sum ke barabar ho. Saare aise subsets print karo."
+      },
+      "examples": [
+        {
+          "input": "arr = [10, 7, 5, 18, 12, 20, 15], target = 35",
+          "output": "[18, 7, 10]\n[20, 15]\n[15, 12, 5, 3]",
+          "explanation": {
+            "en": "Multiple subsets can add up to 35. For example, 18 + 7 + 10 = 35 and 20 + 15 = 35.",
+            "hi": "Kai subsets ka sum 35 ho sakta hai. Jaise 18 + 7 + 10 = 35 aur 20 + 15 = 35."
+          }
+        }
+      ],
+      "constraints": ["1 <= N <= 20", "1 <= arr[i] <= 10^5", "1 <= target <= 10^6"],
+      "hints": [
+        { "en": "For each element, you have two choices: include it or exclude it", "hi": "Har element ke liye do choices hain: include karo ya exclude karo" },
+        { "en": "Prune branches where remaining sum becomes negative", "hi": "Un branches ko prune karo jahan remaining sum negative ho jaaye" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\nusing namespace std;\n\nvoid subsetSum(vector<int>& arr, int target) {\n    // Write your code here\n}\n\nint main() {\n    int n, target; cin >> n >> target;\n    vector<int> arr(n);\n    for(int i=0;i<n;i++) cin >> arr[i];\n    subsetSum(arr, target);\n    return 0;\n}",
+        "python": "def subset_sum(arr, target):\n    # Write your code here\n    pass\n\nn, target = map(int, input().split())\narr = list(map(int, input().split()))\nresult = subset_sum(arr, target)\nfor s in result:\n    print(s)",
+        "java": "import java.util.*;\npublic class Main {\n    public static List<List<Integer>> subsetSum(int[] arr, int target) {\n        // Write your code here\n        return new ArrayList<>();\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), target = sc.nextInt();\n        int[] arr = new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n        for(List<Integer> s : subsetSum(arr, target)) System.out.println(s);\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [n, target] = lines[0].split(' ').map(Number);\nconst arr = lines[1].split(' ').map(Number);\nfunction subsetSum(arr, target) {\n    // Write your code here\n    return [];\n}\nsubsetSum(arr, target).forEach(s => console.log(JSON.stringify(s)));",
+        "c": "#include<stdio.h>\nvoid subsetSum(int arr[], int n, int target) {\n    // Write your code here\n}\nint main() {\n    int n, target; scanf(\"%d %d\", &n, &target);\n    int arr[20];\n    for(int i=0;i<n;i++) scanf(\"%d\", &arr[i]);\n    subsetSum(arr, n, target);\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "5 10\n1 2 3 4 5", "expectedOutput": "[1, 2, 3, 4]\n[1, 4, 5]\n[2, 3, 5]" },
+        { "input": "3 6\n2 4 6", "expectedOutput": "[2, 4]\n[6]" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use include/exclude backtracking. At each index, either include current element (if sum doesn't exceed target) or exclude it. Prune when remaining elements can't fill the gap.",
+          "hi": "Include/exclude backtracking use karo. Har index pe current element ko include karo (agar sum target se zyada nahi hota) ya exclude karo. Jab remaining elements gap fill nahi kar sakte toh prune karo."
+        },
+        "code": {
+          "cpp": "void solve(vector<int>& arr, int idx, int target, vector<int>& cur, vector<vector<int>>& res) {\n    if(target==0){res.push_back(cur);return;}\n    if(idx==arr.size()||target<0) return;\n    cur.push_back(arr[idx]); solve(arr,idx+1,target-arr[idx],cur,res); cur.pop_back();\n    solve(arr,idx+1,target,cur,res);\n}",
+          "python": "def subset_sum(arr, target):\n    res = []\n    def bt(idx, rem, cur):\n        if rem==0: res.append(cur[:]); return\n        if idx==len(arr) or rem<0: return\n        cur.append(arr[idx]); bt(idx+1, rem-arr[idx], cur); cur.pop()\n        bt(idx+1, rem, cur)\n    bt(0, target, [])\n    return res"
+        },
+        "timeComplexity": "O(2^N)",
+        "spaceComplexity": "O(N)"
+      },
+      "tags": ["backtracking", "subset", "recursion"]
+    },
+    {
+      "id": "bt-007",
+      "title": "Word Search in Grid",
+      "titleHi": "Grid mein Word Search",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given an M x N grid of characters and a word, determine if the word exists in the grid. The word can be formed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same cell cannot be used more than once.",
+        "hi": "Ek M x N character grid aur ek word diya hai. Determine karo ki word grid mein exist karta hai ya nahi. Word sequentially adjacent cells ke letters se banta hai, jahan adjacent cells horizontally ya vertically neighboring hain. Ek cell ek se zyada baar use nahi ho sakta."
+      },
+      "examples": [
+        {
+          "input": "grid = [['A','B','C','E'],['S','F','C','S'],['A','D','E','E']], word = \"ABCCED\"",
+          "output": "true",
+          "explanation": {
+            "en": "Starting from A(0,0) -> B(0,1) -> C(0,2) -> C(1,2) -> E(2,2) -> D(2,1). All cells are adjacent and no cell is reused.",
+            "hi": "A(0,0) se start karke -> B(0,1) -> C(0,2) -> C(1,2) -> E(2,2) -> D(2,1). Saare cells adjacent hain aur koi cell dubara use nahi hua."
+          }
+        }
+      ],
+      "constraints": ["1 <= M, N <= 6", "1 <= word.length <= 15", "Grid contains uppercase English letters"],
+      "hints": [
+        { "en": "Start DFS from each cell that matches the first character of the word", "hi": "Har us cell se DFS start karo jo word ke pehle character se match karta hai" },
+        { "en": "Mark cells as visited during traversal and unmark when backtracking", "hi": "Traversal ke dauran cells ko visited mark karo aur backtracking mein unmark karo" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\n#include<vector>\n#include<string>\nusing namespace std;\n\nbool wordSearch(vector<vector<char>>& grid, string word) {\n    // Write your code here\n    return false;\n}\n\nint main() {\n    int m, n; cin >> m >> n;\n    vector<vector<char>> grid(m, vector<char>(n));\n    for(int i=0;i<m;i++) for(int j=0;j<n;j++) cin >> grid[i][j];\n    string word; cin >> word;\n    cout << (wordSearch(grid, word) ? \"true\" : \"false\") << endl;\n    return 0;\n}",
+        "python": "def word_search(grid, word):\n    # Write your code here\n    pass\n\nm, n = map(int, input().split())\ngrid = []\nfor _ in range(m):\n    grid.append(input().split())\nword = input()\nprint('true' if word_search(grid, word) else 'false')",
+        "java": "import java.util.*;\npublic class Main {\n    public static boolean wordSearch(char[][] grid, String word) {\n        // Write your code here\n        return false;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int m = sc.nextInt(), n = sc.nextInt();\n        char[][] grid = new char[m][n];\n        for(int i=0;i<m;i++) for(int j=0;j<n;j++) grid[i][j]=sc.next().charAt(0);\n        String word = sc.next();\n        System.out.println(wordSearch(grid, word) ? \"true\" : \"false\");\n    }\n}",
+        "javascript": "const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst [m, n] = lines[0].split(' ').map(Number);\nconst grid = [];\nfor(let i=1;i<=m;i++) grid.push(lines[i].split(' '));\nconst word = lines[m+1];\nfunction wordSearch(grid, word) {\n    // Write your code here\n    return false;\n}\nconsole.log(wordSearch(grid, word) ? 'true' : 'false');",
+        "c": "#include<stdio.h>\n#include<stdbool.h>\n#include<string.h>\nbool wordSearch(char grid[][6], int m, int n, char word[]) {\n    // Write your code here\n    return false;\n}\nint main() {\n    int m, n; scanf(\"%d %d\", &m, &n);\n    char grid[6][6], word[16];\n    for(int i=0;i<m;i++) for(int j=0;j<n;j++) scanf(\" %c\", &grid[i][j]);\n    scanf(\"%s\", word);\n    printf(\"%s\\n\", wordSearch(grid, m, n, word) ? \"true\" : \"false\");\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "3 4\nA B C E\nS F C S\nA D E E\nABCCED", "expectedOutput": "true" },
+        { "input": "3 4\nA B C E\nS F C S\nA D E E\nABCB", "expectedOutput": "false" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "For each cell matching the first character, run DFS. At each step, check all 4 neighbors. Mark cells visited during search and unmark on backtrack.",
+          "hi": "Pehle character se match hone wale har cell se DFS run karo. Har step pe chaaon neighbors check karo. Search ke dauran cells visited mark karo aur backtrack pe unmark karo."
+        },
+        "code": {
+          "cpp": "bool dfs(vector<vector<char>>& g, string& w, int i, int j, int k, int m, int n) {\n    if(k==w.size()) return true;\n    if(i<0||j<0||i>=m||j>=n||g[i][j]!=w[k]) return false;\n    char t=g[i][j]; g[i][j]='#';\n    bool found=dfs(g,w,i+1,j,k+1,m,n)||dfs(g,w,i-1,j,k+1,m,n)||dfs(g,w,i,j+1,k+1,m,n)||dfs(g,w,i,j-1,k+1,m,n);\n    g[i][j]=t; return found;\n}",
+          "python": "def word_search(grid, word):\n    m, n = len(grid), len(grid[0])\n    def dfs(i, j, k):\n        if k==len(word): return True\n        if i<0 or j<0 or i>=m or j>=n or grid[i][j]!=word[k]: return False\n        t, grid[i][j] = grid[i][j], '#'\n        found = dfs(i+1,j,k+1) or dfs(i-1,j,k+1) or dfs(i,j+1,k+1) or dfs(i,j-1,k+1)\n        grid[i][j] = t\n        return found\n    return any(dfs(i,j,0) for i in range(m) for j in range(n))"
+        },
+        "timeComplexity": "O(M * N * 4^L)",
+        "spaceComplexity": "O(L)"
+      },
+      "tags": ["backtracking", "grid", "dfs"]
+    },
+    {
+      "id": "bt-008",
+      "title": "Knight's Tour",
+      "titleHi": "Knight's Tour Problem",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given an N x N chessboard, find a sequence of moves for a knight such that it visits every square exactly once. The knight starts from position (0, 0). Print the board with the order in which each square was visited.",
+        "hi": "Ek N x N chessboard diya hai, knight ke liye moves ka aisa sequence dhundho ki wo har square ko exactly ek baar visit kare. Knight position (0, 0) se start karta hai. Board print karo jisme har square ka visit order likha ho."
+      },
+      "examples": [
+        {
+          "input": "N = 5",
+          "output": "Matrix showing visit order 1 to 25",
+          "explanation": {
+            "en": "The knight starts at (0,0) which is marked 1, and makes valid L-shaped moves to visit all 25 squares in order.",
+            "hi": "Knight (0,0) se start karta hai jo 1 mark hota hai, aur valid L-shaped moves karke saare 25 squares ko order mein visit karta hai."
+          }
+        }
+      ],
+      "constraints": ["1 <= N <= 8", "Knight starts at (0, 0)"],
+      "hints": [
+        { "en": "A knight has 8 possible moves from any position", "hi": "Knight ke kisi bhi position se 8 possible moves hain" },
+        { "en": "Use Warnsdorff's heuristic to choose the next move: pick the square with fewest onward moves", "hi": "Warnsdorff's heuristic use karo next move choose karne ke liye: wo square choose karo jiske aage sabse kam moves hain" }
+      ],
+      "starterCode": {
+        "cpp": "#include<iostream>\nusing namespace std;\n\nvoid knightTour(int n) {\n    // Write your code here\n}\n\nint main() {\n    int n; cin >> n;\n    knightTour(n);\n    return 0;\n}",
+        "python": "def knight_tour(n):\n    # Write your code here\n    pass\n\nn = int(input())\nknight_tour(n)",
+        "java": "import java.util.*;\npublic class Main {\n    public static void knightTour(int n) {\n        // Write your code here\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        knightTour(n);\n    }\n}",
+        "javascript": "const n = parseInt(require('fs').readFileSync('/dev/stdin','utf8').trim());\nfunction knightTour(n) {\n    // Write your code here\n}\nknightTour(n);",
+        "c": "#include<stdio.h>\nvoid knightTour(int n) {\n    // Write your code here\n}\nint main() {\n    int n; scanf(\"%d\", &n);\n    knightTour(n);\n    return 0;\n}"
+      },
+      "testCases": [
+        { "input": "5", "expectedOutput": "Valid knight's tour matrix with values 1 to 25" },
+        { "input": "6", "expectedOutput": "Valid knight's tour matrix with values 1 to 36" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use backtracking with 8 possible knight moves. At each step, try all 8 moves. If move is valid and square unvisited, mark and recurse. Backtrack if stuck. Warnsdorff's heuristic improves performance by picking moves with fewest exits first.",
+          "hi": "8 possible knight moves ke saath backtracking use karo. Har step pe saare 8 moves try karo. Agar move valid hai aur square unvisited hai toh mark karo aur recurse karo. Agar stuck ho toh backtrack karo. Warnsdorff's heuristic performance improve karta hai sabse kam exits wale moves pehle pick karke."
+        },
+        "code": {
+          "cpp": "int dx[]={2,1,-1,-2,-2,-1,1,2};\nint dy[]={1,2,2,1,-1,-2,-2,-1};\nbool solve(int board[][8], int x, int y, int move, int n) {\n    if(move==n*n) return true;\n    for(int k=0;k<8;k++) {\n        int nx=x+dx[k], ny=y+dy[k];\n        if(nx>=0&&ny>=0&&nx<n&&ny<n&&board[nx][ny]==-1) {\n            board[nx][ny]=move;\n            if(solve(board,nx,ny,move+1,n)) return true;\n            board[nx][ny]=-1;\n        }\n    }\n    return false;\n}",
+          "python": "def knight_tour(n):\n    board = [[-1]*n for _ in range(n)]\n    dx = [2,1,-1,-2,-2,-1,1,2]\n    dy = [1,2,2,1,-1,-2,-2,-1]\n    board[0][0] = 0\n    def bt(x, y, move):\n        if move == n*n: return True\n        for k in range(8):\n            nx, ny = x+dx[k], y+dy[k]\n            if 0<=nx<n and 0<=ny<n and board[nx][ny]==-1:\n                board[nx][ny] = move\n                if bt(nx, ny, move+1): return True\n                board[nx][ny] = -1\n        return False\n    if bt(0, 0, 1):\n        for row in board: print(*[x+1 for x in row])"
+        },
+        "timeComplexity": "O(8^(N*N))",
+        "spaceComplexity": "O(N*N)"
+      },
+      "tags": ["backtracking", "chess", "knight"]
+    }
+  ]
+}
