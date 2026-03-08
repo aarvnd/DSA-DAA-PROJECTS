@@ -1,0 +1,185 @@
+{
+  "topicId": "strings",
+  "title": {
+    "en": "Strings - Complete Guide",
+    "hi": "Strings - Poori Jaankari"
+  },
+  "introduction": {
+    "en": "A string is a sequence of characters stored in contiguous memory. It is one of the most fundamental and widely used data structures in programming, used everywhere from user input to file processing.",
+    "hi": "String ek sequence hai characters ka, jo ek saath memory mein store hote hain. Ye programming ki sabse fundamental aur widely used data structures mein se ek hai, user input se lekar file processing tak har jagah use hoti hai."
+  },
+  "realLifeAnalogy": {
+    "en": "Think of a necklace (mala) where each bead is a character. The entire necklace is the string. You can access any bead by its position, count the total beads, cut a portion, or check if two necklaces look the same.",
+    "hi": "Socho ek moti ki mala jisme har moti ek character hai. Poori mala hi string hai. Tum kisi bhi moti ko uski position se access kar sakte ho, total moti count kar sakte ho, kuch hissa kaat sakte ho, ya check kar sakte ho ki do malayein ek jaisi hain ya nahi."
+  },
+  "sections": [
+    {
+      "id": "what-is-string",
+      "title": {
+        "en": "What is a String?",
+        "hi": "String kya hoti hai?"
+      },
+      "content": {
+        "en": "A string is a sequence of characters. Internally it is stored as an array of characters with a null terminator (`\\0`) in C/C++, or as an immutable object in Java and Python.\n\n**Key Properties:**\n- Indexed from 0 (first character is at index 0)\n- In C/C++ strings are mutable char arrays; in Java/Python strings are immutable\n- Length can be found in O(1) in most modern languages\n- Characters can be letters, digits, spaces, or special symbols",
+        "hi": "String characters ka ek sequence hai. Internally ye ek character array ki tarah store hoti hai jisme C/C++ mein null terminator (`\\0`) hota hai, ya Java aur Python mein ek immutable object ki tarah.\n\n**Important Baatein:**\n- Index 0 se start hota hai (pehla character index 0 pe hota hai)\n- C/C++ mein strings mutable char arrays hain; Java/Python mein strings immutable hain\n- Length O(1) mein mil jaati hai zyaadatar modern languages mein\n- Characters letters, digits, spaces, ya special symbols ho sakte hain"
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string s = \"Hello\";\n    cout << \"String: \" << s << endl;\n    cout << \"Length: \" << s.length() << endl;\n    cout << \"First char: \" << s[0] << endl;   // H\n    cout << \"Last char: \" << s[s.length()-1] << endl; // o\n    // Iterate over characters\n    for (char c : s) cout << c << \" \";\n    return 0;\n}",
+        "c": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char s[] = \"Hello\";\n    printf(\"String: %s\\n\", s);\n    printf(\"Length: %lu\\n\", strlen(s));\n    printf(\"First char: %c\\n\", s[0]);   // H\n    printf(\"Last char: %c\\n\", s[strlen(s)-1]); // o\n    for (int i = 0; s[i] != '\\0'; i++) printf(\"%c \", s[i]);\n    return 0;\n}",
+        "java": "public class Main {\n    public static void main(String[] args) {\n        String s = \"Hello\";\n        System.out.println(\"String: \" + s);\n        System.out.println(\"Length: \" + s.length());\n        System.out.println(\"First char: \" + s.charAt(0));   // H\n        System.out.println(\"Last char: \" + s.charAt(s.length()-1)); // o\n        for (char c : s.toCharArray()) System.out.print(c + \" \");\n    }\n}",
+        "python": "s = \"Hello\"\nprint(\"String:\", s)\nprint(\"Length:\", len(s))\nprint(\"First char:\", s[0])    # H\nprint(\"Last char:\", s[-1])    # o\nfor c in s:\n    print(c, end=' ')",
+        "javascript": "let s = \"Hello\";\nconsole.log(\"String:\", s);\nconsole.log(\"Length:\", s.length);\nconsole.log(\"First char:\", s[0]);      // H\nconsole.log(\"Last char:\", s[s.length-1]); // o\nfor (let c of s) process.stdout.write(c + ' ');"
+      },
+      "keyPoints": [
+        {
+          "en": "String index starts from 0; last character is at index length-1",
+          "hi": "String ka index 0 se start hota hai; aakhri character length-1 pe hota hai"
+        },
+        {
+          "en": "In Java and Python strings are immutable - any modification creates a new string",
+          "hi": "Java aur Python mein strings immutable hain - koi bhi modification ek nayi string banata hai"
+        },
+        {
+          "en": "In C, strings end with a null character '\\0' which marks the end",
+          "hi": "C mein strings null character '\\0' se end hoti hain jo string ka end batata hai"
+        },
+        {
+          "en": "Accessing a character by index is O(1) - constant time",
+          "hi": "Index se character access karna O(1) hai - constant time mein hota hai"
+        }
+      ],
+      "timeComplexity": {
+        "access": "O(1)",
+        "search": "O(n)",
+        "insert": "O(n)",
+        "delete": "O(n)"
+      }
+    },
+    {
+      "id": "string-operations",
+      "title": {
+        "en": "String Operations",
+        "hi": "String Operations"
+      },
+      "content": {
+        "en": "Common string operations include:\n1. **Concatenation** - Joining two strings (O(n+m))\n2. **Length** - Getting the number of characters (O(1) in most languages)\n3. **Substring** - Extracting a portion of the string (O(k) where k = substring length)\n4. **Comparison** - Comparing two strings lexicographically (O(min(n,m)))\n5. **Reverse** - Reversing the string (O(n))\n6. **Find/Replace** - Searching and replacing patterns (O(n*m) naive)",
+        "hi": "Common string operations:\n1. **Concatenation** - Do strings ko join karna (O(n+m))\n2. **Length** - Characters ki count lena (O(1) zyaadatar languages mein)\n3. **Substring** - String ka ek hissa nikalna (O(k) jahan k = substring ki length)\n4. **Comparison** - Do strings ko lexicographically compare karna (O(min(n,m)))\n5. **Reverse** - String ko ulta karna (O(n))\n6. **Find/Replace** - Patterns dhundhna aur replace karna (O(n*m) naive)"
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    string s1 = \"Hello\", s2 = \" World\";\n    // Concatenation\n    string s3 = s1 + s2;\n    cout << s3 << endl;           // Hello World\n    // Substring\n    cout << s3.substr(6, 5) << endl; // World\n    // Find\n    cout << s3.find(\"World\") << endl; // 6\n    // Reverse\n    string rev = s1;\n    reverse(rev.begin(), rev.end());\n    cout << rev << endl;          // olleH\n    // Compare\n    cout << (s1 == \"Hello\" ? \"equal\" : \"not equal\") << endl;\n    return 0;\n}",
+        "c": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char s1[20] = \"Hello\";\n    char s2[] = \" World\";\n    // Concatenation\n    strcat(s1, s2);\n    printf(\"%s\\n\", s1);  // Hello World\n    // Length\n    printf(\"Length: %lu\\n\", strlen(s1));\n    // Substring (manual)\n    char sub[10];\n    strncpy(sub, s1 + 6, 5);\n    sub[5] = '\\0';\n    printf(\"%s\\n\", sub); // World\n    // Compare\n    printf(\"%s\\n\", strcmp(\"Hello\", \"Hello\") == 0 ? \"equal\" : \"not equal\");\n    return 0;\n}",
+        "java": "public class Main {\n    public static void main(String[] args) {\n        String s1 = \"Hello\", s2 = \" World\";\n        // Concatenation\n        String s3 = s1 + s2;\n        System.out.println(s3);              // Hello World\n        // Substring\n        System.out.println(s3.substring(6)); // World\n        // Find\n        System.out.println(s3.indexOf(\"World\")); // 6\n        // Reverse\n        String rev = new StringBuilder(s1).reverse().toString();\n        System.out.println(rev);             // olleH\n        // Compare\n        System.out.println(s1.equals(\"Hello\") ? \"equal\" : \"not equal\");\n    }\n}",
+        "python": "s1, s2 = \"Hello\", \" World\"\n# Concatenation\ns3 = s1 + s2\nprint(s3)               # Hello World\n# Substring (slicing)\nprint(s3[6:])           # World\n# Find\nprint(s3.find(\"World\")) # 6\n# Reverse\nprint(s1[::-1])         # olleH\n# Compare\nprint(\"equal\" if s1 == \"Hello\" else \"not equal\")",
+        "javascript": "let s1 = \"Hello\", s2 = \" World\";\n// Concatenation\nlet s3 = s1 + s2;\nconsole.log(s3);                    // Hello World\n// Substring\nconsole.log(s3.substring(6));       // World\n// Find\nconsole.log(s3.indexOf(\"World\"));   // 6\n// Reverse\nconsole.log(s1.split('').reverse().join('')); // olleH\n// Compare\nconsole.log(s1 === \"Hello\" ? \"equal\" : \"not equal\");"
+      },
+      "keyPoints": [
+        {
+          "en": "String concatenation with + in a loop is O(n^2); use StringBuilder/join for efficiency",
+          "hi": "Loop mein + se string concatenation O(n^2) hai; efficiency ke liye StringBuilder/join use karo"
+        },
+        {
+          "en": "substr/substring extracts characters from start index to end index",
+          "hi": "substr/substring start index se end index tak characters extract karta hai"
+        },
+        {
+          "en": "String comparison is lexicographic (dictionary order), not by length",
+          "hi": "String comparison lexicographic hoti hai (dictionary order), length se nahi"
+        },
+        {
+          "en": "Python strings support negative indexing: s[-1] gives the last character",
+          "hi": "Python strings negative indexing support karte hain: s[-1] se aakhri character milta hai"
+        }
+      ],
+      "timeComplexity": {
+        "access": "O(1)",
+        "search": "O(n)",
+        "insert": "O(n)",
+        "delete": "O(n)"
+      }
+    },
+    {
+      "id": "pattern-matching",
+      "title": {
+        "en": "Pattern Matching",
+        "hi": "Pattern Matching"
+      },
+      "content": {
+        "en": "Pattern matching is finding the occurrence(s) of a shorter string (pattern) within a longer string (text).\n\n**Naive Approach:** Compare pattern at every position in the text. Time: O(n*m)\n\n**KMP Algorithm (Knuth-Morris-Pratt):**\n- Precompute a failure function (LPS - Longest Proper Prefix which is also Suffix) for the pattern\n- Use it to skip redundant comparisons\n- Time: O(n+m), Space: O(m)\n\nThe LPS array stores the length of the longest proper prefix of pattern[0..i] which is also a suffix.",
+        "hi": "Pattern matching mein ek chhoti string (pattern) ko ek lambi string (text) mein dhundhte hain.\n\n**Naive Approach:** Har position pe pattern compare karo. Time: O(n*m)\n\n**KMP Algorithm (Knuth-Morris-Pratt):**\n- Pattern ke liye pehle failure function (LPS - Longest Proper Prefix which is also Suffix) banao\n- Isse redundant comparisons skip karo\n- Time: O(n+m), Space: O(m)\n\nLPS array mein pattern[0..i] ke longest proper prefix ki length store hoti hai jo suffix bhi ho."
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\n\nvector<int> computeLPS(const string& pat) {\n    int m = pat.size();\n    vector<int> lps(m, 0);\n    int len = 0, i = 1;\n    while (i < m) {\n        if (pat[i] == pat[len]) { lps[i++] = ++len; }\n        else if (len) { len = lps[len-1]; }\n        else { lps[i++] = 0; }\n    }\n    return lps;\n}\n\nvoid kmpSearch(const string& text, const string& pat) {\n    int n = text.size(), m = pat.size();\n    vector<int> lps = computeLPS(pat);\n    int i = 0, j = 0;\n    while (i < n) {\n        if (text[i] == pat[j]) { i++; j++; }\n        if (j == m) { cout << \"Pattern at index \" << i-j << endl; j = lps[j-1]; }\n        else if (i < n && text[i] != pat[j]) {\n            if (j) j = lps[j-1]; else i++;\n        }\n    }\n}\n\nint main() {\n    kmpSearch(\"AABAACAADAABAABA\", \"AABA\");\n    return 0;\n}",
+        "c": "#include <stdio.h>\n#include <string.h>\n\nvoid computeLPS(char* pat, int m, int* lps) {\n    lps[0] = 0;\n    int len = 0, i = 1;\n    while (i < m) {\n        if (pat[i] == pat[len]) { lps[i++] = ++len; }\n        else if (len) { len = lps[len-1]; }\n        else { lps[i++] = 0; }\n    }\n}\n\nvoid kmpSearch(char* text, char* pat) {\n    int n = strlen(text), m = strlen(pat);\n    int lps[m];\n    computeLPS(pat, m, lps);\n    int i = 0, j = 0;\n    while (i < n) {\n        if (text[i] == pat[j]) { i++; j++; }\n        if (j == m) { printf(\"Pattern at index %d\\n\", i-j); j = lps[j-1]; }\n        else if (i < n && text[i] != pat[j]) {\n            if (j) j = lps[j-1]; else i++;\n        }\n    }\n}\n\nint main() {\n    kmpSearch(\"AABAACAADAABAABA\", \"AABA\");\n    return 0;\n}",
+        "java": "public class Main {\n    static int[] computeLPS(String pat) {\n        int m = pat.length();\n        int[] lps = new int[m];\n        int len = 0, i = 1;\n        while (i < m) {\n            if (pat.charAt(i) == pat.charAt(len)) { lps[i++] = ++len; }\n            else if (len > 0) { len = lps[len-1]; }\n            else { lps[i++] = 0; }\n        }\n        return lps;\n    }\n\n    static void kmpSearch(String text, String pat) {\n        int n = text.length(), m = pat.length();\n        int[] lps = computeLPS(pat);\n        int i = 0, j = 0;\n        while (i < n) {\n            if (text.charAt(i) == pat.charAt(j)) { i++; j++; }\n            if (j == m) { System.out.println(\"Pattern at index \" + (i-j)); j = lps[j-1]; }\n            else if (i < n && text.charAt(i) != pat.charAt(j)) {\n                if (j > 0) j = lps[j-1]; else i++;\n            }\n        }\n    }\n\n    public static void main(String[] args) {\n        kmpSearch(\"AABAACAADAABAABA\", \"AABA\");\n    }\n}",
+        "python": "def compute_lps(pat):\n    m = len(pat)\n    lps = [0] * m\n    length, i = 0, 1\n    while i < m:\n        if pat[i] == pat[length]:\n            length += 1\n            lps[i] = length\n            i += 1\n        elif length:\n            length = lps[length - 1]\n        else:\n            lps[i] = 0\n            i += 1\n    return lps\n\ndef kmp_search(text, pat):\n    n, m = len(text), len(pat)\n    lps = compute_lps(pat)\n    i = j = 0\n    while i < n:\n        if text[i] == pat[j]:\n            i += 1; j += 1\n        if j == m:\n            print(f\"Pattern at index {i - j}\")\n            j = lps[j - 1]\n        elif i < n and text[i] != pat[j]:\n            if j:\n                j = lps[j - 1]\n            else:\n                i += 1\n\nkmp_search(\"AABAACAADAABAABA\", \"AABA\")",
+        "javascript": "function computeLPS(pat) {\n    const m = pat.length;\n    const lps = new Array(m).fill(0);\n    let len = 0, i = 1;\n    while (i < m) {\n        if (pat[i] === pat[len]) { lps[i++] = ++len; }\n        else if (len) { len = lps[len-1]; }\n        else { lps[i++] = 0; }\n    }\n    return lps;\n}\n\nfunction kmpSearch(text, pat) {\n    const n = text.length, m = pat.length;\n    const lps = computeLPS(pat);\n    let i = 0, j = 0;\n    while (i < n) {\n        if (text[i] === pat[j]) { i++; j++; }\n        if (j === m) { console.log('Pattern at index', i - j); j = lps[j-1]; }\n        else if (i < n && text[i] !== pat[j]) {\n            if (j) j = lps[j-1]; else i++;\n        }\n    }\n}\n\nkmpSearch('AABAACAADAABAABA', 'AABA');"
+      },
+      "keyPoints": [
+        {
+          "en": "Naive pattern matching is O(n*m); KMP improves it to O(n+m)",
+          "hi": "Naive pattern matching O(n*m) hai; KMP ise O(n+m) mein kar deta hai"
+        },
+        {
+          "en": "LPS (Longest Proper Prefix Suffix) array is the key to KMP; it avoids re-comparison",
+          "hi": "LPS (Longest Proper Prefix Suffix) array KMP ki key hai; ye re-comparison avoid karta hai"
+        },
+        {
+          "en": "KMP never backtracks in the text - each character is processed at most twice",
+          "hi": "KMP text mein kabhi backtrack nahi karta - har character zyaadatar do baar process hota hai"
+        },
+        {
+          "en": "Python's 'in' operator and str.find() use optimized algorithms internally",
+          "hi": "Python ka 'in' operator aur str.find() internally optimized algorithms use karte hain"
+        }
+      ],
+      "timeComplexity": {
+        "access": "O(1)",
+        "search": "O(n+m) KMP / O(nm) naive",
+        "insert": "O(n)",
+        "delete": "O(n)"
+      }
+    },
+    {
+      "id": "string-manipulation",
+      "title": {
+        "en": "String Manipulation Techniques",
+        "hi": "String Manipulation Techniques"
+      },
+      "content": {
+        "en": "Common string manipulation problems and their efficient solutions:\n\n1. **Palindrome Check:** A string that reads the same forwards and backwards. Use two-pointer technique in O(n).\n2. **Anagram Check:** Two strings are anagrams if they contain the same characters with same frequency. Use frequency array/hashmap in O(n).\n3. **Frequency Count:** Count how many times each character appears. Use an array of size 26 for lowercase letters in O(n).",
+        "hi": "Common string manipulation problems aur unke efficient solutions:\n\n1. **Palindrome Check:** String jo aage aur peeche se same padhi jaaye. O(n) mein two-pointer technique use karo.\n2. **Anagram Check:** Do strings anagram hain agar unme same characters same frequency ke saath hain. O(n) mein frequency array/hashmap use karo.\n3. **Frequency Count:** Har character kitni baar aata hai count karo. Lowercase letters ke liye size 26 ka array use karo O(n) mein."
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nbool isPalindrome(const string& s) {\n    int l = 0, r = s.size() - 1;\n    while (l < r) {\n        if (s[l++] != s[r--]) return false;\n    }\n    return true;\n}\n\nbool isAnagram(const string& s, const string& t) {\n    if (s.size() != t.size()) return false;\n    int freq[26] = {0};\n    for (char c : s) freq[c-'a']++;\n    for (char c : t) freq[c-'a']--;\n    for (int x : freq) if (x != 0) return false;\n    return true;\n}\n\nvoid charFrequency(const string& s) {\n    int freq[26] = {0};\n    for (char c : s) freq[c-'a']++;\n    for (int i = 0; i < 26; i++)\n        if (freq[i]) cout << (char)('a'+i) << \": \" << freq[i] << endl;\n}\n\nint main() {\n    cout << isPalindrome(\"racecar\") << endl;       // 1\n    cout << isAnagram(\"listen\", \"silent\") << endl; // 1\n    charFrequency(\"hello\");\n    return 0;\n}",
+        "c": "#include <stdio.h>\n#include <string.h>\n\nint isPalindrome(char* s) {\n    int l = 0, r = strlen(s) - 1;\n    while (l < r) if (s[l++] != s[r--]) return 0;\n    return 1;\n}\n\nint isAnagram(char* s, char* t) {\n    if (strlen(s) != strlen(t)) return 0;\n    int freq[26] = {0};\n    for (int i = 0; s[i]; i++) freq[s[i]-'a']++;\n    for (int i = 0; t[i]; i++) freq[t[i]-'a']--;\n    for (int i = 0; i < 26; i++) if (freq[i]) return 0;\n    return 1;\n}\n\nint main() {\n    printf(\"%d\\n\", isPalindrome(\"racecar\"));       // 1\n    printf(\"%d\\n\", isAnagram(\"listen\", \"silent\")); // 1\n    return 0;\n}",
+        "java": "import java.util.*;\npublic class Main {\n    static boolean isPalindrome(String s) {\n        int l = 0, r = s.length() - 1;\n        while (l < r) if (s.charAt(l++) != s.charAt(r--)) return false;\n        return true;\n    }\n    static boolean isAnagram(String s, String t) {\n        if (s.length() != t.length()) return false;\n        int[] freq = new int[26];\n        for (char c : s.toCharArray()) freq[c-'a']++;\n        for (char c : t.toCharArray()) freq[c-'a']--;\n        for (int x : freq) if (x != 0) return false;\n        return true;\n    }\n    static void charFrequency(String s) {\n        int[] freq = new int[26];\n        for (char c : s.toCharArray()) freq[c-'a']++;\n        for (int i = 0; i < 26; i++)\n            if (freq[i] > 0) System.out.println((char)('a'+i) + \": \" + freq[i]);\n    }\n    public static void main(String[] args) {\n        System.out.println(isPalindrome(\"racecar\"));       // true\n        System.out.println(isAnagram(\"listen\", \"silent\")); // true\n        charFrequency(\"hello\");\n    }\n}",
+        "python": "def is_palindrome(s):\n    return s == s[::-1]\n\ndef is_anagram(s, t):\n    if len(s) != len(t):\n        return False\n    freq = [0] * 26\n    for c in s: freq[ord(c) - ord('a')] += 1\n    for c in t: freq[ord(c) - ord('a')] -= 1\n    return all(x == 0 for x in freq)\n\ndef char_frequency(s):\n    freq = {}\n    for c in s:\n        freq[c] = freq.get(c, 0) + 1\n    return freq\n\nprint(is_palindrome(\"racecar\"))        # True\nprint(is_anagram(\"listen\", \"silent\"))  # True\nprint(char_frequency(\"hello\"))         # {'h':1,'e':1,'l':2,'o':1}",
+        "javascript": "function isPalindrome(s) {\n    return s === s.split('').reverse().join('');\n}\n\nfunction isAnagram(s, t) {\n    if (s.length !== t.length) return false;\n    const freq = {};\n    for (let c of s) freq[c] = (freq[c] || 0) + 1;\n    for (let c of t) {\n        if (!freq[c]) return false;\n        freq[c]--;\n    }\n    return true;\n}\n\nfunction charFrequency(s) {\n    const freq = {};\n    for (let c of s) freq[c] = (freq[c] || 0) + 1;\n    return freq;\n}\n\nconsole.log(isPalindrome('racecar'));        // true\nconsole.log(isAnagram('listen', 'silent'));  // true\nconsole.log(charFrequency('hello'));"
+      },
+      "keyPoints": [
+        {
+          "en": "Palindrome check with two pointers runs in O(n) time and O(1) space",
+          "hi": "Two pointers se palindrome check O(n) time aur O(1) space mein hota hai"
+        },
+        {
+          "en": "Anagram check: sort both strings and compare (O(n log n)), or use frequency array (O(n))",
+          "hi": "Anagram check: dono strings sort karke compare karo (O(n log n)), ya frequency array use karo (O(n))"
+        },
+        {
+          "en": "A frequency array of size 26 is sufficient for lowercase English letter problems",
+          "hi": "Lowercase English letters ki problems ke liye size 26 ka frequency array kaafi hai"
+        },
+        {
+          "en": "StringBuilder should be used when building strings character by character in loops",
+          "hi": "Jab loop mein character by character string banani ho tab StringBuilder use karna chahiye"
+        }
+      ],
+      "timeComplexity": {
+        "access": "O(1)",
+        "search": "O(n)",
+        "insert": "O(n)",
+        "delete": "O(n)"
+      }
+    }
+  ]
+}
