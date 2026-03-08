@@ -1,0 +1,523 @@
+{
+  "topicId": "queue",
+  "problems": [
+    {
+      "id": "q-001",
+      "title": "Implement Queue using Array",
+      "titleHi": "Array se Queue Implement Karo",
+      "difficulty": "easy",
+      "description": {
+        "en": "Implement a queue using a fixed-size array with enqueue, dequeue, front, and isEmpty operations.",
+        "hi": "Fixed-size array se queue implement karo jisme enqueue, dequeue, front, aur isEmpty operations ho."
+      },
+      "examples": [
+        {
+          "input": "enqueue(1), enqueue(2), enqueue(3), dequeue(), front()",
+          "output": "dequeue returns 1, front returns 2",
+          "explanation": {
+            "en": "Queue follows FIFO so 1 is removed first; after removal front is 2.",
+            "hi": "Queue FIFO follow karta hai isliye 1 pehle remove hota hai; remove ke baad front 2 hai."
+          }
+        }
+      ],
+      "constraints": ["1 <= operations <= 10^4", "Use a circular array of size 1000"],
+      "hints": [
+        { "en": "Use front and rear indices. Use modulo for circular behavior.", "hi": "Front aur rear indices use karo. Circular behavior ke liye modulo use karo." }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\\n#define MAX 1000\\nusing namespace std;\\n\\nclass Queue {\\n    int arr[MAX], front, rear, sz;\\npublic:\\n    Queue() : front(0), rear(-1), sz(0) {}\\n    void enqueue(int x) { /* implement */ }\\n    int dequeue() { /* implement */ return -1; }\\n    int getFront() { /* implement */ return -1; }\\n    bool isEmpty() { return sz == 0; }\\n};",
+        "python": "class Queue:\\n    def __init__(self, capacity=1000):\\n        self.arr = [0] * capacity\\n        self.front = 0\\n        self.rear = -1\\n        self.size = 0\\n        self.capacity = capacity\\n    def enqueue(self, x): pass\\n    def dequeue(self): pass\\n    def get_front(self): pass\\n    def is_empty(self): return self.size == 0",
+        "java": "public class Queue {\\n    int[] arr = new int[1000];\\n    int front = 0, rear = -1, size = 0;\\n    public void enqueue(int x) { /* implement */ }\\n    public int dequeue() { /* implement */ return -1; }\\n    public int front() { /* implement */ return -1; }\\n    public boolean isEmpty() { return size == 0; }\\n}",
+        "javascript": "class Queue {\\n    constructor(capacity = 1000) {\\n        this.arr = new Array(capacity).fill(0);\\n        this.front = 0; this.rear = -1; this.size = 0; this.capacity = capacity;\\n    }\\n    enqueue(x) { /* implement */ }\\n    dequeue() { /* implement */ }\\n    getFront() { /* implement */ }\\n    isEmpty() { return this.size === 0; }\\n}",
+        "c": "#define MAX 1000\\ntypedef struct { int arr[MAX]; int front, rear, size; } Queue;\\nvoid init(Queue* q) { q->front=0; q->rear=-1; q->size=0; }\\nvoid enqueue(Queue* q, int x) { /* implement */ }\\nint dequeue(Queue* q) { /* implement */ return -1; }\\nint getFront(Queue* q) { return q->arr[q->front]; }\\nint isEmpty(Queue* q) { return q->size == 0; }"
+      },
+      "testCases": [
+        { "input": "enqueue(1),enqueue(2),enqueue(3),dequeue()", "expectedOutput": "1" },
+        { "input": "enqueue(5),front()", "expectedOutput": "5" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use a circular array. Rear advances with (rear+1)%capacity on enqueue. Front advances with (front+1)%capacity on dequeue. Track size separately.",
+          "hi": "Circular array use karo. Enqueue par rear (rear+1)%capacity se advance hota hai. Dequeue par front (front+1)%capacity se advance hota hai. Size alag track karo."
+        },
+        "code": {
+          "cpp": "#include <iostream>\\n#define MAX 1000\\nusing namespace std;\\n\\nclass Queue {\\n    int arr[MAX], front, rear, sz;\\npublic:\\n    Queue() : front(0), rear(-1), sz(0) {}\\n    void enqueue(int x) { rear=(rear+1)%MAX; arr[rear]=x; sz++; }\\n    int dequeue() { int v=arr[front]; front=(front+1)%MAX; sz--; return v; }\\n    int getFront() { return arr[front]; }\\n    bool isEmpty() { return sz==0; }\\n};\\n\\nint main() {\\n    Queue q;\\n    q.enqueue(1); q.enqueue(2); q.enqueue(3);\\n    cout << q.dequeue() << endl; // 1\\n    cout << q.getFront() << endl; // 2\\n    return 0;\\n}",
+          "python": "class Queue:\\n    def __init__(self, capacity=1000):\\n        self.arr = [0] * capacity\\n        self.front = 0; self.rear = -1; self.size = 0; self.capacity = capacity\\n    def enqueue(self, x):\\n        self.rear = (self.rear + 1) % self.capacity\\n        self.arr[self.rear] = x; self.size += 1\\n    def dequeue(self):\\n        v = self.arr[self.front]\\n        self.front = (self.front + 1) % self.capacity\\n        self.size -= 1; return v\\n    def get_front(self): return self.arr[self.front]\\n    def is_empty(self): return self.size == 0\\n\\nq = Queue()\\nq.enqueue(1); q.enqueue(2); q.enqueue(3)\\nprint(q.dequeue())   # 1\\nprint(q.get_front()) # 2",
+          "java": "public class Queue {\\n    int[] arr = new int[1000];\\n    int front = 0, rear = -1, size = 0, cap = 1000;\\n    public void enqueue(int x) { rear=(rear+1)%cap; arr[rear]=x; size++; }\\n    public int dequeue() { int v=arr[front]; front=(front+1)%cap; size--; return v; }\\n    public int front() { return arr[front]; }\\n    public boolean isEmpty() { return size==0; }\\n    public static void main(String[] a) {\\n        Queue q = new Queue();\\n        q.enqueue(1); q.enqueue(2); q.enqueue(3);\\n        System.out.println(q.dequeue()); // 1\\n        System.out.println(q.front());   // 2\\n    }\\n}",
+          "javascript": "class Queue {\\n    constructor(cap=1000){this.arr=new Array(cap).fill(0);this.front=0;this.rear=-1;this.size=0;this.cap=cap;}\\n    enqueue(x){this.rear=(this.rear+1)%this.cap;this.arr[this.rear]=x;this.size++;}\\n    dequeue(){const v=this.arr[this.front];this.front=(this.front+1)%this.cap;this.size--;return v;}\\n    getFront(){return this.arr[this.front];}\\n    isEmpty(){return this.size===0;}\\n}\\nconst q=new Queue();\\nq.enqueue(1);q.enqueue(2);q.enqueue(3);\\nconsole.log(q.dequeue()); // 1\\nconsole.log(q.getFront()); // 2",
+          "c": "#include <stdio.h>\\n#define MAX 1000\\ntypedef struct{int arr[MAX];int front,rear,size;}Queue;\\nvoid init(Queue*q){q->front=0;q->rear=-1;q->size=0;}\\nvoid enqueue(Queue*q,int x){q->rear=(q->rear+1)%MAX;q->arr[q->rear]=x;q->size++;}\\nint dequeue(Queue*q){int v=q->arr[q->front];q->front=(q->front+1)%MAX;q->size--;return v;}\\nint getFront(Queue*q){return q->arr[q->front];}\\nint main(){Queue q;init(&q);enqueue(&q,1);enqueue(&q,2);enqueue(&q,3);printf(\"%d\\\\n\",dequeue(&q));printf(\"%d\\\\n\",getFront(&q));return 0;}"
+        },
+        "timeComplexity": "O(1) per operation",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["queue", "array", "implementation"]
+    },
+    {
+      "id": "q-002",
+      "title": "Implement Queue using Stack",
+      "titleHi": "Stack se Queue Implement Karo",
+      "difficulty": "easy",
+      "description": {
+        "en": "Implement a FIFO queue using only two stacks. Implement push, pop, peek, and empty operations.",
+        "hi": "Sirf do stacks use karke FIFO queue implement karo. push, pop, peek aur empty operations implement karo."
+      },
+      "examples": [
+        {
+          "input": "push(1), push(2), peek(), pop(), empty()",
+          "output": "peek=1, pop=1, empty=false",
+          "explanation": {
+            "en": "Queue is FIFO so peek and pop return the first pushed element.",
+            "hi": "Queue FIFO hai isliye peek aur pop pehle push kiya element return karte hain."
+          }
+        }
+      ],
+      "constraints": ["1 <= x <= 9", "At most 100 calls to push, pop, peek, and empty"],
+      "hints": [
+        { "en": "Use two stacks: input and output. On pop/peek, transfer all from input to output if output is empty.", "hi": "Do stacks use karo: input aur output. Pop/peek par, agar output empty hai toh sab input se output mein transfer karo." }
+      ],
+      "starterCode": {
+        "cpp": "#include <stack>\\nusing namespace std;\\n\\nclass MyQueue {\\npublic:\\n    stack<int> s1, s2;\\n    void push(int x) { /* implement */ }\\n    int pop() { /* implement */ return -1; }\\n    int peek() { /* implement */ return -1; }\\n    bool empty() { return s1.empty() && s2.empty(); }\\n};",
+        "python": "class MyQueue:\\n    def __init__(self):\\n        self.s1 = []\\n        self.s2 = []\\n    def push(self, x): pass\\n    def pop(self): pass\\n    def peek(self): pass\\n    def empty(self): return not self.s1 and not self.s2",
+        "java": "import java.util.Stack;\\npublic class MyQueue {\\n    Stack<Integer> s1 = new Stack<>(), s2 = new Stack<>();\\n    public void push(int x) { /* implement */ }\\n    public int pop() { /* implement */ return -1; }\\n    public int peek() { /* implement */ return -1; }\\n    public boolean empty() { return s1.isEmpty() && s2.isEmpty(); }\\n}",
+        "javascript": "class MyQueue {\\n    constructor() { this.s1 = []; this.s2 = []; }\\n    push(x) { /* implement */ }\\n    pop() { /* implement */ }\\n    peek() { /* implement */ }\\n    empty() { return !this.s1.length && !this.s2.length; }\\n}",
+        "c": "#include <stdbool.h>\\n#define MAX 100\\ntypedef struct { int s1[MAX], s2[MAX]; int t1, t2; } MyQueue;\\nvoid mqInit(MyQueue* q){q->t1=-1;q->t2=-1;}\\nvoid mqPush(MyQueue* q, int x){ q->s1[++q->t1]=x; }\\nint mqPop(MyQueue* q){\\n    if(q->t2<0){while(q->t1>=0)q->s2[++q->t2]=q->s1[q->t1--];}\\n    return q->s2[q->t2--];\\n}\\nint mqPeek(MyQueue* q){\\n    if(q->t2<0){while(q->t1>=0)q->s2[++q->t2]=q->s1[q->t1--];}\\n    return q->s2[q->t2];\\n}\\nbool mqEmpty(MyQueue* q){return q->t1<0 && q->t2<0;}"
+      },
+      "testCases": [
+        { "input": "push(1),push(2),peek()", "expectedOutput": "1" },
+        { "input": "push(1),pop(),empty()", "expectedOutput": "true" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use s1 for push. For pop/peek, if s2 is empty, pour all of s1 into s2 (reversing order gives FIFO). Then pop/peek from s2. This gives amortized O(1).",
+          "hi": "Push ke liye s1 use karo. Pop/peek ke liye, agar s2 empty hai, s1 ka sab s2 mein daalo (order reverse hoke FIFO milta hai). Phir s2 se pop/peek karo. Yeh amortized O(1) deta hai."
+        },
+        "code": {
+          "cpp": "#include <stack>\\nusing namespace std;\\nclass MyQueue {\\n    stack<int> s1, s2;\\npublic:\\n    void push(int x) { s1.push(x); }\\n    int pop() {\\n        if (s2.empty()) while (!s1.empty()) { s2.push(s1.top()); s1.pop(); }\\n        int v = s2.top(); s2.pop(); return v;\\n    }\\n    int peek() {\\n        if (s2.empty()) while (!s1.empty()) { s2.push(s1.top()); s1.pop(); }\\n        return s2.top();\\n    }\\n    bool empty() { return s1.empty() && s2.empty(); }\\n};",
+          "python": "class MyQueue:\\n    def __init__(self): self.s1=[]; self.s2=[]\\n    def push(self, x): self.s1.append(x)\\n    def pop(self):\\n        if not self.s2:\\n            while self.s1: self.s2.append(self.s1.pop())\\n        return self.s2.pop()\\n    def peek(self):\\n        if not self.s2:\\n            while self.s1: self.s2.append(self.s1.pop())\\n        return self.s2[-1]\\n    def empty(self): return not self.s1 and not self.s2",
+          "java": "import java.util.Stack;\\npublic class MyQueue {\\n    Stack<Integer> s1=new Stack<>(), s2=new Stack<>();\\n    public void push(int x){s1.push(x);}\\n    public int pop(){if(s2.isEmpty())while(!s1.isEmpty())s2.push(s1.pop());return s2.pop();}\\n    public int peek(){if(s2.isEmpty())while(!s1.isEmpty())s2.push(s1.pop());return s2.peek();}\\n    public boolean empty(){return s1.isEmpty()&&s2.isEmpty();}\\n}",
+          "javascript": "class MyQueue{\\n    constructor(){this.s1=[];this.s2=[];}\\n    push(x){this.s1.push(x);}\\n    pop(){if(!this.s2.length)while(this.s1.length)this.s2.push(this.s1.pop());return this.s2.pop();}\\n    peek(){if(!this.s2.length)while(this.s1.length)this.s2.push(this.s1.pop());return this.s2[this.s2.length-1];}\\n    empty(){return !this.s1.length&&!this.s2.length;}\\n}",
+          "c": "#include <stdbool.h>\\n#define MAX 100\\ntypedef struct{int s1[MAX],s2[MAX];int t1,t2;}MyQueue;\\nvoid mqInit(MyQueue*q){q->t1=-1;q->t2=-1;}\\nvoid mqPush(MyQueue*q,int x){q->s1[++q->t1]=x;}\\nint mqPop(MyQueue*q){if(q->t2<0)while(q->t1>=0)q->s2[++q->t2]=q->s1[q->t1--];return q->s2[q->t2--];}\\nint mqPeek(MyQueue*q){if(q->t2<0)while(q->t1>=0)q->s2[++q->t2]=q->s1[q->t1--];return q->s2[q->t2];}\\nbool mqEmpty(MyQueue*q){return q->t1<0&&q->t2<0;}"
+        },
+        "timeComplexity": "O(1) amortized",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["queue", "stack", "design"]
+    },
+    {
+      "id": "q-003",
+      "title": "Reverse a Queue",
+      "titleHi": "Queue Reverse Karo",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given a queue, reverse its elements using a stack.",
+        "hi": "Ek queue di gayi hai. Stack use karke iske elements reverse karo."
+      },
+      "examples": [
+        {
+          "input": "queue = [1, 2, 3, 4, 5]",
+          "output": "[5, 4, 3, 2, 1]",
+          "explanation": {
+            "en": "Dequeue all to stack, then enqueue back from stack.",
+            "hi": "Sab stack mein dequeue karo, phir stack se wapas enqueue karo."
+          }
+        }
+      ],
+      "constraints": ["1 <= queue size <= 10^4"],
+      "hints": [
+        { "en": "Pop all elements into a stack, then push all back to the queue.", "hi": "Sab elements stack mein pop karo, phir sab wapas queue mein push karo." }
+      ],
+      "starterCode": {
+        "cpp": "#include <queue>\\n#include <stack>\\nusing namespace std;\\n\\nvoid reverseQueue(queue<int>& q) {\\n    // Write your code here\\n}",
+        "python": "from collections import deque\\n\\ndef reverse_queue(q):\\n    # q is a deque\\n    # Write your code here\\n    pass",
+        "java": "import java.util.*;\\npublic class Solution {\\n    public void reverseQueue(Queue<Integer> q) {\\n        // Write your code here\\n    }\\n}",
+        "javascript": "function reverseQueue(q) {\\n    // q is an array used as queue\\n    // Write your code here\\n}",
+        "c": "#include <stdio.h>\\nvoid reverseQueue(int* arr, int size) {\\n    // Reverse arr in-place (represents queue)\\n}"
+      },
+      "testCases": [
+        { "input": "[1,2,3,4,5]", "expectedOutput": "[5,4,3,2,1]" },
+        { "input": "[10,20,30]", "expectedOutput": "[30,20,10]" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Dequeue all elements into a stack. Then pop all elements from the stack back into the queue. Stack reverses the order giving LIFO behavior.",
+          "hi": "Sab elements queue se stack mein dequeue karo. Phir stack se sab elements wapas queue mein pop karo. Stack order reverse kar deta hai."
+        },
+        "code": {
+          "cpp": "#include <queue>\\n#include <stack>\\nusing namespace std;\\nvoid reverseQueue(queue<int>& q) {\\n    stack<int> st;\\n    while (!q.empty()) { st.push(q.front()); q.pop(); }\\n    while (!st.empty()) { q.push(st.top()); st.pop(); }\\n}",
+          "python": "from collections import deque\\ndef reverse_queue(q):\\n    st = []\\n    while q: st.append(q.popleft())\\n    while st: q.append(st.pop())",
+          "java": "import java.util.*;\\npublic class Solution {\\n    public void reverseQueue(Queue<Integer> q) {\\n        Stack<Integer> st = new Stack<>();\\n        while (!q.isEmpty()) st.push(q.poll());\\n        while (!st.isEmpty()) q.offer(st.pop());\\n    }\\n}",
+          "javascript": "function reverseQueue(q) {\\n    const st = [];\\n    while (q.length) st.push(q.shift());\\n    while (st.length) q.push(st.pop());\\n}",
+          "c": "#include <string.h>\\nvoid reverseQueue(int* arr, int size) {\\n    int st[size], top=-1;\\n    for(int i=0;i<size;i++) st[++top]=arr[i];\\n    for(int i=0;i<size;i++) arr[i]=st[top--];\\n}"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["queue", "stack"]
+    },
+    {
+      "id": "q-004",
+      "title": "First Negative Number in Window",
+      "titleHi": "Window mein Pehla Negative Number",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given an array and a window size k, find the first negative integer in every window of size k. If no negative exists in window, output 0.",
+        "hi": "Ek array aur window size k diya gaya hai. Har k size ke window mein pehla negative integer dhundho. Agar window mein koi negative nahi hai toh 0 output karo."
+      },
+      "examples": [
+        {
+          "input": "arr = [-8, 2, 3, -6, 10], k = 2",
+          "output": "[-8, 0, -6, -6]",
+          "explanation": {
+            "en": "Windows: [-8,2]->-8, [2,3]->0, [3,-6]->-6, [-6,10]->-6",
+            "hi": "Windows: [-8,2]->-8, [2,3]->0, [3,-6]->-6, [-6,10]->-6"
+          }
+        }
+      ],
+      "constraints": ["1 <= arr.length <= 10^5", "1 <= k <= arr.length"],
+      "hints": [
+        { "en": "Use a deque to store indices of negative numbers. Remove indices that fall outside the current window.", "hi": "Negative numbers ke indices store karne ke liye deque use karo. Current window se bahar gaye indices remove karo." }
+      ],
+      "starterCode": {
+        "cpp": "#include <vector>\\n#include <deque>\\nusing namespace std;\\n\\nvector<int> firstNegative(vector<int>& arr, int k) {\\n    // Write your code here\\n    return {};\\n}",
+        "python": "from collections import deque\\nfrom typing import List\\n\\ndef first_negative(arr: List[int], k: int) -> List[int]:\\n    # Write your code here\\n    pass",
+        "java": "import java.util.*;\\npublic class Solution {\\n    public int[] firstNegative(int[] arr, int k) {\\n        // Write your code here\\n        return new int[]{};\\n    }\\n}",
+        "javascript": "function firstNegative(arr, k) {\\n    // Write your code here\\n}",
+        "c": "#include <stdlib.h>\\nint* firstNegative(int* arr, int n, int k, int* returnSize) {\\n    // Write your code here\\n    *returnSize = 0;\\n    return NULL;\\n}"
+      },
+      "testCases": [
+        { "input": "arr=[-8,2,3,-6,10], k=2", "expectedOutput": "[-8,0,-6,-6]" },
+        { "input": "arr=[12,1,2,3], k=3", "expectedOutput": "[0,0]" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use a deque to store indices of negative numbers in the current window. For each new element, if negative add index to deque. Remove front if out of window. The front of deque gives the first negative's index.",
+          "hi": "Current window mein negative numbers ke indices store karne ke liye deque use karo. Har naye element ke liye, negative ho toh index deque mein add karo. Front ka index window se bahar ho toh remove karo. Deque ka front pehle negative ka index deta hai."
+        },
+        "code": {
+          "cpp": "#include <vector>\\n#include <deque>\\nusing namespace std;\\nvector<int> firstNegative(vector<int>& arr, int k) {\\n    deque<int> dq;\\n    vector<int> res;\\n    int n = arr.size();\\n    for (int i = 0; i < n; i++) {\\n        if (arr[i] < 0) dq.push_back(i);\\n        if (i >= k-1) {\\n            if (!dq.empty() && dq.front() < i-k+1) dq.pop_front();\\n            res.push_back(dq.empty() ? 0 : arr[dq.front()]);\\n        }\\n    }\\n    return res;\\n}",
+          "python": "from collections import deque\\nfrom typing import List\\ndef first_negative(arr: List[int], k: int) -> List[int]:\\n    dq = deque(); res = []; n = len(arr)\\n    for i in range(n):\\n        if arr[i] < 0: dq.append(i)\\n        if i >= k - 1:\\n            if dq and dq[0] < i - k + 1: dq.popleft()\\n            res.append(arr[dq[0]] if dq else 0)\\n    return res",
+          "java": "import java.util.*;\\npublic class Solution {\\n    public int[] firstNegative(int[] arr, int k) {\\n        int n = arr.length;\\n        int[] res = new int[n-k+1];\\n        Deque<Integer> dq = new ArrayDeque<>();\\n        for (int i = 0; i < n; i++) {\\n            if (arr[i] < 0) dq.offerLast(i);\\n            if (i >= k-1) {\\n                if (!dq.isEmpty() && dq.peekFirst() < i-k+1) dq.pollFirst();\\n                res[i-k+1] = dq.isEmpty() ? 0 : arr[dq.peekFirst()];\\n            }\\n        }\\n        return res;\\n    }\\n}",
+          "javascript": "function firstNegative(arr, k) {\\n    const dq = [], res = [], n = arr.length;\\n    for (let i = 0; i < n; i++) {\\n        if (arr[i] < 0) dq.push(i);\\n        if (i >= k-1) {\\n            if (dq.length && dq[0] < i-k+1) dq.shift();\\n            res.push(dq.length ? arr[dq[0]] : 0);\\n        }\\n    }\\n    return res;\\n}",
+          "c": "#include <stdlib.h>\\nint* firstNegative(int* arr, int n, int k, int* returnSize) {\\n    int* res = malloc((n-k+1)*sizeof(int));\\n    int dq[n], front=0, rear=-1;\\n    *returnSize = n-k+1;\\n    for (int i=0;i<n;i++) {\\n        if (arr[i]<0) dq[++rear]=i;\\n        if (i>=k-1) {\\n            if (front<=rear && dq[front]<i-k+1) front++;\\n            res[i-k+1]=(front<=rear)?arr[dq[front]]:0;\\n        }\\n    }\\n    return res;\\n}"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(k)"
+      },
+      "tags": ["queue", "deque", "sliding-window"]
+    },
+    {
+      "id": "q-005",
+      "title": "BFS Traversal",
+      "titleHi": "BFS Traversal",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given an undirected graph represented as an adjacency list and a source vertex, perform BFS traversal and return the order of visited vertices.",
+        "hi": "Ek undirected graph adjacency list ke roop mein aur source vertex di gayi hai. BFS traversal karo aur visited vertices ka order return karo."
+      },
+      "examples": [
+        {
+          "input": "graph = {0:[1,2], 1:[3], 2:[4], 3:[], 4:[]}, src = 0",
+          "output": "[0, 1, 2, 3, 4]",
+          "explanation": {
+            "en": "BFS visits level by level: 0, then 1 and 2, then 3 and 4.",
+            "hi": "BFS level by level visit karta hai: 0, phir 1 aur 2, phir 3 aur 4."
+          }
+        }
+      ],
+      "constraints": ["1 <= V <= 10^4", "0 <= E <= 10^4"],
+      "hints": [
+        { "en": "Use a queue and a visited array. Enqueue source, mark visited, then process each node's neighbors.", "hi": "Queue aur visited array use karo. Source enqueue karo, visited mark karo, phir har node ke neighbors process karo." }
+      ],
+      "starterCode": {
+        "cpp": "#include <vector>\\n#include <queue>\\nusing namespace std;\\n\\nvector<int> bfs(vector<vector<int>>& adj, int src) {\\n    // Write your code here\\n    return {};\\n}",
+        "python": "from collections import deque\\nfrom typing import List, Dict\\n\\ndef bfs(adj: Dict[int, List[int]], src: int) -> List[int]:\\n    # Write your code here\\n    pass",
+        "java": "import java.util.*;\\npublic class Solution {\\n    public List<Integer> bfs(List<List<Integer>> adj, int src) {\\n        // Write your code here\\n        return new ArrayList<>();\\n    }\\n}",
+        "javascript": "function bfs(adj, src) {\\n    // Write your code here\\n}",
+        "c": "#include <stdlib.h>\\nvoid bfs(int adj[][100], int adjSize[], int n, int src, int* result, int* resSize) {\\n    // Write your code here\\n}"
+      },
+      "testCases": [
+        { "input": "adj={0:[1,2],1:[3],2:[4],3:[],4:[]}, src=0", "expectedOutput": "[0,1,2,3,4]" },
+        { "input": "adj={0:[1],1:[2],2:[]}, src=0", "expectedOutput": "[0,1,2]" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Initialize visited array and queue. Enqueue source and mark visited. While queue is not empty, dequeue a node, add to result, and enqueue all unvisited neighbors.",
+          "hi": "Visited array aur queue initialize karo. Source enqueue karo aur visited mark karo. Jab tak queue empty nahi, ek node dequeue karo, result mein add karo, aur sab unvisited neighbors enqueue karo."
+        },
+        "code": {
+          "cpp": "#include <vector>\\n#include <queue>\\nusing namespace std;\\nvector<int> bfs(vector<vector<int>>& adj, int src) {\\n    int n = adj.size();\\n    vector<bool> visited(n, false);\\n    vector<int> result;\\n    queue<int> q;\\n    q.push(src); visited[src] = true;\\n    while (!q.empty()) {\\n        int u = q.front(); q.pop();\\n        result.push_back(u);\\n        for (int v : adj[u]) if (!visited[v]) { visited[v]=true; q.push(v); }\\n    }\\n    return result;\\n}",
+          "python": "from collections import deque\\nfrom typing import List, Dict\\ndef bfs(adj: Dict[int, List[int]], src: int) -> List[int]:\\n    visited = set([src]); q = deque([src]); result = []\\n    while q:\\n        u = q.popleft(); result.append(u)\\n        for v in adj.get(u, []):\\n            if v not in visited: visited.add(v); q.append(v)\\n    return result",
+          "java": "import java.util.*;\\npublic class Solution {\\n    public List<Integer> bfs(List<List<Integer>> adj, int src) {\\n        int n = adj.size();\\n        boolean[] visited = new boolean[n];\\n        List<Integer> result = new ArrayList<>();\\n        Queue<Integer> q = new LinkedList<>();\\n        q.offer(src); visited[src] = true;\\n        while (!q.isEmpty()) {\\n            int u = q.poll(); result.add(u);\\n            for (int v : adj.get(u)) if (!visited[v]) { visited[v]=true; q.offer(v); }\\n        }\\n        return result;\\n    }\\n}",
+          "javascript": "function bfs(adj, src) {\\n    const visited = new Set([src]), q = [src], result = [];\\n    while (q.length) {\\n        const u = q.shift(); result.push(u);\\n        for (const v of (adj[u] || [])) if (!visited.has(v)) { visited.add(v); q.push(v); }\\n    }\\n    return result;\\n}",
+          "c": "#include <string.h>\\nvoid bfs(int adj[][100], int adjSize[], int n, int src, int* result, int* resSize) {\\n    int visited[100]={0}, queue[100], front=0, rear=-1;\\n    *resSize=0;\\n    queue[++rear]=src; visited[src]=1;\\n    while(front<=rear){\\n        int u=queue[front++]; result[(*resSize)++]=u;\\n        for(int i=0;i<adjSize[u];i++){\\n            int v=adj[u][i];\\n            if(!visited[v]){visited[v]=1;queue[++rear]=v;}\\n        }\\n    }\\n}"
+        },
+        "timeComplexity": "O(V + E)",
+        "spaceComplexity": "O(V)"
+      },
+      "tags": ["queue", "graph", "bfs"]
+    },
+    {
+      "id": "q-006",
+      "title": "Generate Binary Numbers",
+      "titleHi": "Binary Numbers Generate Karo",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given a number n, generate all binary numbers from 1 to n using a queue.",
+        "hi": "Ek number n diya gaya hai. Queue use karke 1 se n tak saare binary numbers generate karo."
+      },
+      "examples": [
+        {
+          "input": "n = 5",
+          "output": "[\"1\", \"10\", \"11\", \"100\", \"101\"]",
+          "explanation": {
+            "en": "Binary representations of 1 through 5.",
+            "hi": "1 se 5 tak ke binary representations."
+          }
+        }
+      ],
+      "constraints": ["1 <= n <= 1000"],
+      "hints": [
+        { "en": "Start with '1'. For each dequeued string, enqueue string+'0' and string+'1'.", "hi": "'1' se shuru karo. Har dequeued string ke liye, string+'0' aur string+'1' enqueue karo." }
+      ],
+      "starterCode": {
+        "cpp": "#include <vector>\\n#include <string>\\n#include <queue>\\nusing namespace std;\\n\\nvector<string> generateBinaryNumbers(int n) {\\n    // Write your code here\\n    return {};\\n}",
+        "python": "from collections import deque\\nfrom typing import List\\n\\ndef generate_binary_numbers(n: int) -> List[str]:\\n    # Write your code here\\n    pass",
+        "java": "import java.util.*;\\npublic class Solution {\\n    public String[] generateBinaryNumbers(int n) {\\n        // Write your code here\\n        return new String[]{};\\n    }\\n}",
+        "javascript": "function generateBinaryNumbers(n) {\\n    // Write your code here\\n}",
+        "c": "#include <stdlib.h>\\n#include <string.h>\\nchar** generateBinaryNumbers(int n, int* returnSize) {\\n    // Write your code here\\n    *returnSize = 0; return NULL;\\n}"
+      },
+      "testCases": [
+        { "input": "5", "expectedOutput": "[\"1\",\"10\",\"11\",\"100\",\"101\"]" },
+        { "input": "3", "expectedOutput": "[\"1\",\"10\",\"11\"]" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Enqueue '1'. For each iteration, dequeue the front string, add to result, then enqueue front+'0' and front+'1'. Repeat n times.",
+          "hi": "'1' enqueue karo. Har iteration mein, front string dequeue karo, result mein add karo, phir front+'0' aur front+'1' enqueue karo. n baar repeat karo."
+        },
+        "code": {
+          "cpp": "#include <vector>\\n#include <string>\\n#include <queue>\\nusing namespace std;\\nvector<string> generateBinaryNumbers(int n) {\\n    queue<string> q; q.push(\"1\");\\n    vector<string> result;\\n    for (int i = 0; i < n; i++) {\\n        string s = q.front(); q.pop();\\n        result.push_back(s);\\n        q.push(s + \"0\");\\n        q.push(s + \"1\");\\n    }\\n    return result;\\n}",
+          "python": "from collections import deque\\nfrom typing import List\\ndef generate_binary_numbers(n: int) -> List[str]:\\n    q = deque(['1']); result = []\\n    for _ in range(n):\\n        s = q.popleft(); result.append(s)\\n        q.append(s + '0'); q.append(s + '1')\\n    return result",
+          "java": "import java.util.*;\\npublic class Solution {\\n    public String[] generateBinaryNumbers(int n) {\\n        Queue<String> q = new LinkedList<>(); q.offer(\"1\");\\n        String[] result = new String[n];\\n        for (int i = 0; i < n; i++) {\\n            String s = q.poll(); result[i] = s;\\n            q.offer(s + \"0\"); q.offer(s + \"1\");\\n        }\\n        return result;\\n    }\\n}",
+          "javascript": "function generateBinaryNumbers(n) {\\n    const q = ['1'], result = [];\\n    for (let i = 0; i < n; i++) {\\n        const s = q.shift(); result.push(s);\\n        q.push(s + '0'); q.push(s + '1');\\n    }\\n    return result;\\n}",
+          "c": "#include <stdlib.h>\\n#include <string.h>\\nchar** generateBinaryNumbers(int n, int* returnSize) {\\n    char** q = malloc(2*n*sizeof(char*));\\n    char** res = malloc(n*sizeof(char*));\\n    int front=0, rear=0;\\n    char* init = malloc(2); strcpy(init,\"1\"); q[rear++]=init;\\n    *returnSize=n;\\n    for(int i=0;i<n;i++){\\n        char* s=q[front++];\\n        res[i]=s;\\n        int len=strlen(s);\\n        char* s0=malloc(len+2); strcpy(s0,s); s0[len]='0'; s0[len+1]='\\0';\\n        char* s1=malloc(len+2); strcpy(s1,s); s1[len]='1'; s1[len+1]='\\0';\\n        q[rear++]=s0; q[rear++]=s1;\\n    }\\n    free(q); return res;\\n}"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["queue", "binary", "string"]
+    },
+    {
+      "id": "q-007",
+      "title": "Sliding Window Maximum",
+      "titleHi": "Sliding Window Maximum",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given an array nums and a window size k, return an array of the maximum values for each window of size k as it slides from left to right.",
+        "hi": "Array nums aur window size k diya gaya hai. Har k size ke window ka maximum return karo jab window left se right slide karti hai."
+      },
+      "examples": [
+        {
+          "input": "nums = [1,3,-1,-3,5,3,6,7], k = 3",
+          "output": "[3,3,5,5,6,7]",
+          "explanation": {
+            "en": "Windows: [1,3,-1]->3, [3,-1,-3]->3, [-1,-3,5]->5, [-3,5,3]->5, [5,3,6]->6, [3,6,7]->7",
+            "hi": "Windows: [1,3,-1]->3, [3,-1,-3]->3, [-1,-3,5]->5, [-3,5,3]->5, [5,3,6]->6, [3,6,7]->7"
+          }
+        }
+      ],
+      "constraints": ["1 <= nums.length <= 10^5", "1 <= k <= nums.length", "-10^4 <= nums[i] <= 10^4"],
+      "hints": [
+        { "en": "Use a monotonic decreasing deque storing indices. The front is always the max of current window.", "hi": "Indices store karne ke liye monotonic decreasing deque use karo. Front hamesha current window ka max hota hai." }
+      ],
+      "starterCode": {
+        "cpp": "#include <vector>\\n#include <deque>\\nusing namespace std;\\n\\nvector<int> maxSlidingWindow(vector<int>& nums, int k) {\\n    // Write your code here\\n    return {};\\n}",
+        "python": "from collections import deque\\nfrom typing import List\\n\\ndef max_sliding_window(nums: List[int], k: int) -> List[int]:\\n    # Write your code here\\n    pass",
+        "java": "import java.util.*;\\npublic class Solution {\\n    public int[] maxSlidingWindow(int[] nums, int k) {\\n        // Write your code here\\n        return new int[]{};\\n    }\\n}",
+        "javascript": "function maxSlidingWindow(nums, k) {\\n    // Write your code here\\n}",
+        "c": "#include <stdlib.h>\\nint* maxSlidingWindow(int* nums, int n, int k, int* returnSize) {\\n    // Write your code here\\n    *returnSize = 0; return NULL;\\n}"
+      },
+      "testCases": [
+        { "input": "[1,3,-1,-3,5,3,6,7], k=3", "expectedOutput": "[3,3,5,5,6,7]" },
+        { "input": "[1], k=1", "expectedOutput": "[1]" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use a monotonic deque of indices. For each element: remove from back while back element <= current (maintain decreasing order). Remove front if out of window. Front of deque is always the window maximum.",
+          "hi": "Indices ka monotonic deque use karo. Har element ke liye: back element <= current ho tab tak back se remove karo (decreasing order maintain karo). Front window se bahar ho toh remove karo. Deque ka front hamesha window maximum hota hai."
+        },
+        "code": {
+          "cpp": "#include <vector>\\n#include <deque>\\nusing namespace std;\\nvector<int> maxSlidingWindow(vector<int>& nums, int k) {\\n    deque<int> dq;\\n    vector<int> result;\\n    int n = nums.size();\\n    for (int i = 0; i < n; i++) {\\n        if (!dq.empty() && dq.front() <= i-k) dq.pop_front();\\n        while (!dq.empty() && nums[dq.back()] <= nums[i]) dq.pop_back();\\n        dq.push_back(i);\\n        if (i >= k-1) result.push_back(nums[dq.front()]);\\n    }\\n    return result;\\n}",
+          "python": "from collections import deque\\nfrom typing import List\\ndef max_sliding_window(nums: List[int], k: int) -> List[int]:\\n    dq = deque(); result = []; n = len(nums)\\n    for i in range(n):\\n        if dq and dq[0] <= i - k: dq.popleft()\\n        while dq and nums[dq[-1]] <= nums[i]: dq.pop()\\n        dq.append(i)\\n        if i >= k - 1: result.append(nums[dq[0]])\\n    return result",
+          "java": "import java.util.*;\\npublic class Solution {\\n    public int[] maxSlidingWindow(int[] nums, int k) {\\n        int n = nums.length;\\n        int[] result = new int[n-k+1];\\n        Deque<Integer> dq = new ArrayDeque<>();\\n        for (int i = 0; i < n; i++) {\\n            if (!dq.isEmpty() && dq.peekFirst() <= i-k) dq.pollFirst();\\n            while (!dq.isEmpty() && nums[dq.peekLast()] <= nums[i]) dq.pollLast();\\n            dq.offerLast(i);\\n            if (i >= k-1) result[i-k+1] = nums[dq.peekFirst()];\\n        }\\n        return result;\\n    }\\n}",
+          "javascript": "function maxSlidingWindow(nums, k) {\\n    const dq = [], result = [], n = nums.length;\\n    for (let i = 0; i < n; i++) {\\n        if (dq.length && dq[0] <= i-k) dq.shift();\\n        while (dq.length && nums[dq[dq.length-1]] <= nums[i]) dq.pop();\\n        dq.push(i);\\n        if (i >= k-1) result.push(nums[dq[0]]);\\n    }\\n    return result;\\n}",
+          "c": "#include <stdlib.h>\\nint* maxSlidingWindow(int* nums, int n, int k, int* returnSize) {\\n    int* result = malloc((n-k+1)*sizeof(int));\\n    int* dq = malloc(n*sizeof(int));\\n    int front=0, rear=-1;\\n    *returnSize = n-k+1;\\n    for (int i=0;i<n;i++) {\\n        if (front<=rear && dq[front]<=i-k) front++;\\n        while (front<=rear && nums[dq[rear]]<=nums[i]) rear--;\\n        dq[++rear]=i;\\n        if (i>=k-1) result[i-k+1]=nums[dq[front]];\\n    }\\n    free(dq); return result;\\n}"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(k)"
+      },
+      "tags": ["queue", "deque", "sliding-window", "monotonic-queue"]
+    },
+    {
+      "id": "q-008",
+      "title": "Circular Queue Implementation",
+      "titleHi": "Circular Queue Implement Karo",
+      "difficulty": "medium",
+      "description": {
+        "en": "Design a circular queue with a given capacity. Implement enQueue, deQueue, Front, Rear, isEmpty, and isFull operations.",
+        "hi": "Diye gaye capacity ka circular queue design karo. enQueue, deQueue, Front, Rear, isEmpty, aur isFull operations implement karo."
+      },
+      "examples": [
+        {
+          "input": "MyCircularQueue(3): enQueue(1),enQueue(2),enQueue(3),enQueue(4),Rear(),isFull(),deQueue(),enQueue(4),Rear()",
+          "output": "true,true,true,false,3,true,true,true,4",
+          "explanation": {
+            "en": "Capacity 3: after 3 enqueues the queue is full; after dequeue, enqueue(4) succeeds.",
+            "hi": "Capacity 3: 3 enqueues ke baad queue full hai; dequeue ke baad, enqueue(4) succeed hota hai."
+          }
+        }
+      ],
+      "constraints": ["1 <= k <= 1000", "0 <= value <= 1000", "At most 3000 calls"],
+      "hints": [
+        { "en": "Use an array of size k with front, rear, and size variables.", "hi": "k size ka array use karo front, rear, aur size variables ke saath." }
+      ],
+      "starterCode": {
+        "cpp": "class MyCircularQueue {\\n    int *arr, front, rear, sz, cap;\\npublic:\\n    MyCircularQueue(int k): front(0),rear(-1),sz(0),cap(k){arr=new int[k];}\\n    bool enQueue(int value) { /* implement */ return false; }\\n    bool deQueue() { /* implement */ return false; }\\n    int Front() { /* implement */ return -1; }\\n    int Rear() { /* implement */ return -1; }\\n    bool isEmpty() { return sz==0; }\\n    bool isFull() { return sz==cap; }\\n};",
+        "python": "class MyCircularQueue:\\n    def __init__(self, k: int):\\n        self.arr = [0] * k\\n        self.front = 0; self.rear = -1; self.size = 0; self.cap = k\\n    def enQueue(self, value: int) -> bool: pass\\n    def deQueue(self) -> bool: pass\\n    def Front(self) -> int: pass\\n    def Rear(self) -> int: pass\\n    def isEmpty(self) -> bool: return self.size == 0\\n    def isFull(self) -> bool: return self.size == self.cap",
+        "java": "public class MyCircularQueue {\\n    int[] arr; int front, rear, size, cap;\\n    public MyCircularQueue(int k){arr=new int[k];front=0;rear=-1;size=0;cap=k;}\\n    public boolean enQueue(int value){ /* implement */ return false; }\\n    public boolean deQueue(){ /* implement */ return false; }\\n    public int Front(){ /* implement */ return -1; }\\n    public int Rear(){ /* implement */ return -1; }\\n    public boolean isEmpty(){ return size==0; }\\n    public boolean isFull(){ return size==cap; }\\n}",
+        "javascript": "class MyCircularQueue {\\n    constructor(k) {\\n        this.arr = new Array(k).fill(0);\\n        this.front = 0; this.rear = -1; this.size = 0; this.cap = k;\\n    }\\n    enQueue(value) { /* implement */ }\\n    deQueue() { /* implement */ }\\n    Front() { /* implement */ }\\n    Rear() { /* implement */ }\\n    isEmpty() { return this.size === 0; }\\n    isFull() { return this.size === this.cap; }\\n}",
+        "c": "#define CQ_MAX 1001\\ntypedef struct{int arr[CQ_MAX];int front,rear,size,cap;}CQ;\\nvoid cqInit(CQ*q,int k){q->front=0;q->rear=-1;q->size=0;q->cap=k;}\\nint cqEnqueue(CQ*q,int v){if(q->size==q->cap)return 0;q->rear=(q->rear+1)%q->cap;q->arr[q->rear]=v;q->size++;return 1;}\\nint cqDequeue(CQ*q){if(q->size==0)return 0;q->front=(q->front+1)%q->cap;q->size--;return 1;}\\nint cqFront(CQ*q){return q->size?q->arr[q->front]:-1;}\\nint cqRear(CQ*q){return q->size?q->arr[q->rear]:-1;}"
+      },
+      "testCases": [
+        { "input": "k=3,enQueue(1),enQueue(2),enQueue(3),isFull()", "expectedOutput": "true" },
+        { "input": "k=3,enQueue(1),deQueue(),isEmpty()", "expectedOutput": "false" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use circular indexing: rear = (rear+1)%cap on enqueue, front = (front+1)%cap on dequeue. Track size to differentiate full vs empty.",
+          "hi": "Circular indexing use karo: enqueue par rear = (rear+1)%cap, dequeue par front = (front+1)%cap. Full vs empty differentiate karne ke liye size track karo."
+        },
+        "code": {
+          "cpp": "class MyCircularQueue {\\n    int *arr, front, rear, sz, cap;\\npublic:\\n    MyCircularQueue(int k): front(0),rear(-1),sz(0),cap(k){arr=new int[k];}\\n    bool enQueue(int v) {\\n        if (isFull()) return false;\\n        rear=(rear+1)%cap; arr[rear]=v; sz++; return true;\\n    }\\n    bool deQueue() {\\n        if (isEmpty()) return false;\\n        front=(front+1)%cap; sz--; return true;\\n    }\\n    int Front() { return isEmpty()?-1:arr[front]; }\\n    int Rear() { return isEmpty()?-1:arr[rear]; }\\n    bool isEmpty() { return sz==0; }\\n    bool isFull() { return sz==cap; }\\n};",
+          "python": "class MyCircularQueue:\\n    def __init__(self,k): self.arr=[0]*k;self.front=0;self.rear=-1;self.size=0;self.cap=k\\n    def enQueue(self,v):\\n        if self.isFull(): return False\\n        self.rear=(self.rear+1)%self.cap;self.arr[self.rear]=v;self.size+=1;return True\\n    def deQueue(self):\\n        if self.isEmpty(): return False\\n        self.front=(self.front+1)%self.cap;self.size-=1;return True\\n    def Front(self): return -1 if self.isEmpty() else self.arr[self.front]\\n    def Rear(self): return -1 if self.isEmpty() else self.arr[self.rear]\\n    def isEmpty(self): return self.size==0\\n    def isFull(self): return self.size==self.cap",
+          "java": "public class MyCircularQueue {\\n    int[] arr; int front,rear,size,cap;\\n    public MyCircularQueue(int k){arr=new int[k];front=0;rear=-1;size=0;cap=k;}\\n    public boolean enQueue(int v){if(isFull())return false;rear=(rear+1)%cap;arr[rear]=v;size++;return true;}\\n    public boolean deQueue(){if(isEmpty())return false;front=(front+1)%cap;size--;return true;}\\n    public int Front(){return isEmpty()?-1:arr[front];}\\n    public int Rear(){return isEmpty()?-1:arr[rear];}\\n    public boolean isEmpty(){return size==0;}\\n    public boolean isFull(){return size==cap;}\\n}",
+          "javascript": "class MyCircularQueue{\\n    constructor(k){this.arr=new Array(k).fill(0);this.front=0;this.rear=-1;this.size=0;this.cap=k;}\\n    enQueue(v){if(this.isFull())return false;this.rear=(this.rear+1)%this.cap;this.arr[this.rear]=v;this.size++;return true;}\\n    deQueue(){if(this.isEmpty())return false;this.front=(this.front+1)%this.cap;this.size--;return true;}\\n    Front(){return this.isEmpty()?-1:this.arr[this.front];}\\n    Rear(){return this.isEmpty()?-1:this.arr[this.rear];}\\n    isEmpty(){return this.size===0;}\\n    isFull(){return this.size===this.cap;}\\n}",
+          "c": "#define CQ_MAX 1001\\ntypedef struct{int arr[CQ_MAX];int front,rear,size,cap;}CQ;\\nvoid cqInit(CQ*q,int k){q->front=0;q->rear=-1;q->size=0;q->cap=k;}\\nint cqEnqueue(CQ*q,int v){if(q->size==q->cap)return 0;q->rear=(q->rear+1)%q->cap;q->arr[q->rear]=v;q->size++;return 1;}\\nint cqDequeue(CQ*q){if(!q->size)return 0;q->front=(q->front+1)%q->cap;q->size--;return 1;}\\nint cqFront(CQ*q){return q->size?q->arr[q->front]:-1;}\\nint cqRear(CQ*q){return q->size?q->arr[q->rear]:-1;}"
+        },
+        "timeComplexity": "O(1) per operation",
+        "spaceComplexity": "O(k)"
+      },
+      "tags": ["queue", "circular-queue", "design"]
+    },
+    {
+      "id": "q-009",
+      "title": "Design Hit Counter",
+      "titleHi": "Hit Counter Design Karo",
+      "difficulty": "medium",
+      "description": {
+        "en": "Design a hit counter that counts the number of hits received in the past 5 minutes (300 seconds). Implement hit(timestamp) and getHits(timestamp) functions.",
+        "hi": "Ek hit counter design karo jo pichhle 5 minutes (300 seconds) mein receive hui hits count kare. hit(timestamp) aur getHits(timestamp) functions implement karo."
+      },
+      "examples": [
+        {
+          "input": "hit(1),hit(2),hit(3),getHits(4),hit(300),getHits(300),getHits(301)",
+          "output": "getHits(4)=3, getHits(300)=4, getHits(301)=3",
+          "explanation": {
+            "en": "At timestamp 301, hit at t=1 is more than 300 seconds old and is excluded.",
+            "hi": "Timestamp 301 par, t=1 ki hit 300 seconds se zyada purani hai aur exclude ho jaati hai."
+          }
+        }
+      ],
+      "constraints": ["1 <= timestamp <= 2*10^9", "All calls to hit and getHits are in chronological order"],
+      "hints": [
+        { "en": "Use a queue to store timestamps. On getHits, remove all timestamps older than 300 seconds from current.", "hi": "Timestamps store karne ke liye queue use karo. getHits par, current se 300 seconds se zyada purane sab timestamps remove karo." }
+      ],
+      "starterCode": {
+        "cpp": "#include <queue>\\nusing namespace std;\\n\\nclass HitCounter {\\n    queue<int> q;\\npublic:\\n    void hit(int timestamp) { /* implement */ }\\n    int getHits(int timestamp) { /* implement */ return 0; }\\n};",
+        "python": "from collections import deque\\n\\nclass HitCounter:\\n    def __init__(self):\\n        self.q = deque()\\n    def hit(self, timestamp: int) -> None: pass\\n    def get_hits(self, timestamp: int) -> int: pass",
+        "java": "import java.util.LinkedList;\\nimport java.util.Queue;\\npublic class HitCounter {\\n    Queue<Integer> q = new LinkedList<>();\\n    public void hit(int timestamp) { /* implement */ }\\n    public int getHits(int timestamp) { /* implement */ return 0; }\\n}",
+        "javascript": "class HitCounter {\\n    constructor() { this.q = []; }\\n    hit(timestamp) { /* implement */ }\\n    getHits(timestamp) { /* implement */ }\\n}",
+        "c": "#include <stdlib.h>\\n#define HC_MAX 10000\\ntypedef struct{int arr[HC_MAX];int front,rear;}HitCounter;\\nvoid hcInit(HitCounter*h){h->front=0;h->rear=-1;}\\nvoid hcHit(HitCounter*h,int t){h->arr[++h->rear]=t;}\\nint hcGetHits(HitCounter*h,int t){while(h->front<=h->rear&&h->arr[h->front]<=t-300)h->front++;return h->rear-h->front+1;}"
+      },
+      "testCases": [
+        { "input": "hit(1),hit(2),hit(3),getHits(4)", "expectedOutput": "3" },
+        { "input": "hit(1),getHits(301)", "expectedOutput": "0" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Store hit timestamps in a queue. For getHits(t), remove all timestamps <= t-300 from the front (they are older than 5 minutes). Return queue size.",
+          "hi": "Hit timestamps queue mein store karo. getHits(t) ke liye, front se sab timestamps <= t-300 remove karo (5 minutes se zyada purane hain). Queue size return karo."
+        },
+        "code": {
+          "cpp": "#include <queue>\\nusing namespace std;\\nclass HitCounter {\\n    queue<int> q;\\npublic:\\n    void hit(int t) { q.push(t); }\\n    int getHits(int t) {\\n        while (!q.empty() && q.front() <= t-300) q.pop();\\n        return q.size();\\n    }\\n};",
+          "python": "from collections import deque\\nclass HitCounter:\\n    def __init__(self): self.q = deque()\\n    def hit(self, t): self.q.append(t)\\n    def get_hits(self, t):\\n        while self.q and self.q[0] <= t - 300: self.q.popleft()\\n        return len(self.q)",
+          "java": "import java.util.*;\\npublic class HitCounter {\\n    Queue<Integer> q=new LinkedList<>();\\n    public void hit(int t){q.offer(t);}\\n    public int getHits(int t){\\n        while(!q.isEmpty()&&q.peek()<=t-300)q.poll();\\n        return q.size();\\n    }\\n}",
+          "javascript": "class HitCounter {\\n    constructor(){this.q=[];}\\n    hit(t){this.q.push(t);}\\n    getHits(t){\\n        while(this.q.length&&this.q[0]<=t-300)this.q.shift();\\n        return this.q.length;\\n    }\\n}",
+          "c": "#include <stdlib.h>\\n#define HC_MAX 10000\\ntypedef struct{int arr[HC_MAX];int front,rear;}HitCounter;\\nvoid hcInit(HitCounter*h){h->front=0;h->rear=-1;}\\nvoid hcHit(HitCounter*h,int t){h->arr[++h->rear]=t;}\\nint hcGetHits(HitCounter*h,int t){while(h->front<=h->rear&&h->arr[h->front]<=t-300)h->front++;return h->rear-h->front+1;}"
+        },
+        "timeComplexity": "O(1) amortized",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["queue", "design", "sliding-window"]
+    },
+    {
+      "id": "q-010",
+      "title": "Rotten Oranges",
+      "titleHi": "Rotten Oranges",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given an m x n grid where 0=empty, 1=fresh orange, 2=rotten orange. Every minute, any fresh orange 4-directionally adjacent to a rotten orange becomes rotten. Return the minimum minutes until no fresh orange remains, or -1 if impossible.",
+        "hi": "Ek m x n grid di gayi hai jahan 0=empty, 1=fresh orange, 2=rotten orange. Har minute, rotten orange ke 4-directionally adjacent fresh orange bhi rotten ho jaate hain. Minimum minutes return karo jab tak koi fresh orange na bache, ya -1 agar impossible ho."
+      },
+      "examples": [
+        {
+          "input": "grid = [[2,1,1],[1,1,0],[0,1,1]]",
+          "output": "4",
+          "explanation": {
+            "en": "After 4 minutes all reachable fresh oranges become rotten.",
+            "hi": "4 minutes baad saare reachable fresh oranges rotten ho jaate hain."
+          }
+        },
+        {
+          "input": "grid = [[2,1,1],[0,1,1],[1,0,1]]",
+          "output": "-1",
+          "explanation": {
+            "en": "The orange at position (2,0) cannot be reached.",
+            "hi": "Position (2,0) ka orange reach nahi ho sakta."
+          }
+        }
+      ],
+      "constraints": ["1 <= m, n <= 10", "grid[i][j] is 0, 1, or 2"],
+      "hints": [
+        { "en": "Use multi-source BFS. Start by adding all rotten oranges to the queue. Expand level by level.", "hi": "Multi-source BFS use karo. Sab rotten oranges queue mein add karke shuru karo. Level by level expand karo." }
+      ],
+      "starterCode": {
+        "cpp": "#include <vector>\\n#include <queue>\\nusing namespace std;\\n\\nint orangesRotting(vector<vector<int>>& grid) {\\n    // Write your code here\\n    return -1;\\n}",
+        "python": "from collections import deque\\nfrom typing import List\\n\\ndef oranges_rotting(grid: List[List[int]]) -> int:\\n    # Write your code here\\n    pass",
+        "java": "import java.util.*;\\npublic class Solution {\\n    public int orangesRotting(int[][] grid) {\\n        // Write your code here\\n        return -1;\\n    }\\n}",
+        "javascript": "function orangesRotting(grid) {\\n    // Write your code here\\n}",
+        "c": "int orangesRotting(int** grid, int m, int n) {\\n    // Write your code here\\n    return -1;\\n}"
+      },
+      "testCases": [
+        { "input": "[[2,1,1],[1,1,0],[0,1,1]]", "expectedOutput": "4" },
+        { "input": "[[2,1,1],[0,1,1],[1,0,1]]", "expectedOutput": "-1" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Multi-source BFS: add all rotten oranges to queue with time=0. Count fresh oranges. BFS each level, rot neighbors, decrement fresh count. If fresh>0 after BFS, return -1. Otherwise return time elapsed.",
+          "hi": "Multi-source BFS: sab rotten oranges queue mein time=0 ke saath add karo. Fresh oranges count karo. Har level BFS karo, neighbors rot karo, fresh count decrement karo. BFS ke baad fresh>0 hai toh -1 return karo. Warna elapsed time return karo."
+        },
+        "code": {
+          "cpp": "#include <vector>\\n#include <queue>\\nusing namespace std;\\nint orangesRotting(vector<vector<int>>& grid) {\\n    int m=grid.size(), n=grid[0].size(), fresh=0, time=0;\\n    queue<pair<int,int>> q;\\n    for(int i=0;i<m;i++) for(int j=0;j<n;j++) {\\n        if(grid[i][j]==2) q.push({i,j});\\n        else if(grid[i][j]==1) fresh++;\\n    }\\n    int dx[]={0,0,1,-1}, dy[]={1,-1,0,0};\\n    while(!q.empty()&&fresh>0) {\\n        int sz=q.size(); time++;\\n        for(int k=0;k<sz;k++) {\\n            auto [x,y]=q.front(); q.pop();\\n            for(int d=0;d<4;d++) {\\n                int nx=x+dx[d], ny=y+dy[d];\\n                if(nx>=0&&nx<m&&ny>=0&&ny<n&&grid[nx][ny]==1) {\\n                    grid[nx][ny]=2; fresh--; q.push({nx,ny});\\n                }\\n            }\\n        }\\n    }\\n    return fresh==0?time:-1;\\n}",
+          "python": "from collections import deque\\nfrom typing import List\\ndef oranges_rotting(grid: List[List[int]]) -> int:\\n    m, n = len(grid), len(grid[0])\\n    q = deque(); fresh = 0\\n    for i in range(m):\\n        for j in range(n):\\n            if grid[i][j] == 2: q.append((i, j))\\n            elif grid[i][j] == 1: fresh += 1\\n    time = 0\\n    dirs = [(0,1),(0,-1),(1,0),(-1,0)]\\n    while q and fresh > 0:\\n        time += 1\\n        for _ in range(len(q)):\\n            x, y = q.popleft()\\n            for dx, dy in dirs:\\n                nx, ny = x+dx, y+dy\\n                if 0<=nx<m and 0<=ny<n and grid[nx][ny]==1:\\n                    grid[nx][ny]=2; fresh-=1; q.append((nx,ny))\\n    return time if fresh==0 else -1",
+          "java": "import java.util.*;\\npublic class Solution {\\n    public int orangesRotting(int[][] grid) {\\n        int m=grid.length, n=grid[0].length, fresh=0, time=0;\\n        Queue<int[]> q = new LinkedList<>();\\n        for(int i=0;i<m;i++) for(int j=0;j<n;j++) {\\n            if(grid[i][j]==2) q.offer(new int[]{i,j});\\n            else if(grid[i][j]==1) fresh++;\\n        }\\n        int[][] dirs={{0,1},{0,-1},{1,0},{-1,0}};\\n        while(!q.isEmpty()&&fresh>0) {\\n            int sz=q.size(); time++;\\n            for(int k=0;k<sz;k++) {\\n                int[] cell=q.poll();\\n                for(int[] d:dirs) {\\n                    int nx=cell[0]+d[0], ny=cell[1]+d[1];\\n                    if(nx>=0&&nx<m&&ny>=0&&ny<n&&grid[nx][ny]==1) {\\n                        grid[nx][ny]=2; fresh--; q.offer(new int[]{nx,ny});\\n                    }\\n                }\\n            }\\n        }\\n        return fresh==0?time:-1;\\n    }\\n}",
+          "javascript": "function orangesRotting(grid) {\\n    const m=grid.length, n=grid[0].length;\\n    let fresh=0, time=0;\\n    const q=[];\\n    for(let i=0;i<m;i++) for(let j=0;j<n;j++) {\\n        if(grid[i][j]===2) q.push([i,j]);\\n        else if(grid[i][j]===1) fresh++;\\n    }\\n    const dirs=[[0,1],[0,-1],[1,0],[-1,0]];\\n    while(q.length&&fresh>0) {\\n        const sz=q.length; time++;\\n        for(let k=0;k<sz;k++) {\\n            const [x,y]=q.shift();\\n            for(const [dx,dy] of dirs) {\\n                const nx=x+dx, ny=y+dy;\\n                if(nx>=0&&nx<m&&ny>=0&&ny<n&&grid[nx][ny]===1) {\\n                    grid[nx][ny]=2; fresh--; q.push([nx,ny]);\\n                }\\n            }\\n        }\\n    }\\n    return fresh===0?time:-1;\\n}",
+          "c": "#include <stdlib.h>\\nint orangesRotting(int** grid, int m, int n) {\\n    int fresh=0, time=0;\\n    int qx[m*n], qy[m*n], front=0, rear=-1;\\n    for(int i=0;i<m;i++) for(int j=0;j<n;j++) {\\n        if(grid[i][j]==2){qx[++rear]=i;qy[rear]=j;}\\n        else if(grid[i][j]==1) fresh++;\\n    }\\n    int dx[]={0,0,1,-1}, dy[]={1,-1,0,0};\\n    while(front<=rear&&fresh>0) {\\n        int sz=rear-front+1; time++;\\n        for(int k=0;k<sz;k++) {\\n            int x=qx[front], y=qy[front++];\\n            for(int d=0;d<4;d++) {\\n                int nx=x+dx[d], ny=y+dy[d];\\n                if(nx>=0&&nx<m&&ny>=0&&ny<n&&grid[nx][ny]==1) {\\n                    grid[nx][ny]=2; fresh--; qx[++rear]=nx; qy[rear]=ny;\\n                }\\n            }\\n        }\\n    }\\n    return fresh==0?time:-1;\\n}"
+        },
+        "timeComplexity": "O(m * n)",
+        "spaceComplexity": "O(m * n)"
+      },
+      "tags": ["queue", "bfs", "matrix", "multi-source-bfs"]
+    }
+  ]
+}

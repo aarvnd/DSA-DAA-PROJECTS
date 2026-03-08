@@ -1,0 +1,633 @@
+{
+  "topicId": "linked-list",
+  "problems": [
+    {
+      "id": "ll-001",
+      "title": "Print Linked List",
+      "titleHi": "Linked List Print Karo",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given the head of a singly linked list, print all elements from head to tail separated by spaces.",
+        "hi": "Singly linked list ka head diya gaya hai. Head se tail tak saare elements space se separated print karo."
+      },
+      "examples": [
+        {
+          "input": "head = [1, 2, 3, 4, 5]",
+          "output": "1 2 3 4 5",
+          "explanation": {
+            "en": "Traverse from head to tail and print each node's value.",
+            "hi": "Head se tail tak traverse karo aur har node ki value print karo."
+          }
+        }
+      ],
+      "constraints": ["0 <= number of nodes <= 10^4", "-10^5 <= Node.val <= 10^5"],
+      "hints": [
+        { "en": "Use a while loop with a current pointer starting at head.", "hi": "Head se shuru karke ek current pointer ke saath while loop use karo." }
+      ],
+      "starterCode": {
+        "cpp": "struct Node { int data; Node* next; Node(int v):data(v),next(nullptr){} };\\nvoid printList(Node* head) {\\n    // Write your code here\\n}",
+        "python": "class Node:\\n    def __init__(self, v): self.data=v; self.next=None\\n\\ndef print_list(head):\\n    # Write your code here\\n    pass",
+        "java": "public class Solution {\\n    static class Node { int data; Node next; Node(int v){data=v;} }\\n    public void printList(Node head) {\\n        // Write your code here\\n    }\\n}",
+        "javascript": "function printList(head) {\\n    // Write your code here\\n}",
+        "c": "typedef struct Node { int data; struct Node* next; } Node;\\nvoid printList(Node* head) {\\n    // Write your code here\\n}"
+      },
+      "testCases": [
+        { "input": "1->2->3->4->5", "expectedOutput": "1 2 3 4 5" },
+        { "input": "10->20->30", "expectedOutput": "10 20 30" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Traverse the linked list starting from head. At each node, print the data. Move to next node until NULL.",
+          "hi": "Head se linked list traverse karo. Har node par data print karo. NULL milne tak next node par jao."
+        },
+        "code": {
+          "cpp": "void printList(Node* head) {\\n    Node* curr = head;\\n    while (curr) {\\n        cout << curr->data;\\n        if (curr->next) cout << \" \";\\n        curr = curr->next;\\n    }\\n    cout << endl;\\n}",
+          "python": "def print_list(head):\\n    curr = head\\n    parts = []\\n    while curr:\\n        parts.append(str(curr.data))\\n        curr = curr.next\\n    print(' '.join(parts))",
+          "java": "public void printList(Node head) {\\n    StringBuilder sb = new StringBuilder();\\n    while (head != null) {\\n        sb.append(head.data);\\n        if (head.next != null) sb.append(' ');\\n        head = head.next;\\n    }\\n    System.out.println(sb);\\n}",
+          "javascript": "function printList(head) {\\n    const parts = [];\\n    while (head) { parts.push(head.data); head = head.next; }\\n    console.log(parts.join(' '));\\n}",
+          "c": "void printList(Node* head) {\\n    while (head) {\\n        printf(\"%d\", head->data);\\n        if (head->next) printf(\" \");\\n        head = head->next;\\n    }\\n    printf(\"\\\\n\");\\n}"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["linked-list", "traversal"]
+    },
+    {
+      "id": "ll-002",
+      "title": "Insert at Beginning",
+      "titleHi": "Beginning mein Insert Karo",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given the head of a linked list and a value, insert a new node with that value at the beginning. Return the new head.",
+        "hi": "Linked list ka head aur ek value di gayi hai. Us value ka naya node beginning mein insert karo. Naya head return karo."
+      },
+      "examples": [
+        {
+          "input": "head = [2, 3, 4], val = 1",
+          "output": "[1, 2, 3, 4]",
+          "explanation": {
+            "en": "New node with value 1 is added at the beginning.",
+            "hi": "Value 1 wala naya node beginning mein add kiya gaya."
+          }
+        }
+      ],
+      "constraints": ["0 <= number of nodes <= 10^4"],
+      "hints": [
+        { "en": "Create new node, set its next to current head, return new node as new head.", "hi": "Naya node banao, uska next current head pe set karo, naya node return karo." }
+      ],
+      "starterCode": {
+        "cpp": "struct Node { int data; Node* next; Node(int v):data(v),next(nullptr){} };\\nNode* insertAtBeginning(Node* head, int val) {\\n    // Write your code here\\n    return head;\\n}",
+        "python": "class Node:\\n    def __init__(self, v): self.data=v; self.next=None\\n\\ndef insert_at_beginning(head, val):\\n    # Write your code here\\n    pass",
+        "java": "public class Solution {\\n    static class Node { int data; Node next; Node(int v){data=v;} }\\n    public Node insertAtBeginning(Node head, int val) {\\n        // Write your code here\\n        return head;\\n    }\\n}",
+        "javascript": "function insertAtBeginning(head, val) {\\n    // Write your code here\\n}",
+        "c": "typedef struct Node { int data; struct Node* next; } Node;\\nNode* insertAtBeginning(Node* head, int val) {\\n    // Write your code here\\n    return head;\\n}"
+      },
+      "testCases": [
+        { "input": "head=[2,3,4], val=1", "expectedOutput": "1->2->3->4" },
+        { "input": "head=[], val=5", "expectedOutput": "5" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Create a new node with the given value, set its next pointer to the current head, and return the new node as the new head. This is O(1).",
+          "hi": "Di gayi value ka naya node banao, uska next pointer current head pe set karo, aur naya node naya head banake return karo. Yeh O(1) hai."
+        },
+        "code": {
+          "cpp": "Node* insertAtBeginning(Node* head, int val) {\\n    Node* n = new Node(val);\\n    n->next = head;\\n    return n;\\n}",
+          "python": "def insert_at_beginning(head, val):\\n    n = Node(val); n.next = head; return n",
+          "java": "public Node insertAtBeginning(Node head, int val) {\\n    Node n = new Node(val); n.next = head; return n;\\n}",
+          "javascript": "function insertAtBeginning(head, val) {\\n    const n = { data: val, next: head }; return n;\\n}",
+          "c": "Node* insertAtBeginning(Node* head, int val) {\\n    Node* n = malloc(sizeof(Node)); n->data=val; n->next=head; return n;\\n}"
+        },
+        "timeComplexity": "O(1)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["linked-list", "insertion"]
+    },
+    {
+      "id": "ll-003",
+      "title": "Insert at End",
+      "titleHi": "End mein Insert Karo",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given the head of a linked list and a value, insert a new node with that value at the end. Return the head.",
+        "hi": "Linked list ka head aur ek value di gayi hai. Us value ka naya node end mein insert karo. Head return karo."
+      },
+      "examples": [
+        {
+          "input": "head = [1, 2, 3], val = 4",
+          "output": "[1, 2, 3, 4]",
+          "explanation": {
+            "en": "New node with value 4 appended at end.",
+            "hi": "Value 4 wala node end mein add kiya gaya."
+          }
+        }
+      ],
+      "constraints": ["0 <= number of nodes <= 10^4"],
+      "hints": [
+        { "en": "Traverse to the last node and set its next to the new node.", "hi": "Last node tak traverse karo aur uska next naye node pe set karo." }
+      ],
+      "starterCode": {
+        "cpp": "struct Node { int data; Node* next; Node(int v):data(v),next(nullptr){} };\\nNode* insertAtEnd(Node* head, int val) {\\n    // Write your code here\\n    return head;\\n}",
+        "python": "class Node:\\n    def __init__(self, v): self.data=v; self.next=None\\n\\ndef insert_at_end(head, val):\\n    # Write your code here\\n    pass",
+        "java": "public class Solution {\\n    static class Node { int data; Node next; Node(int v){data=v;} }\\n    public Node insertAtEnd(Node head, int val) {\\n        // Write your code here\\n        return head;\\n    }\\n}",
+        "javascript": "function insertAtEnd(head, val) {\\n    // Write your code here\\n}",
+        "c": "typedef struct Node { int data; struct Node* next; } Node;\\nNode* insertAtEnd(Node* head, int val) {\\n    // Write your code here\\n    return head;\\n}"
+      },
+      "testCases": [
+        { "input": "head=[1,2,3], val=4", "expectedOutput": "1->2->3->4" },
+        { "input": "head=[], val=1", "expectedOutput": "1" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "If list is empty, return new node as head. Otherwise traverse to last node (where next is NULL) and attach the new node.",
+          "hi": "Agar list empty hai toh naya node head ke roop mein return karo. Warna last node tak traverse karo (jahan next NULL ho) aur naya node attach karo."
+        },
+        "code": {
+          "cpp": "Node* insertAtEnd(Node* head, int val) {\\n    Node* n = new Node(val);\\n    if (!head) return n;\\n    Node* curr = head;\\n    while (curr->next) curr = curr->next;\\n    curr->next = n;\\n    return head;\\n}",
+          "python": "def insert_at_end(head, val):\\n    n = Node(val)\\n    if not head: return n\\n    curr = head\\n    while curr.next: curr = curr.next\\n    curr.next = n\\n    return head",
+          "java": "public Node insertAtEnd(Node head, int val) {\\n    Node n = new Node(val);\\n    if (head == null) return n;\\n    Node curr = head;\\n    while (curr.next != null) curr = curr.next;\\n    curr.next = n;\\n    return head;\\n}",
+          "javascript": "function insertAtEnd(head, val) {\\n    const n = { data: val, next: null };\\n    if (!head) return n;\\n    let curr = head;\\n    while (curr.next) curr = curr.next;\\n    curr.next = n;\\n    return head;\\n}",
+          "c": "Node* insertAtEnd(Node* head, int val) {\\n    Node* n = malloc(sizeof(Node)); n->data=val; n->next=NULL;\\n    if (!head) return n;\\n    Node* curr = head;\\n    while (curr->next) curr = curr->next;\\n    curr->next = n;\\n    return head;\\n}"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["linked-list", "insertion"]
+    },
+    {
+      "id": "ll-004",
+      "title": "Delete a Node",
+      "titleHi": "Node Delete Karo",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given the head of a linked list and a key, delete the first occurrence of the node with that key value. Return the new head.",
+        "hi": "Linked list ka head aur ek key di gayi hai. Us key value wale node ki pehli occurrence delete karo. Naya head return karo."
+      },
+      "examples": [
+        {
+          "input": "head = [1, 2, 3, 4], key = 3",
+          "output": "[1, 2, 4]",
+          "explanation": {
+            "en": "Node with value 3 is deleted.",
+            "hi": "Value 3 wala node delete ho gaya."
+          }
+        }
+      ],
+      "constraints": ["1 <= number of nodes <= 10^4", "key exists in the list"],
+      "hints": [
+        { "en": "Handle deletion of head separately. For other nodes, find the previous node and update its next.", "hi": "Head deletion alag handle karo. Baaki nodes ke liye previous node dhundho aur uska next update karo." }
+      ],
+      "starterCode": {
+        "cpp": "struct Node { int data; Node* next; Node(int v):data(v),next(nullptr){} };\\nNode* deleteNode(Node* head, int key) {\\n    // Write your code here\\n    return head;\\n}",
+        "python": "class Node:\\n    def __init__(self, v): self.data=v; self.next=None\\n\\ndef delete_node(head, key):\\n    # Write your code here\\n    pass",
+        "java": "public class Solution {\\n    static class Node { int data; Node next; Node(int v){data=v;} }\\n    public Node deleteNode(Node head, int key) {\\n        // Write your code here\\n        return head;\\n    }\\n}",
+        "javascript": "function deleteNode(head, key) {\\n    // Write your code here\\n}",
+        "c": "typedef struct Node { int data; struct Node* next; } Node;\\nNode* deleteNode(Node* head, int key) {\\n    // Write your code here\\n    return head;\\n}"
+      },
+      "testCases": [
+        { "input": "head=[1,2,3,4], key=3", "expectedOutput": "1->2->4" },
+        { "input": "head=[1,2,3], key=1", "expectedOutput": "2->3" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "If head is the target, return head.next. Otherwise traverse to find the node before the target and update its next pointer to skip the target node.",
+          "hi": "Agar head target hai toh head.next return karo. Warna target se pehle wale node tak traverse karo aur uska next pointer update karke target skip karo."
+        },
+        "code": {
+          "cpp": "Node* deleteNode(Node* head, int key) {\\n    if (!head) return nullptr;\\n    if (head->data == key) { Node* tmp=head; head=head->next; delete tmp; return head; }\\n    Node* curr = head;\\n    while (curr->next && curr->next->data != key) curr = curr->next;\\n    if (curr->next) { Node* tmp=curr->next; curr->next=tmp->next; delete tmp; }\\n    return head;\\n}",
+          "python": "def delete_node(head, key):\\n    if not head: return None\\n    if head.data == key: return head.next\\n    curr = head\\n    while curr.next and curr.next.data != key: curr = curr.next\\n    if curr.next: curr.next = curr.next.next\\n    return head",
+          "java": "public Node deleteNode(Node head, int key) {\\n    if (head == null) return null;\\n    if (head.data == key) return head.next;\\n    Node curr = head;\\n    while (curr.next != null && curr.next.data != key) curr = curr.next;\\n    if (curr.next != null) curr.next = curr.next.next;\\n    return head;\\n}",
+          "javascript": "function deleteNode(head, key) {\\n    if (!head) return null;\\n    if (head.data === key) return head.next;\\n    let curr = head;\\n    while (curr.next && curr.next.data !== key) curr = curr.next;\\n    if (curr.next) curr.next = curr.next.next;\\n    return head;\\n}",
+          "c": "Node* deleteNode(Node* head, int key) {\\n    if (!head) return NULL;\\n    if (head->data == key) { Node* tmp=head; head=head->next; free(tmp); return head; }\\n    Node* curr = head;\\n    while (curr->next && curr->next->data != key) curr = curr->next;\\n    if (curr->next) { Node* tmp=curr->next; curr->next=tmp->next; free(tmp); }\\n    return head;\\n}"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["linked-list", "deletion"]
+    },
+    {
+      "id": "ll-005",
+      "title": "Find Length",
+      "titleHi": "Length Find Karo",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given the head of a linked list, find and return its length (number of nodes).",
+        "hi": "Linked list ka head diya gaya hai. Iska length (nodes ki sankhya) dhundho aur return karo."
+      },
+      "examples": [
+        {
+          "input": "head = [1, 2, 3, 4, 5]",
+          "output": "5",
+          "explanation": {
+            "en": "The list has 5 nodes.",
+            "hi": "List mein 5 nodes hain."
+          }
+        }
+      ],
+      "constraints": ["0 <= number of nodes <= 10^5"],
+      "hints": [
+        { "en": "Use a counter and traverse the entire list.", "hi": "Counter use karo aur poori list traverse karo." }
+      ],
+      "starterCode": {
+        "cpp": "struct Node { int data; Node* next; };\\nint findLength(Node* head) {\\n    // Write your code here\\n    return 0;\\n}",
+        "python": "class Node:\\n    def __init__(self, v): self.data=v; self.next=None\\n\\ndef find_length(head):\\n    # Write your code here\\n    pass",
+        "java": "public class Solution {\\n    static class Node { int data; Node next; }\\n    public int findLength(Node head) {\\n        // Write your code here\\n        return 0;\\n    }\\n}",
+        "javascript": "function findLength(head) {\\n    // Write your code here\\n}",
+        "c": "typedef struct Node { int data; struct Node* next; } Node;\\nint findLength(Node* head) {\\n    // Write your code here\\n    return 0;\\n}"
+      },
+      "testCases": [
+        { "input": "1->2->3->4->5", "expectedOutput": "5" },
+        { "input": "NULL", "expectedOutput": "0" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Initialize count to 0. Traverse the list incrementing count at each node. Return count.",
+          "hi": "Count ko 0 se initialize karo. List traverse karo aur har node par count increment karo. Count return karo."
+        },
+        "code": {
+          "cpp": "int findLength(Node* head) {\\n    int count = 0;\\n    while (head) { count++; head = head->next; }\\n    return count;\\n}",
+          "python": "def find_length(head):\\n    count = 0\\n    while head: count += 1; head = head.next\\n    return count",
+          "java": "public int findLength(Node head) {\\n    int count = 0;\\n    while (head != null) { count++; head = head.next; }\\n    return count;\\n}",
+          "javascript": "function findLength(head) {\\n    let count = 0;\\n    while (head) { count++; head = head.next; }\\n    return count;\\n}",
+          "c": "int findLength(Node* head) {\\n    int count = 0;\\n    while (head) { count++; head = head->next; }\\n    return count;\\n}"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["linked-list", "traversal"]
+    },
+    {
+      "id": "ll-006",
+      "title": "Reverse a Linked List",
+      "titleHi": "Linked List Reverse Karo",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given the head of a singly linked list, reverse the list and return the reversed list's head.",
+        "hi": "Singly linked list ka head diya gaya hai. List reverse karo aur reversed list ka head return karo."
+      },
+      "examples": [
+        {
+          "input": "head = [1, 2, 3, 4, 5]",
+          "output": "[5, 4, 3, 2, 1]",
+          "explanation": {
+            "en": "The list 1->2->3->4->5 becomes 5->4->3->2->1.",
+            "hi": "List 1->2->3->4->5 reverse hokar 5->4->3->2->1 ban jaati hai."
+          }
+        }
+      ],
+      "constraints": ["0 <= number of nodes <= 5000", "-5000 <= Node.val <= 5000"],
+      "hints": [
+        { "en": "Use three pointers: prev (starts null), curr (starts at head), next. At each step, reverse the link.", "hi": "Teen pointers use karo: prev (null se shuru), curr (head se shuru), next. Har step par link reverse karo." }
+      ],
+      "starterCode": {
+        "cpp": "struct Node { int data; Node* next; Node(int v):data(v),next(nullptr){} };\\nNode* reverseList(Node* head) {\\n    // Write your code here\\n    return head;\\n}",
+        "python": "class Node:\\n    def __init__(self, v): self.data=v; self.next=None\\n\\ndef reverse_list(head):\\n    # Write your code here\\n    pass",
+        "java": "public class Solution {\\n    static class Node { int data; Node next; Node(int v){data=v;} }\\n    public Node reverseList(Node head) {\\n        // Write your code here\\n        return head;\\n    }\\n}",
+        "javascript": "function reverseList(head) {\\n    // Write your code here\\n}",
+        "c": "typedef struct Node { int data; struct Node* next; } Node;\\nNode* reverseList(Node* head) {\\n    // Write your code here\\n    return head;\\n}"
+      },
+      "testCases": [
+        { "input": "1->2->3->4->5", "expectedOutput": "5->4->3->2->1" },
+        { "input": "1->2", "expectedOutput": "2->1" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Iterative approach: use three pointers prev=NULL, curr=head, next. For each node, save next, point curr.next to prev, move prev to curr, move curr to saved next. Return prev as new head.",
+          "hi": "Iterative approach: teen pointers use karo prev=NULL, curr=head, next. Har node ke liye, next save karo, curr.next ko prev pe point karo, prev ko curr pe move karo, curr ko saved next pe move karo. prev ko naya head banake return karo."
+        },
+        "code": {
+          "cpp": "Node* reverseList(Node* head) {\\n    Node *prev=nullptr, *curr=head, *nxt=nullptr;\\n    while (curr) {\\n        nxt = curr->next;\\n        curr->next = prev;\\n        prev = curr;\\n        curr = nxt;\\n    }\\n    return prev;\\n}",
+          "python": "def reverse_list(head):\\n    prev, curr = None, head\\n    while curr:\\n        nxt = curr.next\\n        curr.next = prev\\n        prev = curr\\n        curr = nxt\\n    return prev",
+          "java": "public Node reverseList(Node head) {\\n    Node prev = null, curr = head, next = null;\\n    while (curr != null) {\\n        next = curr.next;\\n        curr.next = prev;\\n        prev = curr;\\n        curr = next;\\n    }\\n    return prev;\\n}",
+          "javascript": "function reverseList(head) {\\n    let prev = null, curr = head;\\n    while (curr) {\\n        const nxt = curr.next;\\n        curr.next = prev;\\n        prev = curr;\\n        curr = nxt;\\n    }\\n    return prev;\\n}",
+          "c": "Node* reverseList(Node* head) {\\n    Node *prev=NULL, *curr=head, *nxt=NULL;\\n    while (curr) {\\n        nxt=curr->next; curr->next=prev; prev=curr; curr=nxt;\\n    }\\n    return prev;\\n}"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["linked-list", "two-pointers"]
+    },
+    {
+      "id": "ll-007",
+      "title": "Detect Cycle",
+      "titleHi": "Cycle Detect Karo",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given the head of a linked list, determine if the linked list has a cycle (a node that is revisited during traversal). Return true if cycle exists, false otherwise.",
+        "hi": "Linked list ka head diya gaya hai. Check karo ki list mein cycle hai ya nahi (koi node traverse ke dauran dobara visit ho). True return karo agar cycle hai, warna false."
+      },
+      "examples": [
+        {
+          "input": "head = [3, 2, 0, -4], pos = 1 (tail connects to node at index 1)",
+          "output": "true",
+          "explanation": {
+            "en": "There is a cycle: tail connects back to node with value 2.",
+            "hi": "Cycle hai: tail node wapas value 2 wale node se connect hai."
+          }
+        },
+        {
+          "input": "head = [1, 2], pos = -1",
+          "output": "false",
+          "explanation": {
+            "en": "No cycle.",
+            "hi": "Koi cycle nahi hai."
+          }
+        }
+      ],
+      "constraints": ["0 <= number of nodes <= 10^4", "-10^5 <= Node.val <= 10^5"],
+      "hints": [
+        { "en": "Use Floyd's cycle detection: slow pointer moves 1 step, fast pointer moves 2 steps.", "hi": "Floyd's cycle detection use karo: slow pointer 1 step, fast pointer 2 steps move karta hai." }
+      ],
+      "starterCode": {
+        "cpp": "struct Node { int data; Node* next; };\\nbool hasCycle(Node* head) {\\n    // Write your code here\\n    return false;\\n}",
+        "python": "class Node:\\n    def __init__(self, v): self.data=v; self.next=None\\n\\ndef has_cycle(head):\\n    # Write your code here\\n    pass",
+        "java": "public class Solution {\\n    static class Node { int data; Node next; }\\n    public boolean hasCycle(Node head) {\\n        // Write your code here\\n        return false;\\n    }\\n}",
+        "javascript": "function hasCycle(head) {\\n    // Write your code here\\n}",
+        "c": "#include <stdbool.h>\\ntypedef struct Node { int data; struct Node* next; } Node;\\nbool hasCycle(Node* head) {\\n    // Write your code here\\n    return false;\\n}"
+      },
+      "testCases": [
+        { "input": "3->2->0->-4 (cycle at pos 1)", "expectedOutput": "true" },
+        { "input": "1->2->NULL", "expectedOutput": "false" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Floyd's Tortoise and Hare algorithm: move slow by 1 and fast by 2. If they meet, there's a cycle. If fast reaches NULL, no cycle.",
+          "hi": "Floyd's Tortoise and Hare algorithm: slow 1 se aur fast 2 se move karo. Agar mile toh cycle hai. Fast NULL tak pahunche toh cycle nahi hai."
+        },
+        "code": {
+          "cpp": "bool hasCycle(Node* head) {\\n    Node *slow = head, *fast = head;\\n    while (fast && fast->next) {\\n        slow = slow->next;\\n        fast = fast->next->next;\\n        if (slow == fast) return true;\\n    }\\n    return false;\\n}",
+          "python": "def has_cycle(head):\\n    slow = fast = head\\n    while fast and fast.next:\\n        slow = slow.next\\n        fast = fast.next.next\\n        if slow is fast: return True\\n    return False",
+          "java": "public boolean hasCycle(Node head) {\\n    Node slow = head, fast = head;\\n    while (fast != null && fast.next != null) {\\n        slow = slow.next;\\n        fast = fast.next.next;\\n        if (slow == fast) return true;\\n    }\\n    return false;\\n}",
+          "javascript": "function hasCycle(head) {\\n    let slow = head, fast = head;\\n    while (fast && fast.next) {\\n        slow = slow.next;\\n        fast = fast.next.next;\\n        if (slow === fast) return true;\\n    }\\n    return false;\\n}",
+          "c": "bool hasCycle(Node* head) {\\n    Node *slow = head, *fast = head;\\n    while (fast && fast->next) {\\n        slow = slow->next;\\n        fast = fast->next->next;\\n        if (slow == fast) return true;\\n    }\\n    return false;\\n}"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["linked-list", "two-pointers", "floyd-cycle"]
+    },
+    {
+      "id": "ll-008",
+      "title": "Find Middle Element",
+      "titleHi": "Middle Element Find Karo",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given the head of a singly linked list, return the middle node. If two middle nodes exist, return the second one.",
+        "hi": "Singly linked list ka head diya gaya hai. Middle node return karo. Agar do middle nodes hain toh doosra wala return karo."
+      },
+      "examples": [
+        {
+          "input": "head = [1, 2, 3, 4, 5]",
+          "output": "Node with value 3",
+          "explanation": {
+            "en": "The middle node of the list is node 3.",
+            "hi": "List ka middle node 3 hai."
+          }
+        },
+        {
+          "input": "head = [1, 2, 3, 4, 5, 6]",
+          "output": "Node with value 4",
+          "explanation": {
+            "en": "For even length, return second middle node (4).",
+            "hi": "Even length ke liye doosra middle node (4) return karo."
+          }
+        }
+      ],
+      "constraints": ["1 <= number of nodes <= 100"],
+      "hints": [
+        { "en": "Use slow and fast pointers. When fast reaches end, slow is at middle.", "hi": "Slow aur fast pointers use karo. Fast end par pahunche tab slow middle par hoga." }
+      ],
+      "starterCode": {
+        "cpp": "struct Node { int data; Node* next; };\\nNode* middleNode(Node* head) {\\n    // Write your code here\\n    return head;\\n}",
+        "python": "class Node:\\n    def __init__(self, v): self.data=v; self.next=None\\n\\ndef middle_node(head):\\n    # Write your code here\\n    pass",
+        "java": "public class Solution {\\n    static class Node { int data; Node next; }\\n    public Node middleNode(Node head) {\\n        // Write your code here\\n        return head;\\n    }\\n}",
+        "javascript": "function middleNode(head) {\\n    // Write your code here\\n}",
+        "c": "typedef struct Node { int data; struct Node* next; } Node;\\nNode* middleNode(Node* head) {\\n    // Write your code here\\n    return head;\\n}"
+      },
+      "testCases": [
+        { "input": "1->2->3->4->5", "expectedOutput": "3" },
+        { "input": "1->2->3->4->5->6", "expectedOutput": "4" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use slow and fast pointers both starting at head. Move slow by 1 and fast by 2. When fast reaches null or last node, slow points to the middle.",
+          "hi": "Slow aur fast dono pointers head se shuru karo. Slow 1 se aur fast 2 se move karo. Jab fast null ya last node par pahunche, slow middle par hoga."
+        },
+        "code": {
+          "cpp": "Node* middleNode(Node* head) {\\n    Node *slow = head, *fast = head;\\n    while (fast && fast->next) {\\n        slow = slow->next;\\n        fast = fast->next->next;\\n    }\\n    return slow;\\n}",
+          "python": "def middle_node(head):\\n    slow = fast = head\\n    while fast and fast.next:\\n        slow = slow.next\\n        fast = fast.next.next\\n    return slow",
+          "java": "public Node middleNode(Node head) {\\n    Node slow = head, fast = head;\\n    while (fast != null && fast.next != null) {\\n        slow = slow.next;\\n        fast = fast.next.next;\\n    }\\n    return slow;\\n}",
+          "javascript": "function middleNode(head) {\\n    let slow = head, fast = head;\\n    while (fast && fast.next) {\\n        slow = slow.next;\\n        fast = fast.next.next;\\n    }\\n    return slow;\\n}",
+          "c": "Node* middleNode(Node* head) {\\n    Node *slow = head, *fast = head;\\n    while (fast && fast->next) {\\n        slow = slow->next;\\n        fast = fast->next->next;\\n    }\\n    return slow;\\n}"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["linked-list", "two-pointers", "fast-slow-pointer"]
+    },
+    {
+      "id": "ll-009",
+      "title": "Merge Two Sorted Lists",
+      "titleHi": "Do Sorted Lists Merge Karo",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given the heads of two sorted linked lists, merge them into one sorted linked list and return its head.",
+        "hi": "Do sorted linked lists ke heads diye gaye hain. Inhe ek sorted linked list mein merge karo aur head return karo."
+      },
+      "examples": [
+        {
+          "input": "l1 = [1, 2, 4], l2 = [1, 3, 4]",
+          "output": "[1, 1, 2, 3, 4, 4]",
+          "explanation": {
+            "en": "Merge two sorted lists by comparing nodes one by one.",
+            "hi": "Dono sorted lists ko ek-ek node compare karke merge karo."
+          }
+        }
+      ],
+      "constraints": ["0 <= number of nodes <= 50", "-100 <= Node.val <= 100"],
+      "hints": [
+        { "en": "Use a dummy head node. Compare nodes from both lists and link the smaller one to the result.", "hi": "Dummy head node use karo. Dono lists ke nodes compare karo aur chhote wale ko result se link karo." }
+      ],
+      "starterCode": {
+        "cpp": "struct Node { int data; Node* next; Node(int v):data(v),next(nullptr){} };\\nNode* mergeTwoLists(Node* l1, Node* l2) {\\n    // Write your code here\\n    return nullptr;\\n}",
+        "python": "class Node:\\n    def __init__(self, v): self.data=v; self.next=None\\n\\ndef merge_two_lists(l1, l2):\\n    # Write your code here\\n    pass",
+        "java": "public class Solution {\\n    static class Node { int data; Node next; Node(int v){data=v;} }\\n    public Node mergeTwoLists(Node l1, Node l2) {\\n        // Write your code here\\n        return null;\\n    }\\n}",
+        "javascript": "function mergeTwoLists(l1, l2) {\\n    // Write your code here\\n}",
+        "c": "typedef struct Node { int data; struct Node* next; } Node;\\nNode* mergeTwoLists(Node* l1, Node* l2) {\\n    // Write your code here\\n    return NULL;\\n}"
+      },
+      "testCases": [
+        { "input": "l1=1->2->4, l2=1->3->4", "expectedOutput": "1->1->2->3->4->4" },
+        { "input": "l1=NULL, l2=0", "expectedOutput": "0" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use a dummy node as the head of the result. Compare l1 and l2 node values; attach the smaller one to result. Move the pointer of the list whose node was attached. Attach remaining nodes at end.",
+          "hi": "Dummy node result ka head banao. l1 aur l2 node values compare karo; chhote wale ko result se attach karo. Jis list ka node attach hua uska pointer move karo. Baaki nodes end mein attach karo."
+        },
+        "code": {
+          "cpp": "Node* mergeTwoLists(Node* l1, Node* l2) {\\n    Node dummy(0); Node* curr = &dummy;\\n    while (l1 && l2) {\\n        if (l1->data <= l2->data) { curr->next=l1; l1=l1->next; }\\n        else { curr->next=l2; l2=l2->next; }\\n        curr = curr->next;\\n    }\\n    curr->next = l1 ? l1 : l2;\\n    return dummy.next;\\n}",
+          "python": "def merge_two_lists(l1, l2):\\n    dummy = Node(0); curr = dummy\\n    while l1 and l2:\\n        if l1.data <= l2.data: curr.next=l1; l1=l1.next\\n        else: curr.next=l2; l2=l2.next\\n        curr = curr.next\\n    curr.next = l1 or l2\\n    return dummy.next",
+          "java": "public Node mergeTwoLists(Node l1, Node l2) {\\n    Node dummy = new Node(0); Node curr = dummy;\\n    while (l1 != null && l2 != null) {\\n        if (l1.data <= l2.data) { curr.next=l1; l1=l1.next; }\\n        else { curr.next=l2; l2=l2.next; }\\n        curr = curr.next;\\n    }\\n    curr.next = l1 != null ? l1 : l2;\\n    return dummy.next;\\n}",
+          "javascript": "function mergeTwoLists(l1, l2) {\\n    const dummy = { data: 0, next: null }; let curr = dummy;\\n    while (l1 && l2) {\\n        if (l1.data <= l2.data) { curr.next=l1; l1=l1.next; }\\n        else { curr.next=l2; l2=l2.next; }\\n        curr = curr.next;\\n    }\\n    curr.next = l1 || l2;\\n    return dummy.next;\\n}",
+          "c": "Node* mergeTwoLists(Node* l1, Node* l2) {\\n    Node dummy; dummy.next=NULL; Node* curr=&dummy;\\n    while (l1 && l2) {\\n        if (l1->data <= l2->data) { curr->next=l1; l1=l1->next; }\\n        else { curr->next=l2; l2=l2->next; }\\n        curr=curr->next;\\n    }\\n    curr->next = l1 ? l1 : l2;\\n    return dummy.next;\\n}"
+        },
+        "timeComplexity": "O(n + m)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["linked-list", "merge", "sorting"]
+    },
+    {
+      "id": "ll-010",
+      "title": "Remove Nth Node from End",
+      "titleHi": "End se Nth Node Remove Karo",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given the head of a linked list, remove the nth node from the end of the list and return its head.",
+        "hi": "Linked list ka head diya gaya hai. List ke end se nth node remove karo aur head return karo."
+      },
+      "examples": [
+        {
+          "input": "head = [1, 2, 3, 4, 5], n = 2",
+          "output": "[1, 2, 3, 5]",
+          "explanation": {
+            "en": "The 2nd node from end (value 4) is removed.",
+            "hi": "End se 2nd node (value 4) remove ho gayi."
+          }
+        }
+      ],
+      "constraints": ["1 <= number of nodes <= 30", "0 <= Node.val <= 100", "1 <= n <= number of nodes"],
+      "hints": [
+        { "en": "Use two pointers with n-step gap. When fast reaches end, slow is at the node before the target.", "hi": "N-step gap wale do pointers use karo. Fast end par pahunche tab slow target se pehle wale node par hoga." }
+      ],
+      "starterCode": {
+        "cpp": "struct Node { int data; Node* next; Node(int v):data(v),next(nullptr){} };\\nNode* removeNthFromEnd(Node* head, int n) {\\n    // Write your code here\\n    return head;\\n}",
+        "python": "class Node:\\n    def __init__(self, v): self.data=v; self.next=None\\n\\ndef remove_nth_from_end(head, n):\\n    # Write your code here\\n    pass",
+        "java": "public class Solution {\\n    static class Node { int data; Node next; Node(int v){data=v;} }\\n    public Node removeNthFromEnd(Node head, int n) {\\n        // Write your code here\\n        return head;\\n    }\\n}",
+        "javascript": "function removeNthFromEnd(head, n) {\\n    // Write your code here\\n}",
+        "c": "typedef struct Node { int data; struct Node* next; } Node;\\nNode* removeNthFromEnd(Node* head, int n) {\\n    // Write your code here\\n    return head;\\n}"
+      },
+      "testCases": [
+        { "input": "1->2->3->4->5, n=2", "expectedOutput": "1->2->3->5" },
+        { "input": "1, n=1", "expectedOutput": "NULL" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use a dummy node before head. Move fast pointer n+1 steps ahead, then move both slow and fast together until fast is null. Remove the node after slow.",
+          "hi": "Head se pehle dummy node use karo. Fast pointer ko n+1 steps aage le jao, phir slow aur fast dono ko saath move karo jab tak fast null ho. Slow ke baad wala node remove karo."
+        },
+        "code": {
+          "cpp": "Node* removeNthFromEnd(Node* head, int n) {\\n    Node dummy(0); dummy.next = head;\\n    Node *slow = &dummy, *fast = &dummy;\\n    for (int i = 0; i <= n; i++) fast = fast->next;\\n    while (fast) { slow = slow->next; fast = fast->next; }\\n    Node* del = slow->next;\\n    slow->next = del->next;\\n    delete del;\\n    return dummy.next;\\n}",
+          "python": "def remove_nth_from_end(head, n):\\n    dummy = Node(0); dummy.next = head\\n    slow = fast = dummy\\n    for _ in range(n + 1): fast = fast.next\\n    while fast: slow = slow.next; fast = fast.next\\n    slow.next = slow.next.next\\n    return dummy.next",
+          "java": "public Node removeNthFromEnd(Node head, int n) {\\n    Node dummy = new Node(0); dummy.next = head;\\n    Node slow = dummy, fast = dummy;\\n    for (int i = 0; i <= n; i++) fast = fast.next;\\n    while (fast != null) { slow = slow.next; fast = fast.next; }\\n    slow.next = slow.next.next;\\n    return dummy.next;\\n}",
+          "javascript": "function removeNthFromEnd(head, n) {\\n    const dummy = { data: 0, next: head };\\n    let slow = dummy, fast = dummy;\\n    for (let i = 0; i <= n; i++) fast = fast.next;\\n    while (fast) { slow = slow.next; fast = fast.next; }\\n    slow.next = slow.next.next;\\n    return dummy.next;\\n}",
+          "c": "Node* removeNthFromEnd(Node* head, int n) {\\n    Node dummy; dummy.next = head;\\n    Node *slow = &dummy, *fast = &dummy;\\n    for (int i = 0; i <= n; i++) fast = fast->next;\\n    while (fast) { slow = slow->next; fast = fast->next; }\\n    Node* del = slow->next; slow->next = del->next; free(del);\\n    return dummy.next;\\n}"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["linked-list", "two-pointers"]
+    },
+    {
+      "id": "ll-011",
+      "title": "Intersection of Two Linked Lists",
+      "titleHi": "Do Linked Lists ka Intersection",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given the heads of two singly linked lists, find the node at which they intersect. Return null if no intersection.",
+        "hi": "Do singly linked lists ke heads diye gaye hain. Woh node dhundho jahan dono intersect karte hain. Agar koi intersection nahi hai toh null return karo."
+      },
+      "examples": [
+        {
+          "input": "listA = [4,1,8,4,5], listB = [5,6,1,8,4,5] (intersect at node with value 8)",
+          "output": "Reference to node with value 8",
+          "explanation": {
+            "en": "Both lists share nodes starting from node with value 8.",
+            "hi": "Dono lists value 8 wale node se nodes share karti hain."
+          }
+        }
+      ],
+      "constraints": ["0 <= nodes in each list <= 3*10^4", "Intersection is by reference, not value"],
+      "hints": [
+        { "en": "Use two pointers starting at headA and headB. When one reaches null, redirect it to the other list's head.", "hi": "headA aur headB se do pointers start karo. Jab ek null reach kare toh use doosri list ke head par redirect karo." }
+      ],
+      "starterCode": {
+        "cpp": "struct Node { int data; Node* next; };\\nNode* getIntersectionNode(Node* headA, Node* headB) {\\n    // Write your code here\\n    return nullptr;\\n}",
+        "python": "class Node:\\n    def __init__(self, v): self.data=v; self.next=None\\n\\ndef get_intersection_node(headA, headB):\\n    # Write your code here\\n    pass",
+        "java": "public class Solution {\\n    static class Node { int data; Node next; }\\n    public Node getIntersectionNode(Node headA, Node headB) {\\n        // Write your code here\\n        return null;\\n    }\\n}",
+        "javascript": "function getIntersectionNode(headA, headB) {\\n    // Write your code here\\n}",
+        "c": "typedef struct Node { int data; struct Node* next; } Node;\\nNode* getIntersectionNode(Node* headA, Node* headB) {\\n    // Write your code here\\n    return NULL;\\n}"
+      },
+      "testCases": [
+        { "input": "intersecting lists at node 8", "expectedOutput": "node with value 8" },
+        { "input": "non-intersecting lists", "expectedOutput": "null" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use two pointers pA and pB. Traverse both. When pA reaches end, redirect to headB. When pB reaches end, redirect to headA. They will meet at intersection (or both null if no intersection) after at most m+n steps.",
+          "hi": "Do pointers pA aur pB use karo. Dono traverse karo. pA end reach kare toh headB pe redirect karo. pB end reach kare toh headA pe redirect karo. Woh intersection par milenge (ya dono null agar intersection nahi) m+n steps mein."
+        },
+        "code": {
+          "cpp": "Node* getIntersectionNode(Node* headA, Node* headB) {\\n    Node *a = headA, *b = headB;\\n    while (a != b) {\\n        a = a ? a->next : headB;\\n        b = b ? b->next : headA;\\n    }\\n    return a;\\n}",
+          "python": "def get_intersection_node(headA, headB):\\n    a, b = headA, headB\\n    while a is not b:\\n        a = a.next if a else headB\\n        b = b.next if b else headA\\n    return a",
+          "java": "public Node getIntersectionNode(Node headA, Node headB) {\\n    Node a = headA, b = headB;\\n    while (a != b) {\\n        a = a != null ? a.next : headB;\\n        b = b != null ? b.next : headA;\\n    }\\n    return a;\\n}",
+          "javascript": "function getIntersectionNode(headA, headB) {\\n    let a = headA, b = headB;\\n    while (a !== b) {\\n        a = a ? a.next : headB;\\n        b = b ? b.next : headA;\\n    }\\n    return a;\\n}",
+          "c": "Node* getIntersectionNode(Node* headA, Node* headB) {\\n    Node *a = headA, *b = headB;\\n    while (a != b) {\\n        a = a ? a->next : headB;\\n        b = b ? b->next : headA;\\n    }\\n    return a;\\n}"
+        },
+        "timeComplexity": "O(m + n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["linked-list", "two-pointers"]
+    },
+    {
+      "id": "ll-012",
+      "title": "Flatten a Multilevel Linked List",
+      "titleHi": "Multilevel Linked List Flatten Karo",
+      "difficulty": "hard",
+      "description": {
+        "en": "A doubly linked list where some nodes have a child pointer to another doubly linked list. Flatten the list so all nodes appear in a single-level doubly linked list. The child list should be inserted after the node and before the node's next.",
+        "hi": "Ek doubly linked list hai jahan kuch nodes mein ek child pointer hota hai jo doosri doubly linked list ko point karta hai. List ko flatten karo taaki saare nodes single-level doubly linked list mein aayein. Child list node ke baad aur node ke next se pehle insert honi chahiye."
+      },
+      "examples": [
+        {
+          "input": "1 - 2 - 3 - 4 - 5 - 6 with 3 having child 7 - 8 - 9 - 10 with 8 having child 11 - 12",
+          "output": "1 - 2 - 3 - 7 - 8 - 11 - 12 - 9 - 10 - 4 - 5 - 6",
+          "explanation": {
+            "en": "The child list of 3 is inserted after 3. The child list of 8 is inserted after 8.",
+            "hi": "3 ki child list 3 ke baad insert hoti hai. 8 ki child list 8 ke baad insert hoti hai."
+          }
+        }
+      ],
+      "constraints": ["1 <= number of nodes <= 1000", "1 <= Node.val <= 10^5"],
+      "hints": [
+        { "en": "Use a stack or recursion. At each node with a child, insert the child list between current and next.", "hi": "Stack ya recursion use karo. Child wale har node par, child list ko current aur next ke beech insert karo." }
+      ],
+      "starterCode": {
+        "cpp": "struct Node { int data; Node* next; Node* prev; Node* child; };\\nNode* flatten(Node* head) {\\n    // Write your code here\\n    return head;\\n}",
+        "python": "class Node:\\n    def __init__(self, v): self.data=v; self.next=None; self.prev=None; self.child=None\\n\\ndef flatten(head):\\n    # Write your code here\\n    pass",
+        "java": "public class Solution {\\n    static class Node { int data; Node next, prev, child; Node(int v){data=v;} }\\n    public Node flatten(Node head) {\\n        // Write your code here\\n        return head;\\n    }\\n}",
+        "javascript": "function flatten(head) {\\n    // Write your code here\\n}",
+        "c": "typedef struct Node { int data; struct Node* next; struct Node* prev; struct Node* child; } Node;\\nNode* flatten(Node* head) {\\n    // Write your code here\\n    return head;\\n}"
+      },
+      "testCases": [
+        { "input": "1-2-3(child:7-8)-4 with 8(child:11-12)", "expectedOutput": "1-2-3-7-8-11-12-9-4" },
+        { "input": "1-2-3 (no children)", "expectedOutput": "1-2-3" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Iterate through the list. When a node with a child is found, find the tail of the child list, connect it to the current node's next, then insert the child list between current and current's original next. Set child to null.",
+          "hi": "List iterate karo. Child wala node milne par, child list ki tail dhundho, use current node ke next se connect karo, phir child list ko current aur original next ke beech insert karo. Child null set karo."
+        },
+        "code": {
+          "cpp": "Node* flatten(Node* head) {\\n    Node* curr = head;\\n    while (curr) {\\n        if (curr->child) {\\n            Node* child = curr->child;\\n            Node* next = curr->next;\\n            curr->next = child;\\n            child->prev = curr;\\n            curr->child = nullptr;\\n            Node* tail = child;\\n            while (tail->next) tail = tail->next;\\n            tail->next = next;\\n            if (next) next->prev = tail;\\n        }\\n        curr = curr->next;\\n    }\\n    return head;\\n}",
+          "python": "def flatten(head):\\n    curr = head\\n    while curr:\\n        if curr.child:\\n            child = curr.child\\n            nxt = curr.next\\n            curr.next = child\\n            child.prev = curr\\n            curr.child = None\\n            tail = child\\n            while tail.next: tail = tail.next\\n            tail.next = nxt\\n            if nxt: nxt.prev = tail\\n        curr = curr.next\\n    return head",
+          "java": "public Node flatten(Node head) {\\n    Node curr = head;\\n    while (curr != null) {\\n        if (curr.child != null) {\\n            Node child = curr.child;\\n            Node next = curr.next;\\n            curr.next = child;\\n            child.prev = curr;\\n            curr.child = null;\\n            Node tail = child;\\n            while (tail.next != null) tail = tail.next;\\n            tail.next = next;\\n            if (next != null) next.prev = tail;\\n        }\\n        curr = curr.next;\\n    }\\n    return head;\\n}",
+          "javascript": "function flatten(head) {\\n    let curr = head;\\n    while (curr) {\\n        if (curr.child) {\\n            const child = curr.child;\\n            const next = curr.next;\\n            curr.next = child;\\n            child.prev = curr;\\n            curr.child = null;\\n            let tail = child;\\n            while (tail.next) tail = tail.next;\\n            tail.next = next;\\n            if (next) next.prev = tail;\\n        }\\n        curr = curr.next;\\n    }\\n    return head;\\n}",
+          "c": "Node* flatten(Node* head) {\\n    Node* curr = head;\\n    while (curr) {\\n        if (curr->child) {\\n            Node* child = curr->child;\\n            Node* next = curr->next;\\n            curr->next = child;\\n            child->prev = curr;\\n            curr->child = NULL;\\n            Node* tail = child;\\n            while (tail->next) tail = tail->next;\\n            tail->next = next;\\n            if (next) next->prev = tail;\\n        }\\n        curr = curr->next;\\n    }\\n    return head;\\n}"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["linked-list", "doubly-linked-list", "dfs"]
+    }
+  ]
+}
