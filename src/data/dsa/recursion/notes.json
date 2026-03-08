@@ -1,0 +1,207 @@
+{
+  "topicId": "recursion",
+  "title": {
+    "en": "Recursion",
+    "hi": "Recursion (Punaraverti)"
+  },
+  "introduction": {
+    "en": "Recursion is a programming technique where a function calls itself to solve smaller subproblems. It is widely used in algorithms, data structures, and problem-solving.",
+    "hi": "Recursion ek programming technique hai jisme ek function khud ko call karta hai chhote subproblems solve karne ke liye. Yeh algorithms, data structures, aur problem-solving mein widely use hoti hai."
+  },
+  "realLifeAnalogy": {
+    "en": "Think of recursion like looking up a word in a dictionary, and the definition contains another word you don't know, so you look that up too — until you find a word you already understand (the base case).",
+    "hi": "Recursion ko samajhne ke liye socho: ek dictionary mein ek word dhundho, uski definition mein aur ek word hai jo nahi samajh aaya, to usse bhi dhundho — jab tak aisa word na mile jo pehle se pata ho (yeh base case hai)."
+  },
+  "sections": [
+    {
+      "id": "what-is-recursion",
+      "title": {
+        "en": "What is Recursion?",
+        "hi": "Recursion kya hai?"
+      },
+      "content": {
+        "en": "## What is Recursion?\n\nRecursion is a method where the solution to a problem depends on solutions to smaller instances of the same problem.\n\n### Base Case\nThe base case is the condition that stops the recursion. Without it, the function would call itself infinitely.\n\n### Recursive Case\nThe recursive case is the part of the function that calls itself with a smaller or simpler input.\n\n```\nfunction recursiveFunction(input):\n  if (base case condition):\n    return base_value\n  else:\n    return recursiveFunction(smaller_input)\n```",
+        "hi": "## Recursion kya hai?\n\nRecursion ek method hai jisme ek problem ka solution, usi problem ke chhote instances ke solutions par depend karta hai.\n\n### Base Case\nBase case woh condition hai jo recursion ko rokti hai. Iske bina function infinitely khud ko call karta rahega.\n\n### Recursive Case\nRecursive case woh part hai jo function ko chhote ya simpler input ke saath call karta hai.\n\n```\nfunction recursiveFunction(input):\n  if (base case condition):\n    return base_value\n  else:\n    return recursiveFunction(smaller_input)\n```"
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\nusing namespace std;\n\n// Simple recursion example: countdown\nvoid countdown(int n) {\n    if (n <= 0) {  // Base case\n        cout << \"Go!\" << endl;\n        return;\n    }\n    cout << n << endl;\n    countdown(n - 1);  // Recursive case\n}\n\nint main() {\n    countdown(5);\n    return 0;\n}",
+        "c": "#include <stdio.h>\n\nvoid countdown(int n) {\n    if (n <= 0) {\n        printf(\"Go!\\n\");\n        return;\n    }\n    printf(\"%d\\n\", n);\n    countdown(n - 1);\n}\n\nint main() {\n    countdown(5);\n    return 0;\n}",
+        "java": "public class RecursionBasics {\n    static void countdown(int n) {\n        if (n <= 0) {\n            System.out.println(\"Go!\");\n            return;\n        }\n        System.out.println(n);\n        countdown(n - 1);\n    }\n\n    public static void main(String[] args) {\n        countdown(5);\n    }\n}",
+        "python": "def countdown(n):\n    if n <= 0:  # Base case\n        print(\"Go!\")\n        return\n    print(n)\n    countdown(n - 1)  # Recursive case\n\ncountdown(5)",
+        "javascript": "function countdown(n) {\n    if (n <= 0) {  // Base case\n        console.log('Go!');\n        return;\n    }\n    console.log(n);\n    countdown(n - 1);  // Recursive case\n}\n\ncountdown(5);"
+      },
+      "keyPoints": [
+        {
+          "en": "Every recursive function must have a base case to stop infinite recursion.",
+          "hi": "Har recursive function mein ek base case hona chahiye jo infinite recursion rok sake."
+        },
+        {
+          "en": "The recursive case must move toward the base case with each call.",
+          "hi": "Recursive case ko har call mein base case ki taraf move karna chahiye."
+        },
+        {
+          "en": "Recursion uses the call stack to remember function states.",
+          "hi": "Recursion function states yaad rakhne ke liye call stack use karta hai."
+        }
+      ],
+      "timeComplexity": {
+        "access": "N/A",
+        "search": "N/A",
+        "insert": "N/A",
+        "delete": "N/A"
+      }
+    },
+    {
+      "id": "how-recursion-works",
+      "title": {
+        "en": "How Recursion Works (Call Stack)",
+        "hi": "Recursion Kaise Kaam Karta Hai (Call Stack)"
+      },
+      "content": {
+        "en": "## How Recursion Works\n\nWhen a function calls itself, each call creates a new **stack frame** on the call stack. Each frame stores:\n- Local variables\n- Parameters\n- Return address\n\n### Call Stack Visualization\nFor `factorial(3)`:\n```\nfactorial(3) -> 3 * factorial(2)\n  factorial(2) -> 2 * factorial(1)\n    factorial(1) -> 1 * factorial(0)\n      factorial(0) -> 1  [BASE CASE]\n    returns 1*1 = 1\n  returns 2*1 = 2\nreturns 3*2 = 6\n```\n\n### Stack Overflow\nIf recursion is too deep (no base case or too many calls), the call stack overflows.",
+        "hi": "## Recursion Kaise Kaam Karta Hai\n\nJab ek function khud ko call karta hai, har call ek naya **stack frame** call stack par banata hai. Har frame store karta hai:\n- Local variables\n- Parameters\n- Return address\n\n### Call Stack Visualization\n`factorial(3)` ke liye:\n```\nfactorial(3) -> 3 * factorial(2)\n  factorial(2) -> 2 * factorial(1)\n    factorial(1) -> 1 * factorial(0)\n      factorial(0) -> 1  [BASE CASE]\n    returns 1*1 = 1\n  returns 2*1 = 2\nreturns 3*2 = 6\n```\n\n### Stack Overflow\nAgar recursion bahut deep ho (base case nahi ya bahut saari calls), to call stack overflow ho jaata hai."
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\nusing namespace std;\n\nint factorial(int n) {\n    cout << \"Calling factorial(\" << n << \")\" << endl;\n    if (n == 0) return 1;  // Base case\n    int result = n * factorial(n - 1);\n    cout << \"factorial(\" << n << \") = \" << result << endl;\n    return result;\n}\n\nint main() {\n    cout << factorial(4) << endl;\n    return 0;\n}",
+        "c": "#include <stdio.h>\n\nint factorial(int n) {\n    printf(\"Calling factorial(%d)\\n\", n);\n    if (n == 0) return 1;\n    int result = n * factorial(n - 1);\n    printf(\"factorial(%d) = %d\\n\", n, result);\n    return result;\n}\n\nint main() {\n    printf(\"%d\\n\", factorial(4));\n    return 0;\n}",
+        "java": "public class CallStack {\n    static int factorial(int n) {\n        System.out.println(\"Calling factorial(\" + n + \")\");\n        if (n == 0) return 1;\n        int result = n * factorial(n - 1);\n        System.out.println(\"factorial(\" + n + \") = \" + result);\n        return result;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(factorial(4));\n    }\n}",
+        "python": "import sys\nsys.setrecursionlimit(1000)\n\ndef factorial(n):\n    print(f\"Calling factorial({n})\")\n    if n == 0:\n        return 1\n    result = n * factorial(n - 1)\n    print(f\"factorial({n}) = {result}\")\n    return result\n\nprint(factorial(4))",
+        "javascript": "function factorial(n) {\n    console.log(`Calling factorial(${n})`);\n    if (n === 0) return 1;\n    const result = n * factorial(n - 1);\n    console.log(`factorial(${n}) = ${result}`);\n    return result;\n}\n\nconsole.log(factorial(4));"
+      },
+      "keyPoints": [
+        {
+          "en": "Each recursive call adds a new frame to the call stack.",
+          "hi": "Har recursive call call stack par ek naya frame add karta hai."
+        },
+        {
+          "en": "Stack frames are removed (popped) when a function returns.",
+          "hi": "Stack frames tab remove (pop) hote hain jab function return karta hai."
+        },
+        {
+          "en": "Deep recursion can cause StackOverflowError.",
+          "hi": "Bahut deep recursion StackOverflowError cause kar sakti hai."
+        }
+      ],
+      "timeComplexity": {
+        "access": "N/A",
+        "search": "N/A",
+        "insert": "N/A",
+        "delete": "N/A"
+      }
+    },
+    {
+      "id": "types-of-recursion",
+      "title": {
+        "en": "Types of Recursion",
+        "hi": "Recursion ke Prakar"
+      },
+      "content": {
+        "en": "## Types of Recursion\n\n### 1. Head Recursion\nThe recursive call is the **first** statement in the function.\n```\nvoid head(int n) {\n  head(n-1);  // recursive call first\n  print(n);   // processing after\n}\n```\n\n### 2. Tail Recursion\nThe recursive call is the **last** statement. Compilers can optimize this (tail call optimization).\n```\nvoid tail(int n) {\n  print(n);   // processing first\n  tail(n-1);  // recursive call last\n}\n```\n\n### 3. Tree Recursion\nA function makes **multiple** recursive calls, forming a tree-like call structure (e.g., Fibonacci).\n```\nfib(n) = fib(n-1) + fib(n-2)\n```",
+        "hi": "## Recursion ke Prakar\n\n### 1. Head Recursion\nRecursive call function ka **pehla** statement hota hai.\n```\nvoid head(int n) {\n  head(n-1);  // pehle recursive call\n  print(n);   // baad mein processing\n}\n```\n\n### 2. Tail Recursion\nRecursive call **aakhri** statement hota hai. Compilers isko optimize kar sakte hain (tail call optimization).\n```\nvoid tail(int n) {\n  print(n);   // pehle processing\n  tail(n-1);  // aakhri mein recursive call\n}\n```\n\n### 3. Tree Recursion\nEk function **multiple** recursive calls karta hai, jo tree jaisi call structure banata hai (jaise Fibonacci).\n```\nfib(n) = fib(n-1) + fib(n-2)\n```"
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\nusing namespace std;\n\nvoid headRecursion(int n) {\n    if (n == 0) return;\n    headRecursion(n - 1);  // head call\n    cout << n << \" \";\n}\n\nvoid tailRecursion(int n) {\n    if (n == 0) return;\n    cout << n << \" \";\n    tailRecursion(n - 1);  // tail call\n}\n\nint fib(int n) {\n    if (n <= 1) return n;\n    return fib(n - 1) + fib(n - 2);  // two recursive calls\n}\n\nint main() {\n    headRecursion(5); cout << endl;\n    tailRecursion(5); cout << endl;\n    cout << fib(6) << endl;\n    return 0;\n}",
+        "c": "#include <stdio.h>\n\nvoid headRecursion(int n) {\n    if (n == 0) return;\n    headRecursion(n - 1);\n    printf(\"%d \", n);\n}\n\nvoid tailRecursion(int n) {\n    if (n == 0) return;\n    printf(\"%d \", n);\n    tailRecursion(n - 1);\n}\n\nint fib(int n) {\n    if (n <= 1) return n;\n    return fib(n - 1) + fib(n - 2);\n}\n\nint main() {\n    headRecursion(5); printf(\"\\n\");\n    tailRecursion(5); printf(\"\\n\");\n    printf(\"%d\\n\", fib(6));\n    return 0;\n}",
+        "java": "public class TypesOfRecursion {\n    static void headRecursion(int n) {\n        if (n == 0) return;\n        headRecursion(n - 1);\n        System.out.print(n + \" \");\n    }\n\n    static void tailRecursion(int n) {\n        if (n == 0) return;\n        System.out.print(n + \" \");\n        tailRecursion(n - 1);\n    }\n\n    static int fib(int n) {\n        if (n <= 1) return n;\n        return fib(n - 1) + fib(n - 2);\n    }\n\n    public static void main(String[] args) {\n        headRecursion(5); System.out.println();\n        tailRecursion(5); System.out.println();\n        System.out.println(fib(6));\n    }\n}",
+        "python": "def head_recursion(n):\n    if n == 0:\n        return\n    head_recursion(n - 1)\n    print(n, end=' ')\n\ndef tail_recursion(n):\n    if n == 0:\n        return\n    print(n, end=' ')\n    tail_recursion(n - 1)\n\ndef fib(n):\n    if n <= 1:\n        return n\n    return fib(n - 1) + fib(n - 2)\n\nhead_recursion(5); print()\ntail_recursion(5); print()\nprint(fib(6))",
+        "javascript": "function headRecursion(n) {\n    if (n === 0) return;\n    headRecursion(n - 1);\n    process.stdout.write(n + ' ');\n}\n\nfunction tailRecursion(n) {\n    if (n === 0) return;\n    process.stdout.write(n + ' ');\n    tailRecursion(n - 1);\n}\n\nfunction fib(n) {\n    if (n <= 1) return n;\n    return fib(n - 1) + fib(n - 2);\n}\n\nheadRecursion(5); console.log();\ntailRecursion(5); console.log();\nconsole.log(fib(6));"
+      },
+      "keyPoints": [
+        {
+          "en": "Tail recursion can be optimized by compilers to avoid stack overflow.",
+          "hi": "Tail recursion ko compilers optimize kar sakte hain stack overflow avoid karne ke liye."
+        },
+        {
+          "en": "Tree recursion leads to exponential time complexity if not memoized.",
+          "hi": "Tree recursion memoization ke bina exponential time complexity lead karta hai."
+        },
+        {
+          "en": "Head recursion processes after the recursive call returns.",
+          "hi": "Head recursion recursive call return hone ke baad process karta hai."
+        }
+      ],
+      "timeComplexity": {
+        "access": "N/A",
+        "search": "N/A",
+        "insert": "N/A",
+        "delete": "N/A"
+      }
+    },
+    {
+      "id": "backtracking",
+      "title": {
+        "en": "Backtracking Technique",
+        "hi": "Backtracking Technique"
+      },
+      "content": {
+        "en": "## Backtracking\n\nBacktracking is a recursive technique that tries all possibilities and **undoes** (backtracks) choices that don't lead to a solution.\n\n### How it works:\n1. Choose: Make a choice\n2. Explore: Recursively explore that choice\n3. Unchoose: If the choice doesn't work, undo it and try the next\n\n### When to use:\n- Constraint satisfaction problems\n- Generating all permutations/subsets\n- Puzzles (N-Queens, Sudoku)\n\n### Template:\n```\nvoid backtrack(state):\n  if (is_solution(state)):\n    record(state)\n    return\n  for each choice:\n    make_choice()\n    backtrack(new_state)\n    undo_choice()   // BACKTRACK\n```",
+        "hi": "## Backtracking\n\nBacktracking ek recursive technique hai jo saari possibilities try karti hai aur jo choices solution tak nahi pohonchati unhe **undo** (backtrack) karti hai.\n\n### Kaise kaam karta hai:\n1. Choose: Ek choice karo\n2. Explore: Us choice ko recursively explore karo\n3. Unchoose: Agar choice kaam nahi karta, use undo karo aur next try karo\n\n### Kab use karna hai:\n- Constraint satisfaction problems\n- Saare permutations/subsets generate karna\n- Puzzles (N-Queens, Sudoku)\n\n### Template:\n```\nvoid backtrack(state):\n  if (is_solution(state)):\n    record(state)\n    return\n  for each choice:\n    make_choice()\n    backtrack(new_state)\n    undo_choice()   // BACKTRACK\n```"
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvoid subsets(vector<int>& nums, int idx, vector<int>& curr, vector<vector<int>>& result) {\n    result.push_back(curr);\n    for (int i = idx; i < (int)nums.size(); i++) {\n        curr.push_back(nums[i]);       // choose\n        subsets(nums, i + 1, curr, result);  // explore\n        curr.pop_back();               // unchoose (backtrack)\n    }\n}\n\nint main() {\n    vector<int> nums = {1, 2, 3};\n    vector<int> curr;\n    vector<vector<int>> result;\n    subsets(nums, 0, curr, result);\n    for (auto& s : result) {\n        for (int x : s) cout << x << \" \";\n        cout << endl;\n    }\n    return 0;\n}",
+        "c": "#include <stdio.h>\n\nvoid subsets(int* nums, int n, int idx, int* curr, int currSize) {\n    for (int i = 0; i < currSize; i++) printf(\"%d \", curr[i]);\n    printf(\"\\n\");\n    for (int i = idx; i < n; i++) {\n        curr[currSize] = nums[i];  // choose\n        subsets(nums, n, i + 1, curr, currSize + 1);  // explore\n    }\n}\n\nint main() {\n    int nums[] = {1, 2, 3};\n    int curr[10];\n    subsets(nums, 3, 0, curr, 0);\n    return 0;\n}",
+        "java": "import java.util.*;\n\npublic class Backtracking {\n    static void subsets(int[] nums, int idx, List<Integer> curr, List<List<Integer>> result) {\n        result.add(new ArrayList<>(curr));\n        for (int i = idx; i < nums.length; i++) {\n            curr.add(nums[i]);          // choose\n            subsets(nums, i + 1, curr, result);  // explore\n            curr.remove(curr.size() - 1);  // unchoose\n        }\n    }\n\n    public static void main(String[] args) {\n        int[] nums = {1, 2, 3};\n        List<List<Integer>> result = new ArrayList<>();\n        subsets(nums, 0, new ArrayList<>(), result);\n        result.forEach(System.out::println);\n    }\n}",
+        "python": "def subsets(nums, idx, curr, result):\n    result.append(curr[:])  # add current subset\n    for i in range(idx, len(nums)):\n        curr.append(nums[i])         # choose\n        subsets(nums, i + 1, curr, result)  # explore\n        curr.pop()                   # unchoose (backtrack)\n\nnums = [1, 2, 3]\nresult = []\nsubsets(nums, 0, [], result)\nfor s in result:\n    print(s)",
+        "javascript": "function subsets(nums, idx, curr, result) {\n    result.push([...curr]);\n    for (let i = idx; i < nums.length; i++) {\n        curr.push(nums[i]);           // choose\n        subsets(nums, i + 1, curr, result);  // explore\n        curr.pop();                   // unchoose (backtrack)\n    }\n}\n\nconst nums = [1, 2, 3];\nconst result = [];\nsubsets(nums, 0, [], result);\nresult.forEach(s => console.log(s));"
+      },
+      "keyPoints": [
+        {
+          "en": "Backtracking explores all possibilities and prunes invalid paths early.",
+          "hi": "Backtracking saari possibilities explore karta hai aur invalid paths ko jaldi prune karta hai."
+        },
+        {
+          "en": "The 'undo' step is critical — it restores state before trying the next option.",
+          "hi": "'Undo' step critical hai — yeh next option try karne se pehle state restore karta hai."
+        },
+        {
+          "en": "Used in N-Queens, Sudoku, permutations, and maze problems.",
+          "hi": "N-Queens, Sudoku, permutations, aur maze problems mein use hota hai."
+        }
+      ],
+      "timeComplexity": {
+        "access": "N/A",
+        "search": "N/A",
+        "insert": "N/A",
+        "delete": "N/A"
+      }
+    },
+    {
+      "id": "classic-examples",
+      "title": {
+        "en": "Classic Recursion Examples",
+        "hi": "Classic Recursion Examples"
+      },
+      "content": {
+        "en": "## Classic Recursion Examples\n\n### Factorial\n`n! = n * (n-1)!`, base: `0! = 1`\n\n### Fibonacci\n`fib(n) = fib(n-1) + fib(n-2)`, base: `fib(0)=0, fib(1)=1`\n\n### Power Function\n`pow(x, n) = x * pow(x, n-1)`, base: `pow(x, 0) = 1`\n\nFast power: `pow(x, n) = pow(x, n/2)^2` — O(log n)\n\n### Summary\n| Problem | Time Complexity | Space Complexity |\n|---------|-----------------|------------------|\n| Factorial | O(n) | O(n) |\n| Fibonacci (naive) | O(2^n) | O(n) |\n| Fibonacci (memo) | O(n) | O(n) |\n| Fast Power | O(log n) | O(log n) |",
+        "hi": "## Classic Recursion Examples\n\n### Factorial\n`n! = n * (n-1)!`, base: `0! = 1`\n\n### Fibonacci\n`fib(n) = fib(n-1) + fib(n-2)`, base: `fib(0)=0, fib(1)=1`\n\n### Power Function\n`pow(x, n) = x * pow(x, n-1)`, base: `pow(x, 0) = 1`\n\nFast power: `pow(x, n) = pow(x, n/2)^2` — O(log n)\n\n### Summary\n| Problem | Time Complexity | Space Complexity |\n|---------|-----------------|------------------|\n| Factorial | O(n) | O(n) |\n| Fibonacci (naive) | O(2^n) | O(n) |\n| Fibonacci (memo) | O(n) | O(n) |\n| Fast Power | O(log n) | O(log n) |"
+      },
+      "codeExamples": {
+        "cpp": "#include <iostream>\nusing namespace std;\n\nlong long factorial(int n) {\n    if (n == 0) return 1;\n    return n * factorial(n - 1);\n}\n\nint fib(int n) {\n    if (n <= 1) return n;\n    return fib(n - 1) + fib(n - 2);\n}\n\nlong long power(long long x, int n) {\n    if (n == 0) return 1;\n    if (n % 2 == 0) {\n        long long half = power(x, n / 2);\n        return half * half;\n    }\n    return x * power(x, n - 1);\n}\n\nint main() {\n    cout << factorial(5) << endl;  // 120\n    cout << fib(7) << endl;        // 13\n    cout << power(2, 10) << endl;  // 1024\n    return 0;\n}",
+        "c": "#include <stdio.h>\n\nlong long factorial(int n) {\n    if (n == 0) return 1;\n    return n * factorial(n - 1);\n}\n\nint fib(int n) {\n    if (n <= 1) return n;\n    return fib(n - 1) + fib(n - 2);\n}\n\nlong long power(long long x, int n) {\n    if (n == 0) return 1;\n    if (n % 2 == 0) {\n        long long half = power(x, n / 2);\n        return half * half;\n    }\n    return x * power(x, n - 1);\n}\n\nint main() {\n    printf(\"%lld\\n\", factorial(5));\n    printf(\"%d\\n\", fib(7));\n    printf(\"%lld\\n\", power(2, 10));\n    return 0;\n}",
+        "java": "public class ClassicRecursion {\n    static long factorial(int n) {\n        if (n == 0) return 1;\n        return n * factorial(n - 1);\n    }\n\n    static int fib(int n) {\n        if (n <= 1) return n;\n        return fib(n - 1) + fib(n - 2);\n    }\n\n    static long power(long x, int n) {\n        if (n == 0) return 1;\n        if (n % 2 == 0) {\n            long half = power(x, n / 2);\n            return half * half;\n        }\n        return x * power(x, n - 1);\n    }\n\n    public static void main(String[] args) {\n        System.out.println(factorial(5));   // 120\n        System.out.println(fib(7));          // 13\n        System.out.println(power(2, 10));    // 1024\n    }\n}",
+        "python": "def factorial(n):\n    if n == 0:\n        return 1\n    return n * factorial(n - 1)\n\ndef fib(n):\n    if n <= 1:\n        return n\n    return fib(n - 1) + fib(n - 2)\n\ndef power(x, n):\n    if n == 0:\n        return 1\n    if n % 2 == 0:\n        half = power(x, n // 2)\n        return half * half\n    return x * power(x, n - 1)\n\nprint(factorial(5))   # 120\nprint(fib(7))          # 13\nprint(power(2, 10))    # 1024",
+        "javascript": "function factorial(n) {\n    if (n === 0) return 1;\n    return n * factorial(n - 1);\n}\n\nfunction fib(n) {\n    if (n <= 1) return n;\n    return fib(n - 1) + fib(n - 2);\n}\n\nfunction power(x, n) {\n    if (n === 0) return 1;\n    if (n % 2 === 0) {\n        const half = power(x, Math.floor(n / 2));\n        return half * half;\n    }\n    return x * power(x, n - 1);\n}\n\nconsole.log(factorial(5));   // 120\nconsole.log(fib(7));          // 13\nconsole.log(power(2, 10));    // 1024"
+      },
+      "keyPoints": [
+        {
+          "en": "Factorial: O(n) time, classic example of linear recursion.",
+          "hi": "Factorial: O(n) time, linear recursion ka classic example."
+        },
+        {
+          "en": "Naive Fibonacci is O(2^n) — use memoization for O(n).",
+          "hi": "Naive Fibonacci O(2^n) hai — O(n) ke liye memoization use karo."
+        },
+        {
+          "en": "Fast power using divide-and-conquer achieves O(log n).",
+          "hi": "Divide-and-conquer se fast power O(log n) achieve karta hai."
+        }
+      ],
+      "timeComplexity": {
+        "access": "N/A",
+        "search": "O(2^n) naive / O(n) memo",
+        "insert": "N/A",
+        "delete": "N/A"
+      }
+    }
+  ]
+}

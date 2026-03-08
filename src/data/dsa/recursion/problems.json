@@ -1,0 +1,734 @@
+{
+  "topicId": "recursion",
+  "problems": [
+    {
+      "id": "rec-001",
+      "title": {
+        "en": "Factorial",
+        "hi": "Factorial"
+      },
+      "difficulty": "easy",
+      "description": {
+        "en": "Given a non-negative integer n, return the factorial of n. The factorial of n is defined as n! = n * (n-1) * ... * 2 * 1, with 0! = 1.",
+        "hi": "Ek non-negative integer n diya gaya hai, n ka factorial return karo. n ka factorial n! = n * (n-1) * ... * 2 * 1 se define hota hai, jabki 0! = 1."
+      },
+      "examples": [
+        {
+          "input": "n = 5",
+          "output": "120",
+          "explanation": {
+            "en": "5! = 5*4*3*2*1 = 120",
+            "hi": "5! = 5*4*3*2*1 = 120"
+          }
+        },
+        {
+          "input": "n = 0",
+          "output": "1",
+          "explanation": {
+            "en": "0! = 1 by definition",
+            "hi": "0! = 1 definition ke anusar"
+          }
+        }
+      ],
+      "constraints": [
+        "0 <= n <= 12"
+      ],
+      "hints": [
+        {
+          "en": "Think about what factorial(n) depends on. factorial(n) = n * factorial(n-1). What is the base case?",
+          "hi": "Socho factorial(n) kya depend karta hai. factorial(n) = n * factorial(n-1). Base case kya hai?"
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\nusing namespace std;\n\nlong long factorial(int n) {\n    // TODO: Implement factorial recursively\n    // Base case: factorial(0) = 1\n    // Recursive case: factorial(n) = n * factorial(n-1)\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << factorial(n) << endl;\n    return 0;\n}",
+        "c": "#include <stdio.h>\n\nlong long factorial(int n) {\n    // TODO: Implement factorial recursively\n}\n\nint main() {\n    int n;\n    scanf(\"%d\", &n);\n    printf(\"%lld\\n\", factorial(n));\n    return 0;\n}",
+        "java": "import java.util.Scanner;\n\npublic class Solution {\n    static long factorial(int n) {\n        // TODO: Implement factorial recursively\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        System.out.println(factorial(n));\n    }\n}",
+        "python": "def factorial(n):\n    # TODO: Implement factorial recursively\n    # Base case: factorial(0) = 1\n    # Recursive case: factorial(n) = n * factorial(n-1)\n    pass\n\nn = int(input())\nprint(factorial(n))",
+        "javascript": "function factorial(n) {\n    // TODO: Implement factorial recursively\n    // Base case: factorial(0) = 1\n    // Recursive case: factorial(n) = n * factorial(n-1)\n}\n\nconst n = parseInt(require('fs').readFileSync('/dev/stdin', 'utf8').trim());\nconsole.log(factorial(n));"
+      },
+      "solution": {
+        "approach": {
+          "en": "Use recursion with base case n==0 returning 1, and recursive case returning n * factorial(n-1). Time complexity O(n), space O(n) for call stack.",
+          "hi": "Base case n==0 par 1 return karo aur recursive case mein n * factorial(n-1) return karo. Time complexity O(n), space O(n) call stack ke liye."
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(n)",
+        "code": {
+          "cpp": "#include <iostream>\nusing namespace std;\n\nlong long factorial(int n) {\n    if (n == 0) return 1;  // base case\n    return n * factorial(n - 1);  // recursive case\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << factorial(n) << endl;\n    return 0;\n}",
+          "c": "#include <stdio.h>\n\nlong long factorial(int n) {\n    if (n == 0) return 1;\n    return n * factorial(n - 1);\n}\n\nint main() {\n    int n;\n    scanf(\"%d\", &n);\n    printf(\"%lld\\n\", factorial(n));\n    return 0;\n}",
+          "java": "import java.util.Scanner;\n\npublic class Solution {\n    static long factorial(int n) {\n        if (n == 0) return 1;\n        return n * factorial(n - 1);\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        System.out.println(factorial(n));\n    }\n}",
+          "python": "def factorial(n):\n    if n == 0:\n        return 1\n    return n * factorial(n - 1)\n\nn = int(input())\nprint(factorial(n))",
+          "javascript": "function factorial(n) {\n    if (n === 0) return 1;\n    return n * factorial(n - 1);\n}\n\nconst n = parseInt(require('fs').readFileSync('/dev/stdin', 'utf8').trim());\nconsole.log(factorial(n));"
+        }
+      }
+    },
+    {
+      "id": "rec-002",
+      "title": {
+        "en": "Fibonacci Number",
+        "hi": "Fibonacci Number"
+      },
+      "difficulty": "easy",
+      "description": {
+        "en": "Given n, return the nth Fibonacci number. The Fibonacci sequence is defined as F(0) = 0, F(1) = 1, F(n) = F(n-1) + F(n-2).",
+        "hi": "n diya gaya hai, nth Fibonacci number return karo. Fibonacci sequence F(0) = 0, F(1) = 1, F(n) = F(n-1) + F(n-2) se define hoti hai."
+      },
+      "examples": [
+        {
+          "input": "n = 6",
+          "output": "8",
+          "explanation": {
+            "en": "F(0)=0, F(1)=1, F(2)=1, F(3)=2, F(4)=3, F(5)=5, F(6)=8",
+            "hi": "F(0)=0, F(1)=1, F(2)=1, F(3)=2, F(4)=3, F(5)=5, F(6)=8"
+          }
+        },
+        {
+          "input": "n = 2",
+          "output": "1",
+          "explanation": {
+            "en": "F(2) = F(1) + F(0) = 1 + 0 = 1",
+            "hi": "F(2) = F(1) + F(0) = 1 + 0 = 1"
+          }
+        }
+      ],
+      "constraints": [
+        "0 <= n <= 30"
+      ],
+      "hints": [
+        {
+          "en": "Base cases are F(0)=0 and F(1)=1. For n>=2, return fib(n-1) + fib(n-2).",
+          "hi": "Base cases F(0)=0 aur F(1)=1 hain. n>=2 ke liye, fib(n-1) + fib(n-2) return karo."
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\nusing namespace std;\n\nint fib(int n) {\n    // TODO: Implement Fibonacci recursively\n    // Base cases: fib(0) = 0, fib(1) = 1\n    // Recursive: fib(n) = fib(n-1) + fib(n-2)\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << fib(n) << endl;\n    return 0;\n}",
+        "c": "#include <stdio.h>\n\nint fib(int n) {\n    // TODO: Implement Fibonacci recursively\n}\n\nint main() {\n    int n;\n    scanf(\"%d\", &n);\n    printf(\"%d\\n\", fib(n));\n    return 0;\n}",
+        "java": "import java.util.Scanner;\n\npublic class Solution {\n    static int fib(int n) {\n        // TODO: Implement Fibonacci recursively\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.println(fib(sc.nextInt()));\n    }\n}",
+        "python": "def fib(n):\n    # TODO: Implement Fibonacci recursively\n    pass\n\nn = int(input())\nprint(fib(n))",
+        "javascript": "function fib(n) {\n    // TODO: Implement Fibonacci recursively\n}\n\nconst n = parseInt(require('fs').readFileSync('/dev/stdin', 'utf8').trim());\nconsole.log(fib(n));"
+      },
+      "solution": {
+        "approach": {
+          "en": "Base cases: fib(0)=0, fib(1)=1. Recursive case: fib(n) = fib(n-1) + fib(n-2). Naive approach is O(2^n); memoization reduces it to O(n).",
+          "hi": "Base cases: fib(0)=0, fib(1)=1. Recursive case: fib(n) = fib(n-1) + fib(n-2). Naive approach O(2^n) hai; memoization se O(n) ho jaata hai."
+        },
+        "timeComplexity": "O(2^n) naive, O(n) with memoization",
+        "spaceComplexity": "O(n)",
+        "code": {
+          "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvector<int> memo(31, -1);\n\nint fib(int n) {\n    if (n <= 1) return n;\n    if (memo[n] != -1) return memo[n];\n    return memo[n] = fib(n - 1) + fib(n - 2);\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << fib(n) << endl;\n    return 0;\n}",
+          "c": "#include <stdio.h>\n\nint memo[31];\n\nint fib(int n) {\n    if (n <= 1) return n;\n    if (memo[n]) return memo[n];\n    return memo[n] = fib(n - 1) + fib(n - 2);\n}\n\nint main() {\n    int n;\n    scanf(\"%d\", &n);\n    printf(\"%d\\n\", fib(n));\n    return 0;\n}",
+          "java": "import java.util.*;\n\npublic class Solution {\n    static int[] memo = new int[31];\n    static { Arrays.fill(memo, -1); }\n\n    static int fib(int n) {\n        if (n <= 1) return n;\n        if (memo[n] != -1) return memo[n];\n        return memo[n] = fib(n - 1) + fib(n - 2);\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.println(fib(sc.nextInt()));\n    }\n}",
+          "python": "from functools import lru_cache\n\n@lru_cache(maxsize=None)\ndef fib(n):\n    if n <= 1:\n        return n\n    return fib(n - 1) + fib(n - 2)\n\nn = int(input())\nprint(fib(n))",
+          "javascript": "const memo = {};\nfunction fib(n) {\n    if (n <= 1) return n;\n    if (memo[n] !== undefined) return memo[n];\n    return memo[n] = fib(n - 1) + fib(n - 2);\n}\n\nconst n = parseInt(require('fs').readFileSync('/dev/stdin', 'utf8').trim());\nconsole.log(fib(n));"
+        }
+      }
+    },
+    {
+      "id": "rec-003",
+      "title": {
+        "en": "Power Function",
+        "hi": "Power Function"
+      },
+      "difficulty": "easy",
+      "description": {
+        "en": "Implement pow(x, n), which calculates x raised to the power n. Use recursion for an efficient O(log n) solution.",
+        "hi": "pow(x, n) implement karo, jo x ko n ki power tak calculate karta hai. Efficient O(log n) solution ke liye recursion use karo."
+      },
+      "examples": [
+        {
+          "input": "x = 2, n = 10",
+          "output": "1024",
+          "explanation": {
+            "en": "2^10 = 1024",
+            "hi": "2^10 = 1024"
+          }
+        },
+        {
+          "input": "x = 3, n = 4",
+          "output": "81",
+          "explanation": {
+            "en": "3^4 = 81",
+            "hi": "3^4 = 81"
+          }
+        }
+      ],
+      "constraints": [
+        "1 <= x <= 100",
+        "0 <= n <= 30"
+      ],
+      "hints": [
+        {
+          "en": "For even n: pow(x,n) = pow(x, n/2) * pow(x, n/2). For odd n: pow(x,n) = x * pow(x, n-1). Base: pow(x,0) = 1.",
+          "hi": "Even n ke liye: pow(x,n) = pow(x, n/2) * pow(x, n/2). Odd n ke liye: pow(x,n) = x * pow(x, n-1). Base: pow(x,0) = 1."
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\nusing namespace std;\n\nlong long power(long long x, int n) {\n    // TODO: Implement using fast recursion (divide and conquer)\n    // Base case: power(x, 0) = 1\n    // If n is even: power(x, n) = power(x, n/2)^2\n    // If n is odd: power(x, n) = x * power(x, n-1)\n}\n\nint main() {\n    long long x; int n;\n    cin >> x >> n;\n    cout << power(x, n) << endl;\n    return 0;\n}",
+        "c": "#include <stdio.h>\n\nlong long power(long long x, int n) {\n    // TODO: Implement using fast recursion\n}\n\nint main() {\n    long long x; int n;\n    scanf(\"%lld %d\", &x, &n);\n    printf(\"%lld\\n\", power(x, n));\n    return 0;\n}",
+        "java": "import java.util.Scanner;\n\npublic class Solution {\n    static long power(long x, int n) {\n        // TODO: Implement using fast recursion\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.println(power(sc.nextLong(), sc.nextInt()));\n    }\n}",
+        "python": "def power(x, n):\n    # TODO: Implement using fast recursion\n    pass\n\nline = input().split()\nprint(power(int(line[0]), int(line[1])))",
+        "javascript": "function power(x, n) {\n    // TODO: Implement using fast recursion\n}\n\nconst [x, n] = require('fs').readFileSync('/dev/stdin','utf8').trim().split(' ').map(Number);\nconsole.log(power(x, n));"
+      },
+      "solution": {
+        "approach": {
+          "en": "Divide and conquer: if n is even, compute half = power(x, n/2) and return half*half. If n is odd, return x * power(x, n-1). Base case: power(x,0) = 1. This gives O(log n) time.",
+          "hi": "Divide and conquer: agar n even hai, half = power(x, n/2) compute karo aur half*half return karo. Agar n odd hai, x * power(x, n-1) return karo. Base case: power(x,0) = 1. Yeh O(log n) time deta hai."
+        },
+        "timeComplexity": "O(log n)",
+        "spaceComplexity": "O(log n)",
+        "code": {
+          "cpp": "#include <iostream>\nusing namespace std;\n\nlong long power(long long x, int n) {\n    if (n == 0) return 1;\n    if (n % 2 == 0) {\n        long long half = power(x, n / 2);\n        return half * half;\n    }\n    return x * power(x, n - 1);\n}\n\nint main() {\n    long long x; int n;\n    cin >> x >> n;\n    cout << power(x, n) << endl;\n    return 0;\n}",
+          "c": "#include <stdio.h>\n\nlong long power(long long x, int n) {\n    if (n == 0) return 1;\n    if (n % 2 == 0) {\n        long long half = power(x, n / 2);\n        return half * half;\n    }\n    return x * power(x, n - 1);\n}\n\nint main() {\n    long long x; int n;\n    scanf(\"%lld %d\", &x, &n);\n    printf(\"%lld\\n\", power(x, n));\n    return 0;\n}",
+          "java": "import java.util.Scanner;\n\npublic class Solution {\n    static long power(long x, int n) {\n        if (n == 0) return 1;\n        if (n % 2 == 0) {\n            long half = power(x, n / 2);\n            return half * half;\n        }\n        return x * power(x, n - 1);\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.println(power(sc.nextLong(), sc.nextInt()));\n    }\n}",
+          "python": "def power(x, n):\n    if n == 0:\n        return 1\n    if n % 2 == 0:\n        half = power(x, n // 2)\n        return half * half\n    return x * power(x, n - 1)\n\nline = input().split()\nprint(power(int(line[0]), int(line[1])))",
+          "javascript": "function power(x, n) {\n    if (n === 0) return 1;\n    if (n % 2 === 0) {\n        const half = power(x, Math.floor(n / 2));\n        return half * half;\n    }\n    return x * power(x, n - 1);\n}\n\nconst [x, n] = require('fs').readFileSync('/dev/stdin','utf8').trim().split(' ').map(Number);\nconsole.log(power(x, n));"
+        }
+      }
+    },
+    {
+      "id": "rec-004",
+      "title": {
+        "en": "Sum of Digits",
+        "hi": "Sum of Digits"
+      },
+      "difficulty": "easy",
+      "description": {
+        "en": "Given a non-negative integer n, return the sum of all its digits using recursion.",
+        "hi": "Ek non-negative integer n diya gaya hai, recursion use karke uske sabhi digits ka sum return karo."
+      },
+      "examples": [
+        {
+          "input": "n = 1234",
+          "output": "10",
+          "explanation": {
+            "en": "1 + 2 + 3 + 4 = 10",
+            "hi": "1 + 2 + 3 + 4 = 10"
+          }
+        },
+        {
+          "input": "n = 99",
+          "output": "18",
+          "explanation": {
+            "en": "9 + 9 = 18",
+            "hi": "9 + 9 = 18"
+          }
+        }
+      ],
+      "constraints": [
+        "0 <= n <= 10^9"
+      ],
+      "hints": [
+        {
+          "en": "Extract the last digit with n%10. Recurse on n/10. Base case: n==0 return 0.",
+          "hi": "n%10 se last digit nikalo. n/10 par recurse karo. Base case: n==0 return 0."
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\nusing namespace std;\n\nint sumDigits(int n) {\n    // TODO: Return sum of digits recursively\n    // Base case: n == 0, return 0\n    // Recursive: n%10 + sumDigits(n/10)\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << sumDigits(n) << endl;\n    return 0;\n}",
+        "c": "#include <stdio.h>\n\nint sumDigits(int n) {\n    // TODO: Return sum of digits recursively\n}\n\nint main() {\n    int n;\n    scanf(\"%d\", &n);\n    printf(\"%d\\n\", sumDigits(n));\n    return 0;\n}",
+        "java": "import java.util.Scanner;\n\npublic class Solution {\n    static int sumDigits(int n) {\n        // TODO: Return sum of digits recursively\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.println(sumDigits(sc.nextInt()));\n    }\n}",
+        "python": "def sum_digits(n):\n    # TODO: Return sum of digits recursively\n    pass\n\nn = int(input())\nprint(sum_digits(n))",
+        "javascript": "function sumDigits(n) {\n    // TODO: Return sum of digits recursively\n}\n\nconst n = parseInt(require('fs').readFileSync('/dev/stdin', 'utf8').trim());\nconsole.log(sumDigits(n));"
+      },
+      "solution": {
+        "approach": {
+          "en": "Extract last digit with n%10, add it to recursive call on n/10. Base case: when n==0, return 0.",
+          "hi": "n%10 se last digit extract karo, isse n/10 par recursive call se add karo. Base case: jab n==0, 0 return karo."
+        },
+        "timeComplexity": "O(log n)",
+        "spaceComplexity": "O(log n)",
+        "code": {
+          "cpp": "#include <iostream>\nusing namespace std;\n\nint sumDigits(int n) {\n    if (n == 0) return 0;\n    return (n % 10) + sumDigits(n / 10);\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << sumDigits(n) << endl;\n    return 0;\n}",
+          "c": "#include <stdio.h>\n\nint sumDigits(int n) {\n    if (n == 0) return 0;\n    return (n % 10) + sumDigits(n / 10);\n}\n\nint main() {\n    int n;\n    scanf(\"%d\", &n);\n    printf(\"%d\\n\", sumDigits(n));\n    return 0;\n}",
+          "java": "import java.util.Scanner;\n\npublic class Solution {\n    static int sumDigits(int n) {\n        if (n == 0) return 0;\n        return (n % 10) + sumDigits(n / 10);\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.println(sumDigits(sc.nextInt()));\n    }\n}",
+          "python": "def sum_digits(n):\n    if n == 0:\n        return 0\n    return (n % 10) + sum_digits(n // 10)\n\nn = int(input())\nprint(sum_digits(n))",
+          "javascript": "function sumDigits(n) {\n    if (n === 0) return 0;\n    return (n % 10) + sumDigits(Math.floor(n / 10));\n}\n\nconst n = parseInt(require('fs').readFileSync('/dev/stdin', 'utf8').trim());\nconsole.log(sumDigits(n));"
+        }
+      }
+    },
+    {
+      "id": "rec-005",
+      "title": {
+        "en": "Reverse a String using Recursion",
+        "hi": "Recursion se String Reverse Karo"
+      },
+      "difficulty": "easy",
+      "description": {
+        "en": "Given a string s, return the reverse of the string using recursion.",
+        "hi": "Ek string s diya gaya hai, recursion use karke string ka reverse return karo."
+      },
+      "examples": [
+        {
+          "input": "s = \"hello\"",
+          "output": "\"olleh\"",
+          "explanation": {
+            "en": "Reverse of 'hello' is 'olleh'",
+            "hi": "'hello' ka reverse 'olleh' hai"
+          }
+        },
+        {
+          "input": "s = \"abc\"",
+          "output": "\"cba\"",
+          "explanation": {
+            "en": "Reverse of 'abc' is 'cba'",
+            "hi": "'abc' ka reverse 'cba' hai"
+          }
+        }
+      ],
+      "constraints": [
+        "1 <= s.length <= 1000"
+      ],
+      "hints": [
+        {
+          "en": "reverse(s) = last character + reverse(s without last character). Base: empty string returns empty.",
+          "hi": "reverse(s) = last character + reverse(s bina last character ke). Base: empty string empty return karta hai."
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nstring reverseStr(string s) {\n    // TODO: Reverse string recursively\n    // Base case: empty or single char\n    // Recursive: last char + reverse(s without last)\n}\n\nint main() {\n    string s;\n    cin >> s;\n    cout << reverseStr(s) << endl;\n    return 0;\n}",
+        "c": "#include <stdio.h>\n#include <string.h>\n\nvoid reverseStr(char* s, int left, int right) {\n    // TODO: Reverse string in-place recursively\n}\n\nint main() {\n    char s[1001];\n    scanf(\"%s\", s);\n    reverseStr(s, 0, strlen(s) - 1);\n    printf(\"%s\\n\", s);\n    return 0;\n}",
+        "java": "import java.util.Scanner;\n\npublic class Solution {\n    static String reverseStr(String s) {\n        // TODO: Reverse string recursively\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.println(reverseStr(sc.next()));\n    }\n}",
+        "python": "def reverse_str(s):\n    # TODO: Reverse string recursively\n    pass\n\ns = input()\nprint(reverse_str(s))",
+        "javascript": "function reverseStr(s) {\n    // TODO: Reverse string recursively\n}\n\nconst s = require('fs').readFileSync('/dev/stdin', 'utf8').trim();\nconsole.log(reverseStr(s));"
+      },
+      "solution": {
+        "approach": {
+          "en": "Base case: empty string returns empty. Recursive case: return last character + reverse of string without last character (or first + reverse of rest, depending on approach).",
+          "hi": "Base case: empty string empty return karta hai. Recursive case: last character + string ke baaki part ka reverse return karo."
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(n)",
+        "code": {
+          "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nstring reverseStr(string s) {\n    if (s.empty()) return \"\";\n    return reverseStr(s.substr(1)) + s[0];\n}\n\nint main() {\n    string s;\n    cin >> s;\n    cout << reverseStr(s) << endl;\n    return 0;\n}",
+          "c": "#include <stdio.h>\n#include <string.h>\n\nvoid reverseStr(char* s, int left, int right) {\n    if (left >= right) return;\n    char tmp = s[left];\n    s[left] = s[right];\n    s[right] = tmp;\n    reverseStr(s, left + 1, right - 1);\n}\n\nint main() {\n    char s[1001];\n    scanf(\"%s\", s);\n    reverseStr(s, 0, strlen(s) - 1);\n    printf(\"%s\\n\", s);\n    return 0;\n}",
+          "java": "import java.util.Scanner;\n\npublic class Solution {\n    static String reverseStr(String s) {\n        if (s.isEmpty()) return \"\";\n        return reverseStr(s.substring(1)) + s.charAt(0);\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.println(reverseStr(sc.next()));\n    }\n}",
+          "python": "def reverse_str(s):\n    if not s:\n        return ''\n    return reverse_str(s[1:]) + s[0]\n\ns = input()\nprint(reverse_str(s))",
+          "javascript": "function reverseStr(s) {\n    if (s.length === 0) return '';\n    return reverseStr(s.slice(1)) + s[0];\n}\n\nconst s = require('fs').readFileSync('/dev/stdin', 'utf8').trim();\nconsole.log(reverseStr(s));"
+        }
+      }
+    },
+    {
+      "id": "rec-006",
+      "title": {
+        "en": "Check Palindrome using Recursion",
+        "hi": "Recursion se Palindrome Check Karo"
+      },
+      "difficulty": "easy",
+      "description": {
+        "en": "Given a string s, return true if it is a palindrome (reads the same forward and backward), using recursion.",
+        "hi": "Ek string s diya gaya hai, recursion use karke true return karo agar yeh palindrome hai (aage aur peeche se same padha jata hai)."
+      },
+      "examples": [
+        {
+          "input": "s = \"racecar\"",
+          "output": "true",
+          "explanation": {
+            "en": "'racecar' reads same from both ends",
+            "hi": "'racecar' dono taraf se same padha jaata hai"
+          }
+        },
+        {
+          "input": "s = \"hello\"",
+          "output": "false",
+          "explanation": {
+            "en": "'hello' != 'olleh'",
+            "hi": "'hello' != 'olleh'"
+          }
+        }
+      ],
+      "constraints": [
+        "1 <= s.length <= 1000"
+      ],
+      "hints": [
+        {
+          "en": "Check if first and last characters match, then recurse on the inner substring. Base: 0 or 1 char is always palindrome.",
+          "hi": "Check karo pehle aur aakhre characters match karte hain, phir inner substring par recurse karo. Base: 0 ya 1 char hamesha palindrome hai."
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nbool isPalindrome(string s, int left, int right) {\n    // TODO: Check palindrome recursively\n    // Base: left >= right -> true\n    // If s[left] != s[right] -> false\n    // Else recurse with left+1, right-1\n}\n\nint main() {\n    string s;\n    cin >> s;\n    cout << (isPalindrome(s, 0, s.size()-1) ? \"true\" : \"false\") << endl;\n    return 0;\n}",
+        "c": "#include <stdio.h>\n#include <string.h>\n\nint isPalindrome(char* s, int left, int right) {\n    // TODO: Check palindrome recursively\n}\n\nint main() {\n    char s[1001];\n    scanf(\"%s\", s);\n    printf(\"%s\\n\", isPalindrome(s, 0, strlen(s)-1) ? \"true\" : \"false\");\n    return 0;\n}",
+        "java": "import java.util.Scanner;\n\npublic class Solution {\n    static boolean isPalindrome(String s, int left, int right) {\n        // TODO: Check palindrome recursively\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        System.out.println(isPalindrome(s, 0, s.length()-1));\n    }\n}",
+        "python": "def is_palindrome(s, left, right):\n    # TODO: Check palindrome recursively\n    pass\n\ns = input()\nprint(is_palindrome(s, 0, len(s)-1))",
+        "javascript": "function isPalindrome(s, left, right) {\n    // TODO: Check palindrome recursively\n}\n\nconst s = require('fs').readFileSync('/dev/stdin', 'utf8').trim();\nconsole.log(isPalindrome(s, 0, s.length - 1));"
+      },
+      "solution": {
+        "approach": {
+          "en": "If left >= right, it is a palindrome (base case). If s[left] != s[right], not a palindrome. Otherwise, recurse with left+1, right-1.",
+          "hi": "Agar left >= right hai, palindrome hai (base case). Agar s[left] != s[right], palindrome nahi. Warna left+1, right-1 ke saath recurse karo."
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(n)",
+        "code": {
+          "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nbool isPalindrome(string s, int left, int right) {\n    if (left >= right) return true;\n    if (s[left] != s[right]) return false;\n    return isPalindrome(s, left + 1, right - 1);\n}\n\nint main() {\n    string s;\n    cin >> s;\n    cout << (isPalindrome(s, 0, s.size()-1) ? \"true\" : \"false\") << endl;\n    return 0;\n}",
+          "c": "#include <stdio.h>\n#include <string.h>\n\nint isPalindrome(char* s, int left, int right) {\n    if (left >= right) return 1;\n    if (s[left] != s[right]) return 0;\n    return isPalindrome(s, left + 1, right - 1);\n}\n\nint main() {\n    char s[1001];\n    scanf(\"%s\", s);\n    printf(\"%s\\n\", isPalindrome(s, 0, strlen(s)-1) ? \"true\" : \"false\");\n    return 0;\n}",
+          "java": "import java.util.Scanner;\n\npublic class Solution {\n    static boolean isPalindrome(String s, int left, int right) {\n        if (left >= right) return true;\n        if (s.charAt(left) != s.charAt(right)) return false;\n        return isPalindrome(s, left + 1, right - 1);\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        System.out.println(isPalindrome(s, 0, s.length()-1));\n    }\n}",
+          "python": "def is_palindrome(s, left, right):\n    if left >= right:\n        return True\n    if s[left] != s[right]:\n        return False\n    return is_palindrome(s, left + 1, right - 1)\n\ns = input()\nprint(is_palindrome(s, 0, len(s)-1))",
+          "javascript": "function isPalindrome(s, left, right) {\n    if (left >= right) return true;\n    if (s[left] !== s[right]) return false;\n    return isPalindrome(s, left + 1, right - 1);\n}\n\nconst s = require('fs').readFileSync('/dev/stdin', 'utf8').trim();\nconsole.log(isPalindrome(s, 0, s.length - 1));"
+        }
+      }
+    },
+    {
+      "id": "rec-007",
+      "title": {
+        "en": "Generate All Subsets (Power Set)",
+        "hi": "Saare Subsets Generate Karo (Power Set)"
+      },
+      "difficulty": "medium",
+      "description": {
+        "en": "Given an integer array nums of unique elements, return all possible subsets (the power set). The solution set must not contain duplicate subsets.",
+        "hi": "Unique elements ke ek integer array nums diya gaya hai, saare possible subsets (power set) return karo. Solution set mein duplicate subsets nahi hone chahiye."
+      },
+      "examples": [
+        {
+          "input": "nums = [1,2,3]",
+          "output": "[[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]",
+          "explanation": {
+            "en": "All 2^3 = 8 possible subsets",
+            "hi": "Saare 2^3 = 8 possible subsets"
+          }
+        },
+        {
+          "input": "nums = [0]",
+          "output": "[[],[0]]",
+          "explanation": {
+            "en": "Two subsets: empty and [0]",
+            "hi": "Do subsets: empty aur [0]"
+          }
+        }
+      ],
+      "constraints": [
+        "1 <= nums.length <= 10",
+        "All elements are unique"
+      ],
+      "hints": [
+        {
+          "en": "Use backtracking. At each index, you can either include the element or not. Add the current state to results at each step.",
+          "hi": "Backtracking use karo. Har index par, element include kar sakte ho ya nahi. Har step par current state ko results mein add karo."
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvoid backtrack(vector<int>& nums, int idx, vector<int>& curr, vector<vector<int>>& result) {\n    // TODO: Add curr to result, then for i from idx to end:\n    // choose nums[i], recurse, unchoose\n}\n\nvector<vector<int>> subsets(vector<int>& nums) {\n    vector<vector<int>> result;\n    vector<int> curr;\n    backtrack(nums, 0, curr, result);\n    return result;\n}\n\nint main() {\n    vector<int> nums = {1, 2, 3};\n    auto result = subsets(nums);\n    for (auto& s : result) {\n        for (int x : s) cout << x << \" \";\n        cout << endl;\n    }\n    return 0;\n}",
+        "c": "#include <stdio.h>\n\nint result[1024][10];\nint rSizes[1024];\nint rCount = 0;\n\nvoid backtrack(int* nums, int n, int idx, int* curr, int currSize) {\n    // TODO: Add curr to result, then recurse\n    for (int i = 0; i < currSize; i++) result[rCount][i] = curr[i];\n    rSizes[rCount++] = currSize;\n    for (int i = idx; i < n; i++) {\n        curr[currSize] = nums[i];\n        backtrack(nums, n, i + 1, curr, currSize + 1);\n    }\n}\n\nint main() {\n    int nums[] = {1, 2, 3};\n    int curr[10];\n    backtrack(nums, 3, 0, curr, 0);\n    for (int i = 0; i < rCount; i++) {\n        for (int j = 0; j < rSizes[i]; j++) printf(\"%d \", result[i][j]);\n        printf(\"\\n\");\n    }\n    return 0;\n}",
+        "java": "import java.util.*;\n\npublic class Solution {\n    static void backtrack(int[] nums, int idx, List<Integer> curr, List<List<Integer>> result) {\n        // TODO: Add curr copy to result, then for i from idx: choose, recurse, unchoose\n    }\n\n    static List<List<Integer>> subsets(int[] nums) {\n        List<List<Integer>> result = new ArrayList<>();\n        backtrack(nums, 0, new ArrayList<>(), result);\n        return result;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(subsets(new int[]{1, 2, 3}));\n    }\n}",
+        "python": "def backtrack(nums, idx, curr, result):\n    # TODO: Add curr copy to result, then for i from idx: choose, recurse, unchoose\n    pass\n\ndef subsets(nums):\n    result = []\n    backtrack(nums, 0, [], result)\n    return result\n\nprint(subsets([1, 2, 3]))",
+        "javascript": "function backtrack(nums, idx, curr, result) {\n    // TODO: Add curr copy to result, then for i from idx: choose, recurse, unchoose\n}\n\nfunction subsets(nums) {\n    const result = [];\n    backtrack(nums, 0, [], result);\n    return result;\n}\n\nconsole.log(subsets([1, 2, 3]));"
+      },
+      "solution": {
+        "approach": {
+          "en": "Use backtracking. Start from index 0. At each step, add current subset to result. Then iterate from current index, include each element, recurse, and remove (backtrack).",
+          "hi": "Backtracking use karo. Index 0 se start karo. Har step par current subset result mein add karo. Phir current index se iterate karo, har element include karo, recurse karo, aur remove karo (backtrack)."
+        },
+        "timeComplexity": "O(2^n * n)",
+        "spaceComplexity": "O(n)",
+        "code": {
+          "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvoid backtrack(vector<int>& nums, int idx, vector<int>& curr, vector<vector<int>>& result) {\n    result.push_back(curr);\n    for (int i = idx; i < (int)nums.size(); i++) {\n        curr.push_back(nums[i]);\n        backtrack(nums, i + 1, curr, result);\n        curr.pop_back();\n    }\n}\n\nvector<vector<int>> subsets(vector<int>& nums) {\n    vector<vector<int>> result;\n    vector<int> curr;\n    backtrack(nums, 0, curr, result);\n    return result;\n}\n\nint main() {\n    vector<int> nums = {1, 2, 3};\n    auto result = subsets(nums);\n    for (auto& s : result) {\n        for (int x : s) cout << x << \" \";\n        cout << endl;\n    }\n    return 0;\n}",
+          "c": "#include <stdio.h>\n\nint result[1024][10];\nint rSizes[1024];\nint rCount = 0;\n\nvoid backtrack(int* nums, int n, int idx, int* curr, int currSize) {\n    for (int i = 0; i < currSize; i++) result[rCount][i] = curr[i];\n    rSizes[rCount++] = currSize;\n    for (int i = idx; i < n; i++) {\n        curr[currSize] = nums[i];\n        backtrack(nums, n, i + 1, curr, currSize + 1);\n    }\n}\n\nint main() {\n    int nums[] = {1, 2, 3};\n    int curr[10];\n    backtrack(nums, 3, 0, curr, 0);\n    for (int i = 0; i < rCount; i++) {\n        for (int j = 0; j < rSizes[i]; j++) printf(\"%d \", result[i][j]);\n        printf(\"\\n\");\n    }\n    return 0;\n}",
+          "java": "import java.util.*;\n\npublic class Solution {\n    static void backtrack(int[] nums, int idx, List<Integer> curr, List<List<Integer>> result) {\n        result.add(new ArrayList<>(curr));\n        for (int i = idx; i < nums.length; i++) {\n            curr.add(nums[i]);\n            backtrack(nums, i + 1, curr, result);\n            curr.remove(curr.size() - 1);\n        }\n    }\n\n    static List<List<Integer>> subsets(int[] nums) {\n        List<List<Integer>> result = new ArrayList<>();\n        backtrack(nums, 0, new ArrayList<>(), result);\n        return result;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(subsets(new int[]{1, 2, 3}));\n    }\n}",
+          "python": "def backtrack(nums, idx, curr, result):\n    result.append(curr[:])\n    for i in range(idx, len(nums)):\n        curr.append(nums[i])\n        backtrack(nums, i + 1, curr, result)\n        curr.pop()\n\ndef subsets(nums):\n    result = []\n    backtrack(nums, 0, [], result)\n    return result\n\nprint(subsets([1, 2, 3]))",
+          "javascript": "function backtrack(nums, idx, curr, result) {\n    result.push([...curr]);\n    for (let i = idx; i < nums.length; i++) {\n        curr.push(nums[i]);\n        backtrack(nums, i + 1, curr, result);\n        curr.pop();\n    }\n}\n\nfunction subsets(nums) {\n    const result = [];\n    backtrack(nums, 0, [], result);\n    return result;\n}\n\nconsole.log(subsets([1, 2, 3]));"
+        }
+      }
+    },
+    {
+      "id": "rec-008",
+      "title": {
+        "en": "Generate All Permutations",
+        "hi": "Saare Permutations Generate Karo"
+      },
+      "difficulty": "medium",
+      "description": {
+        "en": "Given an array nums of distinct integers, return all possible permutations.",
+        "hi": "Distinct integers ka ek array nums diya gaya hai, saare possible permutations return karo."
+      },
+      "examples": [
+        {
+          "input": "nums = [1,2,3]",
+          "output": "[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]",
+          "explanation": {
+            "en": "All 3! = 6 permutations",
+            "hi": "Saare 3! = 6 permutations"
+          }
+        },
+        {
+          "input": "nums = [1]",
+          "output": "[[1]]",
+          "explanation": {
+            "en": "Only one permutation",
+            "hi": "Sirf ek permutation"
+          }
+        }
+      ],
+      "constraints": [
+        "1 <= nums.length <= 6",
+        "All elements are distinct"
+      ],
+      "hints": [
+        {
+          "en": "Swap elements to place each number in the first position, recurse on the rest, then swap back.",
+          "hi": "Pehle position par har number rakhne ke liye elements swap karo, baaki par recurse karo, phir swap back karo."
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvoid permute(vector<int>& nums, int start, vector<vector<int>>& result) {\n    // TODO: if start == nums.size(), add to result\n    // else: for each i from start, swap nums[start] and nums[i],\n    //        recurse(start+1), swap back\n}\n\nint main() {\n    vector<int> nums = {1, 2, 3};\n    vector<vector<int>> result;\n    permute(nums, 0, result);\n    for (auto& p : result) {\n        for (int x : p) cout << x << \" \";\n        cout << endl;\n    }\n    return 0;\n}",
+        "c": "#include <stdio.h>\n\nint result[720][6];\nint rCount = 0;\n\nvoid swap(int* a, int* b) { int t = *a; *a = *b; *b = t; }\n\nvoid permute(int* nums, int n, int start) {\n    if (start == n) {\n        for (int i = 0; i < n; i++) result[rCount][i] = nums[i];\n        rCount++;\n        return;\n    }\n    for (int i = start; i < n; i++) {\n        swap(&nums[start], &nums[i]);\n        permute(nums, n, start + 1);\n        swap(&nums[start], &nums[i]);\n    }\n}\n\nint main() {\n    int nums[] = {1, 2, 3};\n    permute(nums, 3, 0);\n    for (int i = 0; i < rCount; i++) {\n        for (int j = 0; j < 3; j++) printf(\"%d \", result[i][j]);\n        printf(\"\\n\");\n    }\n    return 0;\n}",
+        "java": "import java.util.*;\n\npublic class Solution {\n    static void permute(int[] nums, int start, List<List<Integer>> result) {\n        // TODO: Implement permutation with swapping\n    }\n\n    static List<List<Integer>> permute(int[] nums) {\n        List<List<Integer>> result = new ArrayList<>();\n        permute(nums, 0, result);\n        return result;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(permute(new int[]{1, 2, 3}));\n    }\n}",
+        "python": "def permute(nums, start, result):\n    # TODO: Implement permutation with swapping\n    pass\n\ndef get_permutations(nums):\n    result = []\n    permute(nums, 0, result)\n    return result\n\nprint(get_permutations([1, 2, 3]))",
+        "javascript": "function permute(nums, start, result) {\n    // TODO: Implement permutation with swapping\n}\n\nfunction getPermutations(nums) {\n    const result = [];\n    permute(nums, 0, result);\n    return result;\n}\n\nconsole.log(getPermutations([1, 2, 3]));"
+      },
+      "solution": {
+        "approach": {
+          "en": "Use swap-based backtracking. For each position 'start', swap nums[start] with each nums[i] (i >= start), recurse on start+1, then swap back to restore state.",
+          "hi": "Swap-based backtracking use karo. Har position 'start' ke liye, nums[start] ko har nums[i] (i >= start) ke saath swap karo, start+1 par recurse karo, phir state restore karne ke liye swap back karo."
+        },
+        "timeComplexity": "O(n! * n)",
+        "spaceComplexity": "O(n)",
+        "code": {
+          "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvoid permute(vector<int>& nums, int start, vector<vector<int>>& result) {\n    if (start == (int)nums.size()) {\n        result.push_back(nums);\n        return;\n    }\n    for (int i = start; i < (int)nums.size(); i++) {\n        swap(nums[start], nums[i]);\n        permute(nums, start + 1, result);\n        swap(nums[start], nums[i]);\n    }\n}\n\nint main() {\n    vector<int> nums = {1, 2, 3};\n    vector<vector<int>> result;\n    permute(nums, 0, result);\n    for (auto& p : result) {\n        for (int x : p) cout << x << \" \";\n        cout << endl;\n    }\n    return 0;\n}",
+          "c": "#include <stdio.h>\n\nint result[720][6];\nint rCount = 0;\n\nvoid swap(int* a, int* b) { int t = *a; *a = *b; *b = t; }\n\nvoid permute(int* nums, int n, int start) {\n    if (start == n) {\n        for (int i = 0; i < n; i++) result[rCount][i] = nums[i];\n        rCount++;\n        return;\n    }\n    for (int i = start; i < n; i++) {\n        swap(&nums[start], &nums[i]);\n        permute(nums, n, start + 1);\n        swap(&nums[start], &nums[i]);\n    }\n}\n\nint main() {\n    int nums[] = {1, 2, 3};\n    permute(nums, 3, 0);\n    for (int i = 0; i < rCount; i++) {\n        for (int j = 0; j < 3; j++) printf(\"%d \", result[i][j]);\n        printf(\"\\n\");\n    }\n    return 0;\n}",
+          "java": "import java.util.*;\n\npublic class Solution {\n    static void permute(int[] nums, int start, List<List<Integer>> result) {\n        if (start == nums.length) {\n            List<Integer> perm = new ArrayList<>();\n            for (int x : nums) perm.add(x);\n            result.add(perm);\n            return;\n        }\n        for (int i = start; i < nums.length; i++) {\n            int tmp = nums[start]; nums[start] = nums[i]; nums[i] = tmp;\n            permute(nums, start + 1, result);\n            tmp = nums[start]; nums[start] = nums[i]; nums[i] = tmp;\n        }\n    }\n\n    static List<List<Integer>> permute(int[] nums) {\n        List<List<Integer>> result = new ArrayList<>();\n        permute(nums, 0, result);\n        return result;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(permute(new int[]{1, 2, 3}));\n    }\n}",
+          "python": "def permute(nums, start, result):\n    if start == len(nums):\n        result.append(nums[:])\n        return\n    for i in range(start, len(nums)):\n        nums[start], nums[i] = nums[i], nums[start]\n        permute(nums, start + 1, result)\n        nums[start], nums[i] = nums[i], nums[start]\n\ndef get_permutations(nums):\n    result = []\n    permute(nums, 0, result)\n    return result\n\nprint(get_permutations([1, 2, 3]))",
+          "javascript": "function permute(nums, start, result) {\n    if (start === nums.length) {\n        result.push([...nums]);\n        return;\n    }\n    for (let i = start; i < nums.length; i++) {\n        [nums[start], nums[i]] = [nums[i], nums[start]];\n        permute(nums, start + 1, result);\n        [nums[start], nums[i]] = [nums[i], nums[start]];\n    }\n}\n\nfunction getPermutations(nums) {\n    const result = [];\n    permute(nums, 0, result);\n    return result;\n}\n\nconsole.log(getPermutations([1, 2, 3]));"
+        }
+      }
+    },
+    {
+      "id": "rec-009",
+      "title": {
+        "en": "Tower of Hanoi",
+        "hi": "Tower of Hanoi"
+      },
+      "difficulty": "medium",
+      "description": {
+        "en": "Solve the Tower of Hanoi problem: move n disks from source rod to destination rod using an auxiliary rod. Rules: only one disk can be moved at a time, a larger disk cannot be placed on a smaller disk.",
+        "hi": "Tower of Hanoi problem solve karo: n disks ko source rod se destination rod par auxiliary rod use karke move karo. Rules: ek time par sirf ek disk move ho sakta hai, bada disk chhote disk par nahi rakh sakte."
+      },
+      "examples": [
+        {
+          "input": "n = 2",
+          "output": "Move disk 1 from A to C\nMove disk 2 from A to B\nMove disk 1 from C to B",
+          "explanation": {
+            "en": "3 moves needed for 2 disks",
+            "hi": "2 disks ke liye 3 moves chahiye"
+          }
+        },
+        {
+          "input": "n = 3",
+          "output": "7 moves",
+          "explanation": {
+            "en": "2^n - 1 = 7 moves for 3 disks",
+            "hi": "3 disks ke liye 2^n - 1 = 7 moves"
+          }
+        }
+      ],
+      "constraints": [
+        "1 <= n <= 15"
+      ],
+      "hints": [
+        {
+          "en": "To move n disks from A to C using B: 1) Move n-1 disks from A to B, 2) Move disk n from A to C, 3) Move n-1 disks from B to C.",
+          "hi": "A se C par n disks move karne ke liye B use karo: 1) A se B par n-1 disks move karo, 2) Disk n ko A se C par move karo, 3) B se C par n-1 disks move karo."
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\nusing namespace std;\n\nvoid hanoi(int n, char from, char to, char aux) {\n    // TODO: Implement Tower of Hanoi recursively\n    // Base: n==1, move disk 1 from 'from' to 'to'\n    // Recursive: move n-1 from 'from' to 'aux', move disk n, move n-1 from 'aux' to 'to'\n}\n\nint main() {\n    int n;\n    cin >> n;\n    hanoi(n, 'A', 'C', 'B');\n    return 0;\n}",
+        "c": "#include <stdio.h>\n\nvoid hanoi(int n, char from, char to, char aux) {\n    // TODO: Implement Tower of Hanoi recursively\n}\n\nint main() {\n    int n;\n    scanf(\"%d\", &n);\n    hanoi(n, 'A', 'C', 'B');\n    return 0;\n}",
+        "java": "import java.util.Scanner;\n\npublic class Solution {\n    static void hanoi(int n, char from, char to, char aux) {\n        // TODO: Implement Tower of Hanoi recursively\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        hanoi(sc.nextInt(), 'A', 'C', 'B');\n    }\n}",
+        "python": "def hanoi(n, from_rod, to_rod, aux_rod):\n    # TODO: Implement Tower of Hanoi recursively\n    pass\n\nn = int(input())\nhanoi(n, 'A', 'C', 'B')",
+        "javascript": "function hanoi(n, from, to, aux) {\n    // TODO: Implement Tower of Hanoi recursively\n}\n\nconst n = parseInt(require('fs').readFileSync('/dev/stdin', 'utf8').trim());\nhanoi(n, 'A', 'C', 'B');"
+      },
+      "solution": {
+        "approach": {
+          "en": "Recursively: move n-1 disks from source to auxiliary, move the nth (largest) disk from source to destination, then move n-1 disks from auxiliary to destination. Minimum moves = 2^n - 1.",
+          "hi": "Recursively: n-1 disks ko source se auxiliary par move karo, nth (sabse bada) disk ko source se destination par move karo, phir n-1 disks ko auxiliary se destination par move karo. Minimum moves = 2^n - 1."
+        },
+        "timeComplexity": "O(2^n)",
+        "spaceComplexity": "O(n)",
+        "code": {
+          "cpp": "#include <iostream>\nusing namespace std;\n\nvoid hanoi(int n, char from, char to, char aux) {\n    if (n == 1) {\n        cout << \"Move disk 1 from \" << from << \" to \" << to << endl;\n        return;\n    }\n    hanoi(n - 1, from, aux, to);\n    cout << \"Move disk \" << n << \" from \" << from << \" to \" << to << endl;\n    hanoi(n - 1, aux, to, from);\n}\n\nint main() {\n    int n;\n    cin >> n;\n    hanoi(n, 'A', 'C', 'B');\n    return 0;\n}",
+          "c": "#include <stdio.h>\n\nvoid hanoi(int n, char from, char to, char aux) {\n    if (n == 1) {\n        printf(\"Move disk 1 from %c to %c\\n\", from, to);\n        return;\n    }\n    hanoi(n - 1, from, aux, to);\n    printf(\"Move disk %d from %c to %c\\n\", n, from, to);\n    hanoi(n - 1, aux, to, from);\n}\n\nint main() {\n    int n;\n    scanf(\"%d\", &n);\n    hanoi(n, 'A', 'C', 'B');\n    return 0;\n}",
+          "java": "import java.util.Scanner;\n\npublic class Solution {\n    static void hanoi(int n, char from, char to, char aux) {\n        if (n == 1) {\n            System.out.println(\"Move disk 1 from \" + from + \" to \" + to);\n            return;\n        }\n        hanoi(n - 1, from, aux, to);\n        System.out.println(\"Move disk \" + n + \" from \" + from + \" to \" + to);\n        hanoi(n - 1, aux, to, from);\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        hanoi(sc.nextInt(), 'A', 'C', 'B');\n    }\n}",
+          "python": "def hanoi(n, from_rod, to_rod, aux_rod):\n    if n == 1:\n        print(f'Move disk 1 from {from_rod} to {to_rod}')\n        return\n    hanoi(n - 1, from_rod, aux_rod, to_rod)\n    print(f'Move disk {n} from {from_rod} to {to_rod}')\n    hanoi(n - 1, aux_rod, to_rod, from_rod)\n\nn = int(input())\nhanoi(n, 'A', 'C', 'B')",
+          "javascript": "function hanoi(n, from, to, aux) {\n    if (n === 1) {\n        console.log('Move disk 1 from ' + from + ' to ' + to);\n        return;\n    }\n    hanoi(n - 1, from, aux, to);\n    console.log('Move disk ' + n + ' from ' + from + ' to ' + to);\n    hanoi(n - 1, aux, to, from);\n}\n\nconst n = parseInt(require('fs').readFileSync('/dev/stdin', 'utf8').trim());\nhanoi(n, 'A', 'C', 'B');"
+        }
+      }
+    },
+    {
+      "id": "rec-010",
+      "title": {
+        "en": "N-Queens Problem",
+        "hi": "N-Queens Problem"
+      },
+      "difficulty": "hard",
+      "description": {
+        "en": "Place n queens on an n x n chessboard such that no two queens attack each other. Return all distinct solutions.",
+        "hi": "n x n chessboard par n queens place karo is tarah ki koi bhi do queens ek dusre par attack na kar sake. Saare distinct solutions return karo."
+      },
+      "examples": [
+        {
+          "input": "n = 4",
+          "output": "[[\".Q..\",\"...Q\",\"Q...\",\"..Q.\"],\n[\"..Q.\",\"Q...\",\"...Q\",\".Q..\"]]",
+          "explanation": {
+            "en": "Two solutions exist for n=4",
+            "hi": "n=4 ke liye do solutions hain"
+          }
+        },
+        {
+          "input": "n = 1",
+          "output": "[[\"Q\"]]",
+          "explanation": {
+            "en": "Only one solution for n=1",
+            "hi": "n=1 ke liye sirf ek solution hai"
+          }
+        }
+      ],
+      "constraints": [
+        "1 <= n <= 9"
+      ],
+      "hints": [
+        {
+          "en": "Place one queen per row. For each row, try each column. Check if the position is safe (no conflict in same column, or diagonals). Backtrack if no valid position.",
+          "hi": "Har row mein ek queen place karo. Har row ke liye har column try karo. Check karo position safe hai (same column ya diagonals mein conflict nahi). Agar koi valid position nahi to backtrack karo."
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\n\nbool isSafe(vector<string>& board, int row, int col, int n) {\n    // TODO: Check column, upper-left diagonal, upper-right diagonal\n}\n\nvoid solve(vector<string>& board, int row, int n, vector<vector<string>>& result) {\n    // TODO: If row == n, add board to result\n    // For each col: if isSafe, place queen, recurse, remove queen\n}\n\nvector<vector<string>> solveNQueens(int n) {\n    vector<vector<string>> result;\n    vector<string> board(n, string(n, '.'));\n    solve(board, 0, n, result);\n    return result;\n}\n\nint main() {\n    int n; cin >> n;\n    auto res = solveNQueens(n);\n    cout << res.size() << \" solutions\" << endl;\n    return 0;\n}",
+        "c": "#include <stdio.h>\n#include <string.h>\n\nint board[9][9];\nint n;\nint solutions = 0;\n\nint isSafe(int row, int col) {\n    // TODO: Check if placing queen at (row,col) is safe\n    return 1;\n}\n\nvoid solve(int row) {\n    if (row == n) { solutions++; return; }\n    for (int col = 0; col < n; col++) {\n        if (isSafe(row, col)) {\n            board[row][col] = 1;\n            solve(row + 1);\n            board[row][col] = 0;\n        }\n    }\n}\n\nint main() {\n    scanf(\"%d\", &n);\n    solve(0);\n    printf(\"%d solutions\\n\", solutions);\n    return 0;\n}",
+        "java": "import java.util.*;\n\npublic class Solution {\n    static boolean isSafe(char[][] board, int row, int col, int n) {\n        // TODO: Check safety\n        return true;\n    }\n\n    static void solve(char[][] board, int row, int n, List<List<String>> result) {\n        // TODO: Place queens row by row with backtracking\n    }\n\n    static List<List<String>> solveNQueens(int n) {\n        List<List<String>> result = new ArrayList<>();\n        char[][] board = new char[n][n];\n        for (char[] row : board) Arrays.fill(row, '.');\n        solve(board, 0, n, result);\n        return result;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(solveNQueens(4).size() + \" solutions\");\n    }\n}",
+        "python": "def is_safe(board, row, col, n):\n    # TODO: Check if placing queen at (row,col) is safe\n    return True\n\ndef solve(board, row, n, result):\n    # TODO: Place queens with backtracking\n    pass\n\ndef solve_n_queens(n):\n    result = []\n    board = [['.' for _ in range(n)] for _ in range(n)]\n    solve(board, 0, n, result)\n    return result\n\nn = int(input())\nprint(len(solve_n_queens(n)), 'solutions')",
+        "javascript": "function isSafe(board, row, col, n) {\n    // TODO: Check safety\n    return true;\n}\n\nfunction solve(board, row, n, result) {\n    // TODO: Place queens with backtracking\n}\n\nfunction solveNQueens(n) {\n    const result = [];\n    const board = Array.from({length: n}, () => Array(n).fill('.'));\n    solve(board, 0, n, result);\n    return result;\n}\n\nconst n = parseInt(require('fs').readFileSync('/dev/stdin','utf8').trim());\nconsole.log(solveNQueens(n).length + ' solutions');"
+      },
+      "solution": {
+        "approach": {
+          "en": "Place queens row by row. For each column in the current row, check if it is safe (no queen in same column, no queen on diagonals). If safe, place queen and recurse to next row. When all n rows filled, record the board.",
+          "hi": "Row by row queens place karo. Current row mein har column ke liye check karo safe hai ya nahi (same column mein queen nahi, diagonals par queen nahi). Agar safe hai, queen place karo aur next row par recurse karo. Jab saari n rows fill ho jayen, board record karo."
+        },
+        "timeComplexity": "O(n!)",
+        "spaceComplexity": "O(n^2)",
+        "code": {
+          "cpp": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\n\nbool isSafe(vector<string>& board, int row, int col, int n) {\n    for (int i = 0; i < row; i++)\n        if (board[i][col] == 'Q') return false;\n    for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--)\n        if (board[i][j] == 'Q') return false;\n    for (int i = row - 1, j = col + 1; i >= 0 && j < n; i--, j++)\n        if (board[i][j] == 'Q') return false;\n    return true;\n}\n\nvoid solve(vector<string>& board, int row, int n, vector<vector<string>>& result) {\n    if (row == n) { result.push_back(board); return; }\n    for (int col = 0; col < n; col++) {\n        if (isSafe(board, row, col, n)) {\n            board[row][col] = 'Q';\n            solve(board, row + 1, n, result);\n            board[row][col] = '.';\n        }\n    }\n}\n\nvector<vector<string>> solveNQueens(int n) {\n    vector<vector<string>> result;\n    vector<string> board(n, string(n, '.'));\n    solve(board, 0, n, result);\n    return result;\n}\n\nint main() {\n    int n; cin >> n;\n    cout << solveNQueens(n).size() << \" solutions\" << endl;\n    return 0;\n}",
+          "c": "#include <stdio.h>\n#include <string.h>\n\nint board[9][9];\nint n;\nint solutions = 0;\n\nint isSafe(int row, int col) {\n    for (int i = 0; i < row; i++)\n        if (board[i][col]) return 0;\n    for (int i = row-1, j = col-1; i >= 0 && j >= 0; i--, j--)\n        if (board[i][j]) return 0;\n    for (int i = row-1, j = col+1; i >= 0 && j < n; i--, j++)\n        if (board[i][j]) return 0;\n    return 1;\n}\n\nvoid solve(int row) {\n    if (row == n) { solutions++; return; }\n    for (int col = 0; col < n; col++) {\n        if (isSafe(row, col)) {\n            board[row][col] = 1;\n            solve(row + 1);\n            board[row][col] = 0;\n        }\n    }\n}\n\nint main() {\n    scanf(\"%d\", &n);\n    solve(0);\n    printf(\"%d solutions\\n\", solutions);\n    return 0;\n}",
+          "java": "import java.util.*;\n\npublic class Solution {\n    static boolean isSafe(char[][] board, int row, int col, int n) {\n        for (int i = 0; i < row; i++)\n            if (board[i][col] == 'Q') return false;\n        for (int i = row-1, j = col-1; i >= 0 && j >= 0; i--, j--)\n            if (board[i][j] == 'Q') return false;\n        for (int i = row-1, j = col+1; i >= 0 && j < n; i--, j++)\n            if (board[i][j] == 'Q') return false;\n        return true;\n    }\n\n    static void solve(char[][] board, int row, int n, List<List<String>> result) {\n        if (row == n) {\n            List<String> sol = new ArrayList<>();\n            for (char[] r : board) sol.add(new String(r));\n            result.add(sol);\n            return;\n        }\n        for (int col = 0; col < n; col++) {\n            if (isSafe(board, row, col, n)) {\n                board[row][col] = 'Q';\n                solve(board, row + 1, n, result);\n                board[row][col] = '.';\n            }\n        }\n    }\n\n    static List<List<String>> solveNQueens(int n) {\n        List<List<String>> result = new ArrayList<>();\n        char[][] board = new char[n][n];\n        for (char[] row : board) Arrays.fill(row, '.');\n        solve(board, 0, n, result);\n        return result;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(solveNQueens(4).size() + \" solutions\");\n    }\n}",
+          "python": "def is_safe(board, row, col, n):\n    for i in range(row):\n        if board[i][col] == 'Q':\n            return False\n    i, j = row - 1, col - 1\n    while i >= 0 and j >= 0:\n        if board[i][j] == 'Q': return False\n        i -= 1; j -= 1\n    i, j = row - 1, col + 1\n    while i >= 0 and j < n:\n        if board[i][j] == 'Q': return False\n        i -= 1; j += 1\n    return True\n\ndef solve(board, row, n, result):\n    if row == n:\n        result.append([''.join(r) for r in board])\n        return\n    for col in range(n):\n        if is_safe(board, row, col, n):\n            board[row][col] = 'Q'\n            solve(board, row + 1, n, result)\n            board[row][col] = '.'\n\ndef solve_n_queens(n):\n    result = []\n    board = [['.' for _ in range(n)] for _ in range(n)]\n    solve(board, 0, n, result)\n    return result\n\nn = int(input())\nprint(len(solve_n_queens(n)), 'solutions')",
+          "javascript": "function isSafe(board, row, col, n) {\n    for (let i = 0; i < row; i++)\n        if (board[i][col] === 'Q') return false;\n    for (let i = row-1, j = col-1; i >= 0 && j >= 0; i--, j--)\n        if (board[i][j] === 'Q') return false;\n    for (let i = row-1, j = col+1; i >= 0 && j < n; i--, j++)\n        if (board[i][j] === 'Q') return false;\n    return true;\n}\n\nfunction solve(board, row, n, result) {\n    if (row === n) {\n        result.push(board.map(r => r.join('')));\n        return;\n    }\n    for (let col = 0; col < n; col++) {\n        if (isSafe(board, row, col, n)) {\n            board[row][col] = 'Q';\n            solve(board, row + 1, n, result);\n            board[row][col] = '.';\n        }\n    }\n}\n\nfunction solveNQueens(n) {\n    const result = [];\n    const board = Array.from({length: n}, () => Array(n).fill('.'));\n    solve(board, 0, n, result);\n    return result;\n}\n\nconst n = parseInt(require('fs').readFileSync('/dev/stdin','utf8').trim());\nconsole.log(solveNQueens(n).length + ' solutions');"
+        }
+      }
+    },
+    {
+      "id": "rec-011",
+      "title": {
+        "en": "Sudoku Solver",
+        "hi": "Sudoku Solver"
+      },
+      "difficulty": "hard",
+      "description": {
+        "en": "Solve a 9x9 Sudoku puzzle by filling in the empty cells (marked as '.'). Each row, column, and 3x3 box must contain all digits 1-9.",
+        "hi": "9x9 Sudoku puzzle solve karo khali cells ('.' se mark ki gayi) fill karke. Har row, column, aur 3x3 box mein 1-9 tak saare digits hone chahiye."
+      },
+      "examples": [
+        {
+          "input": "board = [['5','3','.','.','7','.','.','.','.'],['6','.','.','1','9','5','.','.','.'],...]",
+          "output": "Filled 9x9 board",
+          "explanation": {
+            "en": "Use backtracking: try digits 1-9 for each empty cell",
+            "hi": "Backtracking use karo: har khali cell ke liye 1-9 digits try karo"
+          }
+        }
+      ],
+      "constraints": [
+        "Board is 9x9",
+        "Each row/col/box has digits 1-9 with no repetition in the input"
+      ],
+      "hints": [
+        {
+          "en": "Find the first empty cell. Try placing 1-9. For each valid number, place it and recurse. If recursion fails, backtrack (set cell back to '.').",
+          "hi": "Pehli khali cell dhundo. 1-9 place karne ki koshish karo. Har valid number ke liye, use place karo aur recurse karo. Agar recursion fail kare, backtrack karo (cell ko '.' par wapas set karo)."
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nbool isValid(vector<vector<char>>& board, int row, int col, char c) {\n    // TODO: Check row, col, and 3x3 box\n    return true;\n}\n\nbool solve(vector<vector<char>>& board) {\n    // TODO: Find empty cell, try 1-9, backtrack if needed\n    return true;\n}\n\nint main() {\n    // Initialize and solve a sample board\n    return 0;\n}",
+        "c": "#include <stdio.h>\n\nchar board[9][9];\n\nint isValid(int row, int col, char c) {\n    // TODO: Check row, col, 3x3 box\n    return 1;\n}\n\nint solve() {\n    // TODO: Find empty cell, try 1-9, backtrack\n    return 1;\n}\n\nint main() {\n    // Initialize and solve\n    return 0;\n}",
+        "java": "public class Solution {\n    static boolean isValid(char[][] board, int row, int col, char c) {\n        // TODO: Check row, col, 3x3 box\n        return true;\n    }\n\n    static boolean solve(char[][] board) {\n        // TODO: Find empty cell, try 1-9, backtrack\n        return true;\n    }\n\n    public static void main(String[] args) {\n        // Initialize and solve sample board\n    }\n}",
+        "python": "def is_valid(board, row, col, c):\n    # TODO: Check row, col, 3x3 box\n    return True\n\ndef solve(board):\n    # TODO: Find empty cell, try '1'-'9', backtrack\n    pass\n\n# Initialize and solve a sample board",
+        "javascript": "function isValid(board, row, col, c) {\n    // TODO: Check row, col, 3x3 box\n    return true;\n}\n\nfunction solve(board) {\n    // TODO: Find empty cell, try '1'-'9', backtrack\n}\n\n// Initialize and solve a sample board"
+      },
+      "solution": {
+        "approach": {
+          "en": "Find the first empty cell ('.'), try placing digits '1' to '9'. For each digit, check if it is valid (not in same row, column, or 3x3 box). If valid, place it and recurse. If recursion returns false, backtrack by setting the cell back to '.'.",
+          "hi": "Pehli khali cell ('.') dhundo, digits '1' se '9' tak place karne ki koshish karo. Har digit ke liye check karo valid hai ya nahi (same row, column, ya 3x3 box mein nahi). Agar valid hai, place karo aur recurse karo. Agar recursion false return kare, backtrack karo cell ko '.' par wapas set karke."
+        },
+        "timeComplexity": "O(9^(n*n))",
+        "spaceComplexity": "O(n*n)",
+        "code": {
+          "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nbool isValid(vector<vector<char>>& board, int row, int col, char c) {\n    for (int i = 0; i < 9; i++) {\n        if (board[row][i] == c) return false;\n        if (board[i][col] == c) return false;\n        if (board[3*(row/3)+i/3][3*(col/3)+i%3] == c) return false;\n    }\n    return true;\n}\n\nbool solve(vector<vector<char>>& board) {\n    for (int i = 0; i < 9; i++) {\n        for (int j = 0; j < 9; j++) {\n            if (board[i][j] == '.') {\n                for (char c = '1'; c <= '9'; c++) {\n                    if (isValid(board, i, j, c)) {\n                        board[i][j] = c;\n                        if (solve(board)) return true;\n                        board[i][j] = '.';\n                    }\n                }\n                return false;\n            }\n        }\n    }\n    return true;\n}\n\nint main() {\n    vector<vector<char>> board = {\n        {'5','3','.','.','7','.','.','.','.'},\n        {'6','.','.','1','9','5','.','.','.'},\n        {'.','9','8','.','.','.','.','6','.'},\n        {'8','.','.','.','6','.','.','.','3'},\n        {'4','.','.','8','.','3','.','.','1'},\n        {'7','.','.','.','2','.','.','.','6'},\n        {'.','6','.','.','.','.','2','8','.'},\n        {'.','.','.','4','1','9','.','.','5'},\n        {'.','.','.','.','8','.','.','7','9'}\n    };\n    solve(board);\n    for (auto& row : board) {\n        for (char c : row) cout << c << \" \";\n        cout << endl;\n    }\n    return 0;\n}",
+          "c": "#include <stdio.h>\n\nchar board[9][9];\n\nint isValid(int row, int col, char c) {\n    for (int i = 0; i < 9; i++) {\n        if (board[row][i] == c) return 0;\n        if (board[i][col] == c) return 0;\n        if (board[3*(row/3)+i/3][3*(col/3)+i%3] == c) return 0;\n    }\n    return 1;\n}\n\nint solve() {\n    for (int i = 0; i < 9; i++) {\n        for (int j = 0; j < 9; j++) {\n            if (board[i][j] == '.') {\n                for (char c = '1'; c <= '9'; c++) {\n                    if (isValid(i, j, c)) {\n                        board[i][j] = c;\n                        if (solve()) return 1;\n                        board[i][j] = '.';\n                    }\n                }\n                return 0;\n            }\n        }\n    }\n    return 1;\n}\n\nint main() {\n    char init[9][9] = {\n        {'5','3','.','.','7','.','.','.','.'},\n        {'6','.','.','1','9','5','.','.','.'},\n        {'.','9','8','.','.','.','.','6','.'},\n        {'8','.','.','.','6','.','.','.','3'},\n        {'4','.','.','8','.','3','.','.','1'},\n        {'7','.','.','.','2','.','.','.','6'},\n        {'.','6','.','.','.','.','2','8','.'},\n        {'.','.','.','4','1','9','.','.','5'},\n        {'.','.','.','.','8','.','.','7','9'}\n    };\n    for (int i = 0; i < 9; i++)\n        for (int j = 0; j < 9; j++)\n            board[i][j] = init[i][j];\n    solve();\n    for (int i = 0; i < 9; i++) {\n        for (int j = 0; j < 9; j++) printf(\"%c \", board[i][j]);\n        printf(\"\\n\");\n    }\n    return 0;\n}",
+          "java": "public class Solution {\n    static boolean isValid(char[][] board, int row, int col, char c) {\n        for (int i = 0; i < 9; i++) {\n            if (board[row][i] == c) return false;\n            if (board[i][col] == c) return false;\n            if (board[3*(row/3)+i/3][3*(col/3)+i%3] == c) return false;\n        }\n        return true;\n    }\n\n    static boolean solve(char[][] board) {\n        for (int i = 0; i < 9; i++) {\n            for (int j = 0; j < 9; j++) {\n                if (board[i][j] == '.') {\n                    for (char c = '1'; c <= '9'; c++) {\n                        if (isValid(board, i, j, c)) {\n                            board[i][j] = c;\n                            if (solve(board)) return true;\n                            board[i][j] = '.';\n                        }\n                    }\n                    return false;\n                }\n            }\n        }\n        return true;\n    }\n\n    public static void main(String[] args) {\n        char[][] board = {\n            {'5','3','.','.','7','.','.','.','.'},\n            {'6','.','.','1','9','5','.','.','.'},\n            {'.','9','8','.','.','.','.','6','.'},\n            {'8','.','.','.','6','.','.','.','3'},\n            {'4','.','.','8','.','3','.','.','1'},\n            {'7','.','.','.','2','.','.','.','6'},\n            {'.','6','.','.','.','.','2','8','.'},\n            {'.','.','.','4','1','9','.','.','5'},\n            {'.','.','.','.','8','.','.','7','9'}\n        };\n        solve(board);\n        for (char[] row : board) {\n            for (char c : row) System.out.print(c + \" \");\n            System.out.println();\n        }\n    }\n}",
+          "python": "def is_valid(board, row, col, c):\n    for i in range(9):\n        if board[row][i] == c: return False\n        if board[i][col] == c: return False\n        if board[3*(row//3)+i//3][3*(col//3)+i%3] == c: return False\n    return True\n\ndef solve(board):\n    for i in range(9):\n        for j in range(9):\n            if board[i][j] == '.':\n                for c in '123456789':\n                    if is_valid(board, i, j, c):\n                        board[i][j] = c\n                        if solve(board): return True\n                        board[i][j] = '.'\n                return False\n    return True\n\nboard = [\n    ['5','3','.','.','7','.','.','.','.'],\n    ['6','.','.','1','9','5','.','.','.'],\n    ['.','9','8','.','.','.','.','6','.'],\n    ['8','.','.','.','6','.','.','.','3'],\n    ['4','.','.','8','.','3','.','.','1'],\n    ['7','.','.','.','2','.','.','.','6'],\n    ['.','6','.','.','.','.','2','8','.'],\n    ['.','.','.','4','1','9','.','.','5'],\n    ['.','.','.','.','8','.','.','7','9']\n]\nsolve(board)\nfor row in board:\n    print(' '.join(row))",
+          "javascript": "function isValid(board, row, col, c) {\n    for (let i = 0; i < 9; i++) {\n        if (board[row][i] === c) return false;\n        if (board[i][col] === c) return false;\n        if (board[3*Math.floor(row/3)+Math.floor(i/3)][3*Math.floor(col/3)+i%3] === c) return false;\n    }\n    return true;\n}\n\nfunction solve(board) {\n    for (let i = 0; i < 9; i++) {\n        for (let j = 0; j < 9; j++) {\n            if (board[i][j] === '.') {\n                for (let c = 1; c <= 9; c++) {\n                    const ch = String(c);\n                    if (isValid(board, i, j, ch)) {\n                        board[i][j] = ch;\n                        if (solve(board)) return true;\n                        board[i][j] = '.';\n                    }\n                }\n                return false;\n            }\n        }\n    }\n    return true;\n}\n\nconst board = [\n    ['5','3','.','.','7','.','.','.','.'],\n    ['6','.','.','1','9','5','.','.','.'],\n    ['.','9','8','.','.','.','.','6','.'],\n    ['8','.','.','.','6','.','.','.','3'],\n    ['4','.','.','8','.','3','.','.','1'],\n    ['7','.','.','.','2','.','.','.','6'],\n    ['.','6','.','.','.','.','2','8','.'],\n    ['.','.','.','4','1','9','.','.','5'],\n    ['.','.','.','.','8','.','.','7','9']\n];\nsolve(board);\nboard.forEach(row => console.log(row.join(' ')));"
+        }
+      }
+    },
+    {
+      "id": "rec-012",
+      "title": {
+        "en": "Word Search in Grid",
+        "hi": "Grid mein Word Search"
+      },
+      "difficulty": "medium",
+      "description": {
+        "en": "Given an m x n grid of characters board and a string word, return true if word exists in the grid. The word can be constructed from letters of sequentially adjacent cells (horizontally or vertically).",
+        "hi": "Ek m x n character grid board aur ek string word diya gaya hai, true return karo agar word grid mein exist karta hai. Word sequentially adjacent cells (horizontally ya vertically) se construct kiya ja sakta hai."
+      },
+      "examples": [
+        {
+          "input": "board = [[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]], word = \"ABCCED\"",
+          "output": "true",
+          "explanation": {
+            "en": "The path A->B->C->C->E->D exists",
+            "hi": "Path A->B->C->C->E->D exist karta hai"
+          }
+        },
+        {
+          "input": "board = [[\"A\",\"B\"],[\"C\",\"D\"]], word = \"ABDC\"",
+          "output": "true",
+          "explanation": {
+            "en": "A->B->D->C",
+            "hi": "A->B->D->C"
+          }
+        }
+      ],
+      "constraints": [
+        "1 <= m, n <= 6",
+        "1 <= word.length <= 15"
+      ],
+      "hints": [
+        {
+          "en": "For each cell matching word[0], do DFS. Mark cell as visited, explore 4 directions, unmark on backtrack.",
+          "hi": "word[0] se match karne wale har cell ke liye DFS karo. Cell ko visited mark karo, 4 directions explore karo, backtrack par unmark karo."
+        }
+      ],
+      "starterCode": {
+        "cpp": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\n\nbool dfs(vector<vector<char>>& board, string& word, int i, int j, int idx) {\n    // TODO: Base case idx == word.length() -> true\n    // Check bounds and if board[i][j] == word[idx]\n    // Mark visited, explore 4 directions, unmark\n    return false;\n}\n\nbool exist(vector<vector<char>>& board, string word) {\n    int m = board.size(), n = board[0].size();\n    for (int i = 0; i < m; i++)\n        for (int j = 0; j < n; j++)\n            if (dfs(board, word, i, j, 0)) return true;\n    return false;\n}\n\nint main() {\n    vector<vector<char>> board = {{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}};\n    cout << (exist(board, \"ABCCED\") ? \"true\" : \"false\") << endl;\n    return 0;\n}",
+        "c": "#include <stdio.h>\n#include <string.h>\n\nchar board[10][10];\nint m, n;\n\nint dfs(int i, int j, char* word, int idx) {\n    // TODO: Implement DFS with backtracking\n    return 0;\n}\n\nint exist(char* word) {\n    for (int i = 0; i < m; i++)\n        for (int j = 0; j < n; j++)\n            if (dfs(i, j, word, 0)) return 1;\n    return 0;\n}\n\nint main() {\n    // Initialize board and test\n    return 0;\n}",
+        "java": "public class Solution {\n    static boolean dfs(char[][] board, String word, int i, int j, int idx) {\n        // TODO: DFS with backtracking\n        return false;\n    }\n\n    static boolean exist(char[][] board, String word) {\n        for (int i = 0; i < board.length; i++)\n            for (int j = 0; j < board[0].length; j++)\n                if (dfs(board, word, i, j, 0)) return true;\n        return false;\n    }\n\n    public static void main(String[] args) {\n        char[][] board = {{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}};\n        System.out.println(exist(board, \"ABCCED\"));\n    }\n}",
+        "python": "def dfs(board, word, i, j, idx):\n    # TODO: DFS with backtracking\n    return False\n\ndef exist(board, word):\n    m, n = len(board), len(board[0])\n    for i in range(m):\n        for j in range(n):\n            if dfs(board, word, i, j, 0):\n                return True\n    return False\n\nboard = [['A','B','C','E'],['S','F','C','S'],['A','D','E','E']]\nprint(exist(board, 'ABCCED'))",
+        "javascript": "function dfs(board, word, i, j, idx) {\n    // TODO: DFS with backtracking\n    return false;\n}\n\nfunction exist(board, word) {\n    for (let i = 0; i < board.length; i++)\n        for (let j = 0; j < board[0].length; j++)\n            if (dfs(board, word, i, j, 0)) return true;\n    return false;\n}\n\nconst board = [['A','B','C','E'],['S','F','C','S'],['A','D','E','E']];\nconsole.log(exist(board, 'ABCCED'));"
+      },
+      "solution": {
+        "approach": {
+          "en": "For each starting cell, run DFS. If current cell matches word[idx], mark it visited (temporarily change), recurse in 4 directions for idx+1, then restore. Return true when idx reaches word length.",
+          "hi": "Har starting cell ke liye DFS run karo. Agar current cell word[idx] se match karta hai, isse visited mark karo (temporarily change karo), 4 directions mein idx+1 ke liye recurse karo, phir restore karo. Jab idx word length tak pohonche tab true return karo."
+        },
+        "timeComplexity": "O(m*n*4^L) where L is word length",
+        "spaceComplexity": "O(L)",
+        "code": {
+          "cpp": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\n\nbool dfs(vector<vector<char>>& board, string& word, int i, int j, int idx) {\n    if (idx == (int)word.size()) return true;\n    if (i < 0 || i >= (int)board.size() || j < 0 || j >= (int)board[0].size()) return false;\n    if (board[i][j] != word[idx]) return false;\n    char tmp = board[i][j];\n    board[i][j] = '#';  // mark visited\n    bool found = dfs(board, word, i+1, j, idx+1) ||\n                 dfs(board, word, i-1, j, idx+1) ||\n                 dfs(board, word, i, j+1, idx+1) ||\n                 dfs(board, word, i, j-1, idx+1);\n    board[i][j] = tmp;  // restore\n    return found;\n}\n\nbool exist(vector<vector<char>>& board, string word) {\n    int m = board.size(), n = board[0].size();\n    for (int i = 0; i < m; i++)\n        for (int j = 0; j < n; j++)\n            if (dfs(board, word, i, j, 0)) return true;\n    return false;\n}\n\nint main() {\n    vector<vector<char>> board = {{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}};\n    cout << (exist(board, \"ABCCED\") ? \"true\" : \"false\") << endl;\n    return 0;\n}",
+          "c": "#include <stdio.h>\n#include <string.h>\n\nchar board[10][10];\nint rows, cols;\n\nint dfs(int i, int j, char* word, int idx) {\n    if (word[idx] == '\\0') return 1;\n    if (i < 0 || i >= rows || j < 0 || j >= cols) return 0;\n    if (board[i][j] != word[idx]) return 0;\n    char tmp = board[i][j];\n    board[i][j] = '#';\n    int found = dfs(i+1,j,word,idx+1)||dfs(i-1,j,word,idx+1)||\n                dfs(i,j+1,word,idx+1)||dfs(i,j-1,word,idx+1);\n    board[i][j] = tmp;\n    return found;\n}\n\nint main() {\n    rows = 3; cols = 4;\n    char init[3][4] = {{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}};\n    for (int i = 0; i < rows; i++)\n        for (int j = 0; j < cols; j++)\n            board[i][j] = init[i][j];\n    char word[] = \"ABCCED\";\n    int found = 0;\n    for (int i = 0; i < rows && !found; i++)\n        for (int j = 0; j < cols && !found; j++)\n            if (dfs(i, j, word, 0)) found = 1;\n    printf(\"%s\\n\", found ? \"true\" : \"false\");\n    return 0;\n}",
+          "java": "public class Solution {\n    static boolean dfs(char[][] board, String word, int i, int j, int idx) {\n        if (idx == word.length()) return true;\n        if (i < 0 || i >= board.length || j < 0 || j >= board[0].length) return false;\n        if (board[i][j] != word.charAt(idx)) return false;\n        char tmp = board[i][j];\n        board[i][j] = '#';\n        boolean found = dfs(board,word,i+1,j,idx+1)||dfs(board,word,i-1,j,idx+1)||\n                        dfs(board,word,i,j+1,idx+1)||dfs(board,word,i,j-1,idx+1);\n        board[i][j] = tmp;\n        return found;\n    }\n\n    static boolean exist(char[][] board, String word) {\n        for (int i = 0; i < board.length; i++)\n            for (int j = 0; j < board[0].length; j++)\n                if (dfs(board, word, i, j, 0)) return true;\n        return false;\n    }\n\n    public static void main(String[] args) {\n        char[][] board = {{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}};\n        System.out.println(exist(board, \"ABCCED\"));\n    }\n}",
+          "python": "def dfs(board, word, i, j, idx):\n    if idx == len(word):\n        return True\n    m, n = len(board), len(board[0])\n    if i < 0 or i >= m or j < 0 or j >= n:\n        return False\n    if board[i][j] != word[idx]:\n        return False\n    tmp = board[i][j]\n    board[i][j] = '#'\n    found = (dfs(board,word,i+1,j,idx+1) or dfs(board,word,i-1,j,idx+1) or\n             dfs(board,word,i,j+1,idx+1) or dfs(board,word,i,j-1,idx+1))\n    board[i][j] = tmp\n    return found\n\ndef exist(board, word):\n    m, n = len(board), len(board[0])\n    for i in range(m):\n        for j in range(n):\n            if dfs(board, word, i, j, 0):\n                return True\n    return False\n\nboard = [['A','B','C','E'],['S','F','C','S'],['A','D','E','E']]\nprint(exist(board, 'ABCCED'))",
+          "javascript": "function dfs(board, word, i, j, idx) {\n    if (idx === word.length) return true;\n    if (i < 0 || i >= board.length || j < 0 || j >= board[0].length) return false;\n    if (board[i][j] !== word[idx]) return false;\n    const tmp = board[i][j];\n    board[i][j] = '#';\n    const found = dfs(board,word,i+1,j,idx+1)||dfs(board,word,i-1,j,idx+1)||\n                  dfs(board,word,i,j+1,idx+1)||dfs(board,word,i,j-1,idx+1);\n    board[i][j] = tmp;\n    return found;\n}\n\nfunction exist(board, word) {\n    for (let i = 0; i < board.length; i++)\n        for (let j = 0; j < board[0].length; j++)\n            if (dfs(board, word, i, j, 0)) return true;\n    return false;\n}\n\nconst board = [['A','B','C','E'],['S','F','C','S'],['A','D','E','E']];\nconsole.log(exist(board, 'ABCCED'));"
+        }
+      }
+    }
+  ]
+}

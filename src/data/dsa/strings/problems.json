@@ -1,0 +1,695 @@
+{
+  "topicId": "strings",
+  "problems": [
+    {
+      "id": "str-001",
+      "title": "Reverse a String",
+      "titleHi": "String ko Reverse Karo",
+      "difficulty": "easy",
+      "description": {
+        "en": "Write a function to reverse a given string. Return the reversed string.",
+        "hi": "Ek function likho jo di gayi string ko reverse kare. Reversed string return karo."
+      },
+      "examples": [
+        {
+          "input": "s = \"hello\"",
+          "output": "\"olleh\"",
+          "explanation": {
+            "en": "The string 'hello' reversed is 'olleh'.",
+            "hi": "'hello' ko reverse karne par 'olleh' milta hai."
+          }
+        },
+        {
+          "input": "s = \"abcde\"",
+          "output": "\"edcba\"",
+          "explanation": {
+            "en": "'abcde' reversed is 'edcba'.",
+            "hi": "'abcde' reverse karke 'edcba' milta hai."
+          }
+        }
+      ],
+      "constraints": ["1 <= s.length <= 10^5", "s contains printable ASCII characters"],
+      "hints": [
+        { "en": "Use two pointers, one at start and one at end, and swap characters.", "hi": "Do pointers use karo — ek start par, ek end par — aur characters swap karo." }
+      ],
+      "starterCode": {
+        "cpp": "#include <string>\\nusing namespace std;\\n\\nstring reverseString(string s) {\\n    // Write your code here\\n    return s;\\n}",
+        "python": "def reverse_string(s: str) -> str:\\n    # Write your code here\\n    pass",
+        "java": "public class Solution {\\n    public String reverseString(String s) {\\n        // Write your code here\\n        return s;\\n    }\\n}",
+        "javascript": "function reverseString(s) {\\n    // Write your code here\\n}",
+        "c": "#include <string.h>\\nvoid reverseString(char *s) {\\n    // Write your code here\\n}"
+      },
+      "testCases": [
+        { "input": "hello", "expectedOutput": "olleh" },
+        { "input": "abcde", "expectedOutput": "edcba" },
+        { "input": "a", "expectedOutput": "a" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use two pointers starting at both ends of the string. Swap characters and move pointers inward until they meet. This works in-place in O(n) time.",
+          "hi": "String ke dono ends par do pointers rakhh. Characters swap karo aur pointers ko andar ki taraf move karo jab tak wo mile nahi. Yeh in-place O(n) time mein kaam karta hai."
+        },
+        "code": {
+          "cpp": "#include <string>\\n#include <algorithm>\\nusing namespace std;\\n\\nstring reverseString(string s) {\\n    int l = 0, r = s.size() - 1;\\n    while (l < r) {\\n        swap(s[l], s[r]);\\n        l++; r--;\\n    }\\n    return s;\\n}",
+          "python": "def reverse_string(s: str) -> str:\\n    s = list(s)\\n    l, r = 0, len(s) - 1\\n    while l < r:\\n        s[l], s[r] = s[r], s[l]\\n        l += 1; r -= 1\\n    return ''.join(s)",
+          "java": "public class Solution {\\n    public String reverseString(String s) {\\n        char[] arr = s.toCharArray();\\n        int l = 0, r = arr.length - 1;\\n        while (l < r) {\\n            char tmp = arr[l]; arr[l] = arr[r]; arr[r] = tmp;\\n            l++; r--;\\n        }\\n        return new String(arr);\\n    }\\n}",
+          "javascript": "function reverseString(s) {\\n    return s.split('').reverse().join('');\\n}",
+          "c": "#include <string.h>\\nvoid reverseString(char *s) {\\n    int l = 0, r = strlen(s) - 1;\\n    while (l < r) {\\n        char tmp = s[l]; s[l] = s[r]; s[r] = tmp;\\n        l++; r--;\\n    }\\n}"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["string", "two-pointers"]
+    },
+    {
+      "id": "str-002",
+      "title": "Check Palindrome",
+      "titleHi": "Palindrome Check Karo",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given a string s, return true if it is a palindrome (reads the same forward and backward), false otherwise. Consider only alphanumeric characters and ignore case.",
+        "hi": "Ek string s di gayi hai. Return karo true agar yeh palindrome hai (aage aur peeche se same padhe), warna false. Sirf alphanumeric characters consider karo, case ignore karo."
+      },
+      "examples": [
+        {
+          "input": "s = \"A man a plan a canal Panama\"",
+          "output": "true",
+          "explanation": {
+            "en": "After removing non-alphanumeric and lowercasing: 'amanaplanacanalpanama' is a palindrome.",
+            "hi": "Non-alphanumeric hatane aur lowercase karne ke baad: 'amanaplanacanalpanama' palindrome hai."
+          }
+        },
+        {
+          "input": "s = \"race a car\"",
+          "output": "false",
+          "explanation": {
+            "en": "'raceacar' is not a palindrome.",
+            "hi": "'raceacar' palindrome nahi hai."
+          }
+        }
+      ],
+      "constraints": ["1 <= s.length <= 2*10^5", "s consists of printable ASCII characters"],
+      "hints": [
+        { "en": "Filter the string to keep only alphanumeric characters and convert to lowercase.", "hi": "String filter karo, sirf alphanumeric characters rakho aur lowercase mein convert karo." },
+        { "en": "Then apply two-pointer palindrome check.", "hi": "Phir two-pointer palindrome check apply karo." }
+      ],
+      "starterCode": {
+        "cpp": "#include <string>\\nusing namespace std;\\n\\nbool isPalindrome(string s) {\\n    // Write your code here\\n    return false;\\n}",
+        "python": "def is_palindrome(s: str) -> bool:\\n    # Write your code here\\n    pass",
+        "java": "public class Solution {\\n    public boolean isPalindrome(String s) {\\n        // Write your code here\\n        return false;\\n    }\\n}",
+        "javascript": "function isPalindrome(s) {\\n    // Write your code here\\n}",
+        "c": "#include <stdbool.h>\\n#include <string.h>\\nbool isPalindrome(char *s) {\\n    // Write your code here\\n    return false;\\n}"
+      },
+      "testCases": [
+        { "input": "A man a plan a canal Panama", "expectedOutput": "true" },
+        { "input": "race a car", "expectedOutput": "false" },
+        { "input": "Was it a car or a cat I saw", "expectedOutput": "true" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Filter out non-alphanumeric characters and convert to lowercase. Use two pointers from both ends to check if the filtered string is a palindrome.",
+          "hi": "Non-alphanumeric characters filter karo aur lowercase mein convert karo. Dono ends se two pointers use karke filtered string ka palindrome check karo."
+        },
+        "code": {
+          "cpp": "#include <string>\\n#include <cctype>\\nusing namespace std;\\n\\nbool isPalindrome(string s) {\\n    int l = 0, r = s.size() - 1;\\n    while (l < r) {\\n        while (l < r && !isalnum(s[l])) l++;\\n        while (l < r && !isalnum(s[r])) r--;\\n        if (tolower(s[l]) != tolower(s[r])) return false;\\n        l++; r--;\\n    }\\n    return true;\\n}",
+          "python": "def is_palindrome(s: str) -> bool:\\n    filtered = [c.lower() for c in s if c.isalnum()]\\n    return filtered == filtered[::-1]",
+          "java": "public class Solution {\\n    public boolean isPalindrome(String s) {\\n        int l = 0, r = s.length() - 1;\\n        while (l < r) {\\n            while (l < r && !Character.isLetterOrDigit(s.charAt(l))) l++;\\n            while (l < r && !Character.isLetterOrDigit(s.charAt(r))) r--;\\n            if (Character.toLowerCase(s.charAt(l)) != Character.toLowerCase(s.charAt(r))) return false;\\n            l++; r--;\\n        }\\n        return true;\\n    }\\n}",
+          "javascript": "function isPalindrome(s) {\\n    const filtered = s.toLowerCase().replace(/[^a-z0-9]/g, '');\\n    return filtered === filtered.split('').reverse().join('');\\n}",
+          "c": "#include <stdbool.h>\\n#include <ctype.h>\\n#include <string.h>\\nbool isPalindrome(char *s) {\\n    int l = 0, r = strlen(s) - 1;\\n    while (l < r) {\\n        while (l < r && !isalnum(s[l])) l++;\\n        while (l < r && !isalnum(s[r])) r--;\\n        if (tolower(s[l]) != tolower(s[r])) return false;\\n        l++; r--;\\n    }\\n    return true;\\n}"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["string", "two-pointers"]
+    },
+    {
+      "id": "str-003",
+      "title": "Count Vowels and Consonants",
+      "titleHi": "Vowels aur Consonants Count Karo",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given a string of lowercase English letters, count and return the number of vowels and consonants.",
+        "hi": "Lowercase English letters ki ek string di gayi hai. Vowels aur consonants ki count return karo."
+      },
+      "examples": [
+        {
+          "input": "s = \"hello\"",
+          "output": "vowels=2, consonants=3",
+          "explanation": {
+            "en": "Vowels: e, o (2). Consonants: h, l, l (3).",
+            "hi": "Vowels: e, o (2). Consonants: h, l, l (3)."
+          }
+        }
+      ],
+      "constraints": ["1 <= s.length <= 10^4", "s contains only lowercase English letters"],
+      "hints": [
+        { "en": "Use a set or string of vowels 'aeiou' and check each character.", "hi": "Vowels 'aeiou' ka set ya string use karo aur har character check karo." }
+      ],
+      "starterCode": {
+        "cpp": "#include <string>\\n#include <utility>\\nusing namespace std;\\n\\npair<int,int> countVowelsConsonants(string s) {\\n    // Return {vowels, consonants}\\n    return {0, 0};\\n}",
+        "python": "def count_vowels_consonants(s: str):\\n    # Return (vowels, consonants)\\n    pass",
+        "java": "public class Solution {\\n    public int[] countVowelsConsonants(String s) {\\n        // Return [vowels, consonants]\\n        return new int[]{0, 0};\\n    }\\n}",
+        "javascript": "function countVowelsConsonants(s) {\\n    // Return {vowels, consonants}\\n}",
+        "c": "void countVowelsConsonants(char *s, int *vowels, int *consonants) {\\n    *vowels = 0; *consonants = 0;\\n    // Write your code here\\n}"
+      },
+      "testCases": [
+        { "input": "hello", "expectedOutput": "vowels=2, consonants=3" },
+        { "input": "aeiou", "expectedOutput": "vowels=5, consonants=0" },
+        { "input": "rhythm", "expectedOutput": "vowels=0, consonants=6" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Iterate through each character. Check if it belongs to the vowel set 'aeiou'. Increment vowel or consonant counter accordingly.",
+          "hi": "Har character pe iterate karo. Check karo ki kya yeh vowel set 'aeiou' mein hai. Accordingly vowel ya consonant counter increment karo."
+        },
+        "code": {
+          "cpp": "#include <string>\\n#include <utility>\\n#include <unordered_set>\\nusing namespace std;\\n\\npair<int,int> countVowelsConsonants(string s) {\\n    unordered_set<char> vowels = {'a','e','i','o','u'};\\n    int v = 0, c = 0;\\n    for (char ch : s) {\\n        if (vowels.count(ch)) v++;\\n        else c++;\\n    }\\n    return {v, c};\\n}",
+          "python": "def count_vowels_consonants(s: str):\\n    vowels = set('aeiou')\\n    v = sum(1 for c in s if c in vowels)\\n    return v, len(s) - v",
+          "java": "public class Solution {\\n    public int[] countVowelsConsonants(String s) {\\n        String vowels = \"aeiou\";\\n        int v = 0;\\n        for (char c : s.toCharArray())\\n            if (vowels.indexOf(c) != -1) v++;\\n        return new int[]{v, s.length() - v};\\n    }\\n}",
+          "javascript": "function countVowelsConsonants(s) {\\n    const vowels = new Set('aeiou');\\n    let v = 0;\\n    for (const c of s) if (vowels.has(c)) v++;\\n    return { vowels: v, consonants: s.length - v };\\n}",
+          "c": "#include <string.h>\\nvoid countVowelsConsonants(char *s, int *vowels, int *consonants) {\\n    *vowels = 0; *consonants = 0;\\n    char *v = \"aeiou\";\\n    for (int i = 0; s[i]; i++) {\\n        if (strchr(v, s[i])) (*vowels)++;\\n        else (*consonants)++;\\n    }\\n}"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["string", "frequency-count"]
+    },
+    {
+      "id": "str-004",
+      "title": "Check Anagram",
+      "titleHi": "Anagram Check Karo",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given two strings s and t, return true if t is an anagram of s (contains exactly the same characters with the same frequencies).",
+        "hi": "Do strings s aur t di gayi hain. Return karo true agar t, s ka anagram hai (same characters same frequency ke saath)."
+      },
+      "examples": [
+        {
+          "input": "s = \"anagram\", t = \"nagaram\"",
+          "output": "true",
+          "explanation": {
+            "en": "Both strings have same character frequencies.",
+            "hi": "Dono strings ke character frequencies same hain."
+          }
+        },
+        {
+          "input": "s = \"rat\", t = \"car\"",
+          "output": "false",
+          "explanation": {
+            "en": "Different character sets.",
+            "hi": "Alag character sets hain."
+          }
+        }
+      ],
+      "constraints": ["1 <= s.length, t.length <= 5*10^4", "s and t consist of lowercase English letters"],
+      "hints": [
+        { "en": "Sort both strings and compare, or use a frequency array of size 26.", "hi": "Dono strings sort karke compare karo, ya 26 size ka frequency array use karo." }
+      ],
+      "starterCode": {
+        "cpp": "#include <string>\\nusing namespace std;\\n\\nbool isAnagram(string s, string t) {\\n    // Write your code here\\n    return false;\\n}",
+        "python": "def is_anagram(s: str, t: str) -> bool:\\n    # Write your code here\\n    pass",
+        "java": "public class Solution {\\n    public boolean isAnagram(String s, String t) {\\n        // Write your code here\\n        return false;\\n    }\\n}",
+        "javascript": "function isAnagram(s, t) {\\n    // Write your code here\\n}",
+        "c": "#include <stdbool.h>\\nbool isAnagram(char *s, char *t) {\\n    // Write your code here\\n    return false;\\n}"
+      },
+      "testCases": [
+        { "input": "anagram nagaram", "expectedOutput": "true" },
+        { "input": "rat car", "expectedOutput": "false" },
+        { "input": "listen silent", "expectedOutput": "true" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use a frequency array of size 26. Increment for characters in s, decrement for characters in t. If all values are 0, the strings are anagrams.",
+          "hi": "26 size ka frequency array use karo. s ke characters ke liye increment karo, t ke characters ke liye decrement karo. Agar sab values 0 hain, toh strings anagrams hain."
+        },
+        "code": {
+          "cpp": "#include <string>\\n#include <vector>\\nusing namespace std;\\n\\nbool isAnagram(string s, string t) {\\n    if (s.size() != t.size()) return false;\\n    vector<int> freq(26, 0);\\n    for (int i = 0; i < (int)s.size(); i++) {\\n        freq[s[i]-'a']++;\\n        freq[t[i]-'a']--;\\n    }\\n    for (int f : freq) if (f != 0) return false;\\n    return true;\\n}",
+          "python": "from collections import Counter\\ndef is_anagram(s: str, t: str) -> bool:\\n    return Counter(s) == Counter(t)",
+          "java": "public class Solution {\\n    public boolean isAnagram(String s, String t) {\\n        if (s.length() != t.length()) return false;\\n        int[] freq = new int[26];\\n        for (int i = 0; i < s.length(); i++) {\\n            freq[s.charAt(i)-'a']++;\\n            freq[t.charAt(i)-'a']--;\\n        }\\n        for (int f : freq) if (f != 0) return false;\\n        return true;\\n    }\\n}",
+          "javascript": "function isAnagram(s, t) {\\n    if (s.length !== t.length) return false;\\n    const freq = new Array(26).fill(0);\\n    for (let i = 0; i < s.length; i++) {\\n        freq[s.charCodeAt(i) - 97]++;\\n        freq[t.charCodeAt(i) - 97]--;\\n    }\\n    return freq.every(f => f === 0);\\n}",
+          "c": "#include <stdbool.h>\\n#include <string.h>\\nbool isAnagram(char *s, char *t) {\\n    if (strlen(s) != strlen(t)) return false;\\n    int freq[26] = {0};\\n    for (int i = 0; s[i]; i++) {\\n        freq[s[i]-'a']++;\\n        freq[t[i]-'a']--;\\n    }\\n    for (int i = 0; i < 26; i++) if (freq[i] != 0) return false;\\n    return true;\\n}"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["string", "hash-map", "sorting"]
+    },
+    {
+      "id": "str-005",
+      "title": "First Non-Repeating Character",
+      "titleHi": "Pehla Non-Repeating Character",
+      "difficulty": "easy",
+      "description": {
+        "en": "Given a string s, find the first non-repeating character and return its index. If none exists, return -1.",
+        "hi": "Ek string s di gayi hai. Pehla non-repeating character dhundho aur uska index return karo. Agar koi nahi hai toh -1 return karo."
+      },
+      "examples": [
+        {
+          "input": "s = \"leetcode\"",
+          "output": "0",
+          "explanation": {
+            "en": "'l' appears only once and is the first such character at index 0.",
+            "hi": "'l' sirf ek baar aata hai aur pehla aisa character index 0 par hai."
+          }
+        },
+        {
+          "input": "s = \"aabb\"",
+          "output": "-1",
+          "explanation": {
+            "en": "All characters repeat.",
+            "hi": "Saare characters repeat karte hain."
+          }
+        }
+      ],
+      "constraints": ["1 <= s.length <= 10^5", "s consists of lowercase English letters"],
+      "hints": [
+        { "en": "Count frequencies first, then find the first character with frequency 1.", "hi": "Pehle frequencies count karo, phir pehla character dhundho jiska frequency 1 ho." }
+      ],
+      "starterCode": {
+        "cpp": "#include <string>\\nusing namespace std;\\n\\nint firstUniqChar(string s) {\\n    // Write your code here\\n    return -1;\\n}",
+        "python": "def first_uniq_char(s: str) -> int:\\n    # Write your code here\\n    pass",
+        "java": "public class Solution {\\n    public int firstUniqChar(String s) {\\n        // Write your code here\\n        return -1;\\n    }\\n}",
+        "javascript": "function firstUniqChar(s) {\\n    // Write your code here\\n}",
+        "c": "int firstUniqChar(char *s) {\\n    // Write your code here\\n    return -1;\\n}"
+      },
+      "testCases": [
+        { "input": "leetcode", "expectedOutput": "0" },
+        { "input": "aabb", "expectedOutput": "-1" },
+        { "input": "loveleetcode", "expectedOutput": "2" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Two-pass approach: first count all character frequencies in O(n), then iterate again to find the first character with frequency 1.",
+          "hi": "Two-pass approach: pehle O(n) mein sab character frequencies count karo, phir dobara iterate karke pehla character dhundho jiska frequency 1 ho."
+        },
+        "code": {
+          "cpp": "#include <string>\\n#include <vector>\\nusing namespace std;\\n\\nint firstUniqChar(string s) {\\n    vector<int> freq(26, 0);\\n    for (char c : s) freq[c-'a']++;\\n    for (int i = 0; i < (int)s.size(); i++)\\n        if (freq[s[i]-'a'] == 1) return i;\\n    return -1;\\n}",
+          "python": "def first_uniq_char(s: str) -> int:\\n    from collections import Counter\\n    freq = Counter(s)\\n    for i, c in enumerate(s):\\n        if freq[c] == 1: return i\\n    return -1",
+          "java": "public class Solution {\\n    public int firstUniqChar(String s) {\\n        int[] freq = new int[26];\\n        for (char c : s.toCharArray()) freq[c-'a']++;\\n        for (int i = 0; i < s.length(); i++)\\n            if (freq[s.charAt(i)-'a'] == 1) return i;\\n        return -1;\\n    }\\n}",
+          "javascript": "function firstUniqChar(s) {\\n    const freq = new Array(26).fill(0);\\n    for (const c of s) freq[c.charCodeAt(0) - 97]++;\\n    for (let i = 0; i < s.length; i++)\\n        if (freq[s.charCodeAt(i) - 97] === 1) return i;\\n    return -1;\\n}",
+          "c": "#include <string.h>\\nint firstUniqChar(char *s) {\\n    int freq[26] = {0};\\n    for (int i = 0; s[i]; i++) freq[s[i]-'a']++;\\n    for (int i = 0; s[i]; i++) if (freq[s[i]-'a'] == 1) return i;\\n    return -1;\\n}"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["string", "hash-map"]
+    },
+    {
+      "id": "str-006",
+      "title": "Longest Common Prefix",
+      "titleHi": "Longest Common Prefix",
+      "difficulty": "medium",
+      "description": {
+        "en": "Write a function to find the longest common prefix string amongst an array of strings. If there is no common prefix, return an empty string.",
+        "hi": "Strings ke array mein sabka longest common prefix dhundho. Agar koi common prefix nahi hai toh empty string return karo."
+      },
+      "examples": [
+        {
+          "input": "strs = [\"flower\",\"flow\",\"flight\"]",
+          "output": "\"fl\"",
+          "explanation": {
+            "en": "All three strings share the prefix 'fl'.",
+            "hi": "Teeno strings mein 'fl' prefix common hai."
+          }
+        },
+        {
+          "input": "strs = [\"dog\",\"racecar\",\"car\"]",
+          "output": "\"\"",
+          "explanation": {
+            "en": "No common prefix exists.",
+            "hi": "Koi common prefix nahi hai."
+          }
+        }
+      ],
+      "constraints": ["1 <= strs.length <= 200", "0 <= strs[i].length <= 200", "strs[i] consists of lowercase English letters"],
+      "hints": [
+        { "en": "Start with the first string as prefix and trim it until it matches the start of every other string.", "hi": "Pehli string ko prefix maano aur use tab tak trim karo jab tak wo baaki har string ke start se match na kare." }
+      ],
+      "starterCode": {
+        "cpp": "#include <string>\\n#include <vector>\\nusing namespace std;\\n\\nstring longestCommonPrefix(vector<string>& strs) {\\n    // Write your code here\\n    return \"\";\\n}",
+        "python": "from typing import List\\ndef longest_common_prefix(strs: List[str]) -> str:\\n    # Write your code here\\n    pass",
+        "java": "public class Solution {\\n    public String longestCommonPrefix(String[] strs) {\\n        // Write your code here\\n        return \"\";\\n    }\\n}",
+        "javascript": "function longestCommonPrefix(strs) {\\n    // Write your code here\\n}",
+        "c": "#include <string.h>\\nchar* longestCommonPrefix(char** strs, int strsSize) {\\n    // Write your code here\\n    return \"\";\\n}"
+      },
+      "testCases": [
+        { "input": "[\"flower\",\"flow\",\"flight\"]", "expectedOutput": "fl" },
+        { "input": "[\"dog\",\"racecar\",\"car\"]", "expectedOutput": "" },
+        { "input": "[\"interview\",\"inter\",\"internal\"]", "expectedOutput": "inter" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Take the first string as the prefix. For each subsequent string, trim the prefix from the right until it matches the beginning of that string. Return the final prefix.",
+          "hi": "Pehli string ko prefix lo. Har agle string ke liye, prefix ko right se tab tak trim karo jab tak wo us string ke beginning se match na kare. Final prefix return karo."
+        },
+        "code": {
+          "cpp": "#include <string>\\n#include <vector>\\nusing namespace std;\\n\\nstring longestCommonPrefix(vector<string>& strs) {\\n    string prefix = strs[0];\\n    for (int i = 1; i < (int)strs.size(); i++) {\\n        while (strs[i].find(prefix) != 0)\\n            prefix = prefix.substr(0, prefix.size()-1);\\n        if (prefix.empty()) return \"\";\\n    }\\n    return prefix;\\n}",
+          "python": "from typing import List\\ndef longest_common_prefix(strs: List[str]) -> str:\\n    prefix = strs[0]\\n    for s in strs[1:]:\\n        while not s.startswith(prefix):\\n            prefix = prefix[:-1]\\n        if not prefix: return ''\\n    return prefix",
+          "java": "public class Solution {\\n    public String longestCommonPrefix(String[] strs) {\\n        String prefix = strs[0];\\n        for (int i = 1; i < strs.length; i++) {\\n            while (!strs[i].startsWith(prefix))\\n                prefix = prefix.substring(0, prefix.length()-1);\\n            if (prefix.isEmpty()) return \"\";\\n        }\\n        return prefix;\\n    }\\n}",
+          "javascript": "function longestCommonPrefix(strs) {\\n    let prefix = strs[0];\\n    for (let i = 1; i < strs.length; i++) {\\n        while (!strs[i].startsWith(prefix))\\n            prefix = prefix.slice(0, -1);\\n        if (!prefix) return '';\\n    }\\n    return prefix;\\n}",
+          "c": "#include <string.h>\\n#include <stdio.h>\\nchar result[201];\\nchar* longestCommonPrefix(char** strs, int strsSize) {\\n    strcpy(result, strs[0]);\\n    for (int i = 1; i < strsSize; i++) {\\n        while (strncmp(strs[i], result, strlen(result)) != 0)\\n            result[strlen(result)-1] = '\\\\0';\\n        if (strlen(result) == 0) return result;\\n    }\\n    return result;\\n}"
+        },
+        "timeComplexity": "O(S) where S is sum of all characters",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["string", "trie"]
+    },
+    {
+      "id": "str-007",
+      "title": "Count and Say",
+      "titleHi": "Count and Say",
+      "difficulty": "medium",
+      "description": {
+        "en": "The count-and-say sequence: start with '1', then describe the previous term. '1' -> '11' (one 1) -> '21' (two 1s) -> '1211' -> '111221'. Given n, return the nth term.",
+        "hi": "Count-and-say sequence: '1' se shuru karo, phir previous term describe karo. '1' -> '11' -> '21' -> '1211' -> '111221'. n diya gaya hai, nth term return karo."
+      },
+      "examples": [
+        {
+          "input": "n = 4",
+          "output": "\"1211\"",
+          "explanation": {
+            "en": "1 -> 11 -> 21 -> 1211",
+            "hi": "1 -> 11 -> 21 -> 1211"
+          }
+        }
+      ],
+      "constraints": ["1 <= n <= 30"],
+      "hints": [
+        { "en": "Build each term iteratively by running through the previous term and counting consecutive characters.", "hi": "Har term iteratively banao — previous term mein consecutive same characters count karo." }
+      ],
+      "starterCode": {
+        "cpp": "#include <string>\\nusing namespace std;\\n\\nstring countAndSay(int n) {\\n    // Write your code here\\n    return \"\";\\n}",
+        "python": "def count_and_say(n: int) -> str:\\n    # Write your code here\\n    pass",
+        "java": "public class Solution {\\n    public String countAndSay(int n) {\\n        // Write your code here\\n        return \"\";\\n    }\\n}",
+        "javascript": "function countAndSay(n) {\\n    // Write your code here\\n}",
+        "c": "#include <stdlib.h>\\nchar* countAndSay(int n) {\\n    // Write your code here\\n    return \"\";\\n}"
+      },
+      "testCases": [
+        { "input": "1", "expectedOutput": "1" },
+        { "input": "4", "expectedOutput": "1211" },
+        { "input": "5", "expectedOutput": "111221" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Start with '1'. For each step, iterate through the current string counting consecutive equal characters and build the next string.",
+          "hi": "''1' se shuru karo. Har step par current string iterate karo — consecutive equal characters count karo aur next string banao."
+        },
+        "code": {
+          "cpp": "#include <string>\\nusing namespace std;\\n\\nstring countAndSay(int n) {\\n    string result = \"1\";\\n    for (int i = 1; i < n; i++) {\\n        string next = \"\";\\n        int j = 0;\\n        while (j < (int)result.size()) {\\n            char c = result[j];\\n            int cnt = 0;\\n            while (j < (int)result.size() && result[j] == c) { j++; cnt++; }\\n            next += to_string(cnt) + c;\\n        }\\n        result = next;\\n    }\\n    return result;\\n}",
+          "python": "def count_and_say(n: int) -> str:\\n    result = '1'\\n    for _ in range(n - 1):\\n        next_s = ''\\n        i = 0\\n        while i < len(result):\\n            c = result[i]\\n            cnt = 0\\n            while i < len(result) and result[i] == c:\\n                i += 1; cnt += 1\\n            next_s += str(cnt) + c\\n        result = next_s\\n    return result",
+          "java": "public class Solution {\\n    public String countAndSay(int n) {\\n        String result = \\\"1\\\";\\n        for (int i = 1; i < n; i++) {\\n            StringBuilder sb = new StringBuilder();\\n            int j = 0;\\n            while (j < result.length()) {\\n                char c = result.charAt(j);\\n                int cnt = 0;\\n                while (j < result.length() && result.charAt(j) == c) { j++; cnt++; }\\n                sb.append(cnt).append(c);\\n            }\\n            result = sb.toString();\\n        }\\n        return result;\\n    }\\n}",
+          "javascript": "function countAndSay(n) {\\n    let result = '1';\\n    for (let i = 1; i < n; i++) {\\n        let next = '';\\n        let j = 0;\\n        while (j < result.length) {\\n            const c = result[j];\\n            let cnt = 0;\\n            while (j < result.length && result[j] === c) { j++; cnt++; }\\n            next += cnt + c;\\n        }\\n        result = next;\\n    }\\n    return result;\\n}",
+          "c": "#include <stdlib.h>\\n#include <string.h>\\n#include <stdio.h>\\nchar* countAndSay(int n) {\\n    char *result = malloc(10000);\\n    char *next = malloc(10000);\\n    strcpy(result, \\\"1\\\");\\n    for (int i = 1; i < n; i++) {\\n        int len = strlen(result), k = 0, j = 0;\\n        while (j < len) {\\n            char c = result[j]; int cnt = 0;\\n            while (j < len && result[j] == c) { j++; cnt++; }\\n            k += sprintf(next + k, \\\"%d%c\\\", cnt, c);\\n        }\\n        next[k] = '\\\\0';\\n        strcpy(result, next);\\n    }\\n    free(next);\\n    return result;\\n}"
+        },
+        "timeComplexity": "O(n * 2^n)",
+        "spaceComplexity": "O(2^n)"
+      },
+      "tags": ["string", "simulation"]
+    },
+    {
+      "id": "str-008",
+      "title": "Longest Palindromic Substring",
+      "titleHi": "Longest Palindromic Substring",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given a string s, return the longest palindromic substring.",
+        "hi": "Ek string s di gayi hai. Sabse lamba palindromic substring return karo."
+      },
+      "examples": [
+        {
+          "input": "s = \"babad\"",
+          "output": "\"bab\"",
+          "explanation": {
+            "en": "'bab' is the longest palindromic substring ('aba' is also valid).",
+            "hi": "'bab' sabse lamba palindromic substring hai ('aba' bhi valid hai)."
+          }
+        },
+        {
+          "input": "s = \"cbbd\"",
+          "output": "\"bb\"",
+          "explanation": {
+            "en": "'bb' is the longest palindromic substring.",
+            "hi": "'bb' sabse lamba palindromic substring hai."
+          }
+        }
+      ],
+      "constraints": ["1 <= s.length <= 1000", "s consists of digits and English letters"],
+      "hints": [
+        { "en": "Expand around each center (both odd and even length palindromes).", "hi": "Har center ke around expand karo (odd aur even length dono ke liye)." }
+      ],
+      "starterCode": {
+        "cpp": "#include <string>\\nusing namespace std;\\n\\nstring longestPalindrome(string s) {\\n    // Write your code here\\n    return \"\";\\n}",
+        "python": "def longest_palindrome(s: str) -> str:\\n    # Write your code here\\n    pass",
+        "java": "public class Solution {\\n    public String longestPalindrome(String s) {\\n        // Write your code here\\n        return \"\";\\n    }\\n}",
+        "javascript": "function longestPalindrome(s) {\\n    // Write your code here\\n}",
+        "c": "char* longestPalindrome(char* s) {\\n    // Write your code here\\n    return \"\";\\n}"
+      },
+      "testCases": [
+        { "input": "babad", "expectedOutput": "bab" },
+        { "input": "cbbd", "expectedOutput": "bb" },
+        { "input": "a", "expectedOutput": "a" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Expand around each index as center. For odd-length palindromes use one center; for even-length use two adjacent centers. Track the longest found.",
+          "hi": "Har index ko center maanke expand karo. Odd-length ke liye ek center, even-length ke liye do adjacent centers use karo. Sabse lamba track karo."
+        },
+        "code": {
+          "cpp": "#include <string>\\nusing namespace std;\\n\\nstring longestPalindrome(string s) {\\n    int n = s.size(), start = 0, maxLen = 1;\\n    auto expand = [&](int l, int r) {\\n        while (l >= 0 && r < n && s[l] == s[r]) { l--; r++; }\\n        if (r - l - 1 > maxLen) { maxLen = r - l - 1; start = l + 1; }\\n    };\\n    for (int i = 0; i < n; i++) { expand(i, i); expand(i, i+1); }\\n    return s.substr(start, maxLen);\\n}",
+          "python": "def longest_palindrome(s: str) -> str:\\n    n = len(s)\\n    start, max_len = 0, 1\\n    def expand(l, r):\\n        nonlocal start, max_len\\n        while l >= 0 and r < n and s[l] == s[r]: l -= 1; r += 1\\n        if r - l - 1 > max_len: max_len = r - l - 1; start = l + 1\\n    for i in range(n):\\n        expand(i, i)\\n        expand(i, i + 1)\\n    return s[start:start + max_len]",
+          "java": "public class Solution {\\n    int start = 0, maxLen = 1;\\n    public String longestPalindrome(String s) {\\n        int n = s.length();\\n        for (int i = 0; i < n; i++) { expand(s, i, i); expand(s, i, i+1); }\\n        return s.substring(start, start + maxLen);\\n    }\\n    void expand(String s, int l, int r) {\\n        while (l >= 0 && r < s.length() && s.charAt(l) == s.charAt(r)) { l--; r++; }\\n        if (r - l - 1 > maxLen) { maxLen = r - l - 1; start = l + 1; }\\n    }\\n}",
+          "javascript": "function longestPalindrome(s) {\\n    let start = 0, maxLen = 1;\\n    function expand(l, r) {\\n        while (l >= 0 && r < s.length && s[l] === s[r]) { l--; r++; }\\n        if (r - l - 1 > maxLen) { maxLen = r - l - 1; start = l + 1; }\\n    }\\n    for (let i = 0; i < s.length; i++) { expand(i, i); expand(i, i+1); }\\n    return s.substring(start, start + maxLen);\\n}",
+          "c": "#include <string.h>\\n#include <stdlib.h>\\nchar* longestPalindrome(char* s) {\\n    int n = strlen(s), start = 0, maxLen = 1;\\n    for (int i = 0; i < n; i++) {\\n        for (int d = 0; d <= 1; d++) {\\n            int l = i, r = i + d;\\n            while (l >= 0 && r < n && s[l] == s[r]) { l--; r++; }\\n            if (r - l - 1 > maxLen) { maxLen = r - l - 1; start = l + 1; }\\n        }\\n    }\\n    char *res = malloc(maxLen + 1);\\n    strncpy(res, s + start, maxLen);\\n    res[maxLen] = '\\\\0';\\n    return res;\\n}"
+        },
+        "timeComplexity": "O(n^2)",
+        "spaceComplexity": "O(1)"
+      },
+      "tags": ["string", "dynamic-programming", "two-pointers"]
+    },
+    {
+      "id": "str-009",
+      "title": "String Compression",
+      "titleHi": "String Compression",
+      "difficulty": "medium",
+      "description": {
+        "en": "Implement basic string compression: for consecutive repeating characters, write character + count. If compressed length >= original, return original. E.g. 'aabcccdddd' -> 'a2b1c3d4'.",
+        "hi": "Basic string compression implement karo: consecutive repeating characters ke liye, character + count likho. Agar compressed length >= original ho toh original return karo. Jaise 'aabcccdddd' -> 'a2b1c3d4'."
+      },
+      "examples": [
+        {
+          "input": "s = \"aabcccdddd\"",
+          "output": "\"a2b1c3d4\"",
+          "explanation": {
+            "en": "a appears 2 times, b 1 time, c 3 times, d 4 times.",
+            "hi": "a 2 baar, b 1 baar, c 3 baar, d 4 baar aata hai."
+          }
+        }
+      ],
+      "constraints": ["1 <= s.length <= 10^4"],
+      "hints": [
+        { "en": "Iterate through the string, count consecutive same characters, then append char+count to result.", "hi": "String iterate karo, consecutive same characters count karo, phir char+count result mein append karo." }
+      ],
+      "starterCode": {
+        "cpp": "#include <string>\\nusing namespace std;\\n\\nstring compress(string s) {\\n    // Write your code here\\n    return s;\\n}",
+        "python": "def compress(s: str) -> str:\\n    # Write your code here\\n    pass",
+        "java": "public class Solution {\\n    public String compress(String s) {\\n        // Write your code here\\n        return s;\\n    }\\n}",
+        "javascript": "function compress(s) {\\n    // Write your code here\\n}",
+        "c": "char* compress(char* s) {\\n    // Write your code here\\n    return s;\\n}"
+      },
+      "testCases": [
+        { "input": "aabcccdddd", "expectedOutput": "a2b1c3d4" },
+        { "input": "abcd", "expectedOutput": "abcd" },
+        { "input": "aaaa", "expectedOutput": "a4" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Iterate through the string keeping count of consecutive characters. Append char+count to a result string. If result is longer than original, return original.",
+          "hi": "String iterate karo, consecutive characters ka count rakho. Char+count result mein append karo. Agar result original se lamba hai toh original return karo."
+        },
+        "code": {
+          "cpp": "#include <string>\\nusing namespace std;\\n\\nstring compress(string s) {\\n    string result = \"\";\\n    int i = 0, n = s.size();\\n    while (i < n) {\\n        char c = s[i]; int cnt = 0;\\n        while (i < n && s[i] == c) { i++; cnt++; }\\n        result += c + to_string(cnt);\\n    }\\n    return result.size() < s.size() ? result : s;\\n}",
+          "python": "def compress(s: str) -> str:\\n    result = []\\n    i = 0\\n    while i < len(s):\\n        c = s[i]; cnt = 0\\n        while i < len(s) and s[i] == c: i += 1; cnt += 1\\n        result.append(c + str(cnt))\\n    compressed = ''.join(result)\\n    return compressed if len(compressed) < len(s) else s",
+          "java": "public class Solution {\\n    public String compress(String s) {\\n        StringBuilder sb = new StringBuilder();\\n        int i = 0, n = s.length();\\n        while (i < n) {\\n            char c = s.charAt(i); int cnt = 0;\\n            while (i < n && s.charAt(i) == c) { i++; cnt++; }\\n            sb.append(c).append(cnt);\\n        }\\n        return sb.length() < n ? sb.toString() : s;\\n    }\\n}",
+          "javascript": "function compress(s) {\\n    let result = '', i = 0;\\n    while (i < s.length) {\\n        const c = s[i]; let cnt = 0;\\n        while (i < s.length && s[i] === c) { i++; cnt++; }\\n        result += c + cnt;\\n    }\\n    return result.length < s.length ? result : s;\\n}",
+          "c": "#include <string.h>\\n#include <stdlib.h>\\n#include <stdio.h>\\nchar* compress(char* s) {\\n    int n = strlen(s);\\n    char *result = malloc(2 * n + 1);\\n    int k = 0, i = 0;\\n    while (i < n) {\\n        char c = s[i]; int cnt = 0;\\n        while (i < n && s[i] == c) { i++; cnt++; }\\n        k += sprintf(result + k, \\\"%c%d\\\", c, cnt);\\n    }\\n    result[k] = '\\\\0';\\n    return k < n ? result : s;\\n}"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["string", "two-pointers"]
+    },
+    {
+      "id": "str-010",
+      "title": "Valid Parentheses",
+      "titleHi": "Valid Parentheses",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given a string containing only '(', ')', '{', '}', '[' and ']', determine if the input string is valid. A string is valid if every open bracket is closed by the correct type in the correct order.",
+        "hi": "Sirf '(', ')', '{', '}', '[' aur ']' wali string di gayi hai. Check karo ki string valid hai ya nahi. Valid tab hai jab har open bracket sahi type se sahi order mein close ho."
+      },
+      "examples": [
+        {
+          "input": "s = \"()[]{}\"",
+          "output": "true",
+          "explanation": {
+            "en": "All brackets are properly matched.",
+            "hi": "Sab brackets properly matched hain."
+          }
+        },
+        {
+          "input": "s = \"(]\"",
+          "output": "false",
+          "explanation": {
+            "en": "Mismatched brackets.",
+            "hi": "Brackets match nahi karte."
+          }
+        }
+      ],
+      "constraints": ["1 <= s.length <= 10^4", "s consists of parentheses only '()[]{}'"],
+      "hints": [
+        { "en": "Use a stack. Push opening brackets; for closing brackets check if the top of stack matches.", "hi": "Stack use karo. Opening brackets push karo; closing brackets ke liye check karo ki stack ka top match karta hai ya nahi." }
+      ],
+      "starterCode": {
+        "cpp": "#include <string>\\nusing namespace std;\\n\\nbool isValid(string s) {\\n    // Write your code here\\n    return false;\\n}",
+        "python": "def is_valid(s: str) -> bool:\\n    # Write your code here\\n    pass",
+        "java": "public class Solution {\\n    public boolean isValid(String s) {\\n        // Write your code here\\n        return false;\\n    }\\n}",
+        "javascript": "function isValid(s) {\\n    // Write your code here\\n}",
+        "c": "#include <stdbool.h>\\nbool isValid(char* s) {\\n    // Write your code here\\n    return false;\\n}"
+      },
+      "testCases": [
+        { "input": "()[]{}", "expectedOutput": "true" },
+        { "input": "(]", "expectedOutput": "false" },
+        { "input": "{[]}", "expectedOutput": "true" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use a stack. Push each opening bracket. When a closing bracket is encountered, check if the stack top is the matching opening bracket. If not, return false. At the end, stack must be empty.",
+          "hi": "Stack use karo. Har opening bracket push karo. Closing bracket aane par check karo ki stack top matching opening bracket hai ya nahi. Nahi hai toh false return karo. Ant mein stack empty hona chahiye."
+        },
+        "code": {
+          "cpp": "#include <string>\\n#include <stack>\\nusing namespace std;\\n\\nbool isValid(string s) {\\n    stack<char> st;\\n    for (char c : s) {\\n        if (c == '(' || c == '[' || c == '{') st.push(c);\\n        else {\\n            if (st.empty()) return false;\\n            char top = st.top(); st.pop();\\n            if (c == ')' && top != '(') return false;\\n            if (c == ']' && top != '[') return false;\\n            if (c == '}' && top != '{') return false;\\n        }\\n    }\\n    return st.empty();\\n}",
+          "python": "def is_valid(s: str) -> bool:\\n    stack = []\\n    mapping = {')': '(', ']': '[', '}': '{'}\\n    for c in s:\\n        if c in '([{':\\n            stack.append(c)\\n        else:\\n            if not stack or stack[-1] != mapping[c]: return False\\n            stack.pop()\\n    return not stack",
+          "java": "import java.util.Stack;\\npublic class Solution {\\n    public boolean isValid(String s) {\\n        Stack<Character> st = new Stack<>();\\n        for (char c : s.toCharArray()) {\\n            if (c == '(' || c == '[' || c == '{') st.push(c);\\n            else {\\n                if (st.isEmpty()) return false;\\n                char top = st.pop();\\n                if (c == ')' && top != '(') return false;\\n                if (c == ']' && top != '[') return false;\\n                if (c == '}' && top != '{') return false;\\n            }\\n        }\\n        return st.isEmpty();\\n    }\\n}",
+          "javascript": "function isValid(s) {\\n    const stack = [];\\n    const map = {')': '(', ']': '[', '}': '{'};\\n    for (const c of s) {\\n        if ('([{'.includes(c)) stack.push(c);\\n        else {\\n            if (!stack.length || stack[stack.length-1] !== map[c]) return false;\\n            stack.pop();\\n        }\\n    }\\n    return stack.length === 0;\\n}",
+          "c": "#include <stdbool.h>\\n#include <string.h>\\nbool isValid(char* s) {\\n    int n = strlen(s);\\n    char stack[n];\\n    int top = -1;\\n    for (int i = 0; s[i]; i++) {\\n        char c = s[i];\\n        if (c == '(' || c == '[' || c == '{') stack[++top] = c;\\n        else {\\n            if (top < 0) return false;\\n            char t = stack[top--];\\n            if (c == ')' && t != '(') return false;\\n            if (c == ']' && t != '[') return false;\\n            if (c == '}' && t != '{') return false;\\n        }\\n    }\\n    return top == -1;\\n}"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(n)"
+      },
+      "tags": ["string", "stack"]
+    },
+    {
+      "id": "str-011",
+      "title": "Minimum Window Substring",
+      "titleHi": "Minimum Window Substring",
+      "difficulty": "hard",
+      "description": {
+        "en": "Given strings s and t, return the minimum window substring of s that contains all characters in t (including duplicates). If no such window exists, return empty string.",
+        "hi": "Strings s aur t di gayi hain. s ka minimum window substring return karo jo t ke saare characters contain kare (duplicates including). Agar aisa koi window nahi hai toh empty string return karo."
+      },
+      "examples": [
+        {
+          "input": "s = \"ADOBECODEBANC\", t = \"ABC\"",
+          "output": "\"BANC\"",
+          "explanation": {
+            "en": "The minimum window containing A, B, C is 'BANC'.",
+            "hi": "A, B, C contain karne wala minimum window 'BANC' hai."
+          }
+        }
+      ],
+      "constraints": ["1 <= s.length, t.length <= 10^5", "s and t consist of uppercase and lowercase English letters"],
+      "hints": [
+        { "en": "Use sliding window with two frequency maps.", "hi": "Do frequency maps ke saath sliding window use karo." },
+        { "en": "Expand window by moving right pointer, then shrink from left when all characters are covered.", "hi": "Right pointer move karke window expand karo, phir jab saare characters cover ho jaayein toh left se shrink karo." }
+      ],
+      "starterCode": {
+        "cpp": "#include <string>\\nusing namespace std;\\n\\nstring minWindow(string s, string t) {\\n    // Write your code here\\n    return \"\";\\n}",
+        "python": "def min_window(s: str, t: str) -> str:\\n    # Write your code here\\n    pass",
+        "java": "public class Solution {\\n    public String minWindow(String s, String t) {\\n        // Write your code here\\n        return \"\";\\n    }\\n}",
+        "javascript": "function minWindow(s, t) {\\n    // Write your code here\\n}",
+        "c": "char* minWindow(char* s, char* t) {\\n    // Write your code here\\n    return \"\";\\n}"
+      },
+      "testCases": [
+        { "input": "ADOBECODEBANC ABC", "expectedOutput": "BANC" },
+        { "input": "a a", "expectedOutput": "a" },
+        { "input": "a b", "expectedOutput": "" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use a sliding window with two hash maps — one for required characters from t, one for current window. Use a 'formed' counter to track when all required chars are satisfied. Shrink from left when window is valid.",
+          "hi": "Do hash maps ke saath sliding window use karo — ek t ke required characters ke liye, ek current window ke liye. 'formed' counter use karo track karne ke liye ki sab required chars satisfy hue ya nahi. Window valid hone par left se shrink karo."
+        },
+        "code": {
+          "cpp": "#include <string>\\n#include <unordered_map>\\n#include <climits>\\nusing namespace std;\\n\\nstring minWindow(string s, string t) {\\n    unordered_map<char,int> need, have;\\n    for (char c : t) need[c]++;\\n    int formed = 0, required = need.size();\\n    int l = 0, minLen = INT_MAX, start = 0;\\n    for (int r = 0; r < (int)s.size(); r++) {\\n        have[s[r]]++;\\n        if (need.count(s[r]) && have[s[r]] == need[s[r]]) formed++;\\n        while (formed == required) {\\n            if (r - l + 1 < minLen) { minLen = r - l + 1; start = l; }\\n            have[s[l]]--;\\n            if (need.count(s[l]) && have[s[l]] < need[s[l]]) formed--;\\n            l++;\\n        }\\n    }\\n    return minLen == INT_MAX ? \"\" : s.substr(start, minLen);\\n}",
+          "python": "from collections import Counter\\ndef min_window(s: str, t: str) -> str:\\n    if not t or not s: return ''\\n    need = Counter(t)\\n    have = {}\\n    formed = 0\\n    required = len(need)\\n    l = 0; min_len = float('inf'); start = 0\\n    for r, c in enumerate(s):\\n        have[c] = have.get(c, 0) + 1\\n        if c in need and have[c] == need[c]: formed += 1\\n        while formed == required:\\n            if r - l + 1 < min_len: min_len = r - l + 1; start = l\\n            have[s[l]] -= 1\\n            if s[l] in need and have[s[l]] < need[s[l]]: formed -= 1\\n            l += 1\\n    return '' if min_len == float('inf') else s[start:start + min_len]",
+          "java": "import java.util.HashMap;\\npublic class Solution {\\n    public String minWindow(String s, String t) {\\n        HashMap<Character,Integer> need = new HashMap<>(), have = new HashMap<>();\\n        for (char c : t.toCharArray()) need.merge(c, 1, Integer::sum);\\n        int formed = 0, required = need.size(), l = 0, minLen = Integer.MAX_VALUE, start = 0;\\n        for (int r = 0; r < s.length(); r++) {\\n            char c = s.charAt(r);\\n            have.merge(c, 1, Integer::sum);\\n            if (need.containsKey(c) && have.get(c).equals(need.get(c))) formed++;\\n            while (formed == required) {\\n                if (r - l + 1 < minLen) { minLen = r - l + 1; start = l; }\\n                char lc = s.charAt(l);\\n                have.merge(lc, -1, Integer::sum);\\n                if (need.containsKey(lc) && have.get(lc) < need.get(lc)) formed--;\\n                l++;\\n            }\\n        }\\n        return minLen == Integer.MAX_VALUE ? \"\" : s.substring(start, start + minLen);\\n    }\\n}",
+          "javascript": "function minWindow(s, t) {\\n    const need = {}, have = {};\\n    for (const c of t) need[c] = (need[c] || 0) + 1;\\n    let formed = 0, required = Object.keys(need).length;\\n    let l = 0, minLen = Infinity, start = 0;\\n    for (let r = 0; r < s.length; r++) {\\n        have[s[r]] = (have[s[r]] || 0) + 1;\\n        if (need[s[r]] && have[s[r]] === need[s[r]]) formed++;\\n        while (formed === required) {\\n            if (r - l + 1 < minLen) { minLen = r - l + 1; start = l; }\\n            have[s[l]]--;\\n            if (need[s[l]] && have[s[l]] < need[s[l]]) formed--;\\n            l++;\\n        }\\n    }\\n    return minLen === Infinity ? '' : s.substring(start, start + minLen);\\n}",
+          "c": "#include <string.h>\\n#include <stdlib.h>\\n#include <limits.h>\\nchar* minWindow(char* s, char* t) {\\n    int need[128] = {0}, have[128] = {0};\\n    for (int i = 0; t[i]; i++) need[(int)t[i]]++;\\n    int required = 0;\\n    for (int i = 0; i < 128; i++) if (need[i] > 0) required++;\\n    int formed = 0, l = 0, minLen = INT_MAX, start = 0;\\n    for (int r = 0; s[r]; r++) {\\n        have[(int)s[r]]++;\\n        if (need[(int)s[r]] > 0 && have[(int)s[r]] == need[(int)s[r]]) formed++;\\n        while (formed == required) {\\n            if (r - l + 1 < minLen) { minLen = r - l + 1; start = l; }\\n            have[(int)s[l]]--;\\n            if (need[(int)s[l]] > 0 && have[(int)s[l]] < need[(int)s[l]]) formed--;\\n            l++;\\n        }\\n    }\\n    if (minLen == INT_MAX) return \\\"\\\";\\n    char *res = malloc(minLen + 1);\\n    strncpy(res, s + start, minLen);\\n    res[minLen] = '\\\\0';\\n    return res;\\n}"
+        },
+        "timeComplexity": "O(|s| + |t|)",
+        "spaceComplexity": "O(|s| + |t|)"
+      },
+      "tags": ["string", "sliding-window", "hash-map"]
+    },
+    {
+      "id": "str-012",
+      "title": "Longest Substring Without Repeating Characters",
+      "titleHi": "Longest Substring Without Repeating Characters",
+      "difficulty": "medium",
+      "description": {
+        "en": "Given a string s, find the length of the longest substring without repeating characters.",
+        "hi": "Ek string s di gayi hai. Bina repeating characters ke sabse lamba substring ka length dhundho."
+      },
+      "examples": [
+        {
+          "input": "s = \"abcabcbb\"",
+          "output": "3",
+          "explanation": {
+            "en": "The longest substring without repeating characters is 'abc' with length 3.",
+            "hi": "Bina repeating characters ka sabse lamba substring 'abc' hai, length 3."
+          }
+        },
+        {
+          "input": "s = \"bbbbb\"",
+          "output": "1",
+          "explanation": {
+            "en": "The longest is 'b' with length 1.",
+            "hi": "Sabse lamba 'b' hai, length 1."
+          }
+        }
+      ],
+      "constraints": ["0 <= s.length <= 5*10^4", "s consists of English letters, digits, symbols and spaces"],
+      "hints": [
+        { "en": "Use a sliding window with a hash map storing the last seen index of each character.", "hi": "Sliding window use karo ek hash map ke saath jo har character ka last seen index store kare." }
+      ],
+      "starterCode": {
+        "cpp": "#include <string>\\nusing namespace std;\\n\\nint lengthOfLongestSubstring(string s) {\\n    // Write your code here\\n    return 0;\\n}",
+        "python": "def length_of_longest_substring(s: str) -> int:\\n    # Write your code here\\n    pass",
+        "java": "public class Solution {\\n    public int lengthOfLongestSubstring(String s) {\\n        // Write your code here\\n        return 0;\\n    }\\n}",
+        "javascript": "function lengthOfLongestSubstring(s) {\\n    // Write your code here\\n}",
+        "c": "int lengthOfLongestSubstring(char* s) {\\n    // Write your code here\\n    return 0;\\n}"
+      },
+      "testCases": [
+        { "input": "abcabcbb", "expectedOutput": "3" },
+        { "input": "bbbbb", "expectedOutput": "1" },
+        { "input": "pwwkew", "expectedOutput": "3" }
+      ],
+      "solution": {
+        "approach": {
+          "en": "Use a sliding window [l, r]. Use a hash map to store the last seen index of each character. When a duplicate is found, move l to max(l, lastIndex+1). Track max window length.",
+          "hi": "Sliding window [l, r] use karo. Hash map mein har character ka last seen index store karo. Duplicate milne par l ko max(l, lastIndex+1) par move karo. Max window length track karo."
+        },
+        "code": {
+          "cpp": "#include <string>\\n#include <unordered_map>\\nusing namespace std;\\n\\nint lengthOfLongestSubstring(string s) {\\n    unordered_map<char,int> mp;\\n    int l = 0, maxLen = 0;\\n    for (int r = 0; r < (int)s.size(); r++) {\\n        if (mp.count(s[r])) l = max(l, mp[s[r]] + 1);\\n        mp[s[r]] = r;\\n        maxLen = max(maxLen, r - l + 1);\\n    }\\n    return maxLen;\\n}",
+          "python": "def length_of_longest_substring(s: str) -> int:\\n    mp = {}\\n    l = max_len = 0\\n    for r, c in enumerate(s):\\n        if c in mp: l = max(l, mp[c] + 1)\\n        mp[c] = r\\n        max_len = max(max_len, r - l + 1)\\n    return max_len",
+          "java": "import java.util.HashMap;\\npublic class Solution {\\n    public int lengthOfLongestSubstring(String s) {\\n        HashMap<Character,Integer> map = new HashMap<>();\\n        int l = 0, maxLen = 0;\\n        for (int r = 0; r < s.length(); r++) {\\n            if (map.containsKey(s.charAt(r))) l = Math.max(l, map.get(s.charAt(r)) + 1);\\n            map.put(s.charAt(r), r);\\n            maxLen = Math.max(maxLen, r - l + 1);\\n        }\\n        return maxLen;\\n    }\\n}",
+          "javascript": "function lengthOfLongestSubstring(s) {\\n    const map = new Map();\\n    let l = 0, maxLen = 0;\\n    for (let r = 0; r < s.length; r++) {\\n        if (map.has(s[r])) l = Math.max(l, map.get(s[r]) + 1);\\n        map.set(s[r], r);\\n        maxLen = Math.max(maxLen, r - l + 1);\\n    }\\n    return maxLen;\\n}",
+          "c": "int lengthOfLongestSubstring(char* s) {\\n    int mp[128];\\n    for (int i = 0; i < 128; i++) mp[i] = -1;\\n    int l = 0, maxLen = 0;\\n    for (int r = 0; s[r]; r++) {\\n        if (mp[(int)s[r]] >= l) l = mp[(int)s[r]] + 1;\\n        mp[(int)s[r]] = r;\\n        if (r - l + 1 > maxLen) maxLen = r - l + 1;\\n    }\\n    return maxLen;\\n}"
+        },
+        "timeComplexity": "O(n)",
+        "spaceComplexity": "O(min(n, m)) where m is charset size"
+      },
+      "tags": ["string", "sliding-window", "hash-map"]
+    }
+  ]
+}
